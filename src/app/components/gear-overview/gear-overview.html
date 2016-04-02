@@ -1,0 +1,26 @@
+<div class="item-wrapper {{gear.rarity}}">
+  <div class="section-wrapper title-section">
+    <div class="rarity-indicator"></div>
+    <div class="title-wrapper">{{gear.title}}</div>
+    <div class="rarity-wrapper">{{gear.rarity|ucfirst}}</div>
+
+    <div class="level-wrapper">
+      <div class="number-wrapper level-number-wrapper">
+        {{gear.level}}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-wrapper">
+
+    <div class="stat-wrapper">
+      ARMOR
+      <div class="number-wrapper stat-number-wrapper">
+        {{gear.armor}}
+      </div>
+    </div>
+
+  </div>
+  <stats-display [stats]="gear.stats"></stats-display>
+
+</div>

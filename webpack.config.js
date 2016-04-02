@@ -7,11 +7,11 @@ var webpackConfig = {
   entry: {
     'polyfills': './src/polyfills.ts',
     'vendor':    './src/vendor.ts',
-    'app':       './src/app.ts',
+    'app':       './src/app.ts'
   },
 
   output: {
-    path: './dist',
+    path: './dist'
   },
 
   plugins: [
@@ -22,6 +22,10 @@ var webpackConfig = {
     loaders: [
       // .ts files for TypeScript
       { test: /\.ts$/, loader: 'awesome-typescript-loader' },
+      { test: /\.scss$/,
+        exclude: /node_modules/,
+        loaders: ['raw-loader', 'sass-loader']
+      }
 
     ]
   }
