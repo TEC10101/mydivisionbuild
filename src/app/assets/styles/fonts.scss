@@ -2,31 +2,35 @@
   font-family: 'Borda';
   font-style: normal;
   font-weight: 500;
-  src: url( 'fonts/borda.eot' );
-  src: url( 'fonts/borda.eot?#iefix' ) format( 'embedded-opentype' ),
-  url( 'fonts/borda.woff2' ) format( 'woff2' ),
-  url( 'fonts/borda.woff' ) format( 'woff' ),
-  url( 'fonts/borda.ttf' ) format( 'truetype' );
+  src: url( '../fonts/borda-w00-regular.eot' );
+  src: url( '../fonts/borda-w00-regular.eot?#iefix' ) format( 'embedded-opentype' ),
+  url( '../fonts/borda-w00-regular.woff2' ) format( 'woff2' ),
+  url( '../fonts/borda-w00-regular.woff' ) format( 'woff' ),
+  url( '../fonts/borda-w00-regular.ttf' ) format( 'truetype' ),
+  url( '../fonts/borda-w00-regular.svg#borda' ) format( 'svg' );
 }
+
 
 @font-face {
   font-family: 'Borda';
   font-style: normal;
   font-weight: 600;
-  src: url( 'fonts/borda-semibold.eot' );
-  src: url( 'fonts/borda-semibold.eot?#iefix' ) format('embedded-opentype' ),
-  url( 'fonts/borda-semibold.woff2' ) format('woff2' ),
-  url( 'fonts/borda-semibold.woff' ) format('woff' ),
-  url( 'fonts/borda-semibold.ttf' ) format('truetype' );
+  src: url( '../fonts/borda-w00-medium.eot' );
+  src: url( '../fonts/borda-w00-medium.eot?#iefix' ) format('embedded-opentype' ),
+  url( '../fonts/borda-w00-medium.woff2' ) format('woff2' ),
+  url( '../fonts/borda-w00-medium.woff' ) format('woff' ),
+  url( '../fonts/borda-w00-medium.ttf' ) format('truetype' ),
+  url( '../fonts/borda-w00-medium.svg#borda' ) format( 'svg' );;
 }
 
 @font-face {
   font-family: 'Borda';
   font-style: normal;
   font-weight: 700;
-  src: url( 'fonts/borda-bold.eot' );
-  src: url( 'fonts/borda-bold.eot?#iefix' ) format( 'embedded-opentype' ),
-  url( 'fonts/borda-bold.woff2' ) format( 'woff2' ),
-  url( 'fonts/borda-bold.woff' ) format( 'woff' ),
-  url( 'fonts/borda-bold.ttf' ) format( 'truetype' );
+  src: url( '../fonts/borda-w00-bold.eot' );
+  src: url( '../fonts/borda-w00-bold.eot?#iefix' ) format( 'embedded-opentype' ),
+  url( '../fonts/borda-w00-bold.woff2' ) format( 'woff2' ),
+  url( '../fonts/borda-w00-bold.woff' ) format( 'woff' ),
+  url( '../fonts/borda-w00-bold.ttf' ) format( 'truetype' ),
+  url( '../fonts/borda-w00-bold.svg#borda' ) format( 'svg' );;
 }
