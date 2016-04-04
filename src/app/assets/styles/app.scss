@@ -235,15 +235,15 @@ body {
     width: 24px;
 
     &.firearms {
-      background-image: url('../images/icon-stat-firearms.png');
+      background-image: url('app/assets/images/icon-stat-firearms.png');
     }
 
     &.stamina {
-      background-image: url('../images/icon-stat-stamina.png');
+      background-image: url('app/assets/images/icon-stat-stamina.png');
     }
 
     &.electronics {
-      background-image: url('../images/icon-stat-electronics.png');
+      background-image: url('app/assets/images/icon-stat-electronics.png');
     }
   }
 
@@ -261,13 +261,16 @@ body {
     padding: 1px;
   }
 
+  single-stat-display{
+    width: calc(33.33333% - 3px);
+  }
   .single-stat-block {
     background-color: $alternate-background-color;
     box-shadow: 1px 1px 4px 0 rgba(50, 50, 50, .75);
     font-weight: 700;
     padding-top: 20px;
     text-align: center;
-    width: calc(33.33333% - 3px);
+    width:100%;
 
     &.inactive {
       background-color: $background-color;

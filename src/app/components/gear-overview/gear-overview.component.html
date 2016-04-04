@@ -5,6 +5,7 @@
     <div class="rarity-wrapper">{{gear.rarity|ucfirst}}</div>
 
     <div class="level-wrapper">
+      level
       <div class="number-wrapper level-number-wrapper">
         {{gear.level}}
       </div>
@@ -16,11 +17,13 @@
     <div class="stat-wrapper">
       ARMOR
       <div class="number-wrapper stat-number-wrapper">
-        {{gear.armor}}
+        {{gear.armor | prettynumber }}
       </div>
     </div>
 
   </div>
   <stats-display [stats]="gear.stats"></stats-display>
+  <item-attributes [data]="gear.attributes" [gear-type]="gear.type"></item-attributes>
+
 
 </div>

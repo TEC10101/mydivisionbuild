@@ -4,6 +4,7 @@
 
 import {Component, Input} from 'angular2/core';
 import {StatType} from "../../common/models/common";
+import {NgClass} from "angular2/common";
 
 
 export class Stats {
@@ -13,8 +14,9 @@ export class Stats {
 }
 
 @Component({
-  selector: 'single-stat',
+  selector: 'single-stat-display',
   templateUrl: 'app/components/stats-display/single-stat-display.html',
+  directives: [NgClass],
 })
 export class SingleStatDisplay {
 

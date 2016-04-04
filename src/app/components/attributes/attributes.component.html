@@ -1,0 +1,24 @@
+<div class="section-wrapper attributes-wrapper">
+  <div class="attributes-title-wrapper" *ngIf="attributes.major.length">
+    Major Attributes
+  </div>
+
+  <item-attribute *ngFor="#attribute of attributes.major" [attribute]="attribute" [belongs-to]="gearType"
+                  [attribute-type]="'major'"></item-attribute>
+
+   <!--
+  <div class="attributes-title-wrapper" *ngIf="attributes.major">
+    Minor Attributes
+  </div>
+  <item-attribute *ngFor="#attribute of attributes.minor" [attribute]="attribute" [belongs-to]="gearType" [type]="minor"></item-attribute>
+
+  <div class="attributes-title-wrapper" *ngIf="attributes.skill">
+    Skill Attributes
+  </div>
+  <item-attribute *ngFor="#attribute of attributes.skill" [attribute]="attribute" [belongs-to]="gearType" [type]="skill"></item-attribute>
+
+  -->
+</div>
+
+
+
