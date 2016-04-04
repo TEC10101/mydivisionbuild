@@ -1,13 +1,14 @@
 import {Injectable, OnInit} from "angular2/core";
 import {
   GearType, AttributeType, MajorAttribute, GearSupport, IAttribute,
-  MinorAttribute
+  MinorAttribute, AttributeFormat
 } from "../common/models/common";
 import {Http} from "angular2/http";
 import {Observable} from "rxjs/Observable";
 import {Observer} from "rxjs/Observer";
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/startWith';
+import {BehaviorSubject} from "rxjs/Rx";
 /**
  * Created by xastey on 4/3/2016.
  */
@@ -18,26 +19,30 @@ type AttributeObserver=Observer<IAttribute[]>;
 
 interface RawAttribute {
   name:string;
+  id:number;
+  format:AttributeFormat;
   support:GearSupport[];
 }
 
 class AttributeStore {
 
-  major$:AttributeObservable;
-  minor$:AttributeObservable;
-  private _major:Observer<IAttribute[]>;
 
-  private _minor:Observer<IAttribute[]>;
+  private _major:BehaviorSubject<IAttribute[]> = new BehaviorSubject<IAttribute[]>([]);
+
+  major$:AttributeObservable = this._major.asObservable();
+
+  private _minor:BehaviorSubject<IAttribute[]> = new BehaviorSubject<IAttribute[]>([]);
+  minor$:AttributeObservable = this._minor.asObservable();
   private _http:Http;
   private _basePath:string;
   private _gearType:GearType;
 
   private static convertToMajor(raw:RawAttribute):IAttribute {
-    return new MajorAttribute(raw.name, raw.support)
+    return new MajorAttribute(raw.id, raw.name, raw.format, raw.support)
   }
 
   private static convertToMinor(raw:RawAttribute):IAttribute {
-    return new MinorAttribute(raw.name, raw.support)
+    return new MinorAttribute(raw.id, raw.name, raw.format, raw.support)
   }
 
   constructor(gearType:GearType, http:Http) {
@@ -45,11 +50,6 @@ class AttributeStore {
     this._http = http;
     this._gearType = gearType;
 
-    this.major$ = new Observable(observer=>this._major = observer)
-      .startWith([]).share();
-
-    this.minor$ = new Observable(observer =>this._minor = observer)
-      .startWith([]).share();
     this.init();
 
   }
@@ -61,18 +61,18 @@ class AttributeStore {
 
 
       let url = this._generateUrl(attributeType);
-      this[attributeType + '$'].subscribe(()=> {
-      });
-      let observer = this["_" + attributeType] as AttributeObserver;
-      console.log(observer);
+
+      let subject = this["_" + attributeType] as BehaviorSubject<IAttribute[]>;
+
 
       let self = this;
       let callback = attributeType == AttributeType.MAJOR ? AttributeStore.convertToMajor : AttributeStore.convertToMinor;
-      this._fetch(url, callback).subscribe(
+      let subscription = this._fetch(url, callback).subscribe(
         data => {
 
 
-          observer.next(data);
+          subject.next(data);
+          subscription.unsubscribe();
         },
         err=> console.error(err),
         () => console.log("Finished loading (", this._gearType, ":", attributeType, ")")

@@ -4,7 +4,8 @@
 
 
 import {Pipe, PipeTransform} from "angular2/core";
-import {AttributeFormat} from "./attributes.model";
+import {AttributeFormat} from "../../common/models/common";
+
 
 @Pipe({name: "attribute"})
 export class AttributePipe implements PipeTransform {

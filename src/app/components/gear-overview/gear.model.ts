@@ -10,6 +10,7 @@ export class Gear {
   rarity:Rarity;
   type:GearType;
   title:string;
+  
   level:number;
   stats:Stats;
   armor:number;

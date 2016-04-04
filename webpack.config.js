@@ -26,7 +26,7 @@ var webpackConfig = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        loaders: ['raw-loader', 'sass-loader']
+        loaders: ['raw-loader', 'sass-loader?sourceMap']
       }
 
     ]
@@ -55,7 +55,7 @@ var defaultConfig = {
         exclude: [
           // these packages have problems with their sourcemaps
           path.join(__dirname, 'node_modules', 'rxjs'),
-          path.join(__dirname, 'node_modules', '@angular2-material'),
+          path.join(__dirname, 'node_modules', '@angular2-material')
         ]
       }
     ],

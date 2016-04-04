@@ -3,8 +3,10 @@
     Major Attributes
   </div>
 
-  <item-attribute *ngFor="#attribute of attributes.major" [attribute]="attribute" [belongs-to]="gearType"
-                  [attribute-type]="'major'"></item-attribute>
+  <item-attribute *ngFor="#attribute of attributes.major" [attribute]="attribute" [metadata]="metadata"
+                  [attribute-type]="'major'"
+                  (remove)="onRemoveAttribute($event)"
+                  (add)="onAddAttribute($event)"></item-attribute>
 
    <!--
   <div class="attributes-title-wrapper" *ngIf="attributes.major">

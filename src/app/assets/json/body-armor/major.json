@@ -1,6 +1,8 @@
 [
   {
     "name": "HP on Kill",
+    "id": 1,
+    "format": "percent",
     "support": [
       {
         "rarity": "superior",

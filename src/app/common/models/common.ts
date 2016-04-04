@@ -55,17 +55,29 @@ export class GearSupport {
 
 export interface IAttribute {
   name:string;
-  canSupport(rarity:Rarity, level:number):boolean;
+  id:number;
+  format:AttributeFormat;
+  //canSupport(rarity:Rarity, level:number):boolean;
 }
+export type AttributeFormat = "percent" | "number";
+export const AttributeFormat = {
+  PERCENT: "percent" as AttributeFormat,
+  NUMBER: "number" as AttributeFormat
+};
+
 abstract class BaseAttribute implements IAttribute {
   protected _support:GearSupport[];
   kind:string;
   name:string;
+  id:number;
+  format:AttributeFormat;
 
-  constructor(kind:string, name:string, support:GearSupport[]) {
+  constructor(kind:string, id:number, name:string, format:AttributeFormat, support:GearSupport[]) {
     this.name = name;
+    this.id = id;
     this.kind = kind;
     this._support = support;
+    this.format = format;
   }
 
 
@@ -75,16 +87,24 @@ abstract class BaseAttribute implements IAttribute {
     return !!found.length;
   }
 }
+
+export class EmptyAttribute implements IAttribute {
+
+
+  name:string;
+  id:number;
+  format:AttributeFormat;
+}
 export class MajorAttribute extends BaseAttribute {
-  constructor(name:string, support:GearSupport[]) {
-    super("major", name, support)
+  constructor(id:number, name:string, format:AttributeFormat, support:GearSupport[]) {
+    super("major", id, name, format, support)
 
   }
 }
 
 export class MinorAttribute extends BaseAttribute {
-  constructor(name:string, support:GearSupport[]) {
-    super("minor", name, support)
+  constructor(id:number, name:string, format:AttributeFormat, support:GearSupport[]) {
+    super("minor", id, name, format, support)
 
   }
 }

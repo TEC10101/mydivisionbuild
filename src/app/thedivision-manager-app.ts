@@ -2,11 +2,9 @@
  * Created by xastey on 4/2/2016.
  */
 
-import {Component, ViewEncapsulation} from 'angular2/core';
-import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, ViewEncapsulation, OnInit} from "angular2/core";
+import {ROUTER_DIRECTIVES} from "angular2/router";
 import {Gear, GearOverviewComponent} from "./components/gear-overview/gear-overview.component";
-import {OnInit} from 'angular2/core';
-import {AttributeFormat} from "./components/attributes/attributes.model";
 import {DIVISION_PROVIDERS} from "./services/core";
 import {GearType} from "./common/models/common";
 
@@ -43,9 +41,9 @@ export class TheDivisionManagerApp implements OnInit {
       },
       attributes: {
         major: [{
-          title: "Health on Kill",
-          value: 8,
-          format: AttributeFormat.PERCENT
+          id: 1,//"Health on Kill",
+          value: 8
+
         }],
         minor: [],
         skill: []

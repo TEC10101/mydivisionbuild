@@ -1,4 +1,9 @@
-<div>
-  <div class="attribute-value-wrapper">{{attribute.value | attribute:attribute.format}}</div>
-  <div class="attribute-title-wrapper">{{attribute.title}}</div>
+<div class="clearfix">
+  <div class="attribute-value-wrapper">{{attribute.value | attribute:attributeFormat}}</div>
+  <div class="attribute-title-wrapper"><select [(ngModel)]="attribute.id" (change)="onAttributeChange()">
+    <option *ngFor="#attr of attributes" [value]="attr.id">{{attr.name}}</option>
+  </select>
+  </div>
+  <button (click)="onAddAttribute()">+</button>
+  <button (click)="onRemoveAttribute()">-</button>
 </div>

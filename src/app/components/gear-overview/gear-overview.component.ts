@@ -8,6 +8,8 @@ import {StatsDisplay} from "../stats-display/stats-display";
 import {Gear} from "./gear.model";
 import {AttributesComponent} from "../attributes/attributes.component";
 import {PrettyNumberPipe} from "../../common/pipes/prettynumber";
+import {Rarity, GearType} from "../../common/models/common";
+import {AttributeMeta} from "../attributes/attribute.component";
 export {Gear} from "./gear.model";
 
 
@@ -22,5 +24,15 @@ export {Gear} from "./gear.model";
 })
 export class GearOverviewComponent {
   @Input() gear:Gear;
+
+  get metadata():AttributeMeta {
+    return {
+      level: this.gear.level,
+      rarity: this.gear.rarity,
+      belongsTo: this.gear.type
+
+    }
+  }
+
 
 }
