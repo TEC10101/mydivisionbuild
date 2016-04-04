@@ -1,0 +1,47 @@
+@import "../../assets/styles/colors";
+
+
+
+.icon {
+  background-size: contain;
+  float: left;
+  height: 64px;
+  width: 64px;
+
+  &.firearms {
+    background-image: url('app/assets/images/icon-stat-firearms.png');
+  }
+
+  &.stamina {
+    background-image: url('app/assets/images/icon-stat-stamina.png');
+  }
+
+  &.electronics {
+    background-image: url('app/assets/images/icon-stat-electronics.png');
+  }
+}
+
+.single-stat-block {
+  background-color: $alternate-background-color;
+  box-shadow: 1px 1px 4px 0 rgba(50, 50, 50, .75);
+  font-weight: 700;
+
+  text-align: center;
+
+
+  &.inactive {
+    background-color: $background-color;
+    opacity: 0.1;
+  }
+
+  .icon {
+    float: none;
+    height: 48px;
+    margin: 0 auto;
+    width: 48px;
+  }
+}
+
+.single-stat-value-wrapper {
+  font-size: 1.2em;
+}

@@ -3,7 +3,8 @@
  */
 
 import * as _ from 'lodash';
-
+import {Observable} from "rxjs/Observable";
+import {Subject} from "rxjs/Subject";
 
 
 export const noop = ()=> {
@@ -21,4 +22,16 @@ export function without(collection, element):()=>any {
     collection.splice(index, 0, element);
   }
 
+}
+
+
+const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
+export function camelCase(name) {
+  return name.replace(SPECIAL_CHARS_REGEXP, function (_, separator, letter, offset) {
+    return offset ? letter.toUpperCase() : letter;
+  });
+}
+
+export function asObservable<T>(subject:Subject<T>):Observable<T> {
+  return new Observable(fn => subject.subscribe(fn));
 }

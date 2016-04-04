@@ -1,7 +1,11 @@
 <div class="item-wrapper {{gear.rarity}}" xmlns="">
   <div class="section-wrapper title-section">
     <div class="rarity-indicator"></div>
-    <div class="title-wrapper">{{gear.title}}</div>
+    <div class="title-wrapper">
+      <select [(ngModel)]="gear.itemId">
+        <option *ngFor="#item of items" [value]="item.id">{{item.name}}</option>
+      </select>
+    </div>
     <div class="rarity-wrapper">{{gear.rarity|ucfirst}}</div>
 
     <div class="level-wrapper">
@@ -23,7 +27,7 @@
 
   </div>
   <stats-display [stats]="gear.stats"></stats-display>
-  <item-attributes [data]="gear.attributes" [gear-metadata]="metadata" ></item-attributes>
+  <item-attributes [data]="gear.attributes" [gear-metadata]="metadata"></item-attributes>
 
 
 </div>

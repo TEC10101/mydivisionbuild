@@ -110,3 +110,9 @@ export class MinorAttribute extends BaseAttribute {
 }
 
 
+export interface DivisionItem {
+  id:number;
+  name:string;
+}
+
+

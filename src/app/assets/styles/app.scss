@@ -1,5 +1,6 @@
 @import 'fonts.scss';
 @import 'colors.scss';
+@import "mixins";
 
 * {
   box-sizing: border-box;
@@ -13,6 +14,7 @@
   clear: both;
   height: 0;
 }
+
 
 .clearfix {
   display: inline-block;
@@ -251,24 +253,7 @@ body {
     }
   }
 
-  .icon {
-    background-size: contain;
-    float: left;
-    height: 64px;
-    width: 64px;
 
-    &.firearms {
-      background-image: url('app/assets/images/icon-stat-firearms.png');
-    }
-
-    &.stamina {
-      background-image: url('app/assets/images/icon-stat-stamina.png');
-    }
-
-    &.electronics {
-      background-image: url('app/assets/images/icon-stat-electronics.png');
-    }
-  }
 
   .stat-requirement-number-wrapper {
     float: left;
@@ -284,33 +269,7 @@ body {
     padding: 1px;
   }
 
-  single-stat-display {
-    width: calc(33.33333% - 3px);
-  }
-  .single-stat-block {
-    background-color: $alternate-background-color;
-    box-shadow: 1px 1px 4px 0 rgba(50, 50, 50, .75);
-    font-weight: 700;
 
-    text-align: center;
-    width: 100%;
-
-    &.inactive {
-      background-color: $background-color;
-      opacity: 0.1;
-    }
-
-    .icon {
-      float: none;
-      height: 48px;
-      margin: 0 auto;
-      width: 48px;
-    }
-  }
-
-  .single-stat-value-wrapper {
-    font-size: 1.2em;
-  }
 
   .attributes-wrapper:first-child {
     margin-top: 0;

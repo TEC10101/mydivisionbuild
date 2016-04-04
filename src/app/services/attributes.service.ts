@@ -29,10 +29,9 @@ class AttributeStore {
 
   private _major:BehaviorSubject<IAttribute[]> = new BehaviorSubject<IAttribute[]>([]);
 
-  major$:AttributeObservable = this._major.asObservable();
 
   private _minor:BehaviorSubject<IAttribute[]> = new BehaviorSubject<IAttribute[]>([]);
-  minor$:AttributeObservable = this._minor.asObservable();
+
   private _http:Http;
   private _basePath:string;
   private _gearType:GearType;
@@ -82,7 +81,8 @@ class AttributeStore {
   }
 
   fetch(attributeType:AttributeType):AttributeObservable {
-    return attributeType == AttributeType.MAJOR ? this.major$ : this.minor$;
+    let subject = attributeType == AttributeType.MAJOR ? this._major : this._minor;
+    return new Observable(fn=> subject.subscribe(fn))
   }
 
   private _generateUrl(attributeType:AttributeType) {

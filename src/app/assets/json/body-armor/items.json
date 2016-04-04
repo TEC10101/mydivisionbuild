@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Coated Armor",
+    "id": 1
+  },
+  {
+    "name": "Coated Plate Armor",
+    "id": 2
+  },
+  {
+    "name": "Corrections Armor",
+    "id": 3
+  },
+  {
+    "name": "Guard Vest",
+    "id": 4
+  },
+  {
+    "name": "Graphene Plate Vest",
+    "id": 5
+  },
+  {
+    "name": "Heavy Duty Vest",
+    "id": 6
+  },
+  {
+    "name": "Hunting Vest",
+    "id": 7
+  },
+  {
+    "name": "Laminate Vest",
+    "id": 8
+  },
+  {
+    "name": "Light Vest",
+    "id": 9
+  },
+  {
+    "name": "Preparedness Vest",
+    "id": 10
+  },
+  {
+    "name": "Protective Armor",
+    "id": 11
+  },
+  {
+    "name": "Safety Vest",
+    "id": 12
+  },
+  {
+    "name": "Soft Trauma Vest",
+    "id": 13
+  },
+  {
+    "name": "Strike Vest",
+    "id": 14
+  },
+  {
+    "name": "Utility Vest",
+    "id": 15
+  },
+  {
+    "name": "Urban Assault Vest",
+    "id": 16
+  },
+  {
+    "name": "Hybrid Armor",
+    "id": 17
+  },
+  {
+    "name": "Rush Armor",
+    "id": 18
+  }
+]

@@ -7,10 +7,11 @@ import {Attributes} from "../attributes/attributes.model";
 
 
 export class Gear {
+  itemId:number;
   rarity:Rarity;
   type:GearType;
   title:string;
-  
+
   level:number;
   stats:Stats;
   armor:number;

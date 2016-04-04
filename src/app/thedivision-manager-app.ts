@@ -31,6 +31,7 @@ export class TheDivisionManagerApp implements OnInit {
     this.gear = {
       rarity: "superior",
       type: GearType.BodyArmor,
+      itemId: 16,
       title: "Rapid Assault Vest",
       armor: 1049,
       level: 30,
