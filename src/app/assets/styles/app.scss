@@ -5,11 +5,34 @@
   box-sizing: border-box;
 }
 
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+/* start commented backslash hack \*/
+* html .clearfix {
+  height: 1%;
+}
+
+.clearfix {
+  display: block;
+}
+
+/* close commented backslash hack */
 body {
   margin: 0;
 
   &:before {
-    background-image: url( 'app/assets/images/background-processed.jpg' );
+    background-image: url('app/assets/images/background-processed.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     bottom: 0;
@@ -231,8 +254,8 @@ body {
   .icon {
     background-size: contain;
     float: left;
-    height: 24px;
-    width: 24px;
+    height: 64px;
+    width: 64px;
 
     &.firearms {
       background-image: url('app/assets/images/icon-stat-firearms.png');
@@ -261,16 +284,16 @@ body {
     padding: 1px;
   }
 
-  single-stat-display{
+  single-stat-display {
     width: calc(33.33333% - 3px);
   }
   .single-stat-block {
     background-color: $alternate-background-color;
     box-shadow: 1px 1px 4px 0 rgba(50, 50, 50, .75);
     font-weight: 700;
-    padding-top: 20px;
+
     text-align: center;
-    width:100%;
+    width: 100%;
 
     &.inactive {
       background-color: $background-color;
