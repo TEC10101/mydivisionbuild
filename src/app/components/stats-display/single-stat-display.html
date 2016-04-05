@@ -1,4 +1,5 @@
-<div  class="single-stat-block">
+<div  class="single-stat-block" [ngClass]="{inactive: value == 0 }">
   <div class="icon {{type}}"></div>
   <div class="single-stat-value-wrapper">+{{value}}</div>
+
 </div>

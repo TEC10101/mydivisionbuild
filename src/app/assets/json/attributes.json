@@ -1,0 +1,97 @@
+[
+  {
+    "id": 1,
+    "name": "Crit Chance",
+    "type": "major",
+    "kind": "offensive",
+    "format": "percent",
+    "supports": [
+      "mask",
+      "gloves"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Crit Damage",
+    "type": "major",
+    "kind": "offensive",
+    "format": "percent",
+    "supports": [
+      "backpack",
+      "gloves",
+      "knee-pads"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "SMG Damage",
+    "type": "major",
+    "kind": "offensive",
+    "format": "number",
+    "supports": [
+      "gloves"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Assault Rifle Damage",
+    "type": "major",
+    "kind": "offensive",
+    "format": "number",
+    "supports": [
+      "gloves"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Shotgun Damage",
+    "type": "major",
+    "kind": "offensive",
+    "format": "number",
+    "supports": [
+      "gloves"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "LMG Damage",
+    "type": "major",
+    "kind": "offensive",
+    "format": "number",
+    "supports": [
+      "gloves"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Pistol Damage",
+    "type": "major",
+    "kind": "offensive",
+    "format": "number",
+    "supports": [
+      "gloves",
+      "holster"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Marksman Rifle Damage",
+    "type": "major",
+    "kind": "offensive",
+    "format": "number",
+    "supports": [
+      "gloves"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Damage vs Elites",
+    "format": "percent",
+    "supports": [
+      "mask",
+      "body-armor",
+      "gloves",
+      "knee-pads"
+    ]
+  }
+]
