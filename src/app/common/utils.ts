@@ -2,9 +2,8 @@
  * Created by xastey on 4/4/2016.
  */
 
-import * as _ from 'lodash';
+import * as _ from "lodash";
 import {Observable} from "rxjs/Observable";
-import {Subject} from "rxjs/Subject";
 
 
 export const noop = ()=> {
@@ -32,6 +31,6 @@ export function camelCase(name) {
   });
 }
 
-export function asObservable<T>(subject:Subject<T>):Observable<T> {
+export function asObservable<T>(subject:Observable<T>):Observable<T> {
   return new Observable(fn => subject.subscribe(fn));
 }

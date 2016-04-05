@@ -8,7 +8,7 @@ import {Http} from "angular2/http";
 import {BehaviorSubject} from "rxjs/Rx";
 import {DivisionItem, GearType} from "../common/models/common";
 import * as _ from "lodash";
-import { dashCaseToCamelCase} from "angular2/src/compiler/util";
+import {dashCaseToCamelCase} from "angular2/src/compiler/util";
 import {asObservable} from "../common/utils";
 import {Observable} from "rxjs/Observable";
 
@@ -36,7 +36,7 @@ export class ItemsService {
       let subjectName = dashCaseToCamelCase(gearType);
 
       let subject = self["_" + subjectName] as BehaviorSubject<DivisionItem[]>;
-      let url = self._basePath + gearType + "/items.json";
+      let url = self._basePath + gearType + ".json";
       http.get(url)
         .map(res=><DivisionItem[]>res.json())
         .subscribe(

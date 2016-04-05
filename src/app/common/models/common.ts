@@ -2,7 +2,6 @@
  * Created by xastey on 4/2/2016.
  */
 
-import {Gear} from "../../components/gear-overview/gear.model";
 export type Rarity = "high-end" | "superior" | "specialized";
 export type StatType = "firearms" | "stamaina" | "electronics";
 
@@ -15,6 +14,12 @@ const ATTRIBUTE_UTILITY = "utility";
 const MAJOR_ATTRIBUTE = "major";
 const MINOR_ATTRIBUTE = "minor";
 
+export type AttributeKind = "offensive" | "defensive" | "utility"
+export const AttributeKind = {
+  OFFENSIVE: "offensive" as AttributeKind,
+  DEFENSIVE: "defensive" as AttributeKind,
+  UTILITY: "utility" as AttributeKind
+};
 export type AttributeType  = "major" | "minor"
 export const AttributeType = {
   MAJOR: "major" as AttributeType,
@@ -53,61 +58,22 @@ export class GearSupport {
 }
 
 
-export interface IAttribute {
-  name:string;
+export interface GearAttribute {
   id:number;
+  name:string;
+  type:AttributeType;
+  kind:AttributeKind;
   format:AttributeFormat;
-  //canSupport(rarity:Rarity, level:number):boolean;
+  native:boolean;
+  slot:boolean;
+  supports:GearType[];
+
 }
 export type AttributeFormat = "percent" | "number";
 export const AttributeFormat = {
   PERCENT: "percent" as AttributeFormat,
   NUMBER: "number" as AttributeFormat
 };
-
-abstract class BaseAttribute implements IAttribute {
-  protected _support:GearSupport[];
-  kind:string;
-  name:string;
-  id:number;
-  format:AttributeFormat;
-
-  constructor(kind:string, id:number, name:string, format:AttributeFormat, support:GearSupport[]) {
-    this.name = name;
-    this.id = id;
-    this.kind = kind;
-    this._support = support;
-    this.format = format;
-  }
-
-
-  canSupport(rarity:Rarity, level:number):boolean {
-    let found = this._support
-      .filter(support=> support.rarity == rarity && support.level == level);
-    return !!found.length;
-  }
-}
-
-export class EmptyAttribute implements IAttribute {
-
-
-  name:string;
-  id:number;
-  format:AttributeFormat;
-}
-export class MajorAttribute extends BaseAttribute {
-  constructor(id:number, name:string, format:AttributeFormat, support:GearSupport[]) {
-    super("major", id, name, format, support)
-
-  }
-}
-
-export class MinorAttribute extends BaseAttribute {
-  constructor(id:number, name:string, format:AttributeFormat, support:GearSupport[]) {
-    super("minor", id, name, format, support)
-
-  }
-}
 
 
 export interface DivisionItem {

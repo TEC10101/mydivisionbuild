@@ -42,7 +42,7 @@ export class TheDivisionManagerApp implements OnInit {
       },
       attributes: {
         major: [{
-          id: 1,//"Health on Kill",
+          id: 13,//"Health on Kill",
           value: 8
 
         }],

@@ -2,12 +2,12 @@
  * Created by xastey on 4/3/2016.
  */
 
-import {Component, Input, OnInit, Output, EventEmitter} from 'angular2/core';
+import {Component, Input, OnInit, Output, EventEmitter} from "angular2/core";
 import {NgFor} from "angular2/common";
 import {Attribute} from "./attributes.model";
 import {AttributePipe} from "./attribute_pipe";
 import {AttributesService} from "../../services/attributes.service";
-import {GearType, AttributeType, Rarity, IAttribute, AttributeFormat, EmptyAttribute} from "../../common/models/common";
+import {GearType, AttributeType, Rarity, AttributeFormat, GearAttribute} from "../../common/models/common";
 
 
 export interface AttributeMeta {
@@ -25,7 +25,7 @@ export interface AttributeAddEvent {
   attributeType:AttributeType;
   attribute:Attribute;
 }
-type AttributesById = {[id:string]:IAttribute}
+type AttributesById = {[id:string]:GearAttribute}
 
 @Component({
   selector: 'item-attribute',
@@ -45,12 +45,12 @@ export class AttributeComponent implements OnInit {
   @Output("remove") remove = new EventEmitter<AttributeRemoveEvent>();
 
   attributeFormat:AttributeFormat;
-  selectedAttribute:IAttribute = new EmptyAttribute();
+  selectedAttribute:GearAttribute;
   private _attributesService:AttributesService;
 
   private _attributesById:AttributesById = {};
 
-  attributes:IAttribute[];
+  attributes:GearAttribute[];
 
 
   constructor(attributesService:AttributesService) {
@@ -66,7 +66,7 @@ export class AttributeComponent implements OnInit {
     this._attributesService.getFor(meta.belongsTo, this.attributeType)
       .subscribe(data=> {
         this.attributes = data;
-        data.forEach((attr:IAttribute)=> attributesById[attr.id] = attr);
+        data.forEach((attr:GearAttribute)=> attributesById[attr.id] = attr);
         if (data.length)
           this.onAttributeChange();
       });

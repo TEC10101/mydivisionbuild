@@ -86,12 +86,161 @@
   {
     "id": 9,
     "name": "Damage vs Elites",
+    "type": "major",
+    "kind": "offensive",
     "format": "percent",
     "supports": [
       "mask",
       "body-armor",
       "gloves",
       "knee-pads"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Armor(native)",
+    "type": "major",
+    "kind": "defensive",
+    "format": "number",
+    "supports": [
+      "mask",
+      "body-armor",
+      "backpack",
+      "gloves",
+      "knee-pads",
+      "holster"
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Armor",
+    "type": "major",
+    "kind": "defensive",
+    "format": "number",
+    "supports": [
+      "body-armor",
+      "backpack",
+      "knee-pads",
+      "holster"
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Health",
+    "type": "major",
+    "kind": "defensive",
+    "format": "number",
+    "supports": [
+      "mask",
+      "body-armor",
+      "knee-pads"
+    ]
+  },
+  {
+    "id": 13,
+    "name": "HP on Kill",
+    "type": "major",
+    "kind": "defensive",
+    "format": "percent",
+    "supports": [
+      "mask",
+      "body-armor",
+      "gloves",
+      "knee-pads",
+      "holster"
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Exotic Damage Resilience",
+    "type": "major",
+    "kind": "defensive",
+    "format": "percent",
+    "supports": [
+      "mask",
+      "body-armor",
+      "knee-pads"
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Protection vs Elites",
+    "type": "major",
+    "kind": "defensive",
+    "format": "percent",
+    "supports": [
+      "body-armor",
+      "knee-pads",
+      "holster"
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Skill Haste",
+    "type": "major",
+    "kind": "utility",
+    "format": "percent",
+    "supports": [
+      "backpack",
+      "holster"
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Skill Power",
+    "type": "major",
+    "kind": "utility",
+    "format": "number",
+    "supports": [
+      "mask",
+      "backpack"
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Signature Resource Gain",
+    "type": "major",
+    "kind": "utility",
+    "format": "percent",
+    "supports": [
+      "backpack"
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Mod Slot",
+    "type": "major",
+    "kind": "utility",
+    "format": "none",
+    "native": true,
+    "slot": true,
+    "supports": [
+      "mask",
+      "backpack"
+    ]
+  },
+  {
+    "id": 20,
+    "name": "Mod Slot",
+    "type": "major",
+    "kind": "utility",
+    "format": "none",
+    "slot": true,
+    "supports": [
+      "mask",
+      "body-armor",
+      "knee-pads",
+      "holster"
+    ]
+  } ,
+  {
+    "id": 21,
+    "name": "Enemy Armor Damage",
+    "type": "major",
+    "kind": "utility",
+    "format": "percent",
+    "supports": [
+      "backpack"
     ]
   }
 ]
