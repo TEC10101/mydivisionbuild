@@ -1,6 +1,18 @@
 @import "../../assets/styles/mixins";
+@import "../../assets/styles/colors";
 
 select {
   @include select-style();
+  font-weight:600;
 
+
+  .option-high-end {
+    color: $high-end-accent-font-color;
+  }
+  .option-specialized {
+    color: $specialized-accent-font-color;
+  }
+  .option-superior {
+    color: $superior-accent-font-color;
+  }
 }

@@ -8,7 +8,7 @@ import {StatsDisplay} from "../stats-display/stats-display";
 import {Gear} from "./gear.model";
 import {AttributesComponent} from "../attributes/attributes.component";
 import {PrettyNumberPipe} from "../../common/pipes/prettynumber";
-import {Rarity, GearType, DivisionItem} from "../../common/models/common";
+import {Rarity, DivisionItem, GearRarity} from "../../common/models/common";
 import {AttributeMeta} from "../attributes/attribute.component";
 import {ItemsService} from "../../services/item.service";
 import {NgFor} from "angular2/common";
@@ -32,8 +32,13 @@ export class GearOverviewComponent implements OnInit {
 
   items:DivisionItem[] = [];
 
+
   constructor(itemService:ItemsService) {
     this._itemService = itemService;
+  }
+
+  get rarities():Rarity[] {
+    return [GearRarity.HIGH_END, GearRarity.SUPERIOR, GearRarity.SPECIALIZED];
   }
 
   ngOnInit() {

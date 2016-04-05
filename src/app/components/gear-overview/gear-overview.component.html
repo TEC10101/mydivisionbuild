@@ -6,7 +6,11 @@
         <option *ngFor="#item of items" [value]="item.id">{{item.name}}</option>
       </select>
     </div>
-    <div class="rarity-wrapper">{{gear.rarity|ucfirst}}</div>
+    <div class="rarity-wrapper">
+      <select [(ngModel)]="gear.rarity">
+        <option class="option-{{rarity}}" *ngFor="#rarity of rarities" [value]="rarity">{{rarity|ucfirst}}</option>
+      </select>
+    </div>
 
     <div class="level-wrapper">
       level
