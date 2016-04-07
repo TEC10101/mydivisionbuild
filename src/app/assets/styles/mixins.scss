@@ -18,11 +18,19 @@
 
 }
 
-@mixin text-style() {
+@mixin text-style($fontSize:20px,$lineHeight:1.4) {
   font-family: Borda, serif;
-  font-size: 20px;
+  font-size: $fontSize;
   letter-spacing: 1.05px;
-  line-height: 1.4;
+  line-height: $lineHeight;
 
   text-shadow: 0 0 2px rgba(0, 0, 0, .3);
+}
+
+@mixin section-background {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+@mixin dotted-bottom() {
+  border-bottom: 1px dotted #888 !important;
 }

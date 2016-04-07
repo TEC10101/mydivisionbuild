@@ -23,15 +23,17 @@ label {
   margin-right: 10px;
 }
 
-input, div.placeholder, label {
-  border-bottom: 1px dotted #888;
+.edit-mode {
+  input, div.placeholder, label {
+    @include dotted-bottom();
+  }
 }
 
 input, div.placeholder {
   background: none;
   line-height: 15px;
   border: 0;
-  border-bottom: 1px dotted #888;
+
 }
 
 input.inputted {

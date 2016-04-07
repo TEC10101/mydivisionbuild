@@ -3,17 +3,23 @@
 
 select {
   @include select-style();
-  float: left;
-  width: 60%;
 
+  @include dotted-bottom();
+
+}
+
+select, label {
+  float: left;
+  width: 65%;
 }
 
 button {
   color: $accent-font-color;
   font-weight: bold;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   float: right;
+  text-align: center;
   margin-right: 5px;
 
   &:active, &:focus {

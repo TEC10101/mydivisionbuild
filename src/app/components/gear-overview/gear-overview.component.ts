@@ -12,6 +12,7 @@ import {Rarity, DivisionItem, GearRarity} from "../../common/models/common";
 import {AttributeMeta} from "../attributes/attribute.component";
 import {ItemsService} from "../../services/item.service";
 import {NgFor} from "angular2/common";
+import {EditorDirective} from "../../directives/editor";
 export {Gear} from "./gear.model";
 
 
@@ -24,7 +25,7 @@ export {Gear} from "./gear.model";
   styles: [require('./gear-overview.component.scss')],
 
   templateUrl: 'app/components/gear-overview/gear-overview.component.html',
-  directives: [StatsDisplay, AttributesComponent, NgFor]
+  directives: [StatsDisplay, AttributesComponent, NgFor, EditorDirective]
 })
 export class GearOverviewComponent implements OnInit {
   @Input() gear:Gear;
@@ -43,6 +44,16 @@ export class GearOverviewComponent implements OnInit {
 
   ngOnInit() {
     this._itemService.getFor(this.gear.type).subscribe(data=> this.items = data)
+  }
+
+  onAttributeAdded(event) {
+    console.log("Attributed Added");
+    console.dir(this.gear);
+  }
+
+  onAttributeRemoved(event) {
+    console.log("Attributed Removed")
+    console.dir(this.gear);
   }
 
   get metadata():AttributeMeta {

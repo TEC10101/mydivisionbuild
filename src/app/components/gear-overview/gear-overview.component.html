@@ -7,7 +7,8 @@
       </select>
     </div>
     <div class="rarity-wrapper">
-      <select [(ngModel)]="gear.rarity">
+      <label editor="false">{{gear.rarity|ucfirst}}</label>
+      <select [(ngModel)]="gear.rarity" editor="true">
         <option class="option-{{rarity}}" *ngFor="#rarity of rarities" [value]="rarity">{{rarity|ucfirst}}</option>
       </select>
     </div>
@@ -31,7 +32,9 @@
 
   </div>
   <stats-display [stats]="gear.stats"></stats-display>
-  <item-attributes [data]="gear.attributes" [gear-metadata]="metadata"></item-attributes>
+  <item-attributes [data]="gear.attributes" [gear-metadata]="metadata"
+                   (attributeAdded)="onAttributeAdded($event)"
+                   (attributeRemoved)="onAttributeRemoved($event)"></item-attributes>
 
 
 </div>

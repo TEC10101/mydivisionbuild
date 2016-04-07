@@ -1,0 +1,29 @@
+@import '../../assets/styles/mixins';
+@import "../../assets/styles/colors";
+
+$button-width: 70px;
+:host {
+  position: relative;
+  display: block;
+}
+
+.section-wrapper {
+  min-height: 71px;
+}
+
+.button-bar {
+  position: absolute;
+  top: 0;
+  right: -$button-width;
+
+  button {
+    @include section-background();
+    @include text-style(15px, 1);
+    border: none;
+    display: block;
+    margin-bottom: 10px;
+    width: $button-width;
+    color: $accent-font-color;
+
+  }
+}

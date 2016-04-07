@@ -34,3 +34,4 @@ export function camelCase(name) {
 export function asObservable<T>(subject:Observable<T>):Observable<T> {
   return new Observable(fn => subject.subscribe(fn));
 }
+

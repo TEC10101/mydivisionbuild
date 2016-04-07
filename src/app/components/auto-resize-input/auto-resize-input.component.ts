@@ -13,12 +13,15 @@ import {
   HostListener,
   ElementRef,
   ViewChild,
-  NgZone
+  NgZone,
+  OnDestroy
 } from "angular2/core";
 import {ControlValueAccessor, NgControl, FORM_DIRECTIVES} from "angular2/common";
 import * as _ from "lodash";
 import {AttributeFormat} from "../../common/models/common";
 import {AttributePipe} from "../attributes/attribute_pipe";
+import {EditorService} from "../../services/editor-service";
+import {Subscription} from "rxjs/Subscription";
 
 
 //http://jbavari.github.io/blog/2015/10/21/angular-2-and-ng-model/
@@ -50,7 +53,7 @@ export class AutoResizeInput {
 
 @Component({
   selector: 'auto-resize-input',
-  template: `<div>
+  template: `<div [ngClass]="{'edit-mode':allowEditing}">
         <label  [ngClass]="{hidden:editing}" (click)="onClicked()">+{{value|attribute:format}}</label>
         <input [ngClass]="{hidden:!editing}" autofocus type="text"  pattern="\d*" maxlength="4" [value]="value" (input)="onInputChanged($event)"  (focus)="onInputFocused()" class="auto-resize-input" (blur)="onInputBlurred()"/>
     </div>
@@ -59,7 +62,7 @@ export class AutoResizeInput {
   directives: [FORM_DIRECTIVES, AutoResizeInput],
   styles: [require('./auto-resize-input.component.scss')]
 })
-export class AutoResizeInputComponent implements ControlValueAccessor,OnInit {
+export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnDestroy {
 
 
   @ViewChild(AutoResizeInput) autoResizeInput:AutoResizeInput;
@@ -76,12 +79,15 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit {
   editing:boolean = false;
   @Output() input = new EventEmitter<string>();
   ngZone:NgZone;
+  allowEditing:boolean;
 
+  private _editorSubscription:Subscription;
 
-  constructor(elementRef:ElementRef, ngControl:NgControl, ngZone:NgZone) {
+  constructor(elementRef:ElementRef, ngControl:NgControl, ngZone:NgZone, private _editorService:EditorService) {
     ngControl.valueAccessor = this;
     this.elementRef = elementRef;
     this.ngZone = ngZone;
+    this._editorSubscription = this._editorService.subscribe((value)=> this.allowEditing = value)
 
   }
 
@@ -96,15 +102,18 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit {
 
   onClicked() {
 
+    if (this._editorService.state) {
 
-    this.editing = true;
 
-    let inputElement = this.autoResizeInput.nativeElement;
-    this.ngZone.run(()=> {
-      inputElement.focus();
-      inputElement.select();
+      this.editing = true;
 
-    })
+      let inputElement = this.autoResizeInput.nativeElement;
+      this.ngZone.run(()=> {
+        inputElement.focus();
+        inputElement.select();
+
+      })
+    }
 
   }
 
@@ -172,6 +181,11 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit {
 
     //_nghost-juu-
 
+  }
+
+
+  ngOnDestroy():any {
+    this._editorSubscription.unsubscribe();
   }
 
   /**

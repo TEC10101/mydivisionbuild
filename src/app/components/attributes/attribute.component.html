@@ -4,11 +4,15 @@
                        (input)="onAttributeInputChanged($event)"></auto-resize-input>
   </div>
   <div class="attribute-title-wrapper">
-    <select [(ngModel)]="attribute.id" (change)="onAttributeChange()">
-      <option *ngFor="#attr of attributes" [value]="attr.id">{{attr.name}}</option>
-    </select>
-    <button (click)="onAddAttribute()">+</button>
-    <button (click)="onRemoveAttribute()">-</button>
+    <label editor>{{attributeName}}</label>
+    <div editor="true">
+      <select [(ngModel)]="attribute.id" (ngModelChange)="onAttributeChange()">
+        <option *ngFor="#attr of attributes " [value]="attr.id">{{attr.name}}</option>
+      </select>
+      <button (click)="onRemoveAttribute()">-</button>
+      <button (click)="onAddAttribute()">+</button>
+    </div>
+
   </div>
 
 </div>

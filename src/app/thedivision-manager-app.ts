@@ -7,6 +7,7 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
 import {Gear, GearOverviewComponent} from "./components/gear-overview/gear-overview.component";
 import {DIVISION_PROVIDERS} from "./services/core";
 import {GearType} from "./common/models/common";
+import {EditorService} from "./services/editor-service";
 
 
 @Component({
@@ -24,7 +25,7 @@ export class TheDivisionManagerApp implements OnInit {
 
   gear:Gear;
 
-  constructor() {
+  constructor(private _editorService:EditorService) {
   }
 
   ngOnInit() {
@@ -52,6 +53,14 @@ export class TheDivisionManagerApp implements OnInit {
       },
       modslots: []
     }
+  }
+
+  get currentEditorState() {
+    return this._editorService.state ? 'Currently On' : 'Currently Off';
+  }
+
+  onToggleEditor() {
+    this._editorService.toggle();
   }
 
 

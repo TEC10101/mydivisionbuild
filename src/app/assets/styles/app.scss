@@ -28,6 +28,10 @@
   display: block;
 }
 
+.hidden {
+  display: none;
+}
+
 /* close commented backslash hack */
 body {
   margin: 0;
@@ -73,19 +77,15 @@ body {
   text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
   width: 400px;
 
-
-
   &.high-end {
     .rarity-indicator {
       background-color: $high-end-rarity-color;
     }
 
-    .rarity-wrapper select, .talent-title-wrapper  {
+    .rarity-wrapper select, .rarity-wrapper label, .talent-title-wrapper {
       color: $high-end-accent-font-color;
 
     }
-
-
 
   }
 
@@ -94,11 +94,10 @@ body {
       background-color: $superior-rarity-color;
     }
 
-    .rarity-wrapper select, .talent-title-wrapper{
+    .rarity-wrapper select, .rarity-wrapper label, .talent-title-wrapper {
       color: $superior-accent-font-color;
 
     }
-
 
   }
 
@@ -107,10 +106,9 @@ body {
       background-color: $specialized-rarity-color;
     }
 
-    .rarity-wrapper select, .talent-title-wrapper {
+    .rarity-wrapper select, .rarity-wrapper label, .talent-title-wrapper {
       color: $specialized-accent-font-color;
     }
-
 
   }
 

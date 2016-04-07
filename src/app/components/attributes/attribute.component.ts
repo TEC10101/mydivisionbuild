@@ -10,6 +10,8 @@ import {AttributesService} from "../../services/attributes.service";
 import {GearType, AttributeType, Rarity, AttributeFormat, GearAttribute} from "../../common/models/common";
 import {Subscription} from "rxjs/Subscription";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
+import {EditorDirective} from "../../directives/editor";
+import {AttributeRestrictPipe} from "./attribute-restrict.pipe";
 
 
 export interface AttributeMeta {
@@ -19,32 +21,31 @@ export interface AttributeMeta {
   belongsTo:GearType;
 }
 
-export interface AttributeRemoveEvent {
+
+export interface AttributeEvent {
   attribute:Attribute;
   attributeType:AttributeType
 }
-export interface AttributeAddEvent {
-  attributeType:AttributeType;
-  attribute:Attribute;
-}
+
 type AttributesById = {[id:string]:GearAttribute}
 
 @Component({
   selector: 'item-attribute',
-  pipes: [AttributePipe],
+  pipes: [AttributePipe, AttributeRestrictPipe],
   templateUrl: 'app/components/attributes/attribute.component.html',
   styles: [require("./attribute.component.scss")],
-  directives: [NgFor, AutoResizeInputComponent]
+  directives: [NgFor, AutoResizeInputComponent, EditorDirective]
 })
 
 export class AttributeComponent implements OnInit, OnDestroy {
   @Input() attribute:Attribute;
   @Input() metadata:AttributeMeta;
+  @Input() restrict:Attribute[] = [];
 
   @Input("attribute-type") attributeType:AttributeType;
 
-  @Output("add") add = new EventEmitter<AttributeAddEvent>();
-  @Output("remove") remove = new EventEmitter<AttributeRemoveEvent>();
+  @Output() added = new EventEmitter<AttributeEvent>();
+  @Output() removed = new EventEmitter<AttributeEvent>();
 
   attributeFormat:AttributeFormat;
   selectedAttribute:GearAttribute;
@@ -55,6 +56,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
   attributes:GearAttribute[];
 
   private _subscription:Subscription;
+  attributeName:string = "";
 
 
   constructor(attributesService:AttributesService) {
@@ -78,13 +80,18 @@ export class AttributeComponent implements OnInit, OnDestroy {
   }
 
   onAttributeChange() {
+    if (!this.attribute.id) {
+      this.attribute.id = this.attributes[0].id
+    }
     this.selectedAttribute = this._attributesById[this.attribute.id];
 
+    this.attributeName = this.selectedAttribute.name;
+    console.log("attributeName", this.attributeName);
     this.attributeFormat = this.selectedAttribute.format;
   }
 
   onAddAttribute() {
-    this.add.emit({
+    this.added.emit({
       attributeType: this.attributeType,
       attribute: {
         id: this.attribute.id,
@@ -94,7 +101,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
   }
 
   onRemoveAttribute() {
-    this.remove.emit({
+    this.removed.emit({
       attribute: this.attribute,
       attributeType: this.attributeType
     });
