@@ -1,0 +1,46 @@
+@import "../../assets/styles/colors";
+@import "../../assets/styles/mixins";
+
+input, .placeholder {
+  color: #eb7c09;
+  float: left;
+  width: 12px;
+  font-weight: 600;
+
+  @include text-style();
+  &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+}
+
+.hidden {
+  display: none;
+}
+
+label {
+  margin-right: 10px;
+}
+
+input, div.placeholder, label {
+  border-bottom: 1px dotted #888;
+}
+
+input, div.placeholder {
+  background: none;
+  line-height: 15px;
+  border: 0;
+  border-bottom: 1px dotted #888;
+}
+
+input.inputted {
+  color: #ff0000;
+  border-bottom: 0;
+  background: transparent;
+}
+
+div.placeholder {
+  display: inline-block;
+  visibility: collapse;
+}

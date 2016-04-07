@@ -2,12 +2,14 @@
  * Created by xastey on 4/3/2016.
  */
 
-import {Component, Input, OnInit, Output, EventEmitter} from "angular2/core";
+import {Component, Input, OnInit, Output, EventEmitter, OnDestroy} from "angular2/core";
 import {NgFor} from "angular2/common";
 import {Attribute} from "./attributes.model";
 import {AttributePipe} from "./attribute_pipe";
 import {AttributesService} from "../../services/attributes.service";
 import {GearType, AttributeType, Rarity, AttributeFormat, GearAttribute} from "../../common/models/common";
+import {Subscription} from "rxjs/Subscription";
+import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 
 
 export interface AttributeMeta {
@@ -32,10 +34,10 @@ type AttributesById = {[id:string]:GearAttribute}
   pipes: [AttributePipe],
   templateUrl: 'app/components/attributes/attribute.component.html',
   styles: [require("./attribute.component.scss")],
-  directives: [NgFor]
+  directives: [NgFor, AutoResizeInputComponent]
 })
 
-export class AttributeComponent implements OnInit {
+export class AttributeComponent implements OnInit, OnDestroy {
   @Input() attribute:Attribute;
   @Input() metadata:AttributeMeta;
 
@@ -52,6 +54,8 @@ export class AttributeComponent implements OnInit {
 
   attributes:GearAttribute[];
 
+  private _subscription:Subscription;
+
 
   constructor(attributesService:AttributesService) {
     this._attributesService = attributesService;
@@ -63,7 +67,7 @@ export class AttributeComponent implements OnInit {
 
 
     let attributesById = this._attributesById;
-    this._attributesService.getFor(meta.belongsTo, this.attributeType)
+    this._subscription = this._attributesService.getFor(meta.belongsTo, this.attributeType)
       .subscribe(data=> {
         this.attributes = data;
         data.forEach((attr:GearAttribute)=> attributesById[attr.id] = attr);
@@ -77,7 +81,6 @@ export class AttributeComponent implements OnInit {
     this.selectedAttribute = this._attributesById[this.attribute.id];
 
     this.attributeFormat = this.selectedAttribute.format;
-    console.log("AttributeFormat = ", this.attributeFormat);
   }
 
   onAddAttribute() {
@@ -97,6 +100,13 @@ export class AttributeComponent implements OnInit {
     });
   }
 
+  onAttributeInputChanged(value) {
+    this.attribute.value = value;
+  }
+
+  ngOnDestroy():any {
+    this._subscription.unsubscribe();
+  }
 
   /*
    get attributes() {

@@ -2,9 +2,9 @@
 @import "../../assets/styles/mixins";
 
 select {
- @include select-style();
+  @include select-style();
   float: left;
-  width: 70%;
+  width: 60%;
 
 }
 
@@ -13,11 +13,11 @@ button {
   font-weight: bold;
   width: 24px;
   height: 24px;
-  float: left;
+  float: right;
   margin-right: 5px;
 
   &:active, &:focus {
     border: 1px $accent-font-color;
-    outline-color:$accent-font-color ;
+    outline-color: $accent-font-color;
   }
 }

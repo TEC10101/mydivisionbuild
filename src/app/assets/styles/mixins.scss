@@ -17,3 +17,12 @@
   }
 
 }
+
+@mixin text-style() {
+  font-family: Borda, serif;
+  font-size: 20px;
+  letter-spacing: 1.05px;
+  line-height: 1.4;
+
+  text-shadow: 0 0 2px rgba(0, 0, 0, .3);
+}

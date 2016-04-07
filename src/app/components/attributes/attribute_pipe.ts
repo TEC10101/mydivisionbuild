@@ -14,8 +14,8 @@ export class AttributePipe implements PipeTransform {
 
 
     if (format == AttributeFormat.PERCENT) {
-      return "+" + value + "%";
+      return value + "%";
     }
-    return "+" + value.toLocaleString() + "";
+    return value.toLocaleString();
   }
 }
