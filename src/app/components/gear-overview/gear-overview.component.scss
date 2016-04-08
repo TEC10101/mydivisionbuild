@@ -3,8 +3,7 @@
 
 select {
   @include select-style();
-  font-weight:600;
-
+  font-weight: 600;
 
   .option-high-end {
     color: $high-end-accent-font-color;
@@ -14,5 +13,15 @@ select {
   }
   .option-superior {
     color: $superior-accent-font-color;
+  }
+}
+
+:host .number-wrapper {
+  input, div.placeholder {
+    font-size: 1em !important;
+    color: #fff !important;
+    width: 20px;
+    height: 60px;
+    margin-top: -9px;
   }
 }

@@ -18,7 +18,7 @@ type AttributeObservable = Observable<GearAttribute[]>
  interface RawAttribute {
  name:string;
  id:number;
- format:AttributeFormat;
+ format:ValueFormat;
  support:GearSupport[];
  }
 

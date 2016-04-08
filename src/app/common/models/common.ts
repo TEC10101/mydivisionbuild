@@ -63,16 +63,16 @@ export interface GearAttribute {
   name:string;
   type:AttributeType;
   kind:AttributeKind;
-  format:AttributeFormat;
+  format:ValueFormat;
   native:boolean;
   slot:boolean;
   supports:GearType[];
 
 }
-export type AttributeFormat = "percent" | "number";
-export const AttributeFormat = {
-  PERCENT: "percent" as AttributeFormat,
-  NUMBER: "number" as AttributeFormat
+export type ValueFormat = "percent" | "number";
+export const ValueFormat = {
+  PERCENT: "percent" as ValueFormat,
+  NUMBER: "number" as ValueFormat
 };
 
 

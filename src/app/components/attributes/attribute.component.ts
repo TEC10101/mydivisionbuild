@@ -7,7 +7,7 @@ import {NgFor} from "angular2/common";
 import {Attribute} from "./attributes.model";
 import {AttributePipe} from "./attribute_pipe";
 import {AttributesService} from "../../services/attributes.service";
-import {GearType, AttributeType, Rarity, AttributeFormat, GearAttribute} from "../../common/models/common";
+import {GearType, AttributeType, Rarity, ValueFormat, GearAttribute} from "../../common/models/common";
 import {Subscription} from "rxjs/Subscription";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 import {EditorDirective} from "../../directives/editor";
@@ -47,7 +47,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
   @Output() added = new EventEmitter<AttributeEvent>();
   @Output() removed = new EventEmitter<AttributeEvent>();
 
-  attributeFormat:AttributeFormat;
+  attributeFormat:ValueFormat;
   selectedAttribute:GearAttribute;
   private _attributesService:AttributesService;
 

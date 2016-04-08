@@ -13,6 +13,7 @@ import {AttributeMeta} from "../attributes/attribute.component";
 import {ItemsService} from "../../services/item.service";
 import {NgFor} from "angular2/common";
 import {EditorDirective} from "../../directives/editor";
+import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 export {Gear} from "./gear.model";
 
 
@@ -25,7 +26,7 @@ export {Gear} from "./gear.model";
   styles: [require('./gear-overview.component.scss')],
 
   templateUrl: 'app/components/gear-overview/gear-overview.component.html',
-  directives: [StatsDisplay, AttributesComponent, NgFor, EditorDirective]
+  directives: [StatsDisplay, AttributesComponent, NgFor, EditorDirective, AutoResizeInputComponent]
 })
 export class GearOverviewComponent implements OnInit {
   @Input() gear:Gear;
@@ -52,8 +53,12 @@ export class GearOverviewComponent implements OnInit {
   }
 
   onAttributeRemoved(event) {
-    console.log("Attributed Removed")
+    console.log("Attributed Removed");
     console.dir(this.gear);
+  }
+
+  onArmorValueChanged(value) {
+    this.gear.armor = value;
   }
 
   get metadata():AttributeMeta {

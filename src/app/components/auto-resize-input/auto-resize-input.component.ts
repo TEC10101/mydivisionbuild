@@ -18,10 +18,11 @@ import {
 } from "angular2/core";
 import {ControlValueAccessor, NgControl, FORM_DIRECTIVES} from "angular2/common";
 import * as _ from "lodash";
-import {AttributeFormat} from "../../common/models/common";
+import {ValueFormat} from "../../common/models/common";
 import {AttributePipe} from "../attributes/attribute_pipe";
 import {EditorService} from "../../services/editor-service";
 import {Subscription} from "rxjs/Subscription";
+import {InputConverter, NumberConverter} from "../../common/converters";
 
 
 //http://jbavari.github.io/blog/2015/10/21/angular-2-and-ng-model/
@@ -54,7 +55,7 @@ export class AutoResizeInput {
 @Component({
   selector: 'auto-resize-input',
   template: `<div [ngClass]="{'edit-mode':allowEditing}">
-        <label  [ngClass]="{hidden:editing}" (click)="onClicked()">+{{value|attribute:format}}</label>
+        <label  [ngClass]="{hidden:editing}" (click)="onClicked()">{{prepend}}{{value|attribute:format}}</label>
         <input [ngClass]="{hidden:!editing}" autofocus type="text"  pattern="\d*" maxlength="4" [value]="value" (input)="onInputChanged($event)"  (focus)="onInputFocused()" class="auto-resize-input" (blur)="onInputBlurred()"/>
     </div>
      `,
@@ -67,11 +68,13 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
 
   @ViewChild(AutoResizeInput) autoResizeInput:AutoResizeInput;
   @Input() ngModel:string;
-  @Input() defaultWidth:number = 12;
-  @Input() resizeIncrement:number = 10;
-  @Input() length:number;
+
+  @Input('resize-increment')
+  @InputConverter(NumberConverter) resizeIncrement:number = 10;
+  @Input() length:number = 4;
   @Input() inputType:string;
-  @Input() format:AttributeFormat;
+  @Input() format:ValueFormat;
+  @Input() prepend:string = "+";
   value:string;
 
   elementRef:ElementRef;
@@ -163,8 +166,10 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
     parentNode.appendChild(div);
 
 
+    // convert to string
+    let value = this.value + "";
     this.setElementWidth(this.autoResizeInput.nativeElement,
-      ((this.value.length + 1) * pad) + 2);
+      ((value.length + 1) * pad) + 2);
     parentNode.removeChild(div);
 
   }
