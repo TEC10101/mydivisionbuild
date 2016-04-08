@@ -1,5 +1,12 @@
-<div  class="single-stat-block" [ngClass]="{inactive: value == 0 }">
+<div class="single-stat-block" [ngClass]="{inactive: value == 0 }">
   <div class="icon {{type}}"></div>
-  <div class="single-stat-value-wrapper">+{{value}}</div>
+  <div class="single-stat-value-wrapper">
+    <auto-resize-input
+
+      resize-increment="15"
+      [(ngModel)]="value"
+      (input)="onStatValueChanged($event)"></auto-resize-input>
+
+  </div>
 
 </div>

@@ -1,6 +1,10 @@
 @import "../../assets/styles/colors";
 
-
+:host input {
+  font-size: 1.2em !important;
+  color: #fff !important;
+  float: none;
+}
 
 .icon {
   background-size: contain;
@@ -27,7 +31,6 @@
   font-weight: 700;
 
   text-align: center;
-
 
   &.inactive {
     background-color: $background-color;

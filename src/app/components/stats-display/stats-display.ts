@@ -2,10 +2,16 @@
  * Created by xastey on 4/2/2016.
  */
 
-import {Component, Input} from 'angular2/core';
+import {Component, Input, Output, EventEmitter} from "angular2/core";
 import {StatType} from "../../common/models/common";
 import {NgClass} from "angular2/common";
+import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 
+
+interface StateValueChangeEvent {
+  type:StatType
+  value:number;
+}
 
 export class Stats {
   firearms:number;
@@ -16,13 +22,24 @@ export class Stats {
 @Component({
   selector: 'single-stat-display',
   templateUrl: 'app/components/stats-display/single-stat-display.html',
-  directives: [NgClass],
+  directives: [NgClass, AutoResizeInputComponent],
   styles: [require("./single-stat-display.scss")]
+
 })
 export class SingleStatDisplay {
 
   @Input() type:StatType;
   @Input() value:number;
+
+  @Output() change = new EventEmitter<StateValueChangeEvent>();
+
+  onStatValueChanged(value) {
+    this.value = value;
+    this.change.emit({
+      type: this.type,
+      value: this.value
+    })
+  }
 }
 
 @Component({
@@ -39,6 +56,12 @@ export class SingleStatDisplay {
 export class StatsDisplay {
 
   @Input() stats:Stats;
+
+  onStateValueChanged(event:StateValueChangeEvent) {
+
+    console.log("onStateValueChanged", event);
+    this.stats[event.type] = event.value;
+  }
 
 }
 

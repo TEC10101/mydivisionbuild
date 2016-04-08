@@ -33,6 +33,7 @@ import {InputConverter, NumberConverter} from "../../common/converters";
 })
 export class AutoResizeInput {
   @HostListener('input', ['$event'])
+  @HostListener('change', ['$event'])
   /**
    * @private
    * Don't send the input's input event
@@ -111,9 +112,11 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
       this.editing = true;
 
       let inputElement = this.autoResizeInput.nativeElement;
+      let self = this;
       this.ngZone.run(()=> {
         inputElement.focus();
         inputElement.select();
+        self.resize();
 
       })
     }
@@ -128,7 +131,7 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
     if (this.value != value) {
       this.value = value;
       this.input.emit(this.value);
-      this.resize(this.resizeIncrement);
+      this.resize();
 
     }
 
@@ -143,7 +146,7 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
   }
 
   onInputBlurred() {
-    this.resize(this.resizeIncrement);
+    this.resize();
     this.editing = false;
   }
 
@@ -155,7 +158,7 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
   }
 
 
-  private resize(pad) {
+  private resize() {
     //pad = (this.value.length >= this.length) ? 0 : pad;
 
     let div = document.createElement("div");
@@ -169,7 +172,7 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
     // convert to string
     let value = this.value + "";
     this.setElementWidth(this.autoResizeInput.nativeElement,
-      ((value.length + 1) * pad) + 2);
+      ((value.length + 1) * this.resizeIncrement) + 2);
     parentNode.removeChild(div);
 
   }
