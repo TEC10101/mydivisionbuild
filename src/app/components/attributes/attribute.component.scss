@@ -2,15 +2,15 @@
 @import "../../assets/styles/mixins";
 
 select {
-  @include select-style();
+  @include select-style($dotted:true);
 
-  @include dotted-bottom();
+
 
 }
 
 select, label {
   float: left;
-  width: 65%;
+  width: 61%;
 }
 
 button {

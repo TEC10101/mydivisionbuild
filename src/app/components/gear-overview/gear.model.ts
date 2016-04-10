@@ -1,9 +1,9 @@
 /**
  * Created by xastey on 4/3/2016.
  */
-import {Stats} from "../stats-display/stats-display";
-import {Rarity, GearType} from "../../common/models/common";
-import {Attributes} from "../attributes/attributes.model";
+
+import {Rarity, GearType, GearStats} from "../../common/models/common";
+import {Attributes, Attribute} from "../attributes/attributes.model";
 
 
 export class Gear {
@@ -13,8 +13,15 @@ export class Gear {
   title:string;
 
   level:number;
-  stats:Stats;
+  stats:GearStats;
   armor:number;
   attributes:Attributes;
-  modslots:Array<any>;
+  mods:GearModSlot[];
+}
+
+
+export interface GearModSlot {
+  id:number;
+  primary?:Attribute;
+  secondary?:Attribute;
 }

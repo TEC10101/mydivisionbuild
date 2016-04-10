@@ -8,7 +8,8 @@
     "supports": [
       "mask",
       "gloves"
-    ]
+    ],
+    "mod": true
   },
   {
     "id": 2,
@@ -20,7 +21,8 @@
       "backpack",
       "gloves",
       "knee-pads"
-    ]
+    ],
+    "mod": true
   },
   {
     "id": 3,
@@ -94,7 +96,8 @@
       "body-armor",
       "gloves",
       "knee-pads"
-    ]
+    ],
+    "mod": true
   },
   {
     "id": 10,
@@ -122,7 +125,8 @@
       "backpack",
       "knee-pads",
       "holster"
-    ]
+    ],
+    "mod": true
   },
   {
     "id": 12,
@@ -134,7 +138,8 @@
       "mask",
       "body-armor",
       "knee-pads"
-    ]
+    ],
+    "mod": true
   },
   {
     "id": 13,
@@ -148,7 +153,8 @@
       "gloves",
       "knee-pads",
       "holster"
-    ]
+    ],
+    "mod": true
   },
   {
     "id": 14,
@@ -160,7 +166,8 @@
       "mask",
       "body-armor",
       "knee-pads"
-    ]
+    ],
+    "mod": true
   },
   {
     "id": 15,
@@ -172,7 +179,8 @@
       "body-armor",
       "knee-pads",
       "holster"
-    ]
+    ],
+    "mod": true
   },
   {
     "id": 16,
@@ -183,7 +191,8 @@
     "supports": [
       "backpack",
       "holster"
-    ]
+    ],
+    "mod": true
   },
   {
     "id": 17,
@@ -194,7 +203,8 @@
     "supports": [
       "mask",
       "backpack"
-    ]
+    ],
+    "mod": true
   },
   {
     "id": 18,
@@ -204,43 +214,157 @@
     "format": "percent",
     "supports": [
       "backpack"
-    ]
+    ],
+    "mod": true
   },
   {
     "id": 19,
-    "name": "Mod Slot",
-    "type": "major",
-    "kind": "utility",
-    "format": "none",
-    "native": true,
-    "slot": true,
-    "supports": [
-      "mask",
-      "backpack"
-    ]
-  },
-  {
-    "id": 20,
-    "name": "Mod Slot",
-    "type": "major",
-    "kind": "utility",
-    "format": "none",
-    "slot": true,
-    "supports": [
-      "mask",
-      "body-armor",
-      "knee-pads",
-      "holster"
-    ]
-  } ,
-  {
-    "id": 21,
     "name": "Enemy Armor Damage",
     "type": "major",
     "kind": "utility",
     "format": "percent",
     "supports": [
       "backpack"
+    ],
+    "mod": true
+  },
+  {
+    "id": 20,
+    "name": "Shock Resistance",
+    "type": "minor",
+    "kind": "abstract",
+    "format": "percent",
+    "supports": [
+      "knee-pads"
+    ],
+    "mod": true
+  },
+  {
+    "id": 21,
+    "name": "Burn Resistance",
+    "type": "minor",
+    "kind": "abstract",
+    "format": "percent",
+    "supports": [
+      "mask",
+      "backpack",
+      "knee-pads"
+    ],
+    "mod": true
+  },
+  {
+    "id": 22,
+    "name": "Disorient Resistance",
+    "type": "minor",
+    "kind": "abstract",
+    "format": "percent",
+    "supports": [
+      "mask",
+      "knee-pads"
+    ],
+    "mod": true
+  },
+  {
+    "id": 23,
+    "name": "Blind/Deaf Resistance",
+    "type": "minor",
+    "kind": "abstract",
+    "format": "percent",
+    "supports": [
+      "mask",
+      "knee-pads"
+    ],
+    "mod": true
+  },
+  {
+    "id": 24,
+    "name": "Disrupt Resistance",
+    "type": "minor",
+    "kind": "abstract",
+    "format": "percent",
+    "supports": [
+      "backpack",
+      "knee-pads"
+    ],
+    "mod": true
+  },
+  {
+    "id": 25,
+    "name": "Bleed Resistance",
+    "type": "minor",
+    "kind": "abstract",
+    "format": "percent",
+    "supports": [
+      "backpack",
+      "knee-pads"
+    ],
+    "mod": true
+  },
+  {
+    "id": 26,
+    "name": "Scavenging",
+    "type": "minor",
+    "kind": "abstract",
+    "format": "percent",
+    "supports": [
+      "mask",
+      "knee-pads"
+    ],
+    "mod": true
+  },
+  {
+    "id": 27,
+    "name": "Kill XP",
+    "type": "minor",
+    "kind": "abstract",
+    "format": "percent",
+    "supports": [
+      "mask",
+      "body-armor",
+      "knee-pads"
+    ],
+    "mod": true
+  },
+  {
+    "id": 28,
+    "name": "Ammo Capacity",
+    "type": "minor",
+    "kind": "abstract",
+    "format": "percent",
+    "supports": [
+      "body-armor",
+      "backpack"
+    ],
+    "mod": true
+  },
+  {
+    "id": 29,
+    "name": "Firearms",
+    "type": "main",
+    "kind": "abstract",
+    "format": "number",
+    "mod": true,
+    "supports": [
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Stamina",
+    "type": "main",
+    "kind": "abstract",
+    "format": "number",
+    "mod": true,
+    "supports": [
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Electronics",
+    "type": "main",
+    "kind": "abstract",
+    "format": "number",
+    "mod": true,
+    "supports": [
     ]
   }
 ]

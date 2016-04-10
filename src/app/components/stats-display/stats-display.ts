@@ -3,7 +3,7 @@
  */
 
 import {Component, Input, Output, EventEmitter} from "angular2/core";
-import {StatType} from "../../common/models/common";
+import {StatType, GearStats} from "../../common/models/common";
 import {NgClass} from "angular2/common";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 
@@ -11,12 +11,6 @@ import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.c
 interface StateValueChangeEvent {
   type:StatType
   value:number;
-}
-
-export class Stats {
-  firearms:number;
-  stamina:number;
-  electronics:number;
 }
 
 @Component({
@@ -55,7 +49,7 @@ export class SingleStatDisplay {
 })
 export class StatsDisplay {
 
-  @Input() stats:Stats;
+  @Input() stats:GearStats;
 
   onStateValueChanged(event:StateValueChangeEvent) {
 

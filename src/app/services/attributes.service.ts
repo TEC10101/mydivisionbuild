@@ -10,7 +10,7 @@ import * as _ from "lodash";
 /**
  * Created by xastey on 4/3/2016.
  */
-type AttributeObservable = Observable<GearAttribute[]>
+export type AttributeObservable = Observable<GearAttribute[]>
 /*
 
  type AttributeObserver=Observer<IAttribute[]>;
@@ -118,6 +118,10 @@ export class AttributesService {
     // this._bodyArmor = new AttributeStore(GearType.BodyArmor, this._http);
 
 
+  }
+
+  get attributes() {
+    return asObservable(this._attributes.first((attrs, idx, obs)=> !!attrs.length));
   }
 
 

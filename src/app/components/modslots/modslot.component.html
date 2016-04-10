@@ -1,0 +1,21 @@
+<div class="mod-slot-wrapper {{slotRarity}} " >
+
+  <div class="mod-slot-type">
+    <div class="rarity-indicator"></div>
+    <div class="mod-slot-type-title-wrapper">
+      <label editor="false">{{slotName}}</label>
+      <select [(ngModel)]="slot.id" editor="true" (ngModelChange)="onSlotTypeChanged()">
+        <option class="option-{{slotType.rarity}}" *ngFor="#slotType of slotTypes" [value]="slotType.id">{{slotType.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="mod-slot-attributes-wrapper">
+    <item-attribute [attribute]="slot.primary" can-add="false" [attributes-provider]="getAttributesProvider(true)" [metadata]="metadata"
+    attribute-type="main"
+    ></item-attribute>
+
+    <item-attribute [attribute]="slot.secondary" can-add="false" [attributes-provider]="getAttributesProvider(false)" [metadata]="metadata"
+                    attribute-type="main"
+    ></item-attribute>
+  </div>
+</div>

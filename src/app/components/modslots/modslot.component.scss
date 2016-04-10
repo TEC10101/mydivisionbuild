@@ -1,0 +1,28 @@
+@import "../../assets/styles/mixins";
+
+.mod-slot-wrapper {
+  @include rarity-indicator();
+}
+
+select {
+  @include select-style(true, true);
+  margin-left: 25px;
+
+}
+
+.rarity-indicator {
+  position: relative;
+  height: 12px;
+  margin-top: 2px;
+  width: 35px;
+  display: inline-block;
+  left: 0px;
+  -webkit-box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.45);
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.45);
+
+}
+
+.mod-slot-type-title-wrapper {
+  display: inline-block;
+}

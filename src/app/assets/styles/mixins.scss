@@ -1,4 +1,10 @@
-@mixin select-style() {
+@import "colors";
+
+
+@mixin dotted-bottom() {
+  border-bottom: 1px dotted #888 !important;
+}
+@mixin select-style($include-weight:false,$dotted:false) {
   background: none;
   -webkit-appearance: none; /*REMOVES DEFAULT CHROME & SAFARI STYLE*/
   -moz-appearance: none; /*REMOVES DEFAULT FIREFOX STYLE*/
@@ -14,6 +20,22 @@
     background: #2e2e2e;
 
     color: #fff;
+  }
+  .option-high-end {
+    color: $high-end-accent-font-color;
+  }
+  .option-specialized {
+    color: $specialized-accent-font-color;
+  }
+  .option-superior {
+    color: $superior-accent-font-color;
+  }
+  @if $include-weight {
+    font-weight: 600;
+
+  }
+  @if $dotted{
+    @include dotted-bottom();
   }
 
 }
@@ -31,6 +53,40 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-@mixin dotted-bottom() {
-  border-bottom: 1px dotted #888 !important;
+
+@mixin rarity-indicator {
+  &.high-end {
+    .rarity-indicator {
+      background-color: $high-end-rarity-color;
+    }
+
+    .rarity-wrapper select, .rarity-wrapper label, .talent-title-wrapper {
+      color: $high-end-accent-font-color;
+
+    }
+
+  }
+
+  &.superior {
+    .rarity-indicator {
+      background-color: $superior-rarity-color;
+    }
+
+    .rarity-wrapper select, .rarity-wrapper label, .talent-title-wrapper {
+      color: $superior-accent-font-color;
+
+    }
+
+  }
+
+  &.specialized {
+    .rarity-indicator {
+      background-color: $specialized-rarity-color;
+    }
+
+    .rarity-wrapper select, .rarity-wrapper label, .talent-title-wrapper {
+      color: $specialized-accent-font-color;
+    }
+
+  }
 }

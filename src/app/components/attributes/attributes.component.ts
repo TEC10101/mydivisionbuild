@@ -10,6 +10,7 @@ import {NgFor} from "angular2/common";
 import {without} from "../../common/utils";
 import {AttributeType} from "../../common/models/common";
 import {EditorDirective} from "../../directives/editor";
+import {InputConverter, BooleanConverter} from "../../common/converters";
 
 
 @Component({
@@ -25,6 +26,9 @@ export class AttributesComponent {
 
   @Input("data") attributes:Attributes;
   @Input("gear-metadata") metadata:AttributeMeta;
+  @Input("can-add")
+  @InputConverter(BooleanConverter)
+  canAdd:boolean = true;
 
   constructor(private _elementRef:ElementRef) {
 

@@ -14,6 +14,7 @@ import {ItemsService} from "../../services/item.service";
 import {NgFor} from "angular2/common";
 import {EditorDirective} from "../../directives/editor";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
+import {ModSlotsComponent} from "../modslots/modslots.component";
 export {Gear} from "./gear.model";
 
 
@@ -26,7 +27,7 @@ export {Gear} from "./gear.model";
   styles: [require('./gear-overview.component.scss')],
 
   templateUrl: 'app/components/gear-overview/gear-overview.component.html',
-  directives: [StatsDisplay, AttributesComponent, NgFor, EditorDirective, AutoResizeInputComponent]
+  directives: [StatsDisplay, AttributesComponent, NgFor, EditorDirective, AutoResizeInputComponent, ModSlotsComponent]
 })
 export class GearOverviewComponent implements OnInit {
   @Input() gear:Gear;

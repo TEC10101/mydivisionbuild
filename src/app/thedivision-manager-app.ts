@@ -8,6 +8,7 @@ import {Gear, GearOverviewComponent} from "./components/gear-overview/gear-overv
 import {DIVISION_PROVIDERS} from "./services/core";
 import {GearType} from "./common/models/common";
 import {EditorService} from "./services/editor-service";
+import {AttributesService} from "./services/attributes.service";
 
 
 @Component({
@@ -25,7 +26,7 @@ export class TheDivisionManagerApp implements OnInit {
 
   gear:Gear;
 
-  constructor(private _editorService:EditorService) {
+  constructor(private _editorService:EditorService, private _attributesService:AttributesService) {
   }
 
   ngOnInit() {
@@ -51,7 +52,7 @@ export class TheDivisionManagerApp implements OnInit {
         skill: []
 
       },
-      modslots: []
+      mods: []
     }
   }
 

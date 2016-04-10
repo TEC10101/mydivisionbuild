@@ -6,6 +6,12 @@ export type Rarity = "high-end" | "superior" | "specialized";
 export type StatType = "firearms" | "stamaina" | "electronics";
 
 export type GearType = "body-armor" | "mask" | "knee-pads" | "backpack" | "gloves" | "holster";
+export type AttributeInheritance = "native" | "extra"
+export const AttributeInheritance = {
+  NATIVE: "native" as AttributeInheritance,
+  EXTRA: "extra" as AttributeInheritance
+
+};
 
 
 const ATTRIBUTE_OFFENSIVE = "offensive";
@@ -20,10 +26,11 @@ export const AttributeKind = {
   DEFENSIVE: "defensive" as AttributeKind,
   UTILITY: "utility" as AttributeKind
 };
-export type AttributeType  = "major" | "minor"
+export type AttributeType  = "major" | "minor" | "main"
 export const AttributeType = {
   MAJOR: "major" as AttributeType,
-  MINOR: "minor" as AttributeType
+  MINOR: "minor" as AttributeType,
+  MAIN: "main" as AttributeType
 };
 
 //https://basarat.gitbooks.io/typescript/content/docs/enums.html
@@ -65,8 +72,9 @@ export interface GearAttribute {
   kind:AttributeKind;
   format:ValueFormat;
   native:boolean;
-  slot:boolean;
+  mod:boolean;
   supports:GearType[];
+
 
 }
 export type ValueFormat = "percent" | "number";
@@ -80,5 +88,13 @@ export interface DivisionItem {
   id:number;
   name:string;
 }
+
+
+export class GearStats {
+  firearms:number;
+  stamina:number;
+  electronics:number;
+}
+
 
 

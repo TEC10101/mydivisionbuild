@@ -7,10 +7,10 @@
     <label editor>{{attributeName}}</label>
     <div editor="true">
       <select [(ngModel)]="attribute.id" (ngModelChange)="onAttributeChange()">
-        <option *ngFor="#attr of attributes " [value]="attr.id">{{attr.name}}</option>
+        <option *ngFor="#attr of attributes" [value]="attr.id">{{attr.name}}</option>
       </select>
-      <button (click)="onRemoveAttribute()">-</button>
-      <button (click)="onAddAttribute()">+</button>
+      <button *ngIf="canAdd" (click)="onRemoveAttribute()">-</button>
+      <button *ngIf="canAdd" (click)="onAddAttribute()">+</button>
     </div>
 
   </div>

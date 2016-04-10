@@ -6,7 +6,7 @@ import {Component, Input, OnInit, Output, EventEmitter, OnDestroy} from "angular
 import {NgFor} from "angular2/common";
 import {Attribute} from "./attributes.model";
 import {AttributePipe} from "./attribute_pipe";
-import {AttributesService} from "../../services/attributes.service";
+import {AttributesService, AttributeObservable} from "../../services/attributes.service";
 import {GearType, AttributeType, Rarity, ValueFormat, GearAttribute} from "../../common/models/common";
 import {Subscription} from "rxjs/Subscription";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
@@ -49,7 +49,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   attributeFormat:ValueFormat;
   selectedAttribute:GearAttribute;
-  private _attributesService:AttributesService;
+
 
   private _attributesById:AttributesById = {};
 
@@ -58,24 +58,28 @@ export class AttributeComponent implements OnInit, OnDestroy {
   private _subscription:Subscription;
   attributeName:string = "";
 
+  @Input("attributes-provider") attributesProvider:AttributeObservable;
 
-  constructor(attributesService:AttributesService) {
-    this._attributesService = attributesService;
+
+  constructor(private _attributesService:AttributesService) {
+
+
   }
 
   ngOnInit():any {
+
 
     let meta = this.metadata;
 
 
     let attributesById = this._attributesById;
-    this._subscription = this._attributesService.getFor(meta.belongsTo, this.attributeType)
-      .subscribe(data=> {
-        this.attributes = data;
-        data.forEach((attr:GearAttribute)=> attributesById[attr.id] = attr);
-        if (data.length)
-          this.onAttributeChange();
-      });
+    let provider = this.attributesProvider ? this.attributesProvider : this._attributesService.getFor(meta.belongsTo, this.attributeType)
+    this._subscription = provider.subscribe(data=> {
+      this.attributes = data;
+      data.forEach((attr:GearAttribute)=> attributesById[attr.id] = attr);
+      if (data.length)
+        this.onAttributeChange();
+    });
 
   }
 

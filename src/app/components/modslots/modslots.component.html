@@ -1,0 +1,10 @@
+<div class="mod-slots-wrapper section-wrapper ">
+
+  <modslot [slot]="slot" *ngFor="#slot of slots" [gear-metadata]="metadata"></modslot>
+
+
+  <button (click)="onAddSlot()">+ slot</button>
+  <button (click)="onRemoveSlot()">- slot</button>
+
+
+</div>
