@@ -82,11 +82,12 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
 
     let meta = this.metadata;
-    let attributesById = this._attributesById;
+
     let provider = this.attributesProvider ? this.attributesProvider : this._attributesService.getFor(meta.belongsTo, this.attributeType)
     this._subscription = provider.subscribe(data=> {
+      this._attributesById = {};
       this.attributes = data;
-      data.forEach((attr:GearAttribute)=> attributesById[attr.id] = attr);
+      data.forEach((attr:GearAttribute)=> this._attributesById[attr.id] = attr);
       if (data.length)
         this.onAttributeChange();
     });
@@ -94,7 +95,10 @@ export class AttributeComponent implements OnInit, OnDestroy {
   }
 
   onAttributeChange() {
-    if (!this.attribute.id) {
+    // ensure that we always select the first entry
+    // when there is only one entry left no matter if we
+    // switch from another attribute set
+    if (!this.attribute.id || this.attributes.length == 1) {
       this.attribute.id = this.attributes[0].id
     }
     this.selectedAttribute = this._attributesById[this.attribute.id];

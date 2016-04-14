@@ -19,8 +19,6 @@ export class ModSlotAttributeSet {
 export class ModSlotService {
 
 
-
-
   constructor(private _attributeService:AttributesService) {
 
 
@@ -35,8 +33,24 @@ export class ModSlotService {
 
 
     return asObservable(this._attributeService.attributes.map((attrs:GearAttribute[])=> {
-      let secondary = _.filter(attrs, (attr)=> attr.mod && attr.type != AttributeType.MAIN);
-      let primary = slotType.isPerformance ? secondary : _.filter(attrs, {mod: true, type: AttributeType.MAIN});
+      let primary, secondary;
+      if (slotType.isPerformance) {
+
+        primary = secondary = _.filter(attrs, (attr)=> attr.mod && attr.type == AttributeType.SKILL);
+
+
+      } else {
+
+        primary = [slotType
+          .resolveMainAttribute(
+            _.filter(attrs, {mod: true, type: AttributeType.MAIN}))
+        ];
+        secondary = _.filter(attrs,
+          (attr)=> attr.mod && attr.type != AttributeType.MAIN && attr.type != AttributeType.SKILL);
+
+      }
+
+
       return {
         primary: primary,
         secondary: secondary

@@ -344,8 +344,7 @@
     "kind": "abstract",
     "format": "number",
     "mod": true,
-    "supports": [
-    ]
+    "supports": []
   },
   {
     "id": 30,
@@ -354,17 +353,452 @@
     "kind": "abstract",
     "format": "number",
     "mod": true,
-    "supports": [
-    ]
+    "supports": []
   },
   {
-    "id": 30,
+    "id": 31,
     "name": "Electronics",
     "type": "main",
     "kind": "abstract",
     "format": "number",
     "mod": true,
+    "supports": []
+  },
+  {
+    "id": 32,
+    "name": "Ballistic Shield damage",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "mod": true,
+    "skill": true,
     "supports": [
+      "backpack",
+      "gloves",
+      "holster"
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Ballistic Shield damage resilience",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 34,
+    "name": "Mobile Cover blast resilience",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 35,
+    "name": "Mobile Cover blast resilience",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "mask",
+      "body-armor",
+      "backpack"
+    ]
+  },
+  {
+    "id": 36,
+    "name": "Pulse critical hit damage bonus",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "mask",
+      "backpack"
+    ]
+  },
+  {
+    "id": 37,
+    "name": "Smart Cover damage increase",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "backpack",
+      "gloves"
+    ]
+  },
+  {
+    "id": 38,
+    "name": "Smart Cover damage resilience",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "body-armor",
+      "backpack",
+      "knee-pads"
+    ]
+  },
+  {
+    "id": 39,
+    "name": "Ballistic Shield health",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "mask",
+      "body-armor",
+      "backpack",
+      "knee-pads"
+    ]
+  },
+  {
+    "id": 40,
+    "name": "First Aid ally heal",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "mask",
+      "backpack",
+      "knee-pads",
+      "holster"
+    ]
+  },
+  {
+    "id": 41,
+    "name": "First Aid deployment range",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 42,
+    "name": "First Aid radius",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 43,
+    "name": "First Aid self heal",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "supports": [
+      "body-armor",
+      "backpack",
+      "gloves"
+    ]
+  },
+  {
+    "id": 44,
+    "name": "Mobile Cover health",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "backpack",
+      "gloves",
+      "knee-pads",
+      "holster"
+    ]
+  },
+  {
+    "id": 45,
+    "name": "Pulse critical hit damage",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "supports": [
+      "backpack",
+      "gloves",
+      "knee-pads",
+      "holster"
+    ]
+  },
+  {
+    "id": 46,
+    "name": "Pulse duration",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "body-armor",
+      "backpack",
+      "knee-pads"
+    ]
+  },
+  {
+    "id": 47,
+    "name": "Pulse range",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 48,
+    "name": "Seeker Mine damage",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "backpack",
+      "gloves",
+      "holster"
+    ]
+  },
+  {
+    "id": 49,
+    "name": "Seeker Mine detection range",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 50,
+    "name": "Seeker Mine duration",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 51,
+    "name": "Seeker Mine explosion radius",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "mask",
+      "body-armor",
+      "backpack",
+      "knee-pads"
+    ]
+  },
+  {
+    "id": 52,
+    "name": "Seeker Mine health",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 53,
+    "name": "Smart Cover duration",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "mask",
+      "backpack",
+      "holster"
+    ]
+  },
+  {
+    "id": 54,
+    "name": "Smart Cover range",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 55,
+    "name": "Sticky Bomb damage",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "body-armor",
+      "backpack",
+      "gloves",
+      "holster"
+    ]
+  },
+  {
+    "id": 56,
+    "name": "Sticky Bomb deployment range",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 57,
+    "name": "Sticky Bomb explosion radius",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "mask",
+      "backpack",
+      "knee-pads"
+    ]
+  },
+  {
+    "id": 58,
+    "name": "Support Station duration",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "backpack",
+      "gloves"
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Support Station healing speed",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "mask",
+      "backpack",
+      "knee-pads"
+    ]
+  },
+  {
+    "id": 60,
+    "name": "Support Station health",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "body-armor",
+      "backpack"
+    ]
+  },
+  {
+    "id": 61,
+    "name": "Support Station range",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 62,
+    "name": "Support Station revive time",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 63,
+    "name": "Turret attack range",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": []
+  },
+  {
+    "id": 64,
+    "name": "Turret damage",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "backpack",
+      "gloves"
+    ]
+  },
+  {
+    "id": 65,
+    "name": "Turret duration",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "mask",
+      "backpack",
+      "holster"
+    ]
+  },
+  {
+    "id": 66,
+    "name": "Turret health",
+    "type": "skill",
+    "kind": "skill",
+    "format": "percent",
+    "skill": true,
+    "mod": true,
+    "supports": [
+      "body-armor",
+      "backpack",
+      "knee-pads"
     ]
   }
 ]

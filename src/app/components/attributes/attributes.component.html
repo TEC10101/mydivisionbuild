@@ -14,7 +14,7 @@
     Minor Attributes
   </div>
   <item-attribute *ngFor="#attribute of attributes.minor" [attribute]="attribute" [metadata]="metadata"
-                  [attribute-type]="minor"
+                  attribute-type="minor"
                   (removed)="onRemoveAttribute($event)"
                   (added)="onAddAttribute($event)"></item-attribute>
 
@@ -22,7 +22,7 @@
     Skill Attributes
   </div>
   <item-attribute *ngFor="#attribute of attributes.skill" [attribute]="attribute" [metadata]="metadata"
-                  attribte-type="skill"
+                  attribute-type="skill"
                   (removed)="onRemoveAttribute($event)"
                   (added)="onAddAttribute($event)"></item-attribute>
 

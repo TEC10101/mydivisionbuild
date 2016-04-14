@@ -1,4 +1,4 @@
-import {GearStats, Rarity, GearRarity} from "../../common/models/common";
+import {GearStats, Rarity, GearRarity, GearAttribute} from "../../common/models/common";
 import {Attribute} from "../attributes/attributes.model";
 import {CONST_EXPR} from "angular2/src/facade/lang";
 /**
@@ -52,8 +52,9 @@ export class ModSlotType {
 
   }
 
-  create() {
 
+  resolveMainAttribute(attributes:GearAttribute[]) {
+    return _.find(attributes, {name: ModSlotType.toString(this._slotKind)})
   }
 
   get isPerformance() {
@@ -68,7 +69,7 @@ export enum ModSlotKind{
   FIREARMS,
   STAMINA,
   ELECTRONICS
-}                                                           
+}
 
 
 export const MOD_SLOT_TYPES = CONST_EXPR([

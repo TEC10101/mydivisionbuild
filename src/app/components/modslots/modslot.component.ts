@@ -76,7 +76,7 @@ export class ModSlotComponent implements OnInit {
   getAttributesProvider(primary:boolean):AttributeObservable {
 
 
-    return asObservable(primary ? this._primaryAttributes : this._secondaryAttributes).first()
+    return asObservable(primary ? this._primaryAttributes : this._secondaryAttributes);
   }
 
   ngOnInit():any {

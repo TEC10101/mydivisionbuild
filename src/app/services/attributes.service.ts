@@ -125,10 +125,20 @@ export class AttributesService {
   }
 
 
+  private static defaultFilterProvider(gearType:GearType, attributeType:AttributeType) {
+    return {type: attributeType, supports: [gearType]}
+  }
+
+  private static skillFilterProvider(gearType:GearType) {
+    return {type: AttributeType.SKILL, skill: true, supports: [gearType]}
+  }
+
   getFor(gearType:GearType, attributeType:AttributeType):AttributeObservable {
 
+    let providerName = attributeType + "FilterProvider";
+    let filterProvider = AttributesService[providerName] ? AttributesService[providerName] : AttributesService.defaultFilterProvider;
     return asObservable(this._attributes.map(attrs=> {
-      return _.filter(attrs, {type: attributeType, supports: [gearType]})
+      return _.filter(attrs, filterProvider(gearType, attributeType))
     }))
   }
 

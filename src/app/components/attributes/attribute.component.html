@@ -9,8 +9,8 @@
       <select [(ngModel)]="attribute.id" (ngModelChange)="onAttributeChange()">
         <option *ngFor="#attr of attributes" [value]="attr.id">{{attr.name}}</option>
       </select>
-      <button *ngIf="canAdd" (click)="onRemoveAttribute()">-</button>
-      <button *ngIf="canAdd" (click)="onAddAttribute()">+</button>
+      <button  (click)="onRemoveAttribute()">-</button>
+      <button  (click)="onAddAttribute()">+</button>
     </div>
 
   </div>

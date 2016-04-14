@@ -26,11 +26,12 @@ export const AttributeKind = {
   DEFENSIVE: "defensive" as AttributeKind,
   UTILITY: "utility" as AttributeKind
 };
-export type AttributeType  = "major" | "minor" | "main"
+export type AttributeType  = "major" | "minor" | "main" | "skill"
 export const AttributeType = {
   MAJOR: "major" as AttributeType,
   MINOR: "minor" as AttributeType,
-  MAIN: "main" as AttributeType
+  MAIN: "main" as AttributeType,
+  SKILL: "skill" as AttributeType
 };
 
 //https://basarat.gitbooks.io/typescript/content/docs/enums.html
