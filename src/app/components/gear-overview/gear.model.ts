@@ -12,7 +12,7 @@ export class Gear {
   type:GearType;
   title:string;
 
-  level:number;
+  score:number;
   stats:GearStats;
   armor:number;
   attributes:Attributes;

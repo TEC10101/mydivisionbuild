@@ -33,6 +33,7 @@ export class ModSlotComponent implements OnInit {
   private slotRarity:string;
   private _primaryAttributes = new BehaviorSubject<GearAttribute[]>([]);
 
+
   private _secondaryAttributes = new BehaviorSubject<GearAttribute[]>([]);
   private _selectedSlotType:ModSlotType;
 
@@ -55,15 +56,23 @@ export class ModSlotComponent implements OnInit {
 
   }
 
+
+
   private refreshAttributeProviders() {
 
     this._modSlotService.getAttributeSetFor(this._selectedSlotType).first().subscribe((attributeSet:ModSlotAttributeSet)=> {
-      console.log("Refreshed attribute set for ", this._selectedSlotType.name, attributeSet);
+
       this._primaryAttributes.next(attributeSet.primary);
       this._secondaryAttributes.next(attributeSet.secondary);
     })
   }
 
+  /**
+   *  Function that returns an Observable that allows the @link AttributeComponent to
+   *  fetch the correct set of attributes to display for both primary and secondary
+   * @param primary
+   * @returns {Observable<GearAttribute[]>|Observable<R>}
+     */
   getAttributesProvider(primary:boolean):AttributeObservable {
 
 

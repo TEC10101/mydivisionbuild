@@ -1,0 +1,9 @@
+@import '../../assets/styles/mixins';
+
+.button-bar {
+
+  button {
+    @include editor-button(75px);
+    display: inline-block;
+  }
+}

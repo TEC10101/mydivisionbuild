@@ -2,7 +2,7 @@
  * Created by xastey on 4/2/2016.
  */
 
-export type Rarity = "high-end" | "superior" | "specialized";
+export type Rarity = "high-end" | "superior" | "specialized" | "gear-set";
 export type StatType = "firearms" | "stamaina" | "electronics";
 
 export type GearType = "body-armor" | "mask" | "knee-pads" | "backpack" | "gloves" | "holster";

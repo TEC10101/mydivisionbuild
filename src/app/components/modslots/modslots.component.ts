@@ -4,6 +4,7 @@ import {ModSlotService, ModSlotAttributeSet} from "../../services/modslots.servi
 import {AttributeMeta} from "../attributes/attribute.component";
 import {ModSlotComponent} from "./modslot.component";
 import {GearModSlot} from "../gear-overview/gear.model";
+import {EditorDirective} from "../../directives/editor";
 
 /**
  * Created by xastey on 4/10/2016.
@@ -14,7 +15,8 @@ type ModAttributeSetByType = {[id:number]:ModSlotAttributeSet}
 @Component({
   selector: "modslots",
   templateUrl: 'app/components/modslots/modslots.component.html',
-  directives: [ModSlotComponent]
+  styles: [require('./modslots.component.scss')],
+  directives: [ModSlotComponent, EditorDirective]
 
 })
 export class ModSlotsComponent implements OnInit {
@@ -42,11 +44,23 @@ export class ModSlotsComponent implements OnInit {
 
   }
 
+  get canAddSlot() {
+    return this.slots.length < this._canHaveExtra + (this._hasNative ? 1 : 0 );
+  }
+
+  get canRemoveSlot() {
+    return !!this.slots.length;
+  }
+
+  get canDisplayControls() {
+    return this._hasNative || this._canHaveExtra > 0;
+  }
+
   onAddSlot() {
 
-    let canAdd = this.slots.length < this._canHaveExtra + (this._hasNative ? 1 : 0 );
+
     let defaultModSlotType = MOD_SLOT_TYPES[0];
-    if (canAdd)
+    if (this.canAddSlot)
 
 
       if (this._defaultModSlotAttributeSet) {

@@ -68,7 +68,7 @@ export enum ModSlotKind{
   FIREARMS,
   STAMINA,
   ELECTRONICS
-}
+}                                                           
 
 
 export const MOD_SLOT_TYPES = CONST_EXPR([

@@ -1,9 +1,9 @@
 @import "colors";
 
-
 @mixin dotted-bottom() {
   border-bottom: 1px dotted #888 !important;
 }
+
 @mixin select-style($include-weight:false,$dotted:false) {
   background: none;
   -webkit-appearance: none; /*REMOVES DEFAULT CHROME & SAFARI STYLE*/
@@ -34,7 +34,7 @@
     font-weight: 600;
 
   }
-  @if $dotted{
+  @if $dotted {
     @include dotted-bottom();
   }
 
@@ -52,7 +52,6 @@
 @mixin section-background {
   background-color: rgba(0, 0, 0, 0.2);
 }
-
 
 @mixin rarity-indicator {
   &.high-end {
@@ -89,4 +88,17 @@
     }
 
   }
+}
+
+@mixin editor-button($button-width) {
+
+    @include section-background();
+    @include text-style(15px, 1);
+    border: none;
+    display: block;
+    margin-bottom: 10px;
+    width: $button-width;
+    color: $accent-font-color;
+
+
 }

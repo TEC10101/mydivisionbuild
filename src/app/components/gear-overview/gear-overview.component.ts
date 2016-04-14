@@ -64,7 +64,7 @@ export class GearOverviewComponent implements OnInit {
 
   get metadata():AttributeMeta {
     return {
-      level: this.gear.level,
+      level: this.gear.score,
       rarity: this.gear.rarity,
       belongsTo: this.gear.type
 

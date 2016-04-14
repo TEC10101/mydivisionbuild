@@ -36,7 +36,7 @@ export class TheDivisionManagerApp implements OnInit {
       itemId: 16,
       title: "Rapid Assault Vest",
       armor: 1049,
-      level: 30,
+      score: 131,
       stats: {
         firearms: 0,
         stamina: 422,

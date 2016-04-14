@@ -1,6 +1,6 @@
 <div class="clearfix">
   <div class="attribute-value-wrapper">
-    <auto-resize-input length="4" inputType="number" [format]="attributeFormat" [(ngModel)]="attribute.value"
+    <auto-resize-input [length]="maxInputLength" inputType="number" [format]="attributeFormat" [(ngModel)]="attribute.value"
                        (input)="onAttributeInputChanged($event)"></auto-resize-input>
   </div>
   <div class="attribute-title-wrapper">

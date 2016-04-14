@@ -12,6 +12,7 @@ import {Subscription} from "rxjs/Subscription";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 import {EditorDirective} from "../../directives/editor";
 import {AttributeRestrictPipe} from "./attribute-restrict.pipe";
+import {isNumber, isFunction} from "angular2/src/facade/lang";
 
 
 export interface AttributeMeta {
@@ -44,6 +45,8 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   @Input("attribute-type") attributeType:AttributeType;
 
+  @Input("maxlength") maxlength:any;
+
   @Output() added = new EventEmitter<AttributeEvent>();
   @Output() removed = new EventEmitter<AttributeEvent>();
 
@@ -58,6 +61,9 @@ export class AttributeComponent implements OnInit, OnDestroy {
   private _subscription:Subscription;
   attributeName:string = "";
 
+  /**
+   *
+   */
   @Input("attributes-provider") attributesProvider:AttributeObservable;
 
 
@@ -66,12 +72,16 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   }
 
+  get maxInputLength() {
+
+    return (this.maxlength && isNumber(this.maxlength))
+      ? this.maxlength : (isFunction(this.maxlength)) ? this.maxlength() : 4;
+  }
+
   ngOnInit():any {
 
 
     let meta = this.metadata;
-
-
     let attributesById = this._attributesById;
     let provider = this.attributesProvider ? this.attributesProvider : this._attributesService.getFor(meta.belongsTo, this.attributeType)
     this._subscription = provider.subscribe(data=> {
@@ -90,7 +100,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
     this.selectedAttribute = this._attributesById[this.attribute.id];
 
     this.attributeName = this.selectedAttribute.name;
-    console.log("attributeName", this.attributeName);
+
     this.attributeFormat = this.selectedAttribute.format;
   }
 

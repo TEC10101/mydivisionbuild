@@ -3,8 +3,10 @@
   <modslot [slot]="slot" *ngFor="#slot of slots" [gear-metadata]="metadata"></modslot>
 
 
-  <button (click)="onAddSlot()">+ slot</button>
-  <button (click)="onRemoveSlot()">- slot</button>
+  <div *ngIf="canDisplayControls" class="button-bar" editor="true">
+    <button (click)="onAddSlot()" *ngIf="canAddSlot">+ slot</button>
+    <button (click)="onRemoveSlot()" *ngIf="canRemoveSlot">- slot</button>
+  </div>
 
 
 </div>

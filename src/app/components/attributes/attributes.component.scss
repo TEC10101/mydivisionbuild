@@ -16,14 +16,8 @@ $button-width: 70px;
   top: 0;
   right: -$button-width;
 
-  button {
-    @include section-background();
-    @include text-style(15px, 1);
-    border: none;
-    display: block;
-    margin-bottom: 10px;
-    width: $button-width;
-    color: $accent-font-color;
-
+  button{
+    @include editor-button($button-width);
   }
+
 }

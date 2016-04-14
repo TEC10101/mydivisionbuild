@@ -53,7 +53,7 @@ export class ModSlotService {
     return false;
   }
 
-  // TODO: allow to pass rarity and level to restrict more
+  // TODO: allow to pass rarity and score to restrict more
   static canHaveExtra(gearType:GearType):number {
     switch (gearType) {
       case GearType.Mask:

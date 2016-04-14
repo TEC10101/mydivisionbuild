@@ -57,7 +57,7 @@ export class AutoResizeInput {
   selector: 'auto-resize-input',
   template: `<div [ngClass]="{'edit-mode':allowEditing}">
         <label  [ngClass]="{hidden:editing}" (click)="onClicked()">{{prepend}}{{value|attribute:format}}</label>
-        <input [ngClass]="{hidden:!editing}" autofocus type="text"  pattern="\d*" maxlength="4" [value]="value" (input)="onInputChanged($event)"  (focus)="onInputFocused()" class="auto-resize-input" (blur)="onInputBlurred()"/>
+        <input [ngClass]="{hidden:!editing}" autofocus type="text"  pattern="\d*" [attr.maxlength]="length" [value]="value" (input)="onInputChanged($event)"  (focus)="onInputFocused()" class="auto-resize-input" (blur)="onInputBlurred()"/>
     </div>
      `,
   pipes: [AttributePipe],
