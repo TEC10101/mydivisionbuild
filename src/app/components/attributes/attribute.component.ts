@@ -83,16 +83,23 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
     let meta = this.metadata;
 
-    let provider = this.attributesProvider ? this.attributesProvider : this._attributesService.getFor(meta.belongsTo, this.attributeType)
+    let provider = this.attributesProvider
+      ? this.attributesProvider : this._attributesService.getFor(meta.belongsTo, this.attributeType);
     this._subscription = provider.subscribe(data=> {
       this._attributesById = {};
       this.attributes = data;
+      this.attribute.id = null;
       data.forEach((attr:GearAttribute)=> this._attributesById[attr.id] = attr);
-      if (data.length)
+      if (data.length) {
+
         this.onAttributeChange();
+      }
+
     });
 
   }
+
+
 
   onAttributeChange() {
     // ensure that we always select the first entry

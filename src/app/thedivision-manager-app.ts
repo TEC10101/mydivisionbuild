@@ -22,6 +22,7 @@ import {AttributesService} from "./services/attributes.service";
   providers: [DIVISION_PROVIDERS]
 })
 
+
 export class TheDivisionManagerApp implements OnInit {
 
   gear:Gear;

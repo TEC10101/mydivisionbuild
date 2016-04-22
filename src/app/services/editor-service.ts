@@ -11,11 +11,8 @@ export class EditorService {
   private event = new BehaviorSubject<boolean>(this._current);
 
 
-
   toggle() {
-
-    this._current = !this._current;
-    this.event.next(this._current)
+    this.event.next(this._current = !this._current)
   }
 
   subscribe(generatorOrNext?:any, error?:any, complete?:any):any {

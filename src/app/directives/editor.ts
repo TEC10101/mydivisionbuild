@@ -43,7 +43,7 @@ export class EditorDirective implements OnInit,OnDestroy {
   }
 
   ngOnDestroy():any {
-    console.log("Removing editor subscription");
+
     this._subscription.unsubscribe();
   }
 }
