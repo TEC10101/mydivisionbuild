@@ -1,0 +1,26 @@
+<div id="inventory">
+
+
+  <div class="gear-item clearfix">
+    <div class="gear-image high-end">
+      <div class="image"></div>
+      <div class="slots">
+        <div *ngFor="#rarity of slotRarities" [ngClass]="rarity"></div>
+      </div>
+    </div>
+    <ul class="gear-stats">
+
+      <li *ngFor="#stat of statNames"
+          class="{{stat}}"
+          [ngClass]="{active:hasStat(stat)}"></li>
+
+
+    </ul>
+    <div class="gear-armor">
+      <label>ARMOR</label>
+      <span>{{gear.armor}}</span>
+    </div>
+
+  </div>
+
+</div>

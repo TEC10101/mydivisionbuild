@@ -1,0 +1,113 @@
+@import "../../assets/styles/common";
+@import "~compass-mixins/lib/compass/css3";
+
+$gear-item-width: 344px;
+$gear-item-height: 87px;
+$gear-image-width: 164px;
+$gear-image-height: 87px;
+$gear-stats-spacing: 2px;
+
+$gear-mask-width: 152px;
+$gear-mask-height: 75px;
+$black-alpha: 0.30;
+$rarity-alpha: 0.56;
+
+.gear-item {
+  width: $gear-item-width;
+  background-color: rgba(#000000, $black-alpha);
+  height: $gear-item-height;
+  //@include transform(skew(0deg, 1.38deg));
+}
+
+.gear-image {
+  width: $gear-image-width;
+  height: $gear-image-height;
+  display: block;
+  float: left;
+
+  position: relative;
+  @include vertical-align-parent();
+
+  &.high-end {
+    background-color: rgba($high-end-rarity-color, 0.56);
+  }
+
+  .image {
+    @include vertical-align();
+
+    width: $gear-mask-width;
+    height: $gear-mask-height;
+    display: block;
+    background: white;
+    //mask-type: luminance;
+    margin: 0 auto;
+    mask: url('app/assets/images/inventory/body-armor.png');
+
+    // 203 Blend
+    -webkit-mask-image: url('app/assets/images/inventory/body-armor.png');
+    -webkit-mask-size: $gear-mask-width $gear-mask-height;
+  }
+
+}
+
+.slots {
+  position: absolute;
+  bottom: 0;
+
+  div {
+    width: 31px;
+    height: 6px;
+    display: inline-block;
+    margin-right: 3px;
+
+    &.high-end {
+      background-color: $high-end-rarity-color;
+    }
+    &.superior {
+      background-color: $superior-rarity-color;
+    }
+  }
+}
+
+.gear-stats {
+  list-style: none;
+  width: 45px;
+  display: inline-block;
+  float: left;
+  padding: 0;
+  margin: 0;
+  li {
+
+    height: 28px;
+
+    opacity: 0.2;
+    &.active {
+      background-color: rgba(#52534b, 0.25);
+      opacity: 1;
+    }
+  }
+  @each $stat in $main-stat-names {
+    .#{$stat} {
+      background: url('app/assets/images/icon-stat-#{$stat}.png') center center no-repeat;
+      background-size: 21px 21px;
+    }
+  }
+
+}
+
+.gear-armor {
+  color: #cccdc8;
+  text-align: center;
+  font-family: "Borda";
+  font-weight: 700;
+  padding-top: 5px;
+  @include text-shadow(0px -1px 1px rgba(150, 150, 150, 0.25));
+  label {
+    font-size: 18px;
+
+  }
+  span {
+    font-size: 42px;
+    line-height: 25px;
+  }
+}

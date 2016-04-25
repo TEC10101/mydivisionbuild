@@ -9,6 +9,7 @@ import {DIVISION_PROVIDERS} from "./services/core";
 import {GearType} from "./common/models/common";
 import {EditorService} from "./services/editor-service";
 import {AttributesService} from "./services/attributes.service";
+import {InventoryComponent} from "./components/inventory/inventory.component";
 
 
 @Component({
@@ -16,7 +17,7 @@ import {AttributesService} from "./services/attributes.service";
 
   pipes: [],
   styles: [require("./assets/styles/app.scss")],
-  directives: [ROUTER_DIRECTIVES, GearOverviewComponent],
+  directives: [ROUTER_DIRECTIVES, InventoryComponent, GearOverviewComponent],
   encapsulation: ViewEncapsulation.None,
   templateUrl: 'app/the-division-manager-app.html',
   providers: [DIVISION_PROVIDERS]

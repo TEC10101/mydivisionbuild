@@ -1,4 +1,4 @@
-@import "../../assets/styles/colors";
+@import "../../assets/styles/common";
 
 :host input {
   font-size: 1.2em !important;
@@ -12,17 +12,14 @@
   height: 64px;
   width: 64px;
 
-  &.firearms {
-    background-image: url('app/assets/images/icon-stat-firearms.png');
+  @each $stat in $main-stat-names{
+    &.#{$stat} {
+      background-image: url('app/assets/images/icon-stat-#{$stat}.png');
+    }
   }
 
-  &.stamina {
-    background-image: url('app/assets/images/icon-stat-stamina.png');
-  }
 
-  &.electronics {
-    background-image: url('app/assets/images/icon-stat-electronics.png');
-  }
+
 }
 
 .single-stat-block {
