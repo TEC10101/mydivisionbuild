@@ -36,6 +36,7 @@ export class ItemsService {
       let subjectName = dashCaseToCamelCase(gearType);
 
       let subject = self["_" + subjectName] as BehaviorSubject<DivisionItem[]>;
+      if (!subject) return;
       let url = self._basePath + gearType + ".json";
       http.get(url)
         .map(res=><DivisionItem[]>res.json())

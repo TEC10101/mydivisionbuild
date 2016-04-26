@@ -1,5 +1,4 @@
-@import "../../assets/styles/colors";
-@import "../../assets/styles/mixins";
+@import "../../assets/styles/common";
 
 select {
   @include select-style($dotted: true);
@@ -29,4 +28,20 @@ button {
     border: 1px $accent-font-color;
     outline-color: $accent-font-color;
   }
+}
+
+.attributes-wrapper:first-child {
+  margin-top: 0;
+}
+
+.attributes-title-wrapper {
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.attribute-value-wrapper {
+  color: $accent-font-color;
+  float: left;
+  font-weight: 600;
+  margin-right: 10px;
 }

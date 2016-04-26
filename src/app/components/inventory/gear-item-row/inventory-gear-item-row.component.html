@@ -1,4 +1,4 @@
-<div class="inventory-gear-item-row">
+<div class="inventory-gear-item-row clearfix">
   <div class="left">
     <div class="gear-item-image">
       <inventory-gear-item-image [item]="item"></inventory-gear-item-image>
@@ -6,7 +6,7 @@
     <div class="gear-item-meta">
       <div class="title">{{item.title}}</div>
       <div class="armor">
-        <span>{{item.armor}}</span>
+        <span>{{item.armor|prettynumber}}</span>
         <label>ARM</label>
 
       </div>

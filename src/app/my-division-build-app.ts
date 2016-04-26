@@ -9,6 +9,7 @@ import {DIVISION_PROVIDERS} from "./services/core";
 import {EditorService} from "./services/editor-service";
 import {AttributesService} from "./services/attributes.service";
 import {InventoryComponent, InventoryRootComponent} from "./components/inventory/inventory.component";
+import {DUMMY_GEAR} from "./components/gear-overview/gear.model";
 
 
 @Component({
@@ -31,6 +32,7 @@ export class MyDivisionBuild implements OnInit {
   gear:Gear;
 
   constructor(private _editorService:EditorService, private _attributesService:AttributesService) {
+    this.gear = DUMMY_GEAR;
   }
 
   ngOnInit() {

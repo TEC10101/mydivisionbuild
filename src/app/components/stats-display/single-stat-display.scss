@@ -1,5 +1,6 @@
 @import "../../assets/styles/common";
 
+
 :host input {
   font-size: 1.2em !important;
   color: #fff !important;
@@ -12,13 +13,11 @@
   height: 64px;
   width: 64px;
 
-  @each $stat in $main-stat-names{
+  @each $stat in $main-stat-names {
     &.#{$stat} {
       background-image: url('app/assets/images/icon-stat-#{$stat}.png');
     }
   }
-
-
 
 }
 

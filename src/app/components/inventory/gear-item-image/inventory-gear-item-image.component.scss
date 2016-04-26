@@ -12,6 +12,9 @@
   &.high-end {
     background-color: rgba($high-end-rarity-color, 0.56);
   }
+  &.superior {
+    background-color: rgba($superior-rarity-color, 0.56);
+  }
 
   .image {
     @include vertical-align();
@@ -44,6 +47,7 @@
     &.high-end {
       background-color: $high-end-rarity-color;
     }
+
     &.superior {
       background-color: $superior-rarity-color;
     }

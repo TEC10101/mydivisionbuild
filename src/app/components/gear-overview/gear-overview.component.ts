@@ -15,6 +15,7 @@ import {NgFor} from "angular2/common";
 import {EditorDirective} from "../../directives/editor";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 import {ModSlotsComponent} from "../modslots/modslots.component";
+import * as _ from "lodash";
 export {Gear} from "./gear.model";
 
 
@@ -26,7 +27,7 @@ export {Gear} from "./gear.model";
 
   styles: [require('./gear-overview.component.scss')],
 
-  templateUrl: 'app/components/gear-overview/gear-overview.component.html',
+  template: require('./gear-overview.component.html'),
   directives: [StatsDisplay, AttributesComponent, NgFor, EditorDirective, AutoResizeInputComponent, ModSlotsComponent]
 })
 export class GearOverviewComponent implements OnInit {
@@ -69,6 +70,10 @@ export class GearOverviewComponent implements OnInit {
       belongsTo: this.gear.type
 
     }
+  }
+
+  onItemChanged(itemId) {
+    this.gear.title = _.find(this.items, {id: parseInt(itemId)}).name
   }
 
 

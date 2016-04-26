@@ -31,7 +31,7 @@ export const DUMMY_GEAR:Gear = {
   rarity: "superior",
   type: GearType.BodyArmor,
   itemId: 16,
-  title: "Rapid Assault Vest",
+  title: "Urban Assault Vest",
   armor: 1049,
   score: 131,
   stats: {
@@ -49,9 +49,5 @@ export const DUMMY_GEAR:Gear = {
     skill: []
 
   },
-  mods: [{
-    id: 1
-  }, {
-    id: 5
-  }]
+  mods: []
 };

@@ -1,5 +1,4 @@
-@import '../../assets/styles/mixins';
-@import "../../assets/styles/colors";
+@import '../../assets/styles/common';
 
 $button-width: 70px;
 :host {
@@ -14,10 +13,20 @@ $button-width: 70px;
 .button-bar {
   position: absolute;
   top: 0;
-  right: -$button-width;
+  right: - ($button-width + $section-wrapper-side-padding);
 
-  button{
+  button {
     @include editor-button($button-width);
   }
 
 }
+
+.attributes-wrapper:first-child {
+  margin-top: 0;
+}
+
+.attributes-title-wrapper {
+  font-weight: 600;
+  margin-top: 10px;
+}
+

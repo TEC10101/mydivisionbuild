@@ -40,11 +40,7 @@ export class SingleStatDisplay {
   selector: 'stats-display',
   templateUrl: 'app/components/stats-display/stats-display.html',
   directives: [SingleStatDisplay],
-  styles: [`
-    single-stat-display {
-      width: calc(33.33333% - 3px);
-    }
-`]
+  styles: [require('./stats-display.component.scss')]
 
 })
 export class StatsDisplay {

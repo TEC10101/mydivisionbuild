@@ -1,0 +1,10 @@
+.stats-wrapper {
+  display: flex;
+  justify-content: space-between;
+  overflow: visible;
+  padding: 1px;
+}
+
+single-stat-display {
+  width: calc(33.33333% - 3px);
+}
