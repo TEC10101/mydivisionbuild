@@ -1,0 +1,70 @@
+@import "../common";
+
+$item-row-width: 655px;
+$item-row-height: 73px;
+$item-row-score-width: 68px;
+
+.inventory-gear-item-row {
+  .left {
+    width: $item-row-width;
+    margin-right: 5px;
+
+  }
+  .left, .score {
+    float: left;
+    height: $item-row-height;
+    background-color: rgba(#6e7678, $black-alpha);
+  }
+  .score {
+    width: $item-row-score-width;
+    text-align: center;
+    font-family: 'Borda', serif;
+    color: white;
+    padding-top: 5px;
+    label {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    span {
+      font-weight: 700;
+      font-size: 35px;
+      line-height: 32px;
+    }
+  }
+}
+
+.gear-item-image {
+  height: $item-row-height;
+  float: left;
+  transform-origin: top left;
+  transform: scale(((100/$inventory-gear-image-height) * $item-row-height) / 100);
+}
+
+:host .inventory-gear-image {
+
+}
+
+.gear-item-meta {
+  float: left;
+  color: white;
+  padding-top: 5px;
+  font-family: 'Borda', serif;
+  margin-left: -20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.60);
+
+  .title {
+    font-size: 20px;
+    line-height: 20px;
+
+  }
+  .armor {
+    label {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    span {
+      font-size: 32px;
+      font-weight: 700;
+    }
+  }
+}
