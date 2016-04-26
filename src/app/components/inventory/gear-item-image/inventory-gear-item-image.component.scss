@@ -1,0 +1,51 @@
+@import "../common";
+
+.inventory-gear-image {
+  width: $inventory-gear-image-width;
+  height: $inventory-gear-image-height;
+  display: block;
+  float: left;
+
+  position: relative;
+  @include vertical-align-parent();
+
+  &.high-end {
+    background-color: rgba($high-end-rarity-color, 0.56);
+  }
+
+  .image {
+    @include vertical-align();
+
+    width: $inventory-gear-mask-width;
+    height: $inventory-gear-mask-height;
+    display: block;
+    background: white;
+    //mask-type: luminance;
+    margin: 0 auto;
+    mask: url('app/assets/images/inventory/body-armor.png');
+
+    // invert with 203 Blend
+    -webkit-mask-image: url('app/assets/images/inventory/body-armor.png');
+    -webkit-mask-size: $inventory-gear-mask-width $inventory-gear-mask-height;
+  }
+
+}
+
+.slots {
+  position: absolute;
+  bottom: 0;
+
+  div {
+    width: 31px;
+    height: 6px;
+    display: inline-block;
+    margin-right: 3px;
+
+    &.high-end {
+      background-color: $high-end-rarity-color;
+    }
+    &.superior {
+      background-color: $superior-rarity-color;
+    }
+  }
+}

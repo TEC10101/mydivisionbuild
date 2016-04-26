@@ -1,10 +1,5 @@
 <div class="inventory-gear-item clearfix">
-  <div class="inventory-gear-image high-end">
-    <div class="image"></div>
-    <div class="slots">
-      <div *ngFor="#rarity of slotRarities" [ngClass]="rarity"></div>
-    </div>
-  </div>
+  <inventory-gear-item-image [item]="item"></inventory-gear-item-image>
   <ul class="inventory-gear-stats">
 
     <li *ngFor="#stat of statNames"

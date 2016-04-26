@@ -26,10 +26,15 @@ var webpackConfig = {
       {
         test: /\.scss$/,
         /*include:[
-          path.resolve(__dirname,'node_modules','compass-mixin','lib')
-        ],*/
+         path.resolve(__dirname,'node_modules','compass-mixin','lib')
+         ],*/
         exclude: /node_modules/,
         loaders: ['raw-loader', 'sass-loader?sourceMap']
+      },
+      {
+        test: /\.html$/,
+        loader: 'raw-loader'
+
       }
 
     ]

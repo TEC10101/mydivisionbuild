@@ -3,7 +3,8 @@
  */
 
 
-import {Component} from "angular2/core";
+import {Component, Input} from "angular2/core";
+import {Gear} from "../../gear-overview/gear.model";
 @Component({
   selector: 'inventory-gear-items',
   styles: [require('./inventory-gear-items.component.scss')],
@@ -12,4 +13,5 @@ import {Component} from "angular2/core";
 })
 export class InventoryGearItemsComponent {
 
+  @Input() items:Gear[];
 }

@@ -4,9 +4,9 @@
 import {Component, Input} from "angular2/core";
 import {DUMMY_GEAR} from "../gear-overview/gear.model";
 import {Inventory} from "./inventory.model";
-import {InventoryGearItemComponent} from "./inventory-gear-item.component";
+import {InventoryGearItemComponent} from "./gear-item/inventory-gear-item.component";
 import {Router, RouteConfig, RouterOutlet} from "angular2/router";
-import {InventoryGearItemsComponent} from "./inventory-gear-items.component";
+import {InventoryGearItemsComponent} from "./gear-items/inventory-gear-items.component";
 
 @Component({
 

@@ -1,0 +1,56 @@
+@import "../common";
+@import "~compass-mixins/lib/compass/css3";
+
+
+.inventory-gear-item {
+  width: $inventory-gear-item-width;
+  background-color: rgba(#000000, $black-alpha);
+  height: $inventory-gear-item-height;
+  //@include transform(skew(0deg, 1.38deg));
+}
+
+
+
+
+.inventory-gear-stats {
+  list-style: none;
+  width: 45px;
+  display: inline-block;
+  float: left;
+  padding: 0;
+  margin: 0;
+  li {
+
+    height: 28px;
+
+    opacity: 0.2;
+    &.active {
+      background-color: rgba(#52534b, 0.25);
+      opacity: 1;
+    }
+  }
+  @each $stat in $main-stat-names {
+    .#{$stat} {
+      background: url('app/assets/images/icon-stat-#{$stat}.png') center center no-repeat;
+      background-size: 21px 21px;
+    }
+  }
+
+}
+
+.inventory-gear-armor {
+  color: #cccdc8;
+  text-align: center;
+  font-family: "Borda";
+  font-weight: 700;
+  padding-top: 5px;
+  @include text-shadow(0px -1px 1px rgba(150, 150, 150, 0.25));
+  label {
+    font-size: 18px;
+
+  }
+  span {
+    font-size: 42px;
+    line-height: 25px;
+  }
+}
