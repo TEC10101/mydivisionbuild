@@ -1,6 +1,7 @@
 import {GearStats, Rarity, GearRarity, GearAttribute} from "../../common/models/common";
 import {Attribute} from "../attributes/attributes.model";
 import {CONST_EXPR} from "angular2/src/facade/lang";
+import * as _ from "lodash";
 /**
  * Created by xastey on 4/10/2016.
  */

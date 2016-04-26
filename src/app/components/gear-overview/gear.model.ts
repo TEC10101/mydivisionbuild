@@ -49,5 +49,9 @@ export const DUMMY_GEAR:Gear = {
     skill: []
 
   },
-  mods: []
-}
+  mods: [{
+    id: 1
+  }, {
+    id: 5
+  }]
+};

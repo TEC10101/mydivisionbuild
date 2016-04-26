@@ -1,26 +1,27 @@
-<div id="inventory">
+<div id="inventory " class="clearfix">
 
-
-  <div class="gear-item clearfix">
-    <div class="gear-image high-end">
-      <div class="image"></div>
-      <div class="slots">
-        <div *ngFor="#rarity of slotRarities" [ngClass]="rarity"></div>
-      </div>
-    </div>
-    <ul class="gear-stats">
-
-      <li *ngFor="#stat of statNames"
-          class="{{stat}}"
-          [ngClass]="{active:hasStat(stat)}"></li>
-
-
-    </ul>
-    <div class="gear-armor">
-      <label>ARMOR</label>
-      <span>{{gear.armor}}</span>
-    </div>
+  <div id="inventory-weapons">
 
   </div>
+  <div id="inventory-gear">
+    <div class="column">
+      <inventory-gear-item (click)="navigate('BodyArmor')" [item]="inventory.bodyArmor"></inventory-gear-item>
+
+      <inventory-gear-item [item]="inventory.bodyArmor"></inventory-gear-item>
+
+      <inventory-gear-item [item]="inventory.bodyArmor"></inventory-gear-item>
+    </div>
+
+    <div class="column">
+      <inventory-gear-item [item]="inventory.bodyArmor"></inventory-gear-item>
+
+      <inventory-gear-item [item]="inventory.bodyArmor"></inventory-gear-item>
+
+      <inventory-gear-item [item]="inventory.bodyArmor"></inventory-gear-item>
+    </div>
+
+
+  </div>
+
 
 </div>

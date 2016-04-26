@@ -2,40 +2,44 @@
  * Created by xastey on 4/22/2016.
  */
 import {Component, Input} from "angular2/core";
-import {Gear, DUMMY_GEAR} from "../gear-overview/gear.model";
-import {ModSlotService} from "../../services/modslots.service";
-import * as _ from "lodash";
+import {DUMMY_GEAR} from "../gear-overview/gear.model";
+import {Inventory} from "./inventory.model";
+import {InventoryGearItemComponent} from "./inventory-gear-item.component";
+import {Router, RouteConfig, RouterOutlet} from "angular2/router";
+import {InventoryGearItemsComponent} from "./inventory-gear-items.component";
 
 @Component({
 
   selector: 'inventory',
   styles: [require('./inventory.component.scss')],
-  templateUrl: 'app/components/inventory/inventory.component.html'
+  templateUrl: 'app/components/inventory/inventory.component.html',
+  directives: [InventoryGearItemComponent]
 })
 export class InventoryComponent {
 
-  @Input() gear:Gear;
+  @Input() inventory:Inventory;
 
-  constructor(private _modSlotService:ModSlotService) {
-    this.gear = DUMMY_GEAR;
+
+  constructor(private _router:Router) {
+    this.inventory = new Inventory();
+    this.inventory.bodyArmor = DUMMY_GEAR;
   }
 
-  get slotRarities() {
-    let slotTypes = this._modSlotService.types;
-    let mods = [];//this.gear.mods;
-    mods = [{
-      id: 1
-    }, {
-      id: 5
-    }];
-    return mods.map(m=> _.find(slotTypes, {id: m.id}).rarity)
+  navigate(part) {
+    this._router.navigate(['Inventory' + part])
   }
+}
 
-  hasStat(name) {
-    return this.gear.stats[name] > 0;
-  }
 
-  get statNames() {
-    return ["firearms", "stamina", "electronics"];
-  }
+@Component({
+  template: '<router-outlet></router-outlet>',
+  directives: [RouterOutlet]
+})
+@RouteConfig([
+  {path: '/inventory', name: 'Inventory', component: InventoryComponent, useAsDefault: true},
+  {path: '/inventory/bodyArmor', name: 'InventoryBodyArmor', component: InventoryGearItemsComponent}
+
+])
+export class InventoryRootComponent {
+
 }
