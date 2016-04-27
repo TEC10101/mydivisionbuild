@@ -1,6 +1,4 @@
 @import "../common";
-@import "~compass-mixins/lib/compass/css3";
-
 
 .inventory-gear-item {
   width: $inventory-gear-item-width;
@@ -8,9 +6,6 @@
   height: $inventory-gear-item-height;
   //@include transform(skew(0deg, 1.38deg));
 }
-
-
-
 
 .inventory-gear-stats {
   list-style: none;
@@ -44,7 +39,7 @@
   font-family: "Borda";
   font-weight: 700;
   padding-top: 5px;
-  @include text-shadow(0px -1px 1px rgba(150, 150, 150, 0.25));
+  text-shadow: 0px -1px 1px rgba(150, 150, 150, 0.25);
   label {
     font-size: 18px;
 

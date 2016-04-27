@@ -25,4 +25,8 @@ export class InventoryGearItemsComponent {
   get activeItem() {
     return this.items[0];
   }
+
+  onModSlotChanged() {
+    console.log("modSlotChanged");
+  }
 }

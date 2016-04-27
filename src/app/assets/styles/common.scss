@@ -4,3 +4,6 @@
 $main-stat-names: firearms stamina electronics;
 $section-wrapper-side-padding: 15px;
 $section-wrapper-top-bottom-padding: 10px;
+
+$rarities: high-end superior specialized;
+$rarity-to-color: (high-end:$high-end-rarity-color, superior:$superior-rarity-color, specialized:$specialized-rarity-color)

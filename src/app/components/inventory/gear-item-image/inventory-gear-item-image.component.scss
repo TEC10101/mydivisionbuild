@@ -1,5 +1,13 @@
 @import "../common";
 
+$gear-image-background-alpha: 0.56;
+
+@mixin gear-image-background($name) {
+  &.#{$name} {
+    background-color: rgba(map-get($rarity-to-color, #{$name}), $gear-image-background-alpha);
+  }
+}
+
 .inventory-gear-image {
   width: $inventory-gear-image-width;
   height: $inventory-gear-image-height;
@@ -9,11 +17,8 @@
   position: relative;
   @include vertical-align-parent();
 
-  &.high-end {
-    background-color: rgba($high-end-rarity-color, 0.56);
-  }
-  &.superior {
-    background-color: rgba($superior-rarity-color, 0.56);
+  @each $rarity in $rarities {
+    @include gear-image-background($rarity);
   }
 
   .image {

@@ -4,6 +4,7 @@
 import {Component, Input} from "angular2/core";
 import {Gear} from "../../gear-overview/gear.model";
 import {ModSlotService} from "../../../services/modslots.service";
+import * as _ from "lodash";
 
 @Component({
   selector: 'inventory-gear-item-image',
@@ -19,7 +20,6 @@ export class InventoryGearItemImageComponent {
 
   get slotRarities() {
     let slotTypes = this._modSlotService.types;
-
     return this.item.mods.map(m=> _.find(slotTypes, {id: m.id}).rarity)
   }
 }

@@ -1,5 +1,5 @@
 import {ModSlotType} from "./modslots.model";
-import {Input, Component, OnInit} from "angular2/core";
+import {Input, Component, OnInit, ElementRef} from "angular2/core";
 import {GearModSlot} from "../gear-overview/gear.model";
 import {ModSlotService, ModSlotAttributeSet} from "../../services/modslots.service";
 import {EditorDirective} from "../../directives/editor";
@@ -38,7 +38,7 @@ export class ModSlotComponent implements OnInit {
   private _selectedSlotType:ModSlotType;
 
 
-  constructor(private _modSlotService:ModSlotService) {
+  constructor(private _modSlotService:ModSlotService, private _el:ElementRef) {
 
     this.slotTypes = this._modSlotService.types;
     this.slotTypes.forEach(type=>this._slotTypesById[type.id] = type)
@@ -47,6 +47,9 @@ export class ModSlotComponent implements OnInit {
 
   onSlotTypeChanged() {
 
+    //Cast selected id to a number due to bug with angular2 and select
+    //http://stackoverflow.com/questions/35491608/how-to-get-number-in-ngmodel-in-angular-2
+    this.slot.id = +this.slot.id;
 
     this._selectedSlotType = this._slotTypesById[this.slot.id];
     this.slotName = this._selectedSlotType.name;
@@ -54,8 +57,8 @@ export class ModSlotComponent implements OnInit {
 
     this.refreshAttributeProviders();
 
-  }
 
+  }
 
 
   private refreshAttributeProviders() {
@@ -72,7 +75,7 @@ export class ModSlotComponent implements OnInit {
    *  fetch the correct set of attributes to display for both primary and secondary
    * @param primary
    * @returns {Observable<GearAttribute[]>|Observable<R>}
-     */
+   */
   getAttributesProvider(primary:boolean):AttributeObservable {
 
 

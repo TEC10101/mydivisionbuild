@@ -55,7 +55,7 @@ export class AutoResizeInput {
 
 @Component({
   selector: 'auto-resize-input',
-  template: `<div [ngClass]="{'edit-mode':allowEditing}">
+  template: `<div [ngClass]="{'edit-mode':allowEditing}" class="clearfix">
         <label  [ngClass]="{hidden:editing}" (click)="onClicked()">{{prepend}}{{value|attribute:format}}</label>
         <input [ngClass]="{hidden:!editing}" autofocus type="text"  pattern="\d*" [attr.maxlength]="length" [value]="value" (input)="onInputChanged($event)"  (focus)="onInputFocused()" class="auto-resize-input" (blur)="onInputBlurred()"/>
     </div>
@@ -139,10 +139,7 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
   }
 
   onInputFocused() {
-    let inputElement = this.autoResizeInput.nativeElement;
-    /*if (this.getElementWidth(inputElement) < this.defaultWidth) {
-     this.setElementWidth(inputElement, this.defaultWidth);
-     } */
+
   }
 
   onInputBlurred() {
@@ -161,19 +158,19 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
   private resize() {
     //pad = (this.value.length >= this.length) ? 0 : pad;
 
-    let div = document.createElement("div");
-    div.className = "placeholder";
-    div.innerHTML = this.value;
-    div.setAttribute(this.placeholderContentName, '');
-    let parentNode = this.elementRef.nativeElement;
-    parentNode.appendChild(div);
-
+    /*let div = document.createElement("div");
+     div.className = "placeholder";
+     div.innerHTML = this.value;
+     div.setAttribute(this.placeholderContentName, '');
+     let parentNode = this.elementRef.nativeElement;
+     parentNode.appendChild(div);
+     */
 
     // convert to string
     let value = this.value + "";
     this.setElementWidth(this.autoResizeInput.nativeElement,
       ((value.length + 1) * this.resizeIncrement) + 2);
-    parentNode.removeChild(div);
+    // parentNode.removeChild(div);
 
   }
 
