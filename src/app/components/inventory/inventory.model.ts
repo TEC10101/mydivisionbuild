@@ -3,9 +3,11 @@
  */
 
 import {Gear} from "../gear-overview/gear.model";
+import {GenderType} from "../../common/models/common";
 export class Inventory {
 
 
+  gender:GenderType;
   primary:any;
   secondary:any;
   sidearm:any;

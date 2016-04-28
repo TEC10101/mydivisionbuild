@@ -1,74 +1,98 @@
-[
-  {
-    "name": "Coated Armor",
-    "id": 1
+{
+  "items": {
+    "superior": [
+      {
+        "name": "Responder armor"
+      },
+      {
+        "name": "Shooter vest"
+      },
+      {
+        "name": "UHMWPE plate armor"
+      },
+      {
+        "name": "Rapid assault vest"
+      },
+      {
+        "name": "Urban assault vest"
+      },
+      {
+        "name": "Agent vest"
+      },
+      {
+        "name": "Prototype armor"
+      },
+      {
+        "name": "Spider silk armor"
+      }
+    ],
+    "high-end": [
+      {
+        "name": "Hybrid armor"
+      },
+      {
+        "name": "Strike vest"
+      },
+      {
+        "name": "Rush armor"
+      },
+      {
+        "name": "Spec-ops armor"
+      },
+      {
+        "name": "Tactical vest"
+      },
+      {
+        "name": "Operator vest"
+      },
+      {
+        "name": "Gunslinger vest"
+      }
+    ]
   },
-  {
-    "name": "Coated Plate Armor",
-    "id": 2
+  "icons": {
+    "superior": {
+      "131": {
+        "male": "ca_cm_l2_t6_e_icon.png",
+        "female": "ca_cf_l2_t6_e_icon.png"
+      },
+      "147": {
+        "male": "ca_cm_l2_t7_e_icon.png",
+        "female": "ca_cf_l2_t7_e_icon.png"
+      }
+    },
+    "high-end": {
+      "163": {
+        "male": "ca_cm_l2_t6_l_icon.png",
+        "female": "ca_cf_l2_t6_l_icon.png"
+      },
+      "182": {
+        "male": "ca_cm_l2_t7_l_icon.png",
+        "female": "ca_cf_l2_t7_l_icon.png"
+      }
+    },
+    "gear-set": ""
   },
-  {
-    "name": "Corrections Armor",
-    "id": 3
-  },
-  {
-    "name": "Guard Vest",
-    "id": 4
-  },
-  {
-    "name": "Graphene Plate Vest",
-    "id": 5
-  },
-  {
-    "name": "Heavy Duty Vest",
-    "id": 6
-  },
-  {
-    "name": "Hunting Vest",
-    "id": 7
-  },
-  {
-    "name": "Laminate Vest",
-    "id": 8
-  },
-  {
-    "name": "Light Vest",
-    "id": 9
-  },
-  {
-    "name": "Preparedness Vest",
-    "id": 10
-  },
-  {
-    "name": "Protective Armor",
-    "id": 11
-  },
-  {
-    "name": "Safety Vest",
-    "id": 12
-  },
-  {
-    "name": "Soft Trauma Vest",
-    "id": 13
-  },
-  {
-    "name": "Strike Vest",
-    "id": 14
-  },
-  {
-    "name": "Utility Vest",
-    "id": 15
-  },
-  {
-    "name": "Urban Assault Vest",
-    "id": 16
-  },
-  {
-    "name": "Hybrid Armor",
-    "id": 17
-  },
-  {
-    "name": "Rush Armor",
-    "id": 18
-  }
-]
+  "talents": [
+    {
+      "id": "forceful",
+      "template": "Your armor is increased by x% while your Signature Skill is active."
+    },
+    {
+      "id": "rapid",
+      "template": "Decrease cooldown of healing skills by x%."
+    },
+    {
+      "id": "reckless",
+      "template": "You deal x% more damage and receive 10% more damage."
+    },
+    {
+      "id": "robust",
+      "template": "Increase armor while in cover by x%."
+    },
+    {
+      "id": "vigorous",
+      "template": "Grants Overheal to all healing skills."
+    }
+  ]
+}

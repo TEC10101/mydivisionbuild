@@ -2,13 +2,14 @@
   <div class="section-wrapper title-section">
     <div class="rarity-indicator"></div>
     <div class="title-wrapper">
-      <select [(ngModel)]="gear.itemId" (ngModelChange)="onItemChanged($event)">
-        <option *ngFor="#item of items" [value]="item.id">{{item.name}}</option>
+      <label editor="false">{{gear.name}}</label>
+      <select [(ngModel)]="gear.name" editor="true">
+        <option *ngFor="#item of items" [value]="item.name">{{item.name}}</option>
       </select>
     </div>
     <div class="rarity-wrapper">
       <label editor="false">{{gear.rarity|ucfirst}}</label>
-      <select [(ngModel)]="gear.rarity" editor="true">
+      <select [(ngModel)]="gear.rarity" editor="true" (ngModelChange)="onRarityChanged($event)">
         <option class="option-{{rarity}}" *ngFor="#rarity of rarities" [value]="rarity">{{rarity|ucfirst}}</option>
       </select>
     </div>
@@ -16,7 +17,12 @@
     <div class="score-wrapper">
       score
       <div class="number-wrapper score-number-wrapper">
-        {{gear.score}}
+
+        <label editor="false">{{gear.score}}</label>
+        <select [(ngModel)]="gear.score" editor="true">
+          <option *ngFor="#score of scores" [value]="score">{{score}}</option>
+        </select>
+
       </div>
     </div>
   </div>
@@ -36,13 +42,18 @@
     </div>
 
   </div>
+  <div class="section-wrapper " *ngIf="isHighEnd">
+
+    <talents [choices]="talentChoices" [talents]="talents"></talents>
+
+
+  </div>
   <div class="section-wrapper">
     <stats-display [stats]="gear.stats"></stats-display>
   </div>
   <div class="section-wrapper">
     <item-attributes [data]="gear.attributes" [gear-metadata]="metadata"
-                     (attributeAdded)="onAttributeAdded($event)"
-                     (attributeRemoved)="onAttributeRemoved($event)"></item-attributes>
+    ></item-attributes>
   </div>
 
 

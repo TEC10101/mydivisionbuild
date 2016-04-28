@@ -16,7 +16,6 @@ import {isNumber, isFunction} from "angular2/src/facade/lang";
 
 
 export interface AttributeMeta {
-
   level:number;
   rarity:Rarity;
   belongsTo:GearType;
@@ -33,7 +32,7 @@ type AttributesById = {[id:string]:GearAttribute}
 @Component({
   selector: 'item-attribute',
   pipes: [AttributePipe, AttributeRestrictPipe],
-  templateUrl: 'app/components/attributes/attribute.component.html',
+  template: require('./attribute.component.html'),
   styles: [require("./attribute.component.scss")],
   directives: [NgFor, AutoResizeInputComponent, EditorDirective]
 })
@@ -100,7 +99,6 @@ export class AttributeComponent implements OnInit, OnDestroy {
   }
 
 
-
   onAttributeChange() {
     // ensure that we always select the first entry
     // when there is only one entry left no matter if we
@@ -142,6 +140,6 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   /*
    get attributes() {
-   return this._attributesService.getFor(this.belongsTo, this.attributeType)
+   return this._attributesService.getItemsFor(this.belongsTo, this.attributeType)
    }   */
 }

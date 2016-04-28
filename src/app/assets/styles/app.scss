@@ -28,7 +28,7 @@
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 /* close commented backslash hack */
@@ -64,8 +64,6 @@ body {
     display: none;
   }
 }
-
-
 
 .generator-wrapper {
   width: 450px;

@@ -28,12 +28,12 @@ $gear-image-background-alpha: 0.56;
     height: $inventory-gear-mask-height;
     display: block;
     background: white;
-    //mask-type: luminance;
+    mask-type: luminance;
     margin: 0 auto;
-    mask: url('app/assets/images/inventory/body-armor.png');
+
 
     // invert with 203 Blend
-    -webkit-mask-image: url('app/assets/images/inventory/body-armor.png');
+    //-webkit-mask-image: url('app/assets/images/inventory/body-armor.png');
     -webkit-mask-size: $inventory-gear-mask-width $inventory-gear-mask-height;
   }
 

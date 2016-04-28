@@ -8,14 +8,14 @@ import {StatsDisplay} from "../stats-display/stats-display";
 import {Gear} from "./gear.model";
 import {AttributesComponent} from "../attributes/attributes.component";
 import {PrettyNumberPipe} from "../../common/pipes/prettynumber";
-import {Rarity, DivisionItem, GearRarity} from "../../common/models/common";
+import {Rarity, GearRarity} from "../../common/models/common";
 import {AttributeMeta} from "../attributes/attribute.component";
-import {ItemsService} from "../../services/item.service";
+import {ItemsService, GearDescriptor} from "../../services/item.service";
 import {NgFor} from "angular2/common";
 import {EditorDirective} from "../../directives/editor";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 import {ModSlotsComponent} from "../modslots/modslots.component";
-import * as _ from "lodash";
+import {TalentsComponent} from "../talents/talents.component";
 export {Gear} from "./gear.model";
 
 
@@ -28,35 +28,55 @@ export {Gear} from "./gear.model";
   styles: [require('./gear-overview.component.scss')],
 
   template: require('./gear-overview.component.html'),
-  directives: [StatsDisplay, AttributesComponent, NgFor, EditorDirective, AutoResizeInputComponent, ModSlotsComponent]
+  directives: [StatsDisplay, AttributesComponent, NgFor,
+    EditorDirective, AutoResizeInputComponent, ModSlotsComponent, TalentsComponent]
 })
 export class GearOverviewComponent implements OnInit {
   @Input() gear:Gear;
-  private _itemService:ItemsService;
 
-  items:DivisionItem[] = [];
+  descriptor:GearDescriptor;
 
 
-  constructor(itemService:ItemsService) {
-    this._itemService = itemService;
+  constructor(private _itemService:ItemsService) {
+
   }
 
   get rarities():Rarity[] {
-    return [GearRarity.HIGH_END, GearRarity.SUPERIOR, GearRarity.SPECIALIZED];
+    return this._itemService.rarities;
   }
 
   ngOnInit() {
-    this._itemService.getFor(this.gear.type).subscribe(data=> this.items = data)
+    this._itemService.getItemsFor(this.gear.type).subscribe(descriptor=> this.descriptor = descriptor)
   }
 
-  onAttributeAdded(event) {
-    console.log("Attributed Added");
-    console.dir(this.gear);
+  get items() {
+
+    return this.descriptor ? this.descriptor.items[this.gear.rarity] : [];
+
   }
 
-  onAttributeRemoved(event) {
-    console.log("Attributed Removed");
-    console.dir(this.gear);
+  get talentChoices() {
+    return this.descriptor ? this.descriptor.talents : [];
+  }
+
+  get talents() {
+
+    return [this.gear.talent = !this.gear.talent ? {id: this.talentChoices[0].id} : this.gear.talent];
+  }
+
+  get isHighEnd() {
+    return this.gear.rarity == GearRarity.HIGH_END;
+  }
+
+  onRarityChanged(rarity) {
+    // reset gear info when rarity changes
+    this.gear.name = this.items[0].name;
+    this.gear.score = this._itemService.scores[rarity][0];
+  }
+
+
+  get scores() {
+    return this._itemService.scores[this.gear.rarity];
   }
 
   onArmorValueChanged(value) {
@@ -70,10 +90,6 @@ export class GearOverviewComponent implements OnInit {
       belongsTo: this.gear.type
 
     }
-  }
-
-  onItemChanged(itemId) {
-    this.gear.title = _.find(this.items, {id: parseInt(itemId)}).name
   }
 
 

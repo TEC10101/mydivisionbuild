@@ -2,21 +2,23 @@
  * Created by xastey on 4/3/2016.
  */
 
-import {Rarity, GearType, GearStats} from "../../common/models/common";
+import {Rarity, GearType, GearStats, GearRarity} from "../../common/models/common";
 import {Attributes, Attribute} from "../attributes/attributes.model";
+import {Talent} from "../talents/talent.model";
 
 
 export interface Gear {
-  itemId:number;
+
   rarity:Rarity;
   type:GearType;
-  title:string;
+  name:string;
 
   score:number;
   stats:GearStats;
   armor:number;
   attributes:Attributes;
   mods:GearModSlot[];
+  talent:Talent;
 }
 
 
@@ -30,8 +32,7 @@ export interface GearModSlot {
 export const DUMMY_GEAR:Gear = {
   rarity: "superior",
   type: GearType.BodyArmor,
-  itemId: 16,
-  title: "Urban Assault Vest",
+  name: "Urban assault vest",
   armor: 1049,
   score: 131,
   stats: {
@@ -49,5 +50,17 @@ export const DUMMY_GEAR:Gear = {
     skill: []
 
   },
-  mods: []
+  mods: [],
+  talent: {
+    id: "reckless"
+  }
 };
+
+
+export const GEAR_SCORES = (function () {
+  let scores = {};
+  scores[GearRarity.SUPERIOR] = [131, 147/*, 165*/];
+  scores[GearRarity.HIGH_END] = [163, 182/*, 204*/];
+  scores[GearRarity.GEAR_SET] = [191, 214/*, 240*/];
+  return scores;
+})();

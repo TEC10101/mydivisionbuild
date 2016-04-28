@@ -5,6 +5,7 @@ import {Component, Input} from "angular2/core";
 import {Gear} from "../../gear-overview/gear.model";
 import {ModSlotService} from "../../../services/modslots.service";
 import * as _ from "lodash";
+import {ItemsService} from "../../../services/item.service";
 
 @Component({
   selector: 'inventory-gear-item-image',
@@ -15,7 +16,19 @@ import * as _ from "lodash";
 export class InventoryGearItemImageComponent {
   @Input() item:Gear;
 
-  constructor(private _modSlotService:ModSlotService) {
+  constructor(private _modSlotService:ModSlotService, private _itemService:ItemsService) {
+  }
+
+  get icon() {
+
+    let style = {};
+    return this._itemService
+      .imageResolve(this.item).map(image=> {
+        style['-webkit-mask-image'] = 'url("' + image + '")';
+        return style;
+      });
+
+
   }
 
   get slotRarities() {

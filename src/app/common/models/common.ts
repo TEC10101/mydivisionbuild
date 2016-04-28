@@ -2,7 +2,7 @@
  * Created by xastey on 4/2/2016.
  */
 
-export type Rarity = "high-end" | "superior" | "specialized" | "gear-set";
+export type Rarity = "high-end" | "superior" | "specialized" | "gear-set" ;
 export type StatType = "firearms" | "stamaina" | "electronics";
 
 export type GearType = "body-armor" | "mask" | "knee-pads" | "backpack" | "gloves" | "holster";
@@ -13,6 +13,8 @@ export const AttributeInheritance = {
 
 };
 
+
+export type GenderType = "male" | "female";
 
 const ATTRIBUTE_OFFENSIVE = "offensive";
 const ATTRIBUTE_DEFENSIVE = "defensive";
@@ -51,10 +53,15 @@ export class AttributeRange {
 
 }
 
+export const Gender = {
+  MALE: "male" as GenderType,
+  FEMALE: "female" as GenderType
+};
 export const GearRarity = {
   HIGH_END: "high-end" as Rarity,
   SUPERIOR: "superior" as Rarity,
-  SPECIALIZED: "specialized" as Rarity
+  SPECIALIZED: "specialized" as Rarity,
+  GEAR_SET: "gear-set" as Rarity
 };
 
 
@@ -88,6 +95,7 @@ export const ValueFormat = {
 export interface DivisionItem {
   id:number;
   name:string;
+  icon?:string;
 }
 
 

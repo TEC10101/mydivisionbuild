@@ -1,28 +1,30 @@
 /**
  * Created by xastey on 4/22/2016.
  */
-import {Component, Input} from "angular2/core";
-import {DUMMY_GEAR} from "../gear-overview/gear.model";
+import {Component} from "angular2/core";
 import {Inventory} from "./inventory.model";
 import {InventoryGearItemComponent} from "./gear-item/inventory-gear-item.component";
 import {Router, RouteConfig, RouterOutlet} from "angular2/router";
 import {InventoryGearItemsComponent} from "./gear-items/inventory-gear-items.component";
+import {InventoryService} from "../../services/inventory.service";
+
 
 @Component({
 
   selector: 'inventory',
   styles: [require('./inventory.component.scss')],
-  templateUrl: 'app/components/inventory/inventory.component.html',
+  template: require('./inventory.component.html'),
   directives: [InventoryGearItemComponent]
 })
 export class InventoryComponent {
 
-  @Input() inventory:Inventory;
+
+  inventory:Inventory;
 
 
-  constructor(private _router:Router) {
-    this.inventory = new Inventory();
-    this.inventory.bodyArmor = DUMMY_GEAR;
+  constructor(private _router:Router, private _inventoryService:InventoryService) {
+    this.inventory = this._inventoryService.inventory;
+
   }
 
   navigate(part) {

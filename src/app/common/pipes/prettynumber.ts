@@ -4,7 +4,7 @@
 
 
 import {Pipe, PipeTransform} from "angular2/core";
-import {JsonPipe} from "angular2/common";
+
 @Pipe({name: "prettynumber"})
 export class PrettyNumberPipe implements PipeTransform {
 
