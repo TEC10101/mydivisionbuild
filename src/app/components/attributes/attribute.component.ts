@@ -107,9 +107,6 @@ export class AttributeComponent implements OnInit, OnDestroy {
     return this._attributesById[this.attribute.id];
   }
 
-  get attributeSelectWidth() {
-    return this.attributeDef.selectWidth;
-  }
 
   get attributeValues() {
     if (!this.attribute.id) {
@@ -154,7 +151,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
   }
 
   get freeFormDisplay() {
-    return this.attributeDef ? !this.attributeDef.selectWidth : true;
+    return this.attributeDef ? !this.attributeDef.values : true;
   }
 
   onAttributeInputChanged(value) {

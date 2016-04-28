@@ -3,7 +3,7 @@
 
     <label editor>+{{attribute.value|attribute:attributeFormat}}</label>
     <select [(ngModel)]="attribute.value" (ngModelChange)="onAttributeChange()" editor="true"
-            [style.width]="attributeSelectWidth">
+            >
       <option *ngFor="#attr of attributeValues" [value]="attr">{{attr|attribute:attributeFormat}}</option>
     </select>
 

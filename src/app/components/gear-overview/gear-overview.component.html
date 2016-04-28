@@ -19,7 +19,7 @@
       <div class="number-wrapper score-number-wrapper">
 
         <label editor="false">{{gear.score}}</label>
-        <select [(ngModel)]="gear.score" editor="true">
+        <select [(ngModel)]="gear.score" editor="true" (ngModelChange)="onGearScoreChanged($event)">
           <option *ngFor="#score of scores" [value]="score">{{score}}</option>
         </select>
 

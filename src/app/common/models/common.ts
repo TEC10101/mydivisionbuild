@@ -88,7 +88,6 @@ export interface GearAttribute {
   mod:boolean;
   supports:GearType[];
   values:GearValues;
-  selectWidth:string;
 
 
 }

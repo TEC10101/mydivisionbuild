@@ -82,6 +82,9 @@ export class GearOverviewComponent implements OnInit {
   onArmorValueChanged(value) {
     this.gear.armor = value;
   }
+  onGearScoreChanged(score){
+
+  }
 
   get metadata():AttributeMeta {
     return {
