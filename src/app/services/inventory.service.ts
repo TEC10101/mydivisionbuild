@@ -16,6 +16,7 @@ export class InventoryService {
 
   constructor() {
     this._inventory = new Inventory();
+    // TODO: Add selector for choosing gender
     this._inventory.gender = Gender.FEMALE;
     this._inventory.bodyArmor = DUMMY_GEAR;
 

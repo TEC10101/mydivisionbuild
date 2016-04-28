@@ -59,8 +59,8 @@ export const DUMMY_GEAR:Gear = {
 
 export const GEAR_SCORES = (function () {
   let scores = {};
-  scores[GearRarity.SUPERIOR] = [131, 147/*, 165*/];
-  scores[GearRarity.HIGH_END] = [163, 182/*, 204*/];
-  scores[GearRarity.GEAR_SET] = [191, 214/*, 240*/];
+  scores[GearRarity.SUPERIOR] = [131, 147, 165];
+  scores[GearRarity.HIGH_END] = [163, 182, 204];
+ // scores[GearRarity.GEAR_SET] = [191, 214, 240];
   return scores;
 })();

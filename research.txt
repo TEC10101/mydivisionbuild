@@ -4,3 +4,10 @@ https://www.reddit.com/r/thedivision/comments/4gica6/all_your_multipliers_are_be
 
 The Division Gearing Cheat Sheet
 https://docs.google.com/spreadsheets/d/1giZHpZ8uXET4qncFPLJC-FU_NowQH-fD7iUJ-avUrIs/htmlview?usp=sharing&sle=true#
+
+
+Gear naming structure:
+-Image mapping found int rouge/game system data/juice/itemgeneration/filenames/code1_data1_graphobjectlist.juice
+- Actually item names are found in route/game system data /juice/itemgeneration/itemsnames/code1_data1_namelist.juice
+- Image masks are found in rogue\sdf\pc\data\decrypted\rogue\baked\art\[ui]\[loose_images]\generated
+- naming convention is :<unknown>_<gender(m|f)>_<unknown>_<tier>_<rarity([c]ommon,[u]ncommon,[r]are,[e]pic,[l]egendary)_icon.dds

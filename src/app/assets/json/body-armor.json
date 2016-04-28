@@ -59,6 +59,10 @@
       "147": {
         "male": "ca_cm_l2_t7_e_icon.png",
         "female": "ca_cf_l2_t7_e_icon.png"
+      },
+      "165": {
+        "male": "ca_cm_l2_t7_e_icon.png",
+        "female": "ca_cf_l2_t7_e_icon.png"
       }
     },
     "high-end": {
@@ -67,6 +71,10 @@
         "female": "ca_cf_l2_t6_l_icon.png"
       },
       "182": {
+        "male": "ca_cm_l2_t7_l_icon.png",
+        "female": "ca_cf_l2_t7_l_icon.png"
+      },
+      "204": {
         "male": "ca_cm_l2_t7_l_icon.png",
         "female": "ca_cf_l2_t7_l_icon.png"
       }

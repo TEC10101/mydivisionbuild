@@ -9,7 +9,9 @@
       "mask",
       "gloves"
     ],
-    "mod": true
+    "mod": true,
+    "values": {
+    }
   },
   {
     "id": 2,
@@ -97,7 +99,22 @@
       "gloves",
       "knee-pads"
     ],
-    "mod": true
+    "mod": true,
+    "selectWidth": "26px",
+    "values": {
+      "131": [
+        8,
+        9
+      ],
+      "147": [
+        8,
+        10
+      ],
+      "165": [
+        8,
+        10
+      ]
+    }
   },
   {
     "id": 10,

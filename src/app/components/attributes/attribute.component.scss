@@ -44,4 +44,13 @@ button {
   float: left;
   font-weight: 600;
   margin-right: 10px;
+  label {
+    width: auto !important;;
+  }
+  select {
+    color: #eb7c09;
+    font-weight: 600;
+    @include text-style();
+    width: 12px;
+  }
 }

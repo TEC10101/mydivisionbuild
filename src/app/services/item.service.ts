@@ -81,8 +81,9 @@ export class ItemsService {
     return GEAR_SCORES;
   }
 
+  // @TODO : add GEAR_SET images
   get rarities():Rarity[] {
-    return [GearRarity.SUPERIOR, GearRarity.HIGH_END, GearRarity.GEAR_SET]
+    return [GearRarity.SUPERIOR, GearRarity.HIGH_END/*, GearRarity.GEAR_SET*/]
   }
 
   /**

@@ -1,6 +1,17 @@
 <div class="clearfix">
-  <div class="attribute-value-wrapper">
-    <auto-resize-input [length]="maxInputLength" inputType="number" [format]="attributeFormat" [(ngModel)]="attribute.value"
+  <div class="attribute-value-wrapper" *ngIf="!freeFormDisplay">
+
+    <label editor>+{{attribute.value|attribute:attributeFormat}}</label>
+    <select [(ngModel)]="attribute.value" (ngModelChange)="onAttributeChange()" editor="true"
+            [style.width]="attributeSelectWidth">
+      <option *ngFor="#attr of attributeValues" [value]="attr">{{attr|attribute:attributeFormat}}</option>
+    </select>
+
+  </div>
+
+  <div class="attribute-value-wrapper" *ngIf="freeFormDisplay">
+    <auto-resize-input [length]="maxInputLength" inputType="number" [format]="attributeFormat"
+                       [(ngModel)]="attribute.value"
                        (input)="onAttributeInputChanged($event)"></auto-resize-input>
   </div>
   <div class="attribute-title-wrapper">
@@ -9,8 +20,8 @@
       <select [(ngModel)]="attribute.id" (ngModelChange)="onAttributeChange()">
         <option *ngFor="#attr of attributes" [value]="attr.id">{{attr.name}}</option>
       </select>
-      <button  (click)="onRemoveAttribute()">-</button>
-      <button  (click)="onAddAttribute()">+</button>
+      <button (click)="onRemoveAttribute()">-</button>
+      <button (click)="onAddAttribute()">+</button>
     </div>
 
   </div>

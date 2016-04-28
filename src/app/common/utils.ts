@@ -23,6 +23,22 @@ export function without(collection, element):()=>any {
 
 }
 
+export function numberRange(low, high) {
+  let step = 1;
+  // check if a decimal is present
+  if (!!~low.toString().indexOf(".") || !!~high.toString().indexOf(".")) {
+    step = .5;
+  }
+  let range = [];
+
+  for (let i = low; i <= high; i += step) {
+
+    range.push(i);
+
+  }
+  return range;
+}
+
 
 const SPECIAL_CHARS_REGEXP = /([\:\-\_]+(.))/g;
 export function camelCase(name) {

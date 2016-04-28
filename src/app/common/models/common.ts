@@ -73,6 +73,11 @@ export class GearSupport {
 }
 
 
+interface GearValues {
+  131?:number[];
+  147?:number[];
+  165?:number[];
+}
 export interface GearAttribute {
   id:number;
   name:string;
@@ -82,6 +87,8 @@ export interface GearAttribute {
   native:boolean;
   mod:boolean;
   supports:GearType[];
+  values:GearValues;
+  selectWidth:string;
 
 
 }

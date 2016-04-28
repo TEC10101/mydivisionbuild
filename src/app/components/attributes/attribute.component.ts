@@ -3,7 +3,7 @@
  */
 
 import {Component, Input, OnInit, Output, EventEmitter, OnDestroy} from "angular2/core";
-import {NgFor} from "angular2/common";
+import {NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault} from "angular2/common";
 import {Attribute} from "./attributes.model";
 import {AttributePipe} from "./attribute_pipe";
 import {AttributesService, AttributeObservable} from "../../services/attributes.service";
@@ -13,6 +13,7 @@ import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.c
 import {EditorDirective} from "../../directives/editor";
 import {AttributeRestrictPipe} from "./attribute-restrict.pipe";
 import {isNumber, isFunction} from "angular2/src/facade/lang";
+import {numberRange} from "../../common/utils";
 
 
 export interface AttributeMeta {
@@ -34,7 +35,8 @@ type AttributesById = {[id:string]:GearAttribute}
   pipes: [AttributePipe, AttributeRestrictPipe],
   template: require('./attribute.component.html'),
   styles: [require("./attribute.component.scss")],
-  directives: [NgFor, AutoResizeInputComponent, EditorDirective]
+  directives: [NgFor, AutoResizeInputComponent, EditorDirective,
+    NgSwitch, NgSwitchWhen, NgSwitchDefault]
 })
 
 export class AttributeComponent implements OnInit, OnDestroy {
@@ -98,6 +100,27 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   }
 
+  get attributeDef() {
+    if (!this.attribute.id) {
+      return null;
+    }
+    return this._attributesById[this.attribute.id];
+  }
+
+  get attributeSelectWidth() {
+    return this.attributeDef.selectWidth;
+  }
+
+  get attributeValues() {
+    if (!this.attribute.id) {
+      return [];
+    }
+    let [low,high] = this.attributeDef.values[this.metadata.level];
+
+    return numberRange(low, high);
+
+  }
+
 
   onAttributeChange() {
     // ensure that we always select the first entry
@@ -128,6 +151,10 @@ export class AttributeComponent implements OnInit, OnDestroy {
       attribute: this.attribute,
       attributeType: this.attributeType
     });
+  }
+
+  get freeFormDisplay() {
+    return this.attributeDef ? !this.attributeDef.selectWidth : true;
   }
 
   onAttributeInputChanged(value) {
