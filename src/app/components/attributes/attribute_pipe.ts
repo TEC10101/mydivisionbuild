@@ -12,6 +12,7 @@ export class AttributePipe implements PipeTransform {
 
   transform(value:number, [format]):string {
 
+    if (!value || isNaN(value)) return "0";
 
     if (format == ValueFormat.PERCENT) {
       return value + "%";

@@ -1,0 +1,97 @@
+{
+  "items": {
+    "superior": [
+      {
+        "name": "Responder backpack"
+      },
+      {
+        "name": "Shooter pack"
+      },
+      {
+        "name": "Rapid assault pack"
+      },
+      {
+        "name": "Urban assault pack"
+      },
+      {
+        "name": "Agent pack"
+      },
+      {
+        "name": "Spider silk pack"
+      }
+    ],
+    "high-end": [
+      {
+        "name": "Hybrid pack"
+      },
+      {
+        "name": "Strike pack"
+      },
+      {
+        "name": "Rush backpack"
+      },
+      {
+        "name": "Spec-ops pack"
+      },
+      {
+        "name": "Tactical pack"
+      },
+      {
+        "name": "Operator pack"
+      }
+    ]
+  },
+  "icons": {
+    "superior": {
+      "131": {
+        "male": "ca_cm_b_t6_e_icon.png",
+        "female": "ca_cf_b_t6_e_icon.png"
+      },
+      "147": {
+        "male": "ca_cm_b_t7_e_icon.png",
+        "female": "ca_cf_b_t7_e_icon.png"
+      },
+      "165": {
+        "male": "ca_cm_b_t7_e_icon.png",
+        "female": "ca_cf_b_t7_e_icon.png"
+      }
+    },
+    "high-end": {
+      "163": {
+        "male": "ca_cm_b_t6_l_icon.png",
+        "female": "ca_cf_b_t6_l_icon.png"
+      },
+      "182": {
+        "male": "ca_cm_b_t7_l_icon.png",
+        "female": "ca_cf_b_t7_l_icon.png"
+      },
+      "204": {
+        "male": "ca_cm_b_t7_l_icon.png",
+        "female": "ca_cf_b_t7_l_icon.png"
+      }
+    },
+    "gear-set": ""
+  },
+  "talents": [
+    {
+      "id": "inventive",
+      "template": "Your Skill Power is increased by x% while you are at full health.	"
+    },
+    {
+      "id": "relentless",
+      "template": "3% of the damage dealt by skills is returned as healing.	"
+    },
+    {
+      "id": "resourceful",
+      "template": "All healing is also applied to skill objects.	"
+    },
+    {
+      "id": "specialized",
+      "template": "Add x% of Firearms and Stamina to Skill Power.	"
+    },
+    {
+      "id": "technical",
+      "template": "While your signature skill is active, your Skill Power is increased by x%.	"
+    }
+  ]
+}

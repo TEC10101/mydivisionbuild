@@ -5,14 +5,15 @@
   </div>
   <div class="talent-title-separator">|</div>
   <div class="talent-title-name">
-    <label editor>{{talent.id}}</label>
+    <label editor>{{talent.id|ucfirst}}</label>
     <div editor="true">
-      <select [(ngModel)]="talent.id">
-        <option *ngFor="#choice of choices" [value]="choice.id">{{choice.id}}</option>
+      <select [(ngModel)]="talent.id" (ngModelChange)="onTalentChanged($event)">
+        <option *ngFor="#choice of choices" [value]="choice.id">{{choice.id|ucfirst}}</option>
       </select>
     </div>
   </div>
   <div class="talent-description-text">
-    {{text}}
+    <div #description></div>
+
   </div>
 </div>

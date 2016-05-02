@@ -151,7 +151,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
   }
 
   get freeFormDisplay() {
-    return this.attributeDef ? !this.attributeDef.values : true;
+    return true; //this.attributeDef ? !this.attributeDef.values : true;
   }
 
   onAttributeInputChanged(value) {
