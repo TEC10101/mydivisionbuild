@@ -61,7 +61,7 @@ export class ModSlotService {
   static hasNative(gearType:GearType):boolean {
     switch (gearType) {
       case GearType.Mask:
-      case GearType.Backpack:
+      case GearType.BackPack:
         return true;
     }
     return false;

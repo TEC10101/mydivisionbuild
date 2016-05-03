@@ -27,8 +27,8 @@ export class InventoryComponent {
 
   }
 
-  navigate(part) {
-    this._router.navigate(['Inventory' + part])
+  navigate(type) {
+    this._router.navigate(['InventoryList', {gearType: type}])
   }
 }
 
@@ -39,7 +39,8 @@ export class InventoryComponent {
 })
 @RouteConfig([
   {path: '/inventory', name: 'Inventory', component: InventoryComponent, useAsDefault: true},
-  {path: '/inventory/bodyArmor', name: 'InventoryBodyArmor', component: InventoryGearItemsComponent}
+  {path: '/inventory/:gearType', name: 'InventoryList', component: InventoryGearItemsComponent}
+
 
 ])
 export class InventoryRootComponent {

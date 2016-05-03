@@ -1,4 +1,5 @@
 @import "../../assets/styles/common";
+
 $inventory-gear-item-width: 344px;
 $inventory-gear-item-height: 87px;
 $inventory-gear-image-width: 164px;
@@ -7,5 +8,7 @@ $inventory-gear-stats-spacing: 2px;
 
 $inventory-gear-mask-width: 152px;
 $inventory-gear-mask-height: 75px;
+$inventory-gear-set-icon-mask-width: $inventory-gear-mask-height;
+$inventory-gear-set-icon-mask-height: $inventory-gear-mask-height;
 $black-alpha: 0.30;
 $rarity-alpha: 0.56;

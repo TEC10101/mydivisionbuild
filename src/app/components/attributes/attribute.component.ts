@@ -164,6 +164,6 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   /*
    get attributes() {
-   return this._attributesService.getItemsFor(this.belongsTo, this.attributeType)
+   return this._attributesService.getDescriptorFor(this.belongsTo, this.attributeType)
    }   */
 }

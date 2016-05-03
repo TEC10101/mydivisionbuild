@@ -38,6 +38,9 @@ export class TalentComponent implements OnInit {
   ngOnInit():any {
     // ensure that there is a value for the talent even if its 0
     if (!this.talent.value) this.talent.value = 0;
+    if (!this.talent.id) {
+      this.talent.id = this.choices[0].id;
+    }
     this.renderDescription(this.talent.id);
   }
 

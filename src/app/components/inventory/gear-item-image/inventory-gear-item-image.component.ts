@@ -6,6 +6,7 @@ import {Gear} from "../../gear-overview/gear.model";
 import {ModSlotService} from "../../../services/modslots.service";
 import * as _ from "lodash";
 import {ItemsService} from "../../../services/item.service";
+import {GearRarity} from "../../../common/models/common";
 
 @Component({
   selector: 'inventory-gear-item-image',
@@ -21,10 +22,30 @@ export class InventoryGearItemImageComponent {
 
   get icon() {
 
+
     let style = {};
-    return this._itemService
-      .imageResolve(this.item).map(icon=> {
+    return !this.item ? style :
+      this._itemService
+        .imageResolve(this.item).map(icon=> {
         style['-webkit-mask-image'] = 'url("' + icon.primary + '")';
+        return style;
+      });
+
+
+  }
+
+  get belongsToSet() {
+    return this.item && this.item.rarity == GearRarity.GEAR_SET;
+  }
+
+  get gearSetIcon() {
+
+
+    let style = {};
+    return !this.item ? style :
+      this._itemService
+        .imageResolve(this.item).map(icon=> {
+        style['-webkit-mask-image'] = 'url("' + icon.secondary + '")';
         return style;
       });
 
@@ -33,6 +54,8 @@ export class InventoryGearItemImageComponent {
 
   get slotRarities() {
     let slotTypes = this._modSlotService.types;
-    return this.item.mods.map(m=> _.find(slotTypes, {id: m.id}).rarity)
+    return (!this.item || !this.item.mods)
+      ? [] :
+      this.item.mods.map(m=> _.find(slotTypes, {id: m.id}).rarity)
   }
 }

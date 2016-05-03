@@ -1,27 +1,27 @@
 <div class="attributes-wrapper">
-  <div class="attributes-title-wrapper" *ngIf="attributes.major.length">
+  <div class="attributes-title-wrapper" *ngIf="majorAttributes.length">
     Major Attributes
   </div>
 
-  <item-attribute *ngFor="#attribute of attributes.major" [attribute]="attribute" [metadata]="metadata"
+  <item-attribute *ngFor="#attribute of majorAttributes" [attribute]="attribute" [metadata]="metadata"
                   attribute-type="major"
-                  [restrict]="attributes.major"
+                  [restrict]="majorAttributes"
                   (removed)="onRemoveAttribute($event)"
                   (added)="onAddAttribute($event)"></item-attribute>
 
 
-  <div class="attributes-title-wrapper" *ngIf="attributes.minor.length">
+  <div class="attributes-title-wrapper" *ngIf="minorAttributes.length">
     Minor Attributes
   </div>
-  <item-attribute *ngFor="#attribute of attributes.minor" [attribute]="attribute" [metadata]="metadata"
+  <item-attribute *ngFor="#attribute of minorAttributes" [attribute]="attribute" [metadata]="metadata"
                   attribute-type="minor"
                   (removed)="onRemoveAttribute($event)"
                   (added)="onAddAttribute($event)"></item-attribute>
 
-  <div class="attributes-title-wrapper" *ngIf="attributes.skill.length">
+  <div class="attributes-title-wrapper" *ngIf="skillAttributes.length">
     Skill Attributes
   </div>
-  <item-attribute *ngFor="#attribute of attributes.skill" [attribute]="attribute" [metadata]="metadata"
+  <item-attribute *ngFor="#attribute of skillAttributes" [attribute]="attribute" [metadata]="metadata"
                   attribute-type="skill"
                   (removed)="onRemoveAttribute($event)"
                   (added)="onAddAttribute($event)"></item-attribute>
@@ -29,9 +29,9 @@
 
 </div>
 <div class="button-bar" editor="true">
-  <button (click)="onAddAttributeType('major')" *ngIf="!attributes.major.length">+ Major</button>
-  <button (click)="onAddAttributeType('minor')" *ngIf="!attributes.minor.length">+ Minor</button>
-  <button (click)="onAddAttributeType('skill')" *ngIf="!attributes.skill.length">+ Skill</button>
+  <button (click)="onAddAttributeType('major')" *ngIf="!majorAttributes.length">+ Major</button>
+  <button (click)="onAddAttributeType('minor')" *ngIf="!minorAttributes.length">+ Minor</button>
+  <button (click)="onAddAttributeType('skill')" *ngIf="!skillAttributes.length">+ Skill</button>
 </div>
 
 

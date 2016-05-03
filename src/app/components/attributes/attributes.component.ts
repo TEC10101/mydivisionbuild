@@ -35,6 +35,19 @@ export class AttributesComponent {
   }
 
 
+  get majorAttributes() {
+    return this.attributes ? this.attributes.major : [];
+  }
+
+  get minorAttributes() {
+    return this.attributes ? this.attributes.minor : [];
+
+  }
+
+  get skillAttributes() {
+    return this.attributes ? this.attributes.skill : [];
+  }
+
   private _dispatchEvent(type:string, event:AttributeEvent) {
     this._elementRef.nativeElement.dispatchEvent(new CustomEvent(type, {
 

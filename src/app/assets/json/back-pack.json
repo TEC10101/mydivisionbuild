@@ -86,23 +86,23 @@
   "talents": [
     {
       "id": "inventive",
-      "template": "Your Skill Power is increased by x% while you are at full health.	"
+      "template": "Your Skill Power is increased by x% while you are at full health."
     },
     {
       "id": "relentless",
-      "template": "3% of the damage dealt by skills is returned as healing.	"
+      "template": "3% of the damage dealt by skills is returned as healing."
     },
     {
       "id": "resourceful",
-      "template": "All healing is also applied to skill objects.	"
+      "template": "All healing is also applied to skill objects."
     },
     {
       "id": "specialized",
-      "template": "Add x% of Firearms and Stamina to Skill Power.	"
+      "template": "Add x% of Firearms and Stamina to Skill Power."
     },
     {
       "id": "technical",
-      "template": "While your signature skill is active, your Skill Power is increased by x%.	"
+      "template": "While your signature skill is active, your Skill Power is increased by x%."
     }
   ]
 }

@@ -47,6 +47,11 @@ export class StatsDisplay {
 
   @Input() stats:GearStats;
 
+
+  stat(name) {
+    return !this.stats ? 0 : this.stat[name];
+  }
+
   onStateValueChanged(event:StateValueChangeEvent) {
 
     console.log("onStateValueChanged", event);

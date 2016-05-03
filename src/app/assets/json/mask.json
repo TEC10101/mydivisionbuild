@@ -83,23 +83,23 @@
   "talents": [
     {
       "id": "enduring",
-      "template": "While in your last segment, your health continuously regenerates to fill up the segment.	"
+      "template": "While in your last segment, your health continuously regenerates to fill up the segment."
     },
     {
       "id": "refreshed",
-      "template": "All healing is improved by x% when in the last segment of Health.	"
+      "template": "All healing is improved by x% when in the last segment of Health"
     },
     {
       "id": "rehabilitated",
-      "template": "Heals 2% every second during status effects.	"
+      "template": "Heals 2% every second during status effects."
     },
     {
       "id": "rejuvenated",
-      "template": "Consuming a medkit also removes all negative status effects.	"
+      "template": "Consuming a medkit also removes all negative status effects."
     },
     {
       "id": "tenacious",
-      "template": "Increase damage by x% for 10 seconds when using a Medkit.	"
+      "template": "Increase damage by x% for 10 seconds when using a Medkit."
     }
   ]
 }

@@ -1,12 +1,12 @@
 <div class="stats-wrapper">
   <single-stat-display type="firearms"
                        (change)="onStateValueChanged($event)"
-                       [value]="stats.firearms || 0 "></single-stat-display>
+                       [value]="stat('firearms')"></single-stat-display>
   <single-stat-display type="stamina"
                        (change)="onStateValueChanged($event)"
-                       [value]="stats.stamina || 0 "></single-stat-display>
+                       [value]="stat('stamina')"></single-stat-display>
   <single-stat-display type="electronics"
                        (change)="onStateValueChanged($event)"
-                       [value]="stats.electronics || 0 "></single-stat-display>
+                       [value]="stat('electronics')"></single-stat-display>
 
 </div>

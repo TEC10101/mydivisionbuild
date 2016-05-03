@@ -69,6 +69,10 @@ export interface GearDescriptor {
 export class ItemsService {
 
   private _bodyArmor:BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(null);
+  private _mask:BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(null);
+  private _backPack:BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(null);
+  private _gloves:BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(null);
+  private _kneePads:BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(null);
 
   private _basePath = "app/assets/json/";
   private _imagePath = "app/assets/images/inventory/";
@@ -84,6 +88,7 @@ export class ItemsService {
     let self = this;
 
     _.forEach(GearType, (gearType:GearType, key:string)=> {
+      console.log("ItemsService(", gearType, ")");
       let subjectName = dashCaseToCamelCase(gearType);
 
       let subject = self["_" + subjectName] as BehaviorSubject<GearDescriptor>;
@@ -105,22 +110,24 @@ export class ItemsService {
 
   // @TODO : add GEAR_SET images
   get rarities():Rarity[] {
-    return [GearRarity.SUPERIOR, GearRarity.HIGH_END/*, GearRarity.GEAR_SET*/]
+    return [GearRarity.SUPERIOR, GearRarity.HIGH_END, GearRarity.GEAR_SET]
   }
+
 
   /**
    * Returns a descriptor for the choosen gear type
    * @param gearType
    * @returns {Observable<GearDescriptor>}
    */
-  getItemsFor(gearType:GearType):Observable<GearDescriptor> {
-    switch (gearType) {
-      case GearType.BodyArmor:
-        return asObservable(this._bodyArmor.first((x, idx, obs)=> !!x))
+  getDescriptorFor(gearType:GearType):Observable<GearDescriptor> {
+    let obs = this["_" + dashCaseToCamelCase(gearType || "")];
+    if (obs) {
+      return asObservable(obs.first((x, idx, obs)=> !!x))
     }
+    return Observable.empty();
   }
 
-  _imageUrl(type:GearType, icon:string):string {
+  _imageUrl(type:string, icon:string):string {
     return icon ? this._imagePath + type + "/" + icon : "";
   }
 
@@ -131,22 +138,22 @@ export class ItemsService {
    */
   imageResolve(item:Gear):Observable<ResolvedImage> {
 
-    return this.getItemsFor(item.type).map(descriptor=> {
+    return this.getDescriptorFor(item.type).map(descriptor=> {
 
       let icons = descriptor.icons[item.rarity];
 
 
-      let iconLookup = "" + item.score;
-
-      if (item.rarity == GearRarity.GEAR_SET) {
+      let isGearSet = item.rarity == GearRarity.GEAR_SET;
+      let gearSetName = null;
+      if (isGearSet) {
         // find item information to resolve gear name
         let divisionItem = <DivisionItem>_.find(descriptor.items[GearRarity.GEAR_SET], {name: item.name});
-        iconLookup = divisionItem.belongsTo;
+        gearSetName = divisionItem.belongsTo;
 
       }
 
 
-      let icon = icons[iconLookup];
+      let icon = icons[gearSetName || item.score];
 
       if (icon.hasOwnProperty(Gender.MALE)) {
 
@@ -159,7 +166,9 @@ export class ItemsService {
 
       return {
         primary: this._imageUrl(item.type, isObject ? icon.primary : icon),
-        secondary: this._imageUrl(item.type, isObject ? icon.secondary : icon)
+        secondary: gearSetName ?
+          this._imageUrl('sets', gearSetName + ".png")
+          : this._imageUrl(item.type, isObject ? icon.secondary : icon)
       }
 
     })

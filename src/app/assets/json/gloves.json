@@ -91,7 +91,7 @@
     },
     {
       "id": "cunning",
-      "template": "After reloading, the next shot with this weapon has a x% higher critical hit chance.	"
+      "template": "After reloading, the next shot with this weapon has a x% higher critical hit chance."
     },
     {
       "id": "Decisive",

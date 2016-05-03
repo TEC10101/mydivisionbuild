@@ -103,7 +103,10 @@
       }
     },
     "gear-set": {
-      "striker": "ca_cm_l2_t7_l_dlc1_icon.png",
+      "striker": {
+        "male": "ca_cf_l2_t7_l_dlc1_icon.png",
+        "female": "ca_cm_l2_t7_l_dlc1_icon.png"
+      },
       "juggernaut": {
         "male": "ca_cm_l2_t6_u.png",
         "female": "ca_cf_l2_t6_u.png"

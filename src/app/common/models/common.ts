@@ -5,7 +5,7 @@
 export type Rarity = "high-end" | "superior" | "specialized" | "gear-set" ;
 export type StatType = "firearms" | "stamaina" | "electronics";
 
-export type GearType = "body-armor" | "mask" | "knee-pads" | "backpack" | "gloves" | "holster";
+export type GearType = "body-armor" | "mask" | "knee-pads" | "back-pack" | "gloves" | "holster";
 export type AttributeInheritance = "native" | "extra"
 export const AttributeInheritance = {
   NATIVE: "native" as AttributeInheritance,
@@ -41,7 +41,7 @@ export const GearType = {
   BodyArmor: "body-armor" as GearType,
   Mask: "mask" as GearType,
   KneePads: "knee-pads" as GearType,
-  Backpack: "backpack" as GearType,
+  BackPack: "back-pack" as GearType,
   Gloves: "gloves" as GearType,
   Holster: "holster" as GearType,
 };

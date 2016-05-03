@@ -18,7 +18,7 @@ export interface Gear {
   armor:number;
   attributes:Attributes;
   mods:GearModSlot[];
-  talent:Talent;
+  talent?:Talent;
 }
 
 
@@ -30,11 +30,11 @@ export interface GearModSlot {
 
 
 export const DUMMY_GEAR:Gear = {
-  rarity: "superior",
+  rarity: "gear-set",
   type: GearType.BodyArmor,
-  name: "Urban assault vest",
+  name: "Sentry's Call harness",
   armor: 1049,
-  score: 131,
+  score: 214,
   stats: {
     firearms: 0,
     stamina: 422,
@@ -51,9 +51,7 @@ export const DUMMY_GEAR:Gear = {
 
   },
   mods: [],
-  talent: {
-    id: "reckless"
-  }
+  talent: {}
 };
 
 
@@ -61,6 +59,6 @@ export const GEAR_SCORES = (function () {
   let scores = {};
   scores[GearRarity.SUPERIOR] = [131, 147, 165];
   scores[GearRarity.HIGH_END] = [163, 182, 204];
- // scores[GearRarity.GEAR_SET] = [191, 214, 240];
+  scores[GearRarity.GEAR_SET] = [191, 214, 240];
   return scores;
 })();

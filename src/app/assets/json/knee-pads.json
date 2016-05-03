@@ -83,11 +83,11 @@
   "talents": [
     {
       "id": "accomplished",
-      "template": "Rewards from Accolades are tripled.	"
+      "template": "Rewards from Accolades are tripled."
     },
     {
       "id": "prosperous",
-      "template": "Headshot kills grant credits.	"
+      "template": "Headshot kills grant credits."
     },
     {
       "id": "perceptive",

@@ -46,7 +46,7 @@ export class GearOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._itemService.getItemsFor(this.gear.type).subscribe(descriptor=> this.descriptor = descriptor)
+    this._itemService.getDescriptorFor(this.gear.type).subscribe(descriptor=> this.descriptor = descriptor)
   }
 
   get items() {

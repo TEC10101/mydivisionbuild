@@ -6,5 +6,6 @@ $section-wrapper-side-padding: 15px;
 $section-wrapper-top-bottom-padding: 10px;
 $section-wrapper-padding: $section-wrapper-top-bottom-padding $section-wrapper-side-padding;
 
-$rarities: high-end superior specialized;
-$rarity-to-color: (high-end:$high-end-rarity-color, superior:$superior-rarity-color, specialized:$specialized-rarity-color)
+$rarities: high-end superior specialized gear-set;
+$rarity-to-color: (high-end:$high-end-rarity-color, superior:$superior-rarity-color,
+  specialized:$specialized-rarity-color, gear-set:$gear-set-rarity-color)

@@ -31,6 +31,9 @@
   .option-superior {
     color: $superior-accent-font-color;
   }
+  .option-gear-set {
+    color: $gear-set-accent-font-color;
+  }
   @if $include-weight {
     font-weight: 600;
 
@@ -86,6 +89,17 @@
 
     .rarity-wrapper select, .rarity-wrapper label, .talent-title-wrapper {
       color: $specialized-accent-font-color;
+    }
+
+  }
+
+  &.gear-set {
+    .rarity-indicator {
+      background-color: $gear-set-rarity-color;
+    }
+
+    .rarity-wrapper select, .rarity-wrapper label, .talent-title-wrapper {
+      color: $gear-set-accent-font-color;
     }
 
   }

@@ -31,11 +31,28 @@ $gear-image-background-alpha: 0.56;
     mask-type: luminance;
     margin: 0 auto;
 
-
     // invert with 203 Blend
     //-webkit-mask-image: url('app/assets/images/inventory/body-armor.png');
     -webkit-mask-size: $inventory-gear-mask-width $inventory-gear-mask-height;
+
   }
+  &.gear-set .image {
+    -webkit-mask-position-x: -($inventory-gear-mask-width/4);
+  }
+  .set-image {
+    position: absolute;
+    mask-type: luminance;
+    margin: 0 auto;
+    background: white;
+    width: $inventory-gear-set-icon-mask-width;
+    height: $inventory-gear-set-icon-mask-height;
+    opacity: .3;
+    top: 7%;
+    right: 10px;
+    -webkit-mask-size: $inventory-gear-set-icon-mask-width $inventory-gear-set-icon-mask-height;
+
+  }
+  // secondary sprite are 127x127
 
 }
 
