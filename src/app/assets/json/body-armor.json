@@ -48,6 +48,29 @@
       {
         "name": "Gunslinger vest"
       }
+    ],
+    "gear-set": [
+      {
+        "name": "Striker's harness",
+        "belongsTo": "striker"
+      },
+      {
+        "name": "Juggernaut's vest",
+        "omit": true,
+        "belongsTo": "juggernaut"
+      },
+      {
+        "name": "Sentry's Call harness",
+        "belongsTo": "sentry"
+      },
+      {
+        "name": "Vest of the Nomad",
+        "belongsTo": "nomad"
+      },
+      {
+        "name": "Tactician's Authority vest",
+        "belongsTo": "tactician"
+      }
     ]
   },
   "icons": {
@@ -76,10 +99,28 @@
       },
       "204": {
         "male": "ca_cm_l2_t7_l_icon.png",
-        "female": "ca_cf_l2_t7_l_icon.png"
+        "female": "ca_cm_l2_t7_l_icon.png"
       }
     },
-    "gear-set": ""
+    "gear-set": {
+      "striker": "ca_cm_l2_t7_l_dlc1_icon.png",
+      "juggernaut": {
+        "male": "ca_cm_l2_t6_u.png",
+        "female": "ca_cf_l2_t6_u.png"
+      },
+      "sentry": {
+        "male": "ca_cm_l2_t4_l_icon.png",
+        "female": "ca_cf_l2_t4_l_icon.png"
+      },
+      "nomad": {
+        "male": "ca_cm_l2_t5_l_icon.png",
+        "female": "ca_cf_l2_t5_l_icon.png"
+      },
+      "tactician": {
+        "male": "ca_cm_l2_t4_e_icon.png",
+        "female": "ca_cf_l2_t4_e_icon.png"
+      }
+    }
   },
   "talents": [
     {

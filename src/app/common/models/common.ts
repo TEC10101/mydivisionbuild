@@ -102,6 +102,7 @@ export interface DivisionItem {
   id:number;
   name:string;
   icon?:string;
+  belongsTo?:string;
 }
 
 

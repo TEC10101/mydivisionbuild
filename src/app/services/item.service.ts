@@ -6,13 +6,14 @@
 import {Injectable} from "angular2/core";
 import {Http} from "angular2/http";
 import {BehaviorSubject} from "rxjs/Rx";
-import {DivisionItem, GearType, GearRarity, Rarity} from "../common/models/common";
+import {DivisionItem, GearType, GearRarity, Rarity, Gender} from "../common/models/common";
 import * as _ from "lodash";
 import {dashCaseToCamelCase} from "angular2/src/compiler/util";
 import {asObservable} from "../common/utils";
 import {Observable} from "rxjs/Observable";
 import {Gear, GEAR_SCORES} from "../components/gear-overview/gear.model";
 import {InventoryService} from "./inventory.service";
+
 
 class ItemStore {
   private _items:BehaviorSubject<DivisionItem[]> = new BehaviorSubject<DivisionItem[]>([]);
@@ -31,16 +32,37 @@ interface GearIconSet {
   163?:string;
   //high-end lvl 31
   182?:string;
+
+}
+
+interface GearSetIconSet {
+  striker:string;
+  juggernaut:string;
+  sentry:string;
+  nomad:string;
+  tactician:string;
 }
 interface GearIcons {
   superior:GearIconSet;
   "high-end":GearIconSet;
+  "gear-set":GearSetIconSet;
+}
+
+interface ResolvedImage {
+  primary:string;
+  secondary:string;
+}
+
+interface DivisionCategories<T,G> {
+  superior:T
+  "high-end":T
+  "gear-set":G
 }
 
 export interface GearDescriptor {
 
-  items:DivisionItem[];
-  icons:GearIcons;
+  items:DivisionCategories<DivisionItem[],DivisionItem[]>;
+  icons:DivisionCategories<GearIconSet,GearIconSet>;
   talents:GearTalent[];
 }
 @Injectable()
@@ -98,21 +120,47 @@ export class ItemsService {
     }
   }
 
+  _imageUrl(type:GearType, icon:string):string {
+    return icon ? this._imagePath + type + "/" + icon : "";
+  }
+
   /**
    * Resolves the correct gear image
    * @param item
    * @returns {Observable<string>}
    */
-  imageResolve(item:Gear):Observable<string> {
+  imageResolve(item:Gear):Observable<ResolvedImage> {
 
     return this.getItemsFor(item.type).map(descriptor=> {
 
       let icons = descriptor.icons[item.rarity];
 
-      let gender = this._inventoryService.inventory.gender;
-      let icon = icons[item.score][gender];
 
-      return icon ? this._imagePath + item.type + "/" + icon : "";
+      let iconLookup = "" + item.score;
+
+      if (item.rarity == GearRarity.GEAR_SET) {
+        // find item information to resolve gear name
+        let divisionItem = <DivisionItem>_.find(descriptor.items[GearRarity.GEAR_SET], {name: item.name});
+        iconLookup = divisionItem.belongsTo;
+
+      }
+
+
+      let icon = icons[iconLookup];
+
+      if (icon.hasOwnProperty(Gender.MALE)) {
+
+        icon = icon[Gender.MALE];
+      } else if (icon.hasOwnProperty(Gender.FEMALE)) {
+        icon = icon[Gender.FEMALE];
+      }
+
+      let isObject = _.isObject(icon);
+
+      return {
+        primary: this._imageUrl(item.type, isObject ? icon.primary : icon),
+        secondary: this._imageUrl(item.type, isObject ? icon.secondary : icon)
+      }
 
     })
   }

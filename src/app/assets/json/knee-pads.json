@@ -1,0 +1,97 @@
+{
+  "items": {
+    "superior": [
+      {
+        "name": "Responder pads"
+      },
+      {
+        "name": "Rapid assault pads"
+      },
+      {
+        "name": "Urban assault pads"
+      },
+      {
+        "name": "Agent pads"
+      },
+      {
+        "name": "Spider silk pads"
+      }
+    ],
+    "high-end": [
+      {
+        "name": "Hybrid pads"
+      },
+      {
+        "name": "Strike pads"
+      },
+      {
+        "name": "Rush pads"
+      },
+      {
+        "name": "Spec-ops pads"
+      },
+      {
+        "name": "Tactical pads"
+      },
+      {
+        "name": "Operator pads"
+      }
+    ],
+    "gear-set": [
+      {
+        "name": "Striker's knee pad",
+        "set": "striker"
+      },
+      {
+        "name": "Juggernaut's knee pad",
+        "omit": true,
+        "set": "juggernaut"
+      },
+      {
+        "name": "Sentry's Call knee pads",
+        "set": "sentry"
+      },
+      {
+        "name": "Knee pads of the Nomad",
+        "set": "nomad"
+      },
+      {
+        "name": "Tactician's Authority knee pads",
+        "set": "tactician"
+      }
+    ]
+  },
+  "icons": {
+    "superior": {
+      "131": "ca_cm_k_t6_u_icon.png",
+      "147": "ca_cm_k_t7_e_icon.png",
+      "165": "ca_cm_k_t7_e_icon.png"
+    },
+    "high-end": {
+      "163": "ca_cm_k_t6_l_icon.png",
+      "182": "ca_cm_k_t7_l_icon.png",
+      "204": "ca_cm_k_t7_l_icon.png"
+    },
+    "gear-set": {
+      "striker": "ca_cm_k_t7_l_dlc1_icon.png",
+      "juggernaut": "ca_cm_k_t4_l_icon.png",
+      "sentry": "ca_cm_k_t2_e_icon.png",
+      "nomad": "ca_cm_k_t6_l_icon.png",
+      "tactician": "ca_cf_k_t7_r_icon.png"
+    }
+  },
+  "talents": [
+    {
+      "id": "accomplished",
+      "template": "Rewards from Accolades are tripled.	"
+    },
+    {
+      "id": "prosperous",
+      "template": "Headshot kills grant credits.	"
+    },
+    {
+      "id": "perceptive",
+      "template": "Item find and Credit find bonuses are increased by x%."
+    }
+  ]
+}

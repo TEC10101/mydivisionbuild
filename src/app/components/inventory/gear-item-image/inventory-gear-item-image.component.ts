@@ -23,8 +23,8 @@ export class InventoryGearItemImageComponent {
 
     let style = {};
     return this._itemService
-      .imageResolve(this.item).map(image=> {
-        style['-webkit-mask-image'] = 'url("' + image + '")';
+      .imageResolve(this.item).map(icon=> {
+        style['-webkit-mask-image'] = 'url("' + icon.primary + '")';
         return style;
       });
 

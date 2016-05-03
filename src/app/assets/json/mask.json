@@ -1,0 +1,105 @@
+{
+  "items": {
+    "superior": [
+      {
+        "name": "Responder pads"
+      },
+      {
+        "name": "Rapid assault pads"
+      },
+      {
+        "name": "Urban assault pads"
+      },
+      {
+        "name": "Agent pads"
+      },
+      {
+        "name": "Spider silk pads"
+      }
+    ],
+    "high-end": [
+      {
+        "name": "Hybrid pads"
+      },
+      {
+        "name": "Strike pads"
+      },
+      {
+        "name": "Rush pads"
+      },
+      {
+        "name": "Spec-ops pads"
+      },
+      {
+        "name": "Tactical pads"
+      },
+      {
+        "name": "Operator pads"
+      }
+    ],
+    "gear-set": [
+      {
+        "name": "Striker's mask",
+        "set": "striker"
+      },
+      {
+        "name": "Juggernaut's mask",
+        "omit": true,
+        "set": "juggernaut"
+      },
+      {
+        "name": "Sentry's Call mask",
+        "set": "sentry"
+      },
+      {
+        "name": "Mask of the Nomad",
+        "set": "nomad"
+      },
+      {
+        "name": "Tactician's Authority mask",
+        "set": "tactician"
+      }
+    ]
+  },
+  "icons": {
+    "superior": {
+      "131": "cp_hg_t6_e_icon.png",
+      "147": "cp_hg_t7_e_icon.png",
+      "165": "cp_hg_t7_e_icon.png"
+    },
+    "high-end": {
+      "163": "cp_hg_t6_l_icon.png",
+      "182": "cp_hg_t7_l_icon.png",
+      "204": "cp_hg_t7_l_icon.png"
+    },
+    "gear-set": {
+      "striker": "cp_hg_t3_c_icon.png",
+      "juggernaut": "cp_hg_t5_c_icon.png",
+      "sentry": "cp_hg_t4_c_icon.png",
+      "nomad": "cp_hg_t7_e_icon.png",
+      "tactician": "cp_hg_t2_u_icon.png"
+    }
+  },
+  "talents": [
+    {
+      "id": "enduring",
+      "template": "While in your last segment, your health continuously regenerates to fill up the segment.	"
+    },
+    {
+      "id": "refreshed",
+      "template": "All healing is improved by x% when in the last segment of Health.	"
+    },
+    {
+      "id": "rehabilitated",
+      "template": "Heals 2% every second during status effects.	"
+    },
+    {
+      "id": "rejuvenated",
+      "template": "Consuming a medkit also removes all negative status effects.	"
+    },
+    {
+      "id": "tenacious",
+      "template": "Increase damage by x% for 10 seconds when using a Medkit.	"
+    }
+  ]
+}

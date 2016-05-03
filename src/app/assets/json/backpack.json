@@ -39,38 +39,49 @@
       {
         "name": "Operator pack"
       }
+    ],
+    "gear-set": [
+      {
+        "name": "Striker's pack",
+        "set": "striker"
+      },
+      {
+        "name": "Juggernaut's backpack",
+        "omit": true,
+        "set": "juggernaut"
+      },
+      {
+        "name": "Sentry's Call backpack",
+        "set": "sentry"
+      },
+      {
+        "name": "Backpack of the Nomad",
+        "set": "nomad"
+      },
+      {
+        "name": "Tactician's Authority pack",
+        "set": "tactician"
+      }
     ]
   },
   "icons": {
     "superior": {
-      "131": {
-        "male": "ca_cm_b_t6_e_icon.png",
-        "female": "ca_cf_b_t6_e_icon.png"
-      },
-      "147": {
-        "male": "ca_cm_b_t7_e_icon.png",
-        "female": "ca_cf_b_t7_e_icon.png"
-      },
-      "165": {
-        "male": "ca_cm_b_t7_e_icon.png",
-        "female": "ca_cf_b_t7_e_icon.png"
-      }
+      "131": "ca_cm_b_t6_e_icon.png",
+      "147": "ca_cm_b_t7_e_icon.png",
+      "165": "ca_cm_b_t7_e_icon.png"
     },
     "high-end": {
-      "163": {
-        "male": "ca_cm_b_t6_l_icon.png",
-        "female": "ca_cf_b_t6_l_icon.png"
-      },
-      "182": {
-        "male": "ca_cm_b_t7_l_icon.png",
-        "female": "ca_cf_b_t7_l_icon.png"
-      },
-      "204": {
-        "male": "ca_cm_b_t7_l_icon.png",
-        "female": "ca_cf_b_t7_l_icon.png"
-      }
+      "163": "ca_cm_b_t6_l_icon.png",
+      "182": "ca_cm_b_t7_l_icon.png",
+      "204": "ca_cm_b_t7_l_icon.png"
     },
-    "gear-set": ""
+    "gear-set": {
+      "striker": "ca_cm_b_t7_r_dlc1_icon.png",
+      "juggernaut": "ca_cm_b_t3_r_icon.png",
+      "sentry": "ca_cm_b_t6_u_icon.png",
+      "nomad": "ca_cm_b_t7_l_icon.png",
+      "tactician": "ca_cm_b_t6_l_icon.png"
+    }
   },
   "talents": [
     {
