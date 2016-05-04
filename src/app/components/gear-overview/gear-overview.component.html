@@ -4,7 +4,7 @@
     <div class="title-wrapper">
       <label editor="false">{{gear.name}}</label>
       <select [(ngModel)]="gear.name" editor="true">
-        <option *ngFor="let item of items" [value]="item.name">{{item.name}}</option>
+        <option *ngFor="#item of items" [value]="item.name">{{item.name}}</option>
       </select>
     </div>
     <div class="rarity-wrapper">

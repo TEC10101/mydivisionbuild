@@ -56,7 +56,7 @@ export class AutoResizeInput {
 
 @Component({
   selector: 'auto-resize-input',
-  template: `<div [ngClass]='{'edit-mode':allowEditing}' class='clearfix'>
+  template: `<div [ngClass]="{'edit-mode':allowEditing}" class='clearfix'>
         <label  [ngClass]='{hidden:editing}' (click)='onClicked()'>
           {{prepend}}{{value|attribute:format}}
         </label>
