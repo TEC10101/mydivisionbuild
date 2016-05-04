@@ -1,6 +1,5 @@
 import {GearStats, Rarity, GearRarity, GearAttribute} from "../../common/models/common";
 import {Attribute} from "../attributes/attributes.model";
-import {CONST_EXPR} from "angular2/src/facade/lang";
 import * as _ from "lodash";
 /**
  * Created by xastey on 4/10/2016.
@@ -73,7 +72,7 @@ export enum ModSlotKind{
 }
 
 
-export const MOD_SLOT_TYPES = CONST_EXPR([
+export const MOD_SLOT_TYPES = [
 
   new ModSlotType(1, GearRarity.SUPERIOR, ModSlotKind.FIREARMS),
   new ModSlotType(2, GearRarity.SUPERIOR, ModSlotKind.STAMINA),
@@ -85,7 +84,7 @@ export const MOD_SLOT_TYPES = CONST_EXPR([
   new ModSlotType(7, GearRarity.HIGH_END, ModSlotKind.ELECTRONICS),
   new ModSlotType(8, GearRarity.HIGH_END, ModSlotKind.PERFORMANCE),
 
-]);
+];
 
 
 

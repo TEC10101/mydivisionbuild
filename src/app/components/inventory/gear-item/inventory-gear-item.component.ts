@@ -1,7 +1,7 @@
 /**
  * Created by xastey on 4/26/2016.
  */
-import {Component, Input, OnInit} from "angular2/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {Gear} from "../../gear-overview/gear.model";
 import {InventoryGearItemImageComponent} from "../gear-item-image/inventory-gear-item-image.component";
 import {ItemsService} from "../../../services/item.service";
@@ -30,7 +30,6 @@ export class InventoryGearItemComponent implements OnInit {
 
   ngOnInit():any {
 
-    console.log("checking if ", this.gearType, "exists", this.item);
     if (!this.item)this._itemsService
       .getDescriptorFor(this.gearType)
       .subscribe(descriptor=> {

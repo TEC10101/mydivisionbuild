@@ -1,5 +1,5 @@
 import {ModSlotType} from "./modslots.model";
-import {Input, Component, OnInit, ElementRef} from "angular2/core";
+import {Input, Component, OnInit, ElementRef} from "@angular/core";
 import {GearModSlot} from "../gear-overview/gear.model";
 import {ModSlotService, ModSlotAttributeSet} from "../../services/modslots.service";
 import {EditorDirective} from "../../directives/editor";

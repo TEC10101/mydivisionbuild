@@ -1,11 +1,28 @@
 // Polyfills
-// These modules are what's in angular 2 bundle polyfills so don't include them
+// (these modules are what are in 'angular2/bundles/angular2-polyfills' so don't use that here)
+
+// import 'ie-shim'; // Internet Explorer
 // import 'es6-shim';
 // import 'es6-promise';
-// import 'reflect-metadata';
+// import 'es7-reflect-metadata';
 
-// CoreJS has all the polyfills you need
-
-import 'core-js';
+// Prefer CoreJS over the polyfills above
+import "core-js/es6";
+import "core-js/es7/reflect";
+import "ts-helpers";
 require('zone.js/dist/zone');
-require('zone.js/dist/long-stack-trace-zone');
+
+// Typescript emit helpers polyfill
+
+if ('production' === ENV) {
+  // Production
+
+
+} else {
+  // Development
+
+  Error.stackTraceLimit = Infinity;
+
+  require('zone.js/dist/long-stack-trace-zone');
+
+}

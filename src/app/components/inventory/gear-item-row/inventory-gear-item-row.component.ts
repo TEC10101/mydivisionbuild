@@ -1,4 +1,4 @@
-import {Component, Input} from "angular2/core";
+import {Component, Input} from "@angular/core";
 import {Gear} from "../../gear-overview/gear.model";
 import {PrettyNumberPipe} from "../../../common/pipes/prettynumber";
 import {InventoryGearItemImageComponent} from "../gear-item-image/inventory-gear-item-image.component";

@@ -2,7 +2,7 @@
   <inventory-gear-item-image [item]="item"></inventory-gear-item-image>
   <ul class="inventory-gear-stats">
 
-    <li *ngFor="#stat of statNames"
+    <li *ngFor="let stat of statNames"
         class="{{stat}}"
         [ngClass]="{active:hasStat(stat)}"></li>
 

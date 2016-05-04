@@ -1,4 +1,4 @@
-import {Input, OnInit, Component} from "angular2/core";
+import {Input, OnInit, Component} from "@angular/core";
 import {MOD_SLOT_TYPES, ModSlotType} from "./modslots.model";
 import {ModSlotService, ModSlotAttributeSet} from "../../services/modslots.service";
 import {AttributeMeta} from "../attributes/attribute.component";

@@ -3,10 +3,10 @@
  */
 
 
-import {Component, Input, ElementRef} from "angular2/core";
+import {Component, Input, ElementRef} from "@angular/core";
 import {Attributes} from "./attributes.model";
 import {AttributeComponent, AttributeMeta, AttributeEvent} from "./attribute.component";
-import {NgFor} from "angular2/common";
+import {NgFor} from "@angular/common";
 import {without} from "../../common/utils";
 import {AttributeType} from "../../common/models/common";
 import {EditorDirective} from "../../directives/editor";

@@ -9,7 +9,7 @@ import {InvalidPipeArgumentException} from "angular2/src/common/pipes/invalid_pi
 
 @Pipe({name: 'ucfirst'})
 export class UcFirstPipe implements PipeTransform {
-  transform(value:string, args:any[] = null):string {
+  transform(value:string, args:any[] = []):string {
     if (isBlank(value)) return value;
     if (!isString(value)) {
       throw new InvalidPipeArgumentException(UcFirstPipe, value);

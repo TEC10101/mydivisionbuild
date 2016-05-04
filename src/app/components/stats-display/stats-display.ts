@@ -2,9 +2,9 @@
  * Created by xastey on 4/2/2016.
  */
 
-import {Component, Input, Output, EventEmitter} from "angular2/core";
+import {Component, Input, Output, EventEmitter} from "@angular/core";
 import {StatType, GearStats} from "../../common/models/common";
-import {NgClass} from "angular2/common";
+import {NgClass} from "@angular/common";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 
 
@@ -54,7 +54,7 @@ export class StatsDisplay {
 
   onStateValueChanged(event:StateValueChangeEvent) {
 
-    console.log("onStateValueChanged", event);
+   
     this.stats[event.type] = event.value;
   }
 

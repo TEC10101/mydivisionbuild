@@ -3,31 +3,30 @@
  */
 
 import {Component, ViewEncapsulation, OnInit} from "angular2/core";
-import {RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
-import {Gear, GearOverviewComponent} from "./components/gear-overview/gear-overview.component";
-import {DIVISION_PROVIDERS} from "./services/core";
+import {RouteConfig} from "angular2/router";
+import {Gear} from "./components/gear-overview/gear-overview.component";
 import {EditorService} from "./services/editor-service";
 import {AttributesService} from "./services/attributes.service";
-import {InventoryComponent, InventoryRootComponent} from "./components/inventory/inventory.component";
+import {InventoryRootComponent} from "./components/inventory/inventory.component";
 import {DUMMY_GEAR} from "./components/gear-overview/gear.model";
 
 
 @Component({
-  selector: 'my-division-build-app',
+  selector: 'my-division-build',
 
   pipes: [],
   styles: [require("./assets/styles/app.scss")],
-  directives: [ROUTER_DIRECTIVES, InventoryComponent, GearOverviewComponent],
+  directives: [],
   encapsulation: ViewEncapsulation.None,
   templateUrl: 'app/my-division-build-app.html',
-  providers: [DIVISION_PROVIDERS]
+  providers: []
 })
 
 @RouteConfig([
   {path: '/...', name: 'InventoryRoot', component: InventoryRootComponent},
 
 ])
-export class MyDivisionBuild implements OnInit {
+export class App implements OnInit {
 
   gear:Gear;
 

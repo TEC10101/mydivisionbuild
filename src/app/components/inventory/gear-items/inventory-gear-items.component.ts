@@ -3,10 +3,10 @@
  */
 
 
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 import {InventoryGearItemRowComponent} from "../gear-item-row/inventory-gear-item-row.component";
 import {GearOverviewComponent} from "../../gear-overview/gear-overview.component";
-import {RouteParams} from "angular2/router";
+import {RouteParams} from "@angular/router-deprecated";
 import {InventoryService} from "../../../services/inventory.service";
 import {GearType} from "../../../common/models/common";
 @Component({
@@ -32,7 +32,6 @@ export class InventoryGearItemsComponent {
   get items() {
 
     let item = this._inventoryService.retrieve(this._gearType);
-    console.log("items", this._gearType, item);
 
     return item ? [item] : [];
   }
@@ -45,6 +44,6 @@ export class InventoryGearItemsComponent {
   }
 
   onModSlotChanged() {
-    console.log("modSlotChanged");
+
   }
 }

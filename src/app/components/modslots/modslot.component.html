@@ -5,7 +5,7 @@
     <div class="mod-slot-type-title-wrapper">
       <label editor="false">{{slotName}}</label>
       <select [(ngModel)]="slot.id" editor="true" (ngModelChange)="onSlotTypeChanged()">
-        <option class="option-{{slotType.rarity}}" *ngFor="#slotType of slotTypes" [value]="slotType.id">{{slotType.name}}</option>
+        <option class="option-{{slotType.rarity}}" *ngFor="let slotType of slotTypes" [value]="slotType.id">{{slotType.name}}</option>
       </select>
     </div>
   </div>

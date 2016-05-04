@@ -1,7 +1,7 @@
 /**
  * Created by xastey on 4/26/2016.
  */
-import {Component, Input} from "angular2/core";
+import {Component, Input} from "@angular/core";
 import {Gear} from "../../gear-overview/gear.model";
 import {ModSlotService} from "../../../services/modslots.service";
 import * as _ from "lodash";

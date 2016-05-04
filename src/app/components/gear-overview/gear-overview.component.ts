@@ -2,7 +2,7 @@
  * Created by Keyston on 4/2/2016.
  */
 
-import {Component, Input, OnInit} from "angular2/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {UcFirstPipe} from "../../common/pipes/ucfirst_pipe";
 import {StatsDisplay} from "../stats-display/stats-display";
 import {Gear} from "./gear.model";
@@ -11,7 +11,7 @@ import {PrettyNumberPipe} from "../../common/pipes/prettynumber";
 import {Rarity, GearRarity} from "../../common/models/common";
 import {AttributeMeta} from "../attributes/attribute.component";
 import {ItemsService, GearDescriptor} from "../../services/item.service";
-import {NgFor} from "angular2/common";
+import {NgFor} from "@angular/common";
 import {EditorDirective} from "../../directives/editor";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 import {ModSlotsComponent} from "../modslots/modslots.component";

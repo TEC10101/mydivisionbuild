@@ -2,8 +2,8 @@
  * Created by xastey on 4/3/2016.
  */
 
-import {Component, Input, OnInit, Output, EventEmitter, OnDestroy} from "angular2/core";
-import {NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault} from "angular2/common";
+import {Component, Input, OnInit, Output, EventEmitter, OnDestroy} from "@angular/core";
+import {NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault} from "@angular/common";
 import {Attribute} from "./attributes.model";
 import {AttributePipe} from "./attribute_pipe";
 import {AttributesService, AttributeObservable} from "../../services/attributes.service";
@@ -12,7 +12,7 @@ import {Subscription} from "rxjs/Subscription";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 import {EditorDirective} from "../../directives/editor";
 import {AttributeRestrictPipe} from "./attribute-restrict.pipe";
-import {isNumber, isFunction} from "angular2/src/facade/lang";
+import {isNumber, isFunction} from "@angular/core/src/facade/lang";
 import {numberRange} from "../../common/utils";
 
 

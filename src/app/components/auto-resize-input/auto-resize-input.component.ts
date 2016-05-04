@@ -15,8 +15,8 @@ import {
   ViewChild,
   NgZone,
   OnDestroy
-} from "angular2/core";
-import {ControlValueAccessor, NgControl, FORM_DIRECTIVES} from "angular2/common";
+} from "@angular/core";
+import {ControlValueAccessor, NgControl, FORM_DIRECTIVES} from "@angular/common";
 import * as _ from "lodash";
 import {ValueFormat} from "../../common/models/common";
 import {AttributePipe} from "../attributes/attribute_pipe";

@@ -1,13 +1,24 @@
 /**
  * Created by xastey on 4/26/2016.
  */
-import {Component, Input, DynamicComponentLoader, ElementRef, OnInit, ComponentRef} from "angular2/core";
+import {
+  Component,
+  Input,
+  DynamicComponentLoader,
+  ElementRef,
+  OnInit,
+  ComponentRef,
+  ViewChild,
+  ViewContainerRef,
+  AfterViewInit
+} from "@angular/core";
 import {UcFirstPipe} from "../../common/pipes/ucfirst_pipe";
 import {Talent} from "./talent.model";
 import {GearTalent} from "../../services/item.service";
 import * as _ from "lodash";
 import {EditorDirective} from "../../directives/editor";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
+
 
 const TEMPLATE_INPUT_MARKER = "x%";
 const TEMPLATE_INPUT_MARKER_REXP = new RegExp('(' + TEMPLATE_INPUT_MARKER + ')');
@@ -22,13 +33,15 @@ const TALENT_INPUT_TEMPLATE = ` <auto-resize-input [length]="2" inputType="numbe
   directives: [EditorDirective, AutoResizeInputComponent]
 })
 
-export class TalentComponent implements OnInit {
+export class TalentComponent implements OnInit,AfterViewInit {
 
   @Input() talent:Talent;
   @Input() choices:GearTalent[];
 
   _previousTalentId:string;
-  _componentRef:ComponentRef;
+  _componentRef:ComponentRef<any>;
+
+  @ViewChild("description", {read: ViewContainerRef}) _descriptionContainerRef:ViewContainerRef;
 
 
   constructor(private _loader:DynamicComponentLoader, private _elementRef:ElementRef) {
@@ -41,6 +54,10 @@ export class TalentComponent implements OnInit {
     if (!this.talent.id) {
       this.talent.id = this.choices[0].id;
     }
+
+  }
+
+  ngAfterViewInit() {
     this.renderDescription(this.talent.id);
   }
 
@@ -59,18 +76,18 @@ export class TalentComponent implements OnInit {
    */
   renderDescription(id:string) {
 
+
     if (this._previousTalentId == id) return;
     this._previousTalentId = id;
-    if (this._componentRef) this._componentRef.dispose();
+    if (this._componentRef) this._componentRef.destroy();
 
     let text = _.find(this.choices, {id: id}).template;
     let template = text.split(TEMPLATE_INPUT_MARKER_REXP)
       .map(part=> part == TEMPLATE_INPUT_MARKER ? TALENT_INPUT_TEMPLATE : part).join('');
 
-    this._loader.loadIntoLocation(
+    this._loader.loadNextToLocation(
       TalentComponent.toComponent(template, this.talent),
-      this._elementRef,
-      'description'
+      this._descriptionContainerRef
     ).then(ref => this._componentRef = ref)
   }
 

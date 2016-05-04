@@ -4,13 +4,13 @@
     <div class="title-wrapper">
       <label editor="false">{{gear.name}}</label>
       <select [(ngModel)]="gear.name" editor="true">
-        <option *ngFor="#item of items" [value]="item.name">{{item.name}}</option>
+        <option *ngFor="let item of items" [value]="item.name">{{item.name}}</option>
       </select>
     </div>
     <div class="rarity-wrapper">
       <label editor="false">{{gear.rarity|ucfirst}}</label>
       <select [(ngModel)]="gear.rarity" editor="true" (ngModelChange)="onRarityChanged($event)">
-        <option class="option-{{rarity}}" *ngFor="#rarity of rarities" [value]="rarity">{{rarity|ucfirst}}</option>
+        <option class="option-{{rarity}}" *ngFor="let rarity of rarities" [value]="rarity">{{rarity|ucfirst}}</option>
       </select>
     </div>
 
@@ -20,7 +20,7 @@
 
         <label editor="false">{{gear.score}}</label>
         <select [(ngModel)]="gear.score" editor="true" (ngModelChange)="onGearScoreChanged($event)">
-          <option *ngFor="#score of scores" [value]="score">{{score}}</option>
+          <option *ngFor="let score of scores" [value]="score">{{score}}</option>
         </select>
 
       </div>
