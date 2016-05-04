@@ -121,7 +121,7 @@ export class ItemsService {
    * @returns {Observable<GearDescriptor>}
    */
   getDescriptorFor(gearType: GearType): Observable<GearDescriptor> {
-    let obs = this['_' + dashCaseToCamelCase(gearType || '')];
+    let obs = <Observable<GearDescriptor>>this['_' + dashCaseToCamelCase(gearType || '')];
     if (obs) {
       return asObservable(obs.first((x, idx, _) => !!x));
     }

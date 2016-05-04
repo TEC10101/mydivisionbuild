@@ -15,14 +15,14 @@ import {
   ViewChild,
   NgZone,
   OnDestroy
-} from "@angular/core";
-import {ControlValueAccessor, NgControl, FORM_DIRECTIVES} from "@angular/common";
-import * as _ from "lodash";
-import {ValueFormat} from "../../common/models/common";
-import {AttributePipe} from "../attributes/attribute_pipe";
-import {EditorService} from "../../services/editor-service";
-import {Subscription} from "rxjs/Subscription";
-import {InputConverter, NumberConverter} from "../../common/converters";
+} from '@angular/core';
+import {ControlValueAccessor, NgControl, FORM_DIRECTIVES} from '@angular/common';
+import * as _ from 'lodash';
+import {ValueFormat} from '../../common/models/common';
+import {AttributePipe} from '../attributes/attribute.pipe';
+import {EditorService} from '../../services/editor-service';
+import {Subscription} from 'rxjs/Subscription';
+import {InputConverter, NumberConverter} from '../../common/converters';
 
 
 //http://jbavari.github.io/blog/2015/10/21/angular-2-and-ng-model/

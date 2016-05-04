@@ -11,20 +11,20 @@ import {
   ViewChild,
   ViewContainerRef,
   AfterViewInit
-} from "@angular/core";
-import {UcFirstPipe} from "../../common/pipes/ucfirst_pipe";
-import {Talent} from "./talent.model";
-import {GearTalent} from "../../services/item.service";
-import * as _ from "lodash";
-import {EditorDirective} from "../../directives/editor";
-import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
+} from '@angular/core';
+import {UcFirstPipe} from '../../common/pipes/ucfirst_pipe';
+import {Talent} from './talent.model';
+import {GearTalent} from '../../services/item.service';
+import * as _ from 'lodash';
+import {EditorDirective} from '../../directives/editor';
+import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
 
 
 const TEMPLATE_INPUT_MARKER = 'x%';
 const TEMPLATE_INPUT_MARKER_REXP = new RegExp('(' + TEMPLATE_INPUT_MARKER + ')');
-const TALENT_INPUT_TEMPLATE = ` <auto-resize-input [length]="2" 
-                            inputType="number" [format]="percent"
-                           [(ngModel)]="talent.value"
+const TALENT_INPUT_TEMPLATE = ` <auto-resize-input [length]='2' 
+                            inputType='number' [format]='percent'
+                           [(ngModel)]='talent.value'
         ></auto-resize-input>`;
 @Component({
   selector: 'talent',

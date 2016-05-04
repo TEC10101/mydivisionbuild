@@ -1,9 +1,9 @@
 /**
  * Created by xastey on 5/3/2016.
  */
-import {describe, it, expect, inject, beforeEach, beforeEachProviders} from "@angular/core/testing";
-import {TestComponentBuilder} from "@angular/compiler/testing";
-import {TalentComponent} from "./talents.component";
+import {describe, it, expect, inject, beforeEach, beforeEachProviders} from '@angular/core/testing';
+import {TestComponentBuilder} from '@angular/compiler/testing';
+import {TalentComponent} from './talents.component';
 describe('TalentsComponent: component', () => {
   let tcb;
   let choices = [

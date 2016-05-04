@@ -1,6 +1,6 @@
 {
-
   "dependencies": {
+    "lodash": "registry:npm/lodash#4.0.0+20160416211519",
     "lz-string": "registry:dt/lz-string#0.0.0+20160317120654",
     "zone.js": "github:gdi2290/typed-zone.js#66ea8a3451542bb7798369306840e46be1d6ec89"
   },

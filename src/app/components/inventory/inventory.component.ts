@@ -1,12 +1,12 @@
 /**
  * Created by xastey on 4/22/2016.
  */
-import {Component} from "@angular/core";
-import {Inventory} from "./inventory.model";
-import {InventoryGearItemComponent} from "./gear-item/inventory-gear-item.component";
-import {Router, RouteConfig, RouterOutlet} from "@angular/router-deprecated";
-import {InventoryGearItemsComponent} from "./gear-items/inventory-gear-items.component";
-import {InventoryService} from "../../services/inventory.service";
+import {Component} from '@angular/core';
+import {Inventory} from './inventory.model';
+import {InventoryGearItemComponent} from './gear-item/inventory-gear-item.component';
+import {Router, RouteConfig, RouterOutlet} from '@angular/router-deprecated';
+import {InventoryGearItemsComponent} from './gear-items/inventory-gear-items.component';
+import {InventoryService} from '../../services/inventory.service';
 
 
 @Component({

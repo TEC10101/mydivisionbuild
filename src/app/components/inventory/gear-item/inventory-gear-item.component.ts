@@ -1,12 +1,12 @@
 /**
  * Created by xastey on 4/26/2016.
  */
-import {Component, Input, OnInit} from "@angular/core";
-import {Gear} from "../../gear-overview/gear.model";
-import {InventoryGearItemImageComponent} from "../gear-item-image/inventory-gear-item-image.component";
-import {ItemsService} from "../../../services/item.service";
-import {GearType, GearRarity, DivisionItem} from "../../../common/models/common";
-import {InventoryService} from "../../../services/inventory.service";
+import {Component, Input, OnInit} from '@angular/core';
+import {Gear} from '../../gear-overview/gear.model';
+import {InventoryGearItemImageComponent} from '../gear-item-image/inventory-gear-item-image.component';
+import {ItemsService} from '../../../services/item.service';
+import {GearType, GearRarity, DivisionItem} from '../../../common/models/common';
+import {InventoryService} from '../../../services/inventory.service';
 
 
 @Component({

@@ -1,10 +1,10 @@
-import {Input, OnInit, Component} from "@angular/core";
-import {MOD_SLOT_TYPES, ModSlotType} from "./modslots.model";
-import {ModSlotService, ModSlotAttributeSet} from "../../services/modslots.service";
-import {AttributeMeta} from "../attributes/attribute.component";
-import {ModSlotComponent} from "./modslot.component";
-import {GearModSlot} from "../gear-overview/gear.model";
-import {EditorDirective} from "../../directives/editor";
+import {Input, OnInit, Component} from '@angular/core';
+import {MOD_SLOT_TYPES, ModSlotType} from './modslots.model';
+import {ModSlotService, ModSlotAttributeSet} from '../../services/modslots.service';
+import {AttributeMeta} from '../attributes/attribute.component';
+import {ModSlotComponent} from './modslot.component';
+import {GearModSlot} from '../gear-overview/gear.model';
+import {EditorDirective} from '../../directives/editor';
 
 /**
  * Created by xastey on 4/10/2016.
@@ -13,7 +13,7 @@ import {EditorDirective} from "../../directives/editor";
 
 type ModAttributeSetByType = {[id:number]:ModSlotAttributeSet}
 @Component({
-  selector: "modslots",
+  selector: 'modslots',
   templateUrl: 'app/components/modslots/modslots.component.html',
   styles: [require('./modslots.component.scss')],
   directives: [ModSlotComponent, EditorDirective]
@@ -23,7 +23,7 @@ export class ModSlotsComponent implements OnInit {
 
   @Input() slots:GearModSlot[];
 
-  @Input("gear-metadata") metadata:AttributeMeta;
+  @Input('gear-metadata') metadata:AttributeMeta;
 
   private _hasNative:boolean;
   private _canHaveExtra:number;

@@ -1,12 +1,12 @@
 /**
  * Created by xastey on 4/26/2016.
  */
-import {Component, Input} from "@angular/core";
-import {Gear} from "../../gear-overview/gear.model";
-import {ModSlotService} from "../../../services/modslots.service";
-import * as _ from "lodash";
-import {ItemsService} from "../../../services/item.service";
-import {GearRarity} from "../../../common/models/common";
+import {Component, Input} from '@angular/core';
+import {Gear} from '../../gear-overview/gear.model';
+import {ModSlotService} from '../../../services/modslots.service';
+import * as _ from 'lodash';
+import {ItemsService} from '../../../services/item.service';
+import {GearRarity} from '../../../common/models/common';
 
 @Component({
   selector: 'inventory-gear-item-image',
@@ -27,7 +27,7 @@ export class InventoryGearItemImageComponent {
     return !this.item ? style :
       this._itemService
         .imageResolve(this.item).map(icon => {
-        style['-webkit-mask-image'] = 'url("' + icon.primary + '")';
+        style['-webkit-mask-image'] = 'url('' + icon.primary + '')';
         return style;
       });
 
@@ -45,7 +45,7 @@ export class InventoryGearItemImageComponent {
     return !this.item ? style :
       this._itemService
         .imageResolve(this.item).map(icon => {
-        style['-webkit-mask-image'] = 'url("' + icon.secondary + '")';
+        style['-webkit-mask-image'] = 'url('' + icon.secondary + '')';
         return style;
       });
 

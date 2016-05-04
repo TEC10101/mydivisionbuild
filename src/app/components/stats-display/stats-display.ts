@@ -2,10 +2,10 @@
  * Created by xastey on 4/2/2016.
  */
 
-import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {StatType, GearStats} from "../../common/models/common";
-import {NgClass} from "@angular/common";
-import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {StatType, GearStats} from '../../common/models/common';
+import {NgClass} from '@angular/common';
+import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
 
 
 interface StateValueChangeEvent {

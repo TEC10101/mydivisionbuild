@@ -1,13 +1,13 @@
-import {ModSlotType} from "./modslots.model";
-import {Input, Component, OnInit, ElementRef} from "@angular/core";
-import {GearModSlot} from "../gear-overview/gear.model";
-import {ModSlotService, ModSlotAttributeSet} from "../../services/modslots.service";
-import {EditorDirective} from "../../directives/editor";
-import {AttributeObservable} from "../../services/attributes.service";
-import {BehaviorSubject} from "rxjs/Rx";
-import {GearAttribute} from "../../common/models/common";
-import {asObservable} from "../../common/utils";
-import {AttributeComponent, AttributeMeta} from "../attributes/attribute.component";
+import {ModSlotType} from './modslots.model';
+import {Input, Component, OnInit, ElementRef} from '@angular/core';
+import {GearModSlot} from '../gear-overview/gear.model';
+import {ModSlotService, ModSlotAttributeSet} from '../../services/modslots.service';
+import {EditorDirective} from '../../directives/editor';
+import {AttributeObservable} from '../../services/attributes.service';
+import {BehaviorSubject} from 'rxjs/Rx';
+import {GearAttribute} from '../../common/models/common';
+import {asObservable} from '../../common/utils';
+import {AttributeComponent, AttributeMeta} from '../attributes/attribute.component';
 /**
  * Created by xastey on 4/10/2016.
  */
@@ -15,7 +15,7 @@ import {AttributeComponent, AttributeMeta} from "../attributes/attribute.compone
 
 type SlotTypesById = {[id:string]:ModSlotType}
 @Component({
-  selector: "modslot",
+  selector: 'modslot',
   templateUrl: 'app/components/modslots/modslot.component.html',
   styles: [require('./modslot.component.scss')],
   directives: [EditorDirective, AttributeComponent]
@@ -25,7 +25,7 @@ export class ModSlotComponent implements OnInit {
 
   @Input() slot:GearModSlot;
 
-  @Input("gear-metadata") metadata:AttributeMeta;
+  @Input('gear-metadata') metadata:AttributeMeta;
   slotTypes:ModSlotType[];
 
   private slotName:string;

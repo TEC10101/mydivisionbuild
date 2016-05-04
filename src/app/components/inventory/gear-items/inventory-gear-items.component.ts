@@ -3,12 +3,12 @@
  */
 
 
-import {Component} from "@angular/core";
-import {InventoryGearItemRowComponent} from "../gear-item-row/inventory-gear-item-row.component";
-import {GearOverviewComponent} from "../../gear-overview/gear-overview.component";
-import {RouteParams} from "@angular/router-deprecated";
-import {InventoryService} from "../../../services/inventory.service";
-import {GearType} from "../../../common/models/common";
+import {Component} from '@angular/core';
+import {InventoryGearItemRowComponent} from '../gear-item-row/inventory-gear-item-row.component';
+import {GearOverviewComponent} from '../../gear-overview/gear-overview.component';
+import {RouteParams} from '@angular/router-deprecated';
+import {InventoryService} from '../../../services/inventory.service';
+import {GearType} from '../../../common/models/common';
 @Component({
   selector: 'inventory-gear-items',
   styles: [require('./inventory-gear-items.component.scss')],

@@ -2,35 +2,35 @@
  * Created by xastey on 4/3/2016.
  */
 
-import {Rarity, GearType, GearStats, GearRarity} from "../../common/models/common";
-import {Attributes, Attribute} from "../attributes/attributes.model";
-import {Talent} from "../talents/talent.model";
+import {Rarity, GearType, GearStats, GearRarity} from '../../common/models/common';
+import {Attributes, Attribute} from '../attributes/attributes.model';
+import {Talent} from '../talents/talent.model';
 
 
 export interface Gear {
 
-  rarity:Rarity;
-  type:GearType;
-  name:string;
+  rarity: Rarity;
+  type: GearType;
+  name: string;
 
-  score:number;
-  stats:GearStats;
-  armor:number;
-  attributes:Attributes;
-  mods:GearModSlot[];
-  talent?:Talent;
+  score: number;
+  stats: GearStats;
+  armor: number;
+  attributes: Attributes;
+  mods: GearModSlot[];
+  talent?: Talent;
 }
 
 
 export interface GearModSlot {
-  id:number;
-  primary?:Attribute;
-  secondary?:Attribute;
+  id: number;
+  primary?: Attribute;
+  secondary?: Attribute;
 }
 
 
-export const DUMMY_GEAR:Gear = {
-  rarity: "gear-set",
+export const DUMMY_GEAR: Gear = {
+  rarity: 'gear-set',
   type: GearType.BodyArmor,
   name: "Sentry's Call harness",
   armor: 1049,
@@ -42,7 +42,8 @@ export const DUMMY_GEAR:Gear = {
   },
   attributes: {
     major: [{
-      id: 13,//"Health on Kill",
+      //'Health on Kill'
+      id: 13,
       value: 8
 
     }],

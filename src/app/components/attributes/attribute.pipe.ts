@@ -3,14 +3,14 @@
  */
 
 
-import {Pipe, PipeTransform} from "@angular/core";
-import {ValueFormat} from "../../common/models/common";
+import {Pipe, PipeTransform} from '@angular/core';
+import {ValueFormat} from '../../common/models/common';
 
 
 @Pipe({name: 'attribute'})
 export class AttributePipe implements PipeTransform {
 
-  transform(value: number, format?: ValueFormat = ValueFormat.NUMBER): string {
+  transform(value: number, format: ValueFormat = ValueFormat.NUMBER): string {
 
     if (!value || isNaN(value)) return '0';
 

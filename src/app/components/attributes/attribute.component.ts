@@ -2,18 +2,21 @@
  * Created by xastey on 4/3/2016.
  */
 
-import {Component, Input, OnInit, Output, EventEmitter, OnDestroy} from "@angular/core";
-import {NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault} from "@angular/common";
-import {Attribute} from "./attributes.model";
-import {AttributePipe} from "./attribute_pipe";
-import {AttributesService, AttributeObservable} from "../../services/attributes.service";
-import {GearType, AttributeType, Rarity, ValueFormat, GearAttribute} from "../../common/models/common";
-import {Subscription} from "rxjs/Subscription";
-import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
-import {EditorDirective} from "../../directives/editor";
-import {AttributeRestrictPipe} from "./attribute-restrict.pipe";
-import {isNumber, isFunction} from "@angular/core/src/facade/lang";
-import {numberRange} from "../../common/utils";
+import {Component, Input, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';
+import {NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault} from '@angular/common';
+import {Attribute} from './attributes.model';
+import {AttributePipe} from './attribute.pipe';
+import {AttributesService, AttributeObservable} from '../../services/attributes.service';
+import {
+  GearType, AttributeType, Rarity, ValueFormat, GearAttribute
+}
+  from '../../common/models/common';
+import {Subscription} from 'rxjs/Subscription';
+import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
+import {EditorDirective} from '../../directives/editor';
+import {AttributeRestrictPipe} from './attribute-restrict.pipe';
+import {isNumber, isFunction} from '@angular/core/src/facade/lang';
+import {numberRange} from '../../common/utils';
 
 
 export interface AttributeMeta {
