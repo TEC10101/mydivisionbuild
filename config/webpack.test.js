@@ -90,7 +90,9 @@ module.exports = {
           helpers.root('node_modules/rxjs'),
           helpers.root('node_modules/@angular2-material'),
           helpers.root('node_modules/@angular')
-        ]}
+        ]
+      }
+
 
     ],
 
@@ -129,7 +131,7 @@ module.exports = {
        *
        * See: https://github.com/webpack/json-loader
        */
-      { test: /\.json$/, loader: 'json-loader', exclude: [helpers.root('src/index.html')] },
+      {test: /\.json$/, loader: 'json-loader', exclude: [helpers.root('src/index.html')]},
 
       /**
        * Raw loader support for *.css files
@@ -137,7 +139,7 @@ module.exports = {
        *
        * See: https://github.com/webpack/raw-loader
        */
-      { test: /\.css$/, loader: 'raw-loader', exclude: [helpers.root('src/index.html')] },
+      {test: /\.css$/, loader: 'raw-loader', exclude: [helpers.root('src/index.html')]},
 
       /**
        * Raw loader support for *.html
@@ -145,7 +147,14 @@ module.exports = {
        *
        * See: https://github.com/webpack/raw-loader
        */
-      { test: /\.html$/, loader: 'raw-loader', exclude: [helpers.root('src/index.html')] }
+      {test: /\.html$/, loader: 'raw-loader', exclude: [helpers.root('src/index.html')]},
+
+      {
+        test: /\.scss$/,
+
+        exclude: [helpers.root('node_modules')],
+        loaders: ['raw-loader', 'sass-loader?sourceMap']
+      }
 
     ],
 

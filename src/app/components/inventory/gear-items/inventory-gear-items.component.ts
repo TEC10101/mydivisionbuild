@@ -32,6 +32,7 @@ export class InventoryGearItemsComponent {
   get items() {
 
     let item = this._inventoryService.retrieve(this._gearType);
+    console.log(this._gearType, item);
 
     return item ? [item] : [];
   }

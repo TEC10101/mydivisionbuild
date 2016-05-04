@@ -8,17 +8,17 @@ describe('TalentsComponent: component', () => {
   let tcb;
   let choices = [
     {
-      id: "reckless",
-      template: "Head %x Tail"
+      id: 'reckless',
+      template: 'Head %x Tail'
     },
     {
-      id: "vigirous",
-      template: "%x middle %x"
+      id: 'vigirous',
+      template: '%x middle %x'
     }
   ];
 
   let talent = {
-    id: "reckless",
+    id: 'reckless',
     value: 0
   };
 //setup
@@ -28,7 +28,7 @@ describe('TalentsComponent: component', () => {
   ]);
 
   beforeEach(inject([TestComponentBuilder], _tcb => {
-    tcb = _tcb
+    tcb = _tcb;
   }));
 
   it('should render Talent', done => {
@@ -39,7 +39,7 @@ describe('TalentsComponent: component', () => {
         component.talent = talent;
         component.choices = choices;
         fixture.detectChanges(); //trigger change detection
-        expect(element.querySelector("label").innerText).toBe("Reckless");
+        expect(element.querySelector('label').innerText).toBe('Reckless');
         done();
       })
       .catch(e => done.fail(e));

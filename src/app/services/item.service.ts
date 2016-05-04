@@ -73,6 +73,7 @@ export class ItemsService {
   private _backPack: BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(void 0);
   private _gloves: BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(void 0);
   private _kneePads: BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(void 0);
+  private _holster: BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(void 0);
 
   private _basePath = 'app/assets/json/';
   private _imagePath = 'app/assets/images/inventory/';
@@ -124,6 +125,8 @@ export class ItemsService {
     if (obs) {
       return asObservable(obs.first((x, idx, _) => !!x));
     }
+
+    console.dir(Observable.create());
     return Observable.create();
   }
 

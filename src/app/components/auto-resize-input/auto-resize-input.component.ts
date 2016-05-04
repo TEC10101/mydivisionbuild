@@ -34,6 +34,14 @@ import {InputConverter, NumberConverter} from "../../common/converters";
 export class AutoResizeInput {
   @HostListener('input', ['$event'])
   @HostListener('change', ['$event'])
+  nativeElement: any;
+
+
+  constructor(elementRef: ElementRef) {
+
+    this.nativeElement = elementRef.nativeElement;
+  }
+
   /**
    * @private
    * Don't send the input's input event
@@ -41,13 +49,6 @@ export class AutoResizeInput {
   private stopInput(ev) {
     ev.preventDefault();
     ev.stopPropagation();
-  }
-
-  nativeElement: any;
-
-  constructor(elementRef: ElementRef) {
-
-    this.nativeElement = elementRef.nativeElement;
   }
 
 
@@ -106,9 +107,9 @@ export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, O
     this.value = this.ngModel;
     this.onChange(this.value);
     let attributes = this.elementRef.nativeElement.attributes;
-    let attr = _.find(attributes, (attr: any)=>attr.nodeName.indexOf('_nghost-') != -1);
+    let nodeName = _.find(attributes, (attr: any) => attr.nodeName.indexOf('_nghost-') !== -1).nodeName;
 
-    this.placeholderContentName = attr.nodeName.replace('_nghost-', '_ngcontent-');
+    this.placeholderContentName = nodeName.replace('_nghost-', '_ngcontent-');
 
     //_nghost-juu-
 

@@ -10,6 +10,8 @@ import {Http} from "angular2/http";
  * Created by xastey on 4/27/2016.
  */
 
+
+const STORAGE_KEY = "inventories";
 @Injectable()
 export class InventoryService {
 
@@ -18,12 +20,23 @@ export class InventoryService {
 
   private _api: string = 'https://api.myjson.com/';
 
+  private _inventories: Inventory[] = [];
+
 
   constructor(private _http: Http) {
-    this._inventory = new Inventory();
-    // TODO: Add selector for choosing gender
-    this._inventory.gender = Gender.FEMALE;
-    this._inventory.bodyArmor = DUMMY_GEAR;
+
+    let storage = localStorage.getItem(STORAGE_KEY);
+    if (storage) this._inventories = JSON.parse(storage);
+
+    if (this._inventories.length) {
+      this._inventory = this._inventories[0];
+    } else {
+      this._inventory = new Inventory();
+      // TODO: Add selector for choosing gender
+      this._inventory.name = 'Default Build';
+      this._inventory.gender = Gender.FEMALE;
+      this._inventory.bodyArmor = DUMMY_GEAR;
+    }
 
 
   }
@@ -43,10 +56,11 @@ export class InventoryService {
 
 
   restore(base64: string) {
-    LZString.decompressFromBase64(base64);
+    this._inventory = JSON.parse(LZString.decompressFromBase64(base64));
   }
 
-  save(id?: string) {
+  save() {
+    let id = this._inventory.id;
     let json = JSON.stringify(this._inventory);
     let url = this._api + '/bins';
     let request = id ? this._http.put(url, json).map(_ => url)
@@ -54,7 +68,12 @@ export class InventoryService {
 
     request.subscribe(endpoint => {
       id = endpoint.split('/').pop();
-      // localStorage.set
+      if (!this._inventory.id) {
+        this._inventories.unshift(this._inventory);
+      }
+      this._inventory.id = id;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this._inventories));
+
     });
 
 

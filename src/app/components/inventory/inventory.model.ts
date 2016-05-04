@@ -6,6 +6,8 @@ import {Gear} from "../gear-overview/gear.model";
 import {GenderType} from "../../common/models/common";
 export class Inventory {
 
+  id: string;
+  name: string;
 
   gender: GenderType;
   primary: any;
