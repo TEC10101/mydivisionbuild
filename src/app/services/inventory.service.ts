@@ -1,17 +1,17 @@
-import {Inventory} from "../components/inventory/inventory.model";
-import {Injectable} from "@angular/core";
-import {DUMMY_GEAR, Gear} from "../components/gear-overview/gear.model";
-import {Gender, GearType} from "../common/models/common";
-import {dashCaseToCamelCase} from "@angular/compiler/src/util";
-import {LZString} from "lz-string";
-import {Http} from "angular2/http";
+import {Inventory} from '../components/inventory/inventory.model';
+import {Injectable} from '@angular/core';
+import {DUMMY_GEAR, Gear} from '../components/gear-overview/gear.model';
+import {Gender, GearType} from '../common/models/common';
+import {dashCaseToCamelCase} from '@angular/compiler/src/util';
+import {LZString} from 'lz-string';
+import {Http} from 'angular2/http';
 
 /**
  * Created by xastey on 4/27/2016.
  */
 
 
-const STORAGE_KEY = "inventories";
+const STORAGE_KEY = 'inventories';
 @Injectable()
 export class InventoryService {
 

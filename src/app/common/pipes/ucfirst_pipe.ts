@@ -2,9 +2,12 @@
  * Created by Keyston on 4/2/2016.
  */
 
-import {isString, isBlank} from "@angular/core/src/facade/lang";
-import {PipeTransform, Pipe} from "@angular/core";
-import {InvalidPipeArgumentException} from "@angular/common/src/pipes/invalid_pipe_argument_exception";
+import {isString, isBlank} from '@angular/core/src/facade/lang';
+import {PipeTransform, Pipe} from '@angular/core';
+import {
+  InvalidPipeArgumentException
+} from
+  '@angular/common/src/pipes/invalid_pipe_argument_exception';
 
 
 @Pipe({name: 'ucfirst'})

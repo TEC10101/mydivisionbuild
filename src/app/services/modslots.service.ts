@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {AttributesService} from "./attributes.service";
-import {GearType, GearAttribute, AttributeType} from "../common/models/common";
-import {ModSlotType, MOD_SLOT_TYPES} from "../components/modslots/modslots.model";
-import {asObservable} from "../common/utils";
-import * as _ from "lodash";
-import {Observable} from "rxjs/Observable";
+import {Injectable} from '@angular/core';
+import {AttributesService} from './attributes.service';
+import {GearType, GearAttribute, AttributeType} from '../common/models/common';
+import {ModSlotType, MOD_SLOT_TYPES} from '../components/modslots/modslots.model';
+import {asObservable} from '../common/utils';
+import * as _ from 'lodash';
+import {Observable} from 'rxjs/Observable';
 /**
  * Created by xastey on 4/10/2016.
  */
@@ -24,8 +24,10 @@ export class ModSlotService {
       case GearType.Mask:
       case GearType.BackPack:
         return true;
+      default:
+        return false;
     }
-    return false;
+
   }
 
   // TODO: allow to pass rarity and score to restrict more
@@ -38,8 +40,10 @@ export class ModSlotService {
 
       case GearType.BodyArmor:
         return 3;
+      default:
+        return 0;
     }
-    return 0;
+
   }
 
   constructor(private _attributeService: AttributesService) {

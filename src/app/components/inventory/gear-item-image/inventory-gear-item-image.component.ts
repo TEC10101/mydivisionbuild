@@ -27,7 +27,7 @@ export class InventoryGearItemImageComponent {
     return !this.item ? style :
       this._itemService
         .imageResolve(this.item).map(icon => {
-        style['-webkit-mask-image'] = 'url('' + icon.primary + '')';
+        style['-webkit-mask-image'] = `url('${icon.primary}')`;
         return style;
       });
 
@@ -45,7 +45,7 @@ export class InventoryGearItemImageComponent {
     return !this.item ? style :
       this._itemService
         .imageResolve(this.item).map(icon => {
-        style['-webkit-mask-image'] = 'url('' + icon.secondary + '')';
+        style['-webkit-mask-image'] = `url('${icon.secondary}')`;
         return style;
       });
 

@@ -1,12 +1,12 @@
-import {Injectable} from "@angular/core";
-import {GearType, AttributeType, GearAttribute} from "../common/models/common";
-import {Http} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import "rxjs/add/operator/share";
-import "rxjs/add/operator/startWith";
-import {BehaviorSubject} from "rxjs/Rx";
-import {asObservable} from "../common/utils";
-import * as _ from "lodash";
+import {Injectable} from '@angular/core';
+import {GearType, AttributeType, GearAttribute} from '../common/models/common';
+import {Http} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/startWith';
+import {BehaviorSubject} from 'rxjs/Rx';
+import {asObservable} from '../common/utils';
+import * as _ from 'lodash';
 /**
  * Created by xastey on 4/3/2016.
  */

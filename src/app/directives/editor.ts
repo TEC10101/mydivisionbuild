@@ -3,10 +3,10 @@
  */
 
 
-import {Directive, ElementRef, Renderer, OnInit, OnDestroy, Input} from "@angular/core";
-import {EditorService} from "../services/editor-service";
-import {Subscription} from "rxjs/Subscription";
-import {InputConverter, BooleanConverter} from "../common/converters";
+import {Directive, ElementRef, Renderer, OnInit, OnDestroy, Input} from '@angular/core';
+import {EditorService} from '../services/editor-service';
+import {Subscription} from 'rxjs/Subscription';
+import {InputConverter, BooleanConverter} from '../common/converters';
 
 @Directive({
   selector: '[editor]'

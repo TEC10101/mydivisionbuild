@@ -30,7 +30,7 @@ export interface GearModSlot {
 
 
 export const DUMMY_GEAR: Gear = {
-  rarity: 'gear-set',
+  rarity: GearRarity.GEAR_SET,
   type: GearType.BodyArmor,
   name: "Sentry's Call harness",
   armor: 1049,
@@ -42,7 +42,7 @@ export const DUMMY_GEAR: Gear = {
   },
   attributes: {
     major: [{
-      //'Health on Kill'
+
       id: 13,
       value: 8
 

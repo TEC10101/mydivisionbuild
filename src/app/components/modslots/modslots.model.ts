@@ -86,7 +86,7 @@ export const MOD_SLOT_TYPES = [
   new ModSlotType(5, GearRarity.HIGH_END, ModSlotKind.FIREARMS),
   new ModSlotType(6, GearRarity.HIGH_END, ModSlotKind.STAMINA),
   new ModSlotType(7, GearRarity.HIGH_END, ModSlotKind.ELECTRONICS),
-  new ModSlotType(8, GearRarity.HIGH_END, ModSlotKind.PERFORMANCE),
+  new ModSlotType(8, GearRarity.HIGH_END, ModSlotKind.PERFORMANCE)
 
 ];
 

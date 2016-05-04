@@ -3,16 +3,16 @@
  */
 
 
-import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
-import {BehaviorSubject} from "rxjs/Rx";
-import {DivisionItem, GearType, GearRarity, Rarity, Gender} from "../common/models/common";
-import * as _ from "lodash";
-import {dashCaseToCamelCase} from "@angular/compiler/src/util";
-import {asObservable} from "../common/utils";
-import {Observable} from "rxjs/Observable";
-import {Gear, GEAR_SCORES} from "../components/gear-overview/gear.model";
-import {InventoryService} from "./inventory.service";
+import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
+import {BehaviorSubject} from 'rxjs/Rx';
+import {DivisionItem, GearType, GearRarity, Rarity, Gender} from '../common/models/common';
+import * as _ from 'lodash';
+import {dashCaseToCamelCase} from '@angular/compiler/src/util';
+import {asObservable} from '../common/utils';
+import {Observable} from 'rxjs/Observable';
+import {Gear, GEAR_SCORES} from '../components/gear-overview/gear.model';
+import {InventoryService} from './inventory.service';
 
 
 class ItemStore {
@@ -26,11 +26,11 @@ export interface GearTalent {
 interface GearIconSet {
   // superior lvl30
   131?: string;
-  //superior lvl31
+  // superior lvl31
   147?: string;
   // high-end lvl 30
   163?: string;
-  //high-end lvl 31
+  // high-end lvl 31
   182?: string;
 
 }

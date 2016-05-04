@@ -2,7 +2,7 @@
  * Created by xastey on 4/6/2016.
  */
 
-//http://jsfiddle.net/ARTsinn/QJSfa/
+// http://jsfiddle.net/ARTsinn/QJSfa/
 import {
   Component,
   Input,
@@ -25,8 +25,8 @@ import {Subscription} from 'rxjs/Subscription';
 import {InputConverter, NumberConverter} from '../../common/converters';
 
 
-//http://jbavari.github.io/blog/2015/10/21/angular-2-and-ng-model/
-//https://github.com/driftyco/ionic/blob/2.0/ionic/components/searchbar/searchbar.ts
+// http://jbavari.github.io/blog/2015/10/21/angular-2-and-ng-model/
+// https://github.com/driftyco/ionic/blob/2.0/ionic/components/searchbar/searchbar.ts
 @Directive({
   selector: '.auto-resize-input'
 

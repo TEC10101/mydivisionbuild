@@ -4,6 +4,7 @@
 import {describe, it, expect, inject, beforeEach, beforeEachProviders} from '@angular/core/testing';
 import {TestComponentBuilder} from '@angular/compiler/testing';
 import {TalentComponent} from './talents.component';
+import {DIVISION_PROVIDERS} from '../../services/core';
 describe('TalentsComponent: component', () => {
   let tcb;
   let choices = [
@@ -21,10 +22,11 @@ describe('TalentsComponent: component', () => {
     id: 'reckless',
     value: 0
   };
-//setup
+// setup
   beforeEachProviders(() => [
     TestComponentBuilder,
-    TalentComponent
+    TalentComponent,
+    DIVISION_PROVIDERS
   ]);
 
   beforeEach(inject([TestComponentBuilder], _tcb => {
@@ -38,7 +40,7 @@ describe('TalentsComponent: component', () => {
 
         component.talent = talent;
         component.choices = choices;
-        fixture.detectChanges(); //trigger change detection
+        fixture.detectChanges(); // trigger change detection
         expect(element.querySelector('label').innerText).toBe('Reckless');
         done();
       })
