@@ -7,15 +7,15 @@ import {GenderType} from "../../common/models/common";
 export class Inventory {
 
 
-  gender:GenderType;
-  primary:any;
-  secondary:any;
-  sidearm:any;
+  gender: GenderType;
+  primary: any;
+  secondary: any;
+  sidearm: any;
 
-  bodyArmor:Gear;
-  mask:Gear;
-  kneePads:Gear;
-  backPack:Gear;
-  gloves:Gear;
-  holster:Gear;
+  bodyArmor: Gear;
+  mask: Gear;
+  kneePads: Gear;
+  backPack: Gear;
+  gloves: Gear;
+  holster: Gear;
 }

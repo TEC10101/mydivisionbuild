@@ -15,9 +15,9 @@ import {GearRarity} from "../../../common/models/common";
 
 })
 export class InventoryGearItemImageComponent {
-  @Input() item:Gear;
+  @Input() item: Gear;
 
-  constructor(private _modSlotService:ModSlotService, private _itemService:ItemsService) {
+  constructor(private _modSlotService: ModSlotService, private _itemService: ItemsService) {
   }
 
   get icon() {
@@ -26,7 +26,7 @@ export class InventoryGearItemImageComponent {
     let style = {};
     return !this.item ? style :
       this._itemService
-        .imageResolve(this.item).map(icon=> {
+        .imageResolve(this.item).map(icon => {
         style['-webkit-mask-image'] = 'url("' + icon.primary + '")';
         return style;
       });
@@ -35,7 +35,7 @@ export class InventoryGearItemImageComponent {
   }
 
   get belongsToSet() {
-    return this.item && this.item.rarity == GearRarity.GEAR_SET;
+    return this.item && this.item.rarity === GearRarity.GEAR_SET;
   }
 
   get gearSetIcon() {
@@ -44,7 +44,7 @@ export class InventoryGearItemImageComponent {
     let style = {};
     return !this.item ? style :
       this._itemService
-        .imageResolve(this.item).map(icon=> {
+        .imageResolve(this.item).map(icon => {
         style['-webkit-mask-image'] = 'url("' + icon.secondary + '")';
         return style;
       });
@@ -56,6 +56,6 @@ export class InventoryGearItemImageComponent {
     let slotTypes = this._modSlotService.types;
     return (!this.item || !this.item.mods)
       ? [] :
-      this.item.mods.map(m=> _.find(slotTypes, {id: m.id}).rarity)
+      this.item.mods.map(m => _.find(slotTypes, {id: m.id}).rarity);
   }
 }

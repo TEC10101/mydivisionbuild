@@ -13,6 +13,6 @@ import {InventoryGearItemImageComponent} from "../gear-item-image/inventory-gear
 })
 export class InventoryGearItemRowComponent {
 
-  @Input() item:Gear;
+  @Input() item: Gear;
 
 }

@@ -17,58 +17,57 @@ import {numberRange} from "../../common/utils";
 
 
 export interface AttributeMeta {
-  level:number;
-  rarity:Rarity;
-  belongsTo:GearType;
+  level: number;
+  rarity: Rarity;
+  belongsTo: GearType;
 }
 
 
 export interface AttributeEvent {
-  attribute:Attribute;
-  attributeType:AttributeType
+  attribute: Attribute;
+  attributeType: AttributeType;
 }
 
-type AttributesById = {[id:string]:GearAttribute}
+type AttributesById = {[id: string]: GearAttribute}
 
 @Component({
   selector: 'item-attribute',
   pipes: [AttributePipe, AttributeRestrictPipe],
   template: require('./attribute.component.html'),
-  styles: [require("./attribute.component.scss")],
+  styles: [require('./attribute.component.scss')],
   directives: [NgFor, AutoResizeInputComponent, EditorDirective,
     NgSwitch, NgSwitchWhen, NgSwitchDefault]
 })
 
 export class AttributeComponent implements OnInit, OnDestroy {
-  @Input() attribute:Attribute;
-  @Input() metadata:AttributeMeta;
-  @Input() restrict:Attribute[] = [];
+  @Input() attribute: Attribute;
+  @Input() metadata: AttributeMeta;
+  @Input() restrict: Attribute[] = [];
 
-  @Input("attribute-type") attributeType:AttributeType;
+  @Input('attribute-type') attributeType: AttributeType;
 
-  @Input("maxlength") maxlength:any;
+  @Input('maxlength') maxlength: any;
 
   @Output() added = new EventEmitter<AttributeEvent>();
   @Output() removed = new EventEmitter<AttributeEvent>();
 
-  attributeFormat:ValueFormat;
-  selectedAttribute:GearAttribute;
+  attributeFormat: ValueFormat;
+  selectedAttribute: GearAttribute;
+  attributes: GearAttribute[];
+  attributeName: string = '';
 
+  private _attributesById: AttributesById = {};
 
-  private _attributesById:AttributesById = {};
+  private _subscription: Subscription;
 
-  attributes:GearAttribute[];
-
-  private _subscription:Subscription;
-  attributeName:string = "";
 
   /**
    *
    */
-  @Input("attributes-provider") attributesProvider:AttributeObservable;
+  @Input('attributes-provider') attributesProvider: AttributeObservable;
 
 
-  constructor(private _attributesService:AttributesService) {
+  constructor(private _attributesService: AttributesService) {
 
 
   }
@@ -79,18 +78,19 @@ export class AttributeComponent implements OnInit, OnDestroy {
       ? this.maxlength : (isFunction(this.maxlength)) ? this.maxlength() : 4;
   }
 
-  ngOnInit():any {
+  ngOnInit(): any {
 
 
     let meta = this.metadata;
 
     let provider = this.attributesProvider
-      ? this.attributesProvider : this._attributesService.getFor(meta.belongsTo, this.attributeType);
-    this._subscription = provider.subscribe(data=> {
+      ? this.attributesProvider
+      : this._attributesService.getFor(meta.belongsTo, this.attributeType);
+    this._subscription = provider.subscribe(data => {
       this._attributesById = {};
       this.attributes = data;
-      this.attribute.id = null;
-      data.forEach((attr:GearAttribute)=> this._attributesById[attr.id] = attr);
+      this.attribute.id = undefined;
+      data.forEach((attr: GearAttribute) => this._attributesById[attr.id] = attr);
       if (data.length) {
 
         this.onAttributeChange();
@@ -102,7 +102,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   get attributeDef() {
     if (!this.attribute.id) {
-      return null;
+      return void 0;
     }
     return this._attributesById[this.attribute.id];
   }
@@ -112,7 +112,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
     if (!this.attribute.id) {
       return [];
     }
-    let [low,high] = this.attributeDef.values[this.metadata.level];
+    let [low, high] = this.attributeDef.values[this.metadata.level];
 
     return numberRange(low, high);
 
@@ -123,8 +123,8 @@ export class AttributeComponent implements OnInit, OnDestroy {
     // ensure that we always select the first entry
     // when there is only one entry left no matter if we
     // switch from another attribute set
-    if (!this.attribute.id || this.attributes.length == 1) {
-      this.attribute.id = this.attributes[0].id
+    if (!this.attribute.id || this.attributes.length === 1) {
+      this.attribute.id = this.attributes[0].id;
     }
     this.selectedAttribute = this._attributesById[this.attribute.id];
 
@@ -140,7 +140,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
         id: this.attribute.id,
         value: this.attribute.value
       }
-    })
+    });
   }
 
   onRemoveAttribute() {
@@ -151,14 +151,15 @@ export class AttributeComponent implements OnInit, OnDestroy {
   }
 
   get freeFormDisplay() {
-    return true; //this.attributeDef ? !this.attributeDef.values : true;
+    //this.attributeDef ? !this.attributeDef.values : true;
+    return true;
   }
 
   onAttributeInputChanged(value) {
     this.attribute.value = value;
   }
 
-  ngOnDestroy():any {
+  ngOnDestroy(): any {
     this._subscription.unsubscribe();
   }
 

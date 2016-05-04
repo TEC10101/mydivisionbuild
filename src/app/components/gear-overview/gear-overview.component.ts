@@ -16,7 +16,7 @@ import {EditorDirective} from "../../directives/editor";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 import {ModSlotsComponent} from "../modslots/modslots.component";
 import {TalentsComponent} from "../talents/talents.component";
-export {Gear} from "./gear.model";
+export {Gear} from './gear.model';
 
 
 @Component({
@@ -32,21 +32,23 @@ export {Gear} from "./gear.model";
     EditorDirective, AutoResizeInputComponent, ModSlotsComponent, TalentsComponent]
 })
 export class GearOverviewComponent implements OnInit {
-  @Input() gear:Gear;
+  @Input() gear: Gear;
 
-  descriptor:GearDescriptor;
+  descriptor: GearDescriptor;
 
 
-  constructor(private _itemService:ItemsService) {
+  constructor(private _itemService: ItemsService) {
 
   }
 
-  get rarities():Rarity[] {
+  get rarities(): Rarity[] {
     return this._itemService.rarities;
   }
 
   ngOnInit() {
-    this._itemService.getDescriptorFor(this.gear.type).subscribe(descriptor=> this.descriptor = descriptor)
+    this._itemService
+      .getDescriptorFor(this.gear.type)
+      .subscribe(descriptor => this.descriptor = descriptor);
   }
 
   get items() {
@@ -61,11 +63,13 @@ export class GearOverviewComponent implements OnInit {
 
   get talents() {
 
-    return [this.gear.talent = !this.gear.talent ? {id: this.talentChoices[0].id} : this.gear.talent];
+    return [
+      this.gear.talent = !this.gear.talent
+        ? {id: this.talentChoices[0].id} : this.gear.talent];
   }
 
   get isHighEnd() {
-    return this.gear.rarity == GearRarity.HIGH_END;
+    return this.gear.rarity === GearRarity.HIGH_END;
   }
 
   onRarityChanged(rarity) {
@@ -82,17 +86,18 @@ export class GearOverviewComponent implements OnInit {
   onArmorValueChanged(value) {
     this.gear.armor = value;
   }
-  onGearScoreChanged(score){
+
+  onGearScoreChanged(score) {
 
   }
 
-  get metadata():AttributeMeta {
+  get metadata(): AttributeMeta {
     return {
       level: this.gear.score,
       rarity: this.gear.rarity,
       belongsTo: this.gear.type
 
-    }
+    };
   }
 
 

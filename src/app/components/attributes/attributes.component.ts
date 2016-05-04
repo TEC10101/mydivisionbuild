@@ -24,13 +24,13 @@ import {InputConverter, BooleanConverter} from "../../common/converters";
 })
 export class AttributesComponent {
 
-  @Input("data") attributes:Attributes;
-  @Input("gear-metadata") metadata:AttributeMeta;
-  @Input("can-add")
+  @Input('data') attributes: Attributes;
+  @Input('gear-metadata') metadata: AttributeMeta;
+  @Input('can-add')
   @InputConverter(BooleanConverter)
-  canAdd:boolean = true;
+  canAdd: boolean = true;
 
-  constructor(private _elementRef:ElementRef) {
+  constructor(private _elementRef: ElementRef) {
 
   }
 
@@ -48,34 +48,35 @@ export class AttributesComponent {
     return this.attributes ? this.attributes.skill : [];
   }
 
-  private _dispatchEvent(type:string, event:AttributeEvent) {
+
+  onRemoveAttribute(event: AttributeEvent) {
+
+    without(this.attributes[event.attributeType], event.attribute);
+    this._dispatchEvent('attributeRemoved', event);
+  }
+
+  onAddAttribute(event: AttributeEvent) {
+
+    this.attributes[event.attributeType]
+      .push(event.attribute);
+    this._dispatchEvent('attributeAdded', event);
+
+  }
+
+  onAddAttributeType(attributeType: AttributeType) {
+    this.attributes[attributeType].push({
+      value: 0
+    });
+  }
+
+  private _dispatchEvent(type: string, event: AttributeEvent) {
     this._elementRef.nativeElement.dispatchEvent(new CustomEvent(type, {
 
       detail: {
         attribute: event.attribute,
         attributeType: event.attributeType
       }
-    }))
-  }
-
-  onRemoveAttribute(event:AttributeEvent) {
-
-    without(this.attributes[event.attributeType], event.attribute);
-    this._dispatchEvent("attributeRemoved", event)
-  }
-
-  onAddAttribute(event:AttributeEvent) {
-
-    this.attributes[event.attributeType]
-      .push(event.attribute);
-    this._dispatchEvent("attributeAdded", event)
-
-  }
-
-  onAddAttributeType(attributeType:AttributeType) {
-    this.attributes[attributeType].push({
-      value: 0
-    })
+    }));
   }
 
 }

@@ -1,6 +1,6 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {GearType, AttributeType, GearAttribute} from "../common/models/common";
-import {Http} from "angular2/http";
+import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/share";
 import "rxjs/add/operator/startWith";
@@ -16,20 +16,28 @@ export type AttributeObservable = Observable<GearAttribute[]>
 export class AttributesService {
 
 
-  private _http:Http;
+  private _http: Http;
 
   private _attributes = new BehaviorSubject<GearAttribute[]>([]);
 
-  constructor(http:Http) {
+  private static defaultFilterProvider(gearType: GearType, attributeType: AttributeType) {
+    return {type: attributeType, supports: [gearType]};
+  }
+
+  private static skillFilterProvider(gearType: GearType) {
+    return {type: AttributeType.SKILL, skill: true, supports: [gearType]};
+  }
+
+  constructor(http: Http) {
     this._http = http;
-    let basePath = "app/assets/json/attributes.json";
+    let basePath = 'app/assets/json/attributes.json';
 
     http.get(basePath)
-      .map(res=><GearAttribute[]>res.json())
+      .map(res => <GearAttribute[]>res.json())
       .subscribe(
-        attributes =>this._attributes.next(attributes),
-        err=> console.error(err),
-        () => console.log("Finished loading attributes")
+        attributes => this._attributes.next(attributes),
+        err => console.error(err),
+        () => console.log('Finished loading attributes')
       );
 
     // this._bodyArmor = new AttributeStore(GearType.BodyArmor, this._http);
@@ -38,25 +46,18 @@ export class AttributesService {
   }
 
   get attributes() {
-    return asObservable(this._attributes.first((attrs, idx, obs)=> !!attrs.length));
+    return asObservable(this._attributes.first((attrs, idx, obs) => !!attrs.length));
   }
 
 
-  private static defaultFilterProvider(gearType:GearType, attributeType:AttributeType) {
-    return {type: attributeType, supports: [gearType]}
-  }
+  getFor(gearType: GearType, attributeType: AttributeType): AttributeObservable {
 
-  private static skillFilterProvider(gearType:GearType) {
-    return {type: AttributeType.SKILL, skill: true, supports: [gearType]}
-  }
-
-  getFor(gearType:GearType, attributeType:AttributeType):AttributeObservable {
-
-    let providerName = attributeType + "FilterProvider";
-    let filterProvider = AttributesService[providerName] ? AttributesService[providerName] : AttributesService.defaultFilterProvider;
-    return asObservable(this._attributes.map(attrs=> {
-      return _.filter(attrs, filterProvider(gearType, attributeType))
-    }))
+    let providerName = attributeType + 'FilterProvider';
+    let filterProvider = AttributesService[providerName]
+      ? AttributesService[providerName] : AttributesService.defaultFilterProvider;
+    return asObservable(this._attributes.map(attrs => {
+      return _.filter(attrs, filterProvider(gearType, attributeType));
+    }));
   }
 
 

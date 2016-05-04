@@ -20,9 +20,10 @@ import {EditorDirective} from "../../directives/editor";
 import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.component";
 
 
-const TEMPLATE_INPUT_MARKER = "x%";
+const TEMPLATE_INPUT_MARKER = 'x%';
 const TEMPLATE_INPUT_MARKER_REXP = new RegExp('(' + TEMPLATE_INPUT_MARKER + ')');
-const TALENT_INPUT_TEMPLATE = ` <auto-resize-input [length]="2" inputType="number" [format]="percent"
+const TALENT_INPUT_TEMPLATE = ` <auto-resize-input [length]="2" 
+                            inputType="number" [format]="percent"
                            [(ngModel)]="talent.value"
         ></auto-resize-input>`;
 @Component({
@@ -33,22 +34,51 @@ const TALENT_INPUT_TEMPLATE = ` <auto-resize-input [length]="2" inputType="numbe
   directives: [EditorDirective, AutoResizeInputComponent]
 })
 
-export class TalentComponent implements OnInit,AfterViewInit {
+export class TalentComponent implements OnInit, AfterViewInit {
 
-  @Input() talent:Talent;
-  @Input() choices:GearTalent[];
+  @Input() talent: Talent;
+  @Input() choices: GearTalent[];
 
-  _previousTalentId:string;
-  _componentRef:ComponentRef<any>;
+  _previousTalentId: string;
+  _componentRef: ComponentRef<any>;
 
-  @ViewChild("description", {read: ViewContainerRef}) _descriptionContainerRef:ViewContainerRef;
+  @ViewChild('description', {read: ViewContainerRef}) _descriptionContainerRef: ViewContainerRef;
 
 
-  constructor(private _loader:DynamicComponentLoader, private _elementRef:ElementRef) {
+  static toComponent(template, talent) {
+    let directives = [AutoResizeInputComponent];
+    @Component({
+      selector: 'talent-template',
+      template: template,
+      styles: [
+        `:host auto-resize-input{
+        display:inline-block;
+        }
+        :host label{
+          margin-right:0px;
+        }
+        :host input{
+        color:#fff;
+        font-weight: normal;
+        }`
+      ],
+      directives: directives
+    })
+    class TalentTemplateComponent {
+      talent;
+
+      constructor() {
+        this.talent = talent;
+      }
+    }
+    return TalentTemplateComponent;
+  }
+
+  constructor(private _loader: DynamicComponentLoader, private _elementRef: ElementRef) {
   }
 
 
-  ngOnInit():any {
+  ngOnInit(): any {
     // ensure that there is a value for the talent even if its 0
     if (!this.talent.value) this.talent.value = 0;
     if (!this.talent.id) {
@@ -74,52 +104,23 @@ export class TalentComponent implements OnInit,AfterViewInit {
    *  https://github.com/angular/angular/commit/efbd446d18e6e0380beafcad6e94a7751d788623
    * @param id
    */
-  renderDescription(id:string) {
+  renderDescription(id: string) {
 
 
-    if (this._previousTalentId == id) return;
+    if (this._previousTalentId === id) return;
     this._previousTalentId = id;
     if (this._componentRef) this._componentRef.destroy();
 
     let text = _.find(this.choices, {id: id}).template;
     let template = text.split(TEMPLATE_INPUT_MARKER_REXP)
-      .map(part=> part == TEMPLATE_INPUT_MARKER ? TALENT_INPUT_TEMPLATE : part).join('');
+      .map(part => part === TEMPLATE_INPUT_MARKER ? TALENT_INPUT_TEMPLATE : part).join('');
 
     this._loader.loadNextToLocation(
       TalentComponent.toComponent(template, this.talent),
       this._descriptionContainerRef
-    ).then(ref => this._componentRef = ref)
+    ).then(ref => this._componentRef = ref);
   }
 
-
-  static toComponent(template, talent) {
-    let directives = [AutoResizeInputComponent];
-    @Component({
-      selector: 'talent-template',
-      template: template,
-      styles: [
-        `:host auto-resize-input{
-        display:inline-block;
-        }
-        :host label{
-          margin-right:0px;
-        }
-        :host input{
-        color:#fff;
-        font-weight: normal;
-        }`
-      ],
-      directives: directives
-    })
-    class TalentTemplateComponent {
-      @Input() talent;
-
-      constructor() {
-        this.talent = talent;
-      }
-    }
-    return TalentTemplateComponent;
-  }
 
   onTalentChanged(id) {
     this.renderDescription(id);
@@ -140,8 +141,8 @@ export class TalentComponent implements OnInit,AfterViewInit {
 })
 export class TalentsComponent {
 
-  @Input() talents:Talent[];
-  @Input() choices:GearTalent[];
+  @Input() talents: Talent[];
+  @Input() choices: GearTalent[];
 }
 
 

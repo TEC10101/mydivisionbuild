@@ -3,7 +3,7 @@
  */
 import {GearStats} from "../../common/models/common";
 export interface Talent {
-  id?:string;
-  value?:number;
-  requirements?:GearStats;
+  id?: string;
+  value?: number;
+  requirements?: GearStats;
 }

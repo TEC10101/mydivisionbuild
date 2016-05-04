@@ -1,8 +1,8 @@
 import {Inventory} from "../components/inventory/inventory.model";
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {DUMMY_GEAR, Gear} from "../components/gear-overview/gear.model";
 import {Gender, GearType} from "../common/models/common";
-import {dashCaseToCamelCase} from "angular2/src/platform/dom/util";
+import {dashCaseToCamelCase} from "@angular/compiler/src/util";
 import {LZString} from "lz-string";
 import {Http} from "angular2/http";
 
@@ -14,12 +14,12 @@ import {Http} from "angular2/http";
 export class InventoryService {
 
 
-  private _inventory:Inventory;
+  private _inventory: Inventory;
 
-  private _api:string = "https://api.myjson.com/";
+  private _api: string = 'https://api.myjson.com/';
 
 
-  constructor(private _http:Http) {
+  constructor(private _http: Http) {
     this._inventory = new Inventory();
     // TODO: Add selector for choosing gender
     this._inventory.gender = Gender.FEMALE;
@@ -29,12 +29,12 @@ export class InventoryService {
   }
 
 
-  retrieve(gearType:GearType):Gear {
+  retrieve(gearType: GearType): Gear {
 
     return this._inventory[dashCaseToCamelCase(gearType)];
   }
 
-  update(gearType:GearType, value:Gear) {
+  update(gearType: GearType, value: Gear) {
 
     this._inventory[dashCaseToCamelCase(gearType)] = value;
 
@@ -42,20 +42,20 @@ export class InventoryService {
   }
 
 
-  restore(base64:string) {
+  restore(base64: string) {
     LZString.decompressFromBase64(base64);
   }
 
-  save(id?:string) {
+  save(id?: string) {
     let json = JSON.stringify(this._inventory);
-    let url = this._api + "/bins";
-    let request = id ? this._http.put(url, json).map(_=> url)
-      : this._http.post(url, json).map((json:any)=>json.uri)
+    let url = this._api + '/bins';
+    let request = id ? this._http.put(url, json).map(_ => url)
+      : this._http.post(url, json).map((data: any) => data.uri);
 
-    request.subscribe(url=> {
-      let id = url.split("/").pop();
+    request.subscribe(endpoint => {
+      id = endpoint.split('/').pop();
       // localStorage.set
-    })
+    });
 
 
   }

@@ -3,12 +3,12 @@
  */
 
 
-import {Injectable} from "angular2/core";
-import {Http} from "angular2/http";
+import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
 import {BehaviorSubject} from "rxjs/Rx";
 import {DivisionItem, GearType, GearRarity, Rarity, Gender} from "../common/models/common";
 import * as _ from "lodash";
-import {dashCaseToCamelCase} from "angular2/src/compiler/util";
+import {dashCaseToCamelCase} from "@angular/compiler/src/util";
 import {asObservable} from "../common/utils";
 import {Observable} from "rxjs/Observable";
 import {Gear, GEAR_SCORES} from "../components/gear-overview/gear.model";
@@ -16,92 +16,92 @@ import {InventoryService} from "./inventory.service";
 
 
 class ItemStore {
-  private _items:BehaviorSubject<DivisionItem[]> = new BehaviorSubject<DivisionItem[]>([]);
+  private _items: BehaviorSubject<DivisionItem[]> = new BehaviorSubject<DivisionItem[]>([]);
 }
 
 export interface GearTalent {
-  id:string;
-  template:string;
+  id: string;
+  template: string;
 }
 interface GearIconSet {
   // superior lvl30
-  131?:string;
+  131?: string;
   //superior lvl31
-  147?:string;
+  147?: string;
   // high-end lvl 30
-  163?:string;
+  163?: string;
   //high-end lvl 31
-  182?:string;
+  182?: string;
 
 }
 
 interface GearSetIconSet {
-  striker:string;
-  juggernaut:string;
-  sentry:string;
-  nomad:string;
-  tactician:string;
+  striker: string;
+  juggernaut: string;
+  sentry: string;
+  nomad: string;
+  tactician: string;
 }
 interface GearIcons {
-  superior:GearIconSet;
-  "high-end":GearIconSet;
-  "gear-set":GearSetIconSet;
+  superior: GearIconSet;
+  'high-end': GearIconSet;
+  'gear-set': GearSetIconSet;
 }
 
 interface ResolvedImage {
-  primary:string;
-  secondary:string;
+  primary: string;
+  secondary: string;
 }
 
-interface DivisionCategories<T,G> {
-  superior:T
-  "high-end":T
-  "gear-set":G
+interface DivisionCategories<T, G> {
+  superior: T;
+  'high-end': T;
+  'gear-set': G;
 }
 
 export interface GearDescriptor {
 
-  items:DivisionCategories<DivisionItem[],DivisionItem[]>;
-  icons:DivisionCategories<GearIconSet,GearIconSet>;
-  talents:GearTalent[];
+  items: DivisionCategories<DivisionItem[], DivisionItem[]>;
+  icons: DivisionCategories<GearIconSet, GearIconSet>;
+  talents: GearTalent[];
 }
 @Injectable()
 export class ItemsService {
 
-  private _bodyArmor:BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(null);
-  private _mask:BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(null);
-  private _backPack:BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(null);
-  private _gloves:BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(null);
-  private _kneePads:BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(null);
+  private _bodyArmor: BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(void 0);
+  private _mask: BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(void 0);
+  private _backPack: BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(void 0);
+  private _gloves: BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(void 0);
+  private _kneePads: BehaviorSubject<GearDescriptor> = new BehaviorSubject<GearDescriptor>(void 0);
 
-  private _basePath = "app/assets/json/";
-  private _imagePath = "app/assets/images/inventory/";
+  private _basePath = 'app/assets/json/';
+  private _imagePath = 'app/assets/images/inventory/';
 
 
-  constructor(http:Http, private _inventoryService:InventoryService) {
+  constructor(http: Http, private _inventoryService: InventoryService) {
 
     this.init(http);
   }
 
-  init(http:Http) {
+  init(http: Http) {
 
     let self = this;
 
-    _.forEach(GearType, (gearType:GearType, key:string)=> {
-      console.log("ItemsService(", gearType, ")");
+    _.forEach(GearType, (gearType: GearType, key: string) => {
+      console.log('ItemsService(', gearType, ')');
       let subjectName = dashCaseToCamelCase(gearType);
 
-      let subject = self["_" + subjectName] as BehaviorSubject<GearDescriptor>;
+      let subject = self['_' + subjectName] as BehaviorSubject<GearDescriptor>;
       if (!subject) return;
-      let url = self._basePath + gearType + ".json";
+      let url = self._basePath + gearType + '.json';
       http.get(url)
-        .map(res=><GearDescriptor>res.json())
+        .map(res => <GearDescriptor>res.json())
         .subscribe(
-          descriptor=>subject.next(descriptor),
-          error=>console.log("Error loading", url, error),
-          ()=> console.log("Finished loading", url)
-        )
-    })
+          descriptor => subject.next(descriptor),
+          error => console.log('Error loading', url, error),
+          () => console.log('Finished loading', url)
+        );
+    });
   }
 
   get scores() {
@@ -109,7 +109,7 @@ export class ItemsService {
   }
 
   // @TODO : add GEAR_SET images
-  get rarities():Rarity[] {
+  get rarities(): Rarity[] {
     return [GearRarity.SUPERIOR, GearRarity.HIGH_END, GearRarity.GEAR_SET]
   }
 
@@ -119,16 +119,16 @@ export class ItemsService {
    * @param gearType
    * @returns {Observable<GearDescriptor>}
    */
-  getDescriptorFor(gearType:GearType):Observable<GearDescriptor> {
-    let obs = this["_" + dashCaseToCamelCase(gearType || "")];
+  getDescriptorFor(gearType: GearType): Observable<GearDescriptor> {
+    let obs = this['_' + dashCaseToCamelCase(gearType || '')];
     if (obs) {
-      return asObservable(obs.first((x, idx, obs)=> !!x))
+      return asObservable(obs.first((x, idx, _) => !!x));
     }
-    return Observable.empty();
+    return Observable.create();
   }
 
-  _imageUrl(type:string, icon:string):string {
-    return icon ? this._imagePath + type + "/" + icon : "";
+  _imageUrl(type: string, icon: string): string {
+    return icon ? this._imagePath + type + '/' + icon : '';
   }
 
   /**
@@ -136,18 +136,21 @@ export class ItemsService {
    * @param item
    * @returns {Observable<string>}
    */
-  imageResolve(item:Gear):Observable<ResolvedImage> {
+  imageResolve(item: Gear): Observable<ResolvedImage> {
 
-    return this.getDescriptorFor(item.type).map(descriptor=> {
+    return this.getDescriptorFor(item.type).map(descriptor => {
 
       let icons = descriptor.icons[item.rarity];
 
 
-      let isGearSet = item.rarity == GearRarity.GEAR_SET;
-      let gearSetName = null;
+      let isGearSet = item.rarity === GearRarity.GEAR_SET;
+      let gearSetName = void 0;
       if (isGearSet) {
         // find item information to resolve gear name
-        let divisionItem = <DivisionItem>_.find(descriptor.items[GearRarity.GEAR_SET], {name: item.name});
+        let divisionItem = <DivisionItem>_.find(
+          descriptor.items[GearRarity.GEAR_SET],
+          {name: item.name}
+        );
         gearSetName = divisionItem.belongsTo;
 
       }
@@ -167,10 +170,10 @@ export class ItemsService {
       return {
         primary: this._imageUrl(item.type, isObject ? icon.primary : icon),
         secondary: gearSetName ?
-          this._imageUrl('sets', gearSetName + ".png")
+          this._imageUrl('sets', gearSetName + '.png')
           : this._imageUrl(item.type, isObject ? icon.secondary : icon)
-      }
+      };
 
-    })
+    });
   }
 }

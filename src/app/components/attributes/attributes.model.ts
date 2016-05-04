@@ -4,14 +4,14 @@
 
 
 export class Attributes {
-  major:Attribute[];
-  minor:Attribute[];
-  skill:Attribute[];
+  major: Attribute[];
+  minor: Attribute[];
+  skill: Attribute[];
 }
 
 
 export class Attribute {
-  id:number;
-  value:number;
-  
+  id: number;
+  value: number;
+
 }

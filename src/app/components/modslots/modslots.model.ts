@@ -6,18 +6,37 @@ import * as _ from "lodash";
  */
 export interface ModSlot {
 
-  rarity:Rarity;
-  stats?:GearStats;
-  attribute:Attribute;
-  attribute2?:Attribute;
+  rarity: Rarity;
+  stats?: GearStats;
+  attribute: Attribute;
+  attribute2?: Attribute;
 
 }
 
 
 export class ModSlotType {
 
-  constructor(private _id:number, private _rarity:Rarity, private _slotKind:ModSlotKind) {
+  static toString(slotKind: ModSlotKind) {
+    switch (slotKind) {
+      case ModSlotKind.PERFORMANCE:
+        return 'Performance';
+
+      case ModSlotKind.FIREARMS:
+        return 'Firearms';
+
+      case ModSlotKind.STAMINA:
+        return 'Stamina';
+
+      case ModSlotKind.ELECTRONICS:
+        return 'Electronics';
+      default:
+        throw new Error('Invalid ModSlotKind');
+    }
   }
+
+  constructor(private _id: number, private _rarity: Rarity, private _slotKind: ModSlotKind) {
+  }
+
 
   get id() {
     return this._id;
@@ -27,44 +46,29 @@ export class ModSlotType {
     return this._rarity;
   }
 
-  static toString(slotKind:ModSlotKind) {
-    switch (slotKind) {
-      case ModSlotKind.PERFORMANCE:
-        return "Performance";
-
-      case ModSlotKind.FIREARMS:
-        return "Firearms";
-
-      case ModSlotKind.STAMINA:
-        return "Stamina";
-
-      case ModSlotKind.ELECTRONICS:
-        return "Electronics";
-    }
-  }
 
   get name() {
     return [
-      this._rarity == GearRarity.SUPERIOR
-        ? "Advanced " : "Prototype ",
+      this._rarity === GearRarity.SUPERIOR
+        ? 'Advanced ' : 'Prototype ',
       ModSlotType.toString(this._slotKind),
-      " Mod"].join('');
+      ' Mod'].join('');
 
   }
 
 
-  resolveMainAttribute(attributes:GearAttribute[]) {
-    return _.find(attributes, {name: ModSlotType.toString(this._slotKind)})
+  resolveMainAttribute(attributes: GearAttribute[]) {
+    return _.find(attributes, {name: ModSlotType.toString(this._slotKind)});
   }
 
   get isPerformance() {
-    return this._slotKind == ModSlotKind.PERFORMANCE
+    return this._slotKind === ModSlotKind.PERFORMANCE;
   }
 
 
 }
 
-export enum ModSlotKind{
+export enum ModSlotKind {
   PERFORMANCE,
   FIREARMS,
   STAMINA,

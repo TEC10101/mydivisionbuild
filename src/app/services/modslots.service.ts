@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {AttributesService} from "./attributes.service";
 import {GearType, GearAttribute, AttributeType} from "../common/models/common";
 import {ModSlotType, MOD_SLOT_TYPES} from "../components/modslots/modslots.model";
@@ -11,54 +11,15 @@ import {Observable} from "rxjs/Observable";
 
 
 export class ModSlotAttributeSet {
-  primary:GearAttribute[];
-  secondary:GearAttribute[];
+  primary: GearAttribute[];
+  secondary: GearAttribute[];
 }
 
 @Injectable()
 export class ModSlotService {
 
 
-  constructor(private _attributeService:AttributesService) {
-
-
-  }
-
-  get types() {
-    return MOD_SLOT_TYPES;
-  }
-
-
-  getAttributeSetFor(slotType:ModSlotType):Observable<ModSlotAttributeSet> {
-
-
-    return asObservable(this._attributeService.attributes.map((attrs:GearAttribute[])=> {
-      let primary, secondary;
-      if (slotType.isPerformance) {
-
-        primary = secondary = _.filter(attrs, (attr)=> attr.mod && attr.type == AttributeType.SKILL);
-
-
-      } else {
-
-        primary = [slotType
-          .resolveMainAttribute(
-            _.filter(attrs, {mod: true, type: AttributeType.MAIN}))
-        ];
-        secondary = _.filter(attrs,
-          (attr)=> attr.mod && attr.type != AttributeType.MAIN && attr.type != AttributeType.SKILL);
-
-      }
-
-
-      return {
-        primary: primary,
-        secondary: secondary
-      }
-    }))
-  }
-
-  static hasNative(gearType:GearType):boolean {
+  static hasNative(gearType: GearType): boolean {
     switch (gearType) {
       case GearType.Mask:
       case GearType.BackPack:
@@ -68,7 +29,7 @@ export class ModSlotService {
   }
 
   // TODO: allow to pass rarity and score to restrict more
-  static canHaveExtra(gearType:GearType):number {
+  static canHaveExtra(gearType: GearType): number {
     switch (gearType) {
       case GearType.Mask:
       case GearType.KneePads:
@@ -79,6 +40,49 @@ export class ModSlotService {
         return 3;
     }
     return 0;
+  }
+
+  constructor(private _attributeService: AttributesService) {
+
+
+  }
+
+  get types() {
+    return MOD_SLOT_TYPES;
+  }
+
+
+  getAttributeSetFor(slotType: ModSlotType): Observable<ModSlotAttributeSet> {
+
+
+    return asObservable(this._attributeService
+      .attributes.map((attrs: GearAttribute[]) => {
+        let primary, secondary;
+        if (slotType.isPerformance) {
+
+          primary = secondary = _.filter(attrs,
+            (attr) => attr.mod && attr.type === AttributeType.SKILL);
+
+
+        } else {
+
+          primary = [slotType
+            .resolveMainAttribute(
+              _.filter(attrs, {mod: true, type: AttributeType.MAIN}))
+          ];
+          secondary = _.filter(attrs,
+            (attr) => attr.mod &&
+            attr.type !== AttributeType.MAIN
+            && attr.type !== AttributeType.SKILL);
+
+        }
+
+
+        return {
+          primary: primary,
+          secondary: secondary
+        };
+      }));
   }
 
 

@@ -1,4 +1,4 @@
-import {Injectable} from "angular2/core";
+import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs/Rx";
 /**
  * Created by xastey on 4/7/2016.
@@ -7,16 +7,16 @@ import {BehaviorSubject} from "rxjs/Rx";
 @Injectable()
 export class EditorService {
 
-  private _current:boolean = true;
+  private _current: boolean = true;
   private event = new BehaviorSubject<boolean>(this._current);
 
 
   toggle() {
-    this.event.next(this._current = !this._current)
+    this.event.next(this._current = !this._current);
   }
 
-  subscribe(generatorOrNext?:any, error?:any, complete?:any):any {
-    return this.event.subscribe(generatorOrNext, error, complete)
+  subscribe(generatorOrNext?: any, error?: any, complete?: any): any {
+    return this.event.subscribe(generatorOrNext, error, complete);
   }
 
   get state() {
@@ -24,10 +24,10 @@ export class EditorService {
   }
 
   on() {
-    this.event.next(this._current = true)
+    this.event.next(this._current = true);
   }
 
   off() {
-    this.event.next(this._current = false)
+    this.event.next(this._current = false);
   }
 }

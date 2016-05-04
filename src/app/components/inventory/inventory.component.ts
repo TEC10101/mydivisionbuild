@@ -19,16 +19,16 @@ import {InventoryService} from "../../services/inventory.service";
 export class InventoryComponent {
 
 
-  inventory:Inventory;
+  inventory: Inventory;
 
 
-  constructor(private _router:Router, private _inventoryService:InventoryService) {
+  constructor(private _router: Router, private _inventoryService: InventoryService) {
     this.inventory = this._inventoryService.inventory;
 
   }
 
   navigate(type) {
-    this._router.navigate(['InventoryList', {gearType: type}])
+    this._router.navigate(['InventoryList', {gearType: type}]);
   }
 }
 

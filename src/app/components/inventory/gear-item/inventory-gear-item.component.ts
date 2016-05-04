@@ -19,20 +19,20 @@ import {InventoryService} from "../../../services/inventory.service";
 export class InventoryGearItemComponent implements OnInit {
 
 
-  @Input() item:Gear;
+  @Input() item: Gear;
 
-  @Input("gear-type") gearType:GearType;
+  @Input('gear-type') gearType: GearType;
 
 
-  constructor(private _itemsService:ItemsService, private _inventoryService:InventoryService) {
+  constructor(private _itemsService: ItemsService, private _inventoryService: InventoryService) {
   }
 
 
-  ngOnInit():any {
+  ngOnInit(): any {
 
     if (!this.item)this._itemsService
       .getDescriptorFor(this.gearType)
-      .subscribe(descriptor=> {
+      .subscribe(descriptor => {
           let first = <DivisionItem>descriptor.items[GearRarity.SUPERIOR][0];
           let empty = {
             rarity: GearRarity.SUPERIOR,
@@ -56,9 +56,9 @@ export class InventoryGearItemComponent implements OnInit {
             talent: {}
           };
 
-          this._inventoryService.update(this.gearType, empty)
+          this._inventoryService.update(this.gearType, empty);
         }
-      )
+      );
   }
 
 
@@ -67,6 +67,6 @@ export class InventoryGearItemComponent implements OnInit {
   }
 
   get statNames() {
-    return ["firearms", "stamina", "electronics"];
+    return ['firearms', 'stamina', 'electronics'];
   }
 }

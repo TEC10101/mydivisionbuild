@@ -43,9 +43,9 @@ export class AutoResizeInput {
     ev.stopPropagation();
   }
 
-  nativeElement:any;
+  nativeElement: any;
 
-  constructor(elementRef:ElementRef) {
+  constructor(elementRef: ElementRef) {
 
     this.nativeElement = elementRef.nativeElement;
   }
@@ -55,54 +55,106 @@ export class AutoResizeInput {
 
 @Component({
   selector: 'auto-resize-input',
-  template: `<div [ngClass]="{'edit-mode':allowEditing}" class="clearfix">
-        <label  [ngClass]="{hidden:editing}" (click)="onClicked()">{{prepend}}{{value|attribute:format}}</label>
-        <input [ngClass]="{hidden:!editing}" autofocus type="text"  pattern="\d*" [attr.maxlength]="length" [value]="value" (input)="onInputChanged($event)"  (focus)="onInputFocused()" class="auto-resize-input" (blur)="onInputBlurred()"/>
+  template: `<div [ngClass]='{'edit-mode':allowEditing}' class='clearfix'>
+        <label  [ngClass]='{hidden:editing}' (click)='onClicked()'>
+          {{prepend}}{{value|attribute:format}}
+        </label>
+        <input [ngClass]='{hidden:!editing}' autofocus type='text' 
+         pattern='\d*' [attr.maxlength]='length' [value]='value' 
+         (input)='onInputChanged($event)'  (focus)='onInputFocused()' 
+         class='auto-resize-input' (blur)='onInputBlurred()'/>
     </div>
      `,
   pipes: [AttributePipe],
   directives: [FORM_DIRECTIVES, AutoResizeInput],
   styles: [require('./auto-resize-input.component.scss')]
 })
-export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnDestroy {
+export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
 
-  @ViewChild(AutoResizeInput) autoResizeInput:AutoResizeInput;
-  @Input() ngModel:string;
+  @ViewChild(AutoResizeInput) autoResizeInput: AutoResizeInput;
+  @Input() ngModel: string;
 
   @Input('resize-increment')
-  @InputConverter(NumberConverter) resizeIncrement:number = 10;
-  @Input() length:number = 4;
-  @Input() inputType:string;
-  @Input() format:ValueFormat;
-  @Input() prepend:string = "+";
-  value:string;
+  @InputConverter(NumberConverter) resizeIncrement: number = 10;
+  @Input() length: number = 4;
+  @Input() inputType: string;
+  @Input() format: ValueFormat;
+  @Input() prepend: string = '+';
+  value: string;
 
-  elementRef:ElementRef;
-  placeholderContentName:string;
-  editing:boolean = false;
+  elementRef: ElementRef;
+  placeholderContentName: string;
+  editing: boolean = false;
   @Output() input = new EventEmitter<string>();
-  ngZone:NgZone;
-  allowEditing:boolean;
+  ngZone: NgZone;
+  allowEditing: boolean;
 
-  private _editorSubscription:Subscription;
+  private _editorSubscription: Subscription;
 
-  constructor(elementRef:ElementRef, ngControl:NgControl, ngZone:NgZone, private _editorService:EditorService) {
+  constructor(elementRef: ElementRef, ngControl: NgControl, ngZone: NgZone,
+              private _editorService: EditorService) {
     ngControl.valueAccessor = this;
     this.elementRef = elementRef;
     this.ngZone = ngZone;
-    this._editorSubscription = this._editorService.subscribe((value)=> this.allowEditing = value)
+    this._editorSubscription = this._editorService.subscribe((value) => this.allowEditing = value);
 
   }
 
-  private getElementWidth(nativeElement:any):number {
+  ngOnInit(): any {
 
-    return nativeElement.offsetWidth;
+    this.value = this.ngModel;
+    this.onChange(this.value);
+    let attributes = this.elementRef.nativeElement.attributes;
+    let attr = _.find(attributes, (attr: any)=>attr.nodeName.indexOf('_nghost-') != -1);
+
+    this.placeholderContentName = attr.nodeName.replace('_nghost-', '_ngcontent-');
+
+    //_nghost-juu-
+
   }
 
-  private setElementWidth(nativeElement:any, width:number) {
-    nativeElement.style.width = width + "px";
+
+  ngOnDestroy(): any {
+    this._editorSubscription.unsubscribe();
   }
+
+  /**
+   * @private
+   * Write a new value to the element.
+   */
+  writeValue(value: any) {
+    this.value = value;
+  }
+
+  /**
+   * @private
+   */
+  onChange = (_: any) => {
+  };
+
+  /**
+   * @private
+   */
+  onTouched = () => {
+  };
+
+  /**
+   * @private
+   * Set the function to be called when the control receives a change event.
+   */
+  registerOnChange(fn: (_: any) => {}): void {
+    this.onChange = fn;
+  }
+
+  /**
+   * @private
+   * Set the function to be called when the control receives a touch event.
+   */
+  registerOnTouched(fn: () => {}): void {
+    this.onTouched = fn;
+  }
+
 
   onClicked() {
 
@@ -113,12 +165,12 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
 
       let inputElement = this.autoResizeInput.nativeElement;
       let self = this;
-      this.ngZone.run(()=> {
+      this.ngZone.run(() => {
         inputElement.focus();
         inputElement.select();
         self.resize();
 
-      })
+      });
     }
 
   }
@@ -128,7 +180,7 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
     if (value.length > this.length) {
       value = value.substr(0, this.length);
     }
-    if (this.value != value) {
+    if (this.value !== value) {
       this.value = value;
       this.input.emit(this.value);
       this.resize();
@@ -154,12 +206,21 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
     // this.resize(this.resizeIncrement);
   }
 
+  private getElementWidth(nativeElement: any): number {
+
+    return nativeElement.offsetWidth;
+  }
+
+  private setElementWidth(nativeElement: any, width: number) {
+    nativeElement.style.width = width + 'px';
+  }
+
 
   private resize() {
-    //pad = (this.value.length >= this.length) ? 0 : pad;
+    /* pad = (this.value.length >= this.length) ? 0 : pad;
 
-    /*let div = document.createElement("div");
-     div.className = "placeholder";
+     let div = document.createElement('div');
+     div.className = 'placeholder';
      div.innerHTML = this.value;
      div.setAttribute(this.placeholderContentName, '');
      let parentNode = this.elementRef.nativeElement;
@@ -167,7 +228,7 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
      */
 
     // convert to string
-    let value = this.value + "";
+    let value = this.value + '';
     this.setElementWidth(this.autoResizeInput.nativeElement,
       ((value.length + 1) * this.resizeIncrement) + 2);
     // parentNode.removeChild(div);
@@ -175,58 +236,5 @@ export class AutoResizeInputComponent implements ControlValueAccessor,OnInit,OnD
   }
 
 
-  ngOnInit():any {
-
-    this.value = this.ngModel;
-    this.onChange(this.value);
-    let attributes = this.elementRef.nativeElement.attributes;
-    let attr = _.find(attributes, (attr:any)=>attr.nodeName.indexOf("_nghost-") != -1);
-
-    this.placeholderContentName = attr.nodeName.replace('_nghost-', '_ngcontent-');
-
-    //_nghost-juu-
-
-  }
-
-
-  ngOnDestroy():any {
-    this._editorSubscription.unsubscribe();
-  }
-
-  /**
-   * @private
-   * Write a new value to the element.
-   */
-  writeValue(value:any) {
-    this.value = value;
-  }
-
-  /**
-   * @private
-   */
-  onChange = (_:any) => {
-  };
-
-  /**
-   * @private
-   */
-  onTouched = () => {
-  };
-
-  /**
-   * @private
-   * Set the function to be called when the control receives a change event.
-   */
-  registerOnChange(fn:(_:any) => {}):void {
-    this.onChange = fn;
-  }
-
-  /**
-   * @private
-   * Set the function to be called when the control receives a touch event.
-   */
-  registerOnTouched(fn:() => {}):void {
-    this.onTouched = fn;
-  }
 }
 

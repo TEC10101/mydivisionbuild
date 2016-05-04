@@ -9,21 +9,21 @@ import {AutoResizeInputComponent} from "../auto-resize-input/auto-resize-input.c
 
 
 interface StateValueChangeEvent {
-  type:StatType
-  value:number;
+  type: StatType;
+  value: number;
 }
 
 @Component({
   selector: 'single-stat-display',
   templateUrl: 'app/components/stats-display/single-stat-display.html',
   directives: [NgClass, AutoResizeInputComponent],
-  styles: [require("./single-stat-display.scss")]
+  styles: [require('./single-stat-display.scss')]
 
 })
 export class SingleStatDisplay {
 
-  @Input() type:StatType;
-  @Input() value:number;
+  @Input() type: StatType;
+  @Input() value: number;
 
   @Output() change = new EventEmitter<StateValueChangeEvent>();
 
@@ -32,7 +32,7 @@ export class SingleStatDisplay {
     this.change.emit({
       type: this.type,
       value: this.value
-    })
+    });
   }
 }
 
@@ -45,16 +45,14 @@ export class SingleStatDisplay {
 })
 export class StatsDisplay {
 
-  @Input() stats:GearStats;
+  @Input() stats: GearStats;
 
 
   stat(name) {
     return !this.stats ? 0 : this.stat[name];
   }
 
-  onStateValueChanged(event:StateValueChangeEvent) {
-
-   
+  onStateValueChanged(event: StateValueChangeEvent) {
     this.stats[event.type] = event.value;
   }
 

@@ -19,13 +19,13 @@ import {GearType} from "../../../common/models/common";
 export class InventoryGearItemsComponent {
 
 
-  _gearType:GearType;
+  _gearType: GearType;
 
 
-  constructor(private _routeParams:RouteParams, private _inventoryService:InventoryService) {
+  constructor(private _routeParams: RouteParams,
+              private _inventoryService: InventoryService) {
 
-    this._gearType = <GearType>_routeParams.get("gearType");
-
+    this._gearType = <GearType>_routeParams.get('gearType');
 
   }
 
@@ -40,7 +40,7 @@ export class InventoryGearItemsComponent {
 
     let items = this.items;
 
-    return items.length ? items[0] : null;
+    return items.length ? items[0] : void 0;
   }
 
   onModSlotChanged() {

@@ -6,16 +6,16 @@
 import {Pipe, PipeTransform} from "@angular/core";
 import {Attribute} from "./attributes.model";
 @Pipe({
-  name: "attributeRestrict",
+  name: 'attributeRestrict',
   pure: false
 })
 export class AttributeRestrictPipe implements PipeTransform {
 
-  transform(values:Attribute[], [selection]):any {
-    if (selection.length == 1) {
+  transform(values: Attribute[], [selection]): any {
+    if (selection.length === 1) {
       return values;
     }
-    let ids = selection.map((attr:Attribute)=> attr.id);
-    return values.filter((attr:Attribute)=> ids.indexOf(attr.id) == -1)
+    let ids = selection.map((attr: Attribute) => attr.id);
+    return values.filter((attr: Attribute) => ids.indexOf(attr.id) === -1)
   }
 }

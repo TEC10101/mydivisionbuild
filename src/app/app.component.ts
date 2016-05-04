@@ -15,7 +15,7 @@ import {DUMMY_GEAR} from "./components/gear-overview/gear.model";
   selector: 'my-division-build',
 
   pipes: [],
-  styles: [require("./assets/styles/app.scss")],
+  styles: [require('./assets/styles/app.scss')],
   directives: [],
   encapsulation: ViewEncapsulation.None,
   templateUrl: 'app/my-division-build-app.html',
@@ -23,14 +23,15 @@ import {DUMMY_GEAR} from "./components/gear-overview/gear.model";
 })
 
 @RouteConfig([
-  {path: '/...', name: 'InventoryRoot', component: InventoryRootComponent},
+  {path: '/...', name: 'InventoryRoot', component: InventoryRootComponent}
 
 ])
 export class App implements OnInit {
 
-  gear:Gear;
+  gear: Gear;
 
-  constructor(private _editorService:EditorService, private _attributesService:AttributesService) {
+  constructor(private _editorService: EditorService,
+              private _attributesService: AttributesService) {
     this.gear = DUMMY_GEAR;
   }
 
