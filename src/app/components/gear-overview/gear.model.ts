@@ -5,7 +5,7 @@
 import {Rarity, ItemType, GearStats, GearRarity} from '../../common/models/common';
 import {Attributes, Attribute} from '../attributes/attributes.model';
 import {Talent} from '../talents/talent.model';
-import {ItemModSlot, InventoryItem} from "../inventory/inventory.model";
+import {InventoryItem} from '../inventory/inventory.model';
 
 
 export interface Gear extends InventoryItem {

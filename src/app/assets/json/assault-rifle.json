@@ -1,0 +1,64 @@
+[
+  {
+    "name": "ACR"
+  },
+  {
+    "name": "Black Market AK-74"
+  },
+  {
+    "name": "Caduceus",
+    "named": true,
+    "talents": []
+  },
+  {
+    "name": "Classic FAL"
+  },
+  {
+    "name": "Custom P416 G3"
+  },
+  {
+    "name": "Enhanced ACR-E"
+  },
+  {
+    "name": "Liberator",
+    "named": true,
+    "talents": []
+  },
+  {
+    "name": "Lightweight M4"
+  },
+  {
+    "name": "LVOA-C"
+  },
+  {
+    "name": "Military AK-47M"
+  },
+  {
+    "name": "Military P416"
+  },
+  {
+    "name": "Military SA-58"
+  },
+  {
+    "name": "Police M4"
+  },
+  {
+    "name": "SCAR-L"
+  },
+  {
+    "name": "SOCOM SCAR-L"
+  },
+  {
+    "name": "Tactical ACR"
+  },
+  {
+    "name": "Tactical Mk 16"
+  },
+  {
+    "name": "Tactical SA-58"
+  },
+  {
+    "name": "Warlord",
+    "named": true
+  }
+]

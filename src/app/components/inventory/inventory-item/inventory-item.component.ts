@@ -5,9 +5,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Gear} from '../../gear-overview/gear.model';
 import {InventoryItemImageComponent} from '../inventory-item-image/inventory-item-image.component';
 import {ItemsService, isWeaponType} from '../../../services/item.service';
-import {ItemType, GearRarity, DivisionItem} from '../../../common/models/common';
+import {ItemType, GearRarity, DivisionItem, WeaponSlot} from '../../../common/models/common';
 import {InventoryService} from '../../../services/inventory.service';
-import {InventoryItem} from "../inventory.model";
+import {InventoryItem, InventoryItemType} from '../inventory.model';
 
 
 @Component({
@@ -23,6 +23,8 @@ export class InventoryItemComponent implements OnInit {
   @Input() item: InventoryItem;
 
   @Input('item-type') itemType: ItemType;
+  @Input('inventory-item-type') inventoryItemType: InventoryItemType;
+  @Input('weapon-slot') weaponSlot: WeaponSlot;
 
 
   constructor(private _itemsService: ItemsService, private _inventoryService: InventoryService) {
@@ -34,19 +36,22 @@ export class InventoryItemComponent implements OnInit {
     if (!this.item)this._itemsService
       .getDescriptorFor(this.itemType)
       .subscribe(descriptor => {
+
           let first = <DivisionItem>descriptor.items[GearRarity.SUPERIOR][0];
           let empty = isWeaponType(this.itemType)
             ? this._weaponDefaultState(first.name)
             : this._gearDefaultState(first.name);
 
-          this._inventoryService.update(this.itemType, empty);
+
+          let itemType = this.weaponSlot ? <ItemType>this.weaponSlot : this.itemType;
+          this._inventoryService.update(itemType, empty);
         }
       );
   }
 
 
   hasStat(name) {
-    return !this.item || !isWeaponType(this.itemType) ? false : (<Gear>this.item).stats[name] > 0;
+    return !this.item || isWeaponType(this.itemType) ? false : (<Gear>this.item).stats[name] > 0;
   }
 
   get statNames() {

@@ -3,7 +3,7 @@ import {MOD_SLOT_TYPES, ModSlotType} from './modslots.model';
 import {ModSlotService, ModSlotAttributeSet} from '../../services/modslots.service';
 import {AttributeMeta} from '../attributes/attribute.component';
 import {ModSlotComponent} from './modslot.component';
-import {GearModSlot} from '../gear-overview/gear.model';
+import {ItemModSlot} from '../inventory/inventory.model';
 import {EditorDirective} from '../../directives/editor';
 
 /**
@@ -11,7 +11,7 @@ import {EditorDirective} from '../../directives/editor';
  */
 
 
-type ModAttributeSetByType = {[id:number]:ModSlotAttributeSet}
+type ModAttributeSetByType = {[id: number]: ModSlotAttributeSet}
 @Component({
   selector: 'modslots',
   templateUrl: 'app/components/modslots/modslots.component.html',
@@ -21,26 +21,26 @@ type ModAttributeSetByType = {[id:number]:ModSlotAttributeSet}
 })
 export class ModSlotsComponent implements OnInit {
 
-  @Input() slots:GearModSlot[];
+  @Input() slots: ItemModSlot[];
 
-  @Input('gear-metadata') metadata:AttributeMeta;
+  @Input('gear-metadata') metadata: AttributeMeta;
 
-  private _hasNative:boolean;
-  private _canHaveExtra:number;
+  private _hasNative: boolean;
+  private _canHaveExtra: number;
 
-  private _defaultModSlotAttributeSet:ModSlotAttributeSet;
+  private _defaultModSlotAttributeSet: ModSlotAttributeSet;
 
-  constructor(private _modSlotService:ModSlotService) {
+  constructor(private _modSlotService: ModSlotService) {
   }
 
-  ngOnInit():any {
+  ngOnInit(): any {
     let gearType = this.metadata.belongsTo;
     this._hasNative = ModSlotService.hasNative(gearType);
 
     if (this._hasNative && this.slots.length < 1) {
       this.onAddSlot();
     }
-    this._canHaveExtra = ModSlotService.canHaveExtra(gearType)
+    this._canHaveExtra = ModSlotService.canHaveExtra(gearType);
 
   }
 
@@ -69,15 +69,19 @@ export class ModSlotsComponent implements OnInit {
 
 
         this._modSlotService.getAttributeSetFor(defaultModSlotType)
-          .subscribe(attributeSet=> {
+          .subscribe(attributeSet => {
             this._defaultModSlotAttributeSet = attributeSet;
             this._addSlot(defaultModSlotType, attributeSet);
-          })
+          });
       }
 
   }
 
-  private _addSlot(modSlotType:ModSlotType, attributeSet:ModSlotAttributeSet) {
+  onRemoveSlot() {
+    this.slots.pop();
+  }
+
+  private _addSlot(modSlotType: ModSlotType, attributeSet: ModSlotAttributeSet) {
     let primary = attributeSet.primary[0];
     let secondary = attributeSet.secondary[0];
     this.slots.push({
@@ -93,9 +97,5 @@ export class ModSlotsComponent implements OnInit {
     });
   }
 
-
-  onRemoveSlot() {
-    this.slots.pop();
-  }
 
 }

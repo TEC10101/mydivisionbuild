@@ -10,7 +10,7 @@ import {AttributesComponent} from '../attributes/attributes.component';
 import {PrettyNumberPipe} from '../../common/pipes/prettynumber';
 import {Rarity, GearRarity} from '../../common/models/common';
 import {AttributeMeta} from '../attributes/attribute.component';
-import {ItemsService, GearDescriptor, isWeaponType} from '../../services/item.service';
+import {ItemsService, ItemDescriptor, isWeaponType} from '../../services/item.service';
 import {NgFor} from '@angular/common';
 import {EditorDirective} from '../../directives/editor';
 import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
@@ -35,7 +35,7 @@ export {Gear} from './gear.model';
 export class GearOverviewComponent implements OnInit {
   @Input() item: InventoryItem;
 
-  descriptor: GearDescriptor;
+  descriptor: ItemDescriptor;
 
 
   constructor(private _itemService: ItemsService) {
@@ -72,7 +72,7 @@ export class GearOverviewComponent implements OnInit {
   }
 
   get isGear() {
-    return !this.isWeapon;
+    return this.item && !this.isWeapon;
   }
 
   get isWeapon() {

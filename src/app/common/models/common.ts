@@ -16,6 +16,14 @@ export const AttributeInheritance = {
 
 };
 
+export type WeaponSlot = 'primary' | 'secondary'| 'sidearm';
+// tslint:disable-next-line
+export const WeaponSlot = {
+  Primary: 'primary' as WeaponSlot,
+  Secondary: 'secondary' as WeaponSlot,
+  Sidearm: 'sidearm' as WeaponSlot
+};
+
 
 export type GenderType = 'male' | 'female';
 
@@ -124,6 +132,7 @@ export interface DivisionItem {
   name: string;
   icon?: string;
   belongsTo?: string;
+  // talents?: Talent[];
 }
 
 
