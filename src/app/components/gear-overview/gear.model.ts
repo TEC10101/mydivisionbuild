@@ -2,36 +2,23 @@
  * Created by xastey on 4/3/2016.
  */
 
-import {Rarity, GearType, GearStats, GearRarity} from '../../common/models/common';
+import {Rarity, ItemType, GearStats, GearRarity} from '../../common/models/common';
 import {Attributes, Attribute} from '../attributes/attributes.model';
 import {Talent} from '../talents/talent.model';
+import {ItemModSlot, InventoryItem} from "../inventory/inventory.model";
 
 
-export interface Gear {
+export interface Gear extends InventoryItem {
 
-  rarity: Rarity;
-  type: GearType;
-  name: string;
-
-  score: number;
   stats: GearStats;
   armor: number;
-  attributes: Attributes;
-  mods: GearModSlot[];
-  talent?: Talent;
-}
 
-
-export interface GearModSlot {
-  id: number;
-  primary?: Attribute;
-  secondary?: Attribute;
 }
 
 
 export const DUMMY_GEAR: Gear = {
   rarity: GearRarity.GEAR_SET,
-  type: GearType.BodyArmor,
+  type: ItemType.BodyArmor,
   name: "Sentry's Call harness",
   armor: 1049,
   score: 214,
@@ -52,7 +39,7 @@ export const DUMMY_GEAR: Gear = {
 
   },
   mods: [],
-  talent: {}
+  talents: []
 };
 
 

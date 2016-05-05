@@ -1,7 +1,7 @@
-import {Inventory} from '../components/inventory/inventory.model';
+import {Inventory, InventoryItem} from '../components/inventory/inventory.model';
 import {Injectable} from '@angular/core';
 import {DUMMY_GEAR, Gear} from '../components/gear-overview/gear.model';
-import {Gender, GearType} from '../common/models/common';
+import {Gender, ItemType} from '../common/models/common';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 import {LZString} from 'lz-string';
 import {Http} from 'angular2/http';
@@ -42,12 +42,12 @@ export class InventoryService {
   }
 
 
-  retrieve(gearType: GearType): Gear {
+  retrieve(gearType: ItemType): Gear {
 
     return this._inventory[dashCaseToCamelCase(gearType)];
   }
 
-  update(gearType: GearType, value: Gear) {
+  update(gearType: ItemType, value: InventoryItem) {
 
     this._inventory[dashCaseToCamelCase(gearType)] = value;
 

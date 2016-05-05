@@ -3,9 +3,9 @@
  */
 import {Component} from '@angular/core';
 import {Inventory} from './inventory.model';
-import {InventoryGearItemComponent} from './gear-item/inventory-gear-item.component';
+import {InventoryItemComponent} from './inventory-item/inventory-item.component';
 import {Router, RouteConfig, RouterOutlet} from '@angular/router-deprecated';
-import {InventoryGearItemsComponent} from './gear-items/inventory-gear-items.component';
+import {InventoryItemsComponent} from './inventory-items/inventory-items.component';
 import {InventoryService} from '../../services/inventory.service';
 
 
@@ -14,7 +14,7 @@ import {InventoryService} from '../../services/inventory.service';
   selector: 'inventory',
   styles: [require('./inventory.component.scss')],
   template: require('./inventory.component.html'),
-  directives: [InventoryGearItemComponent]
+  directives: [InventoryItemComponent]
 })
 export class InventoryComponent {
 
@@ -28,7 +28,7 @@ export class InventoryComponent {
   }
 
   navigate(type) {
-    this._router.navigate(['InventoryList', {gearType: type}]);
+    this._router.navigate(['InventoryList', {itemType: type}]);
   }
 }
 
@@ -39,7 +39,7 @@ export class InventoryComponent {
 })
 @RouteConfig([
   {path: '/inventory', name: 'Inventory', component: InventoryComponent, useAsDefault: true},
-  {path: '/inventory/:gearType', name: 'InventoryList', component: InventoryGearItemsComponent}
+  {path: '/inventory/:itemType', name: 'InventoryList', component: InventoryItemsComponent}
 
 
 ])

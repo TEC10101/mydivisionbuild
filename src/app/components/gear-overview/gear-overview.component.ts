@@ -10,12 +10,13 @@ import {AttributesComponent} from '../attributes/attributes.component';
 import {PrettyNumberPipe} from '../../common/pipes/prettynumber';
 import {Rarity, GearRarity} from '../../common/models/common';
 import {AttributeMeta} from '../attributes/attribute.component';
-import {ItemsService, GearDescriptor} from '../../services/item.service';
+import {ItemsService, GearDescriptor, isWeaponType} from '../../services/item.service';
 import {NgFor} from '@angular/common';
 import {EditorDirective} from '../../directives/editor';
 import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
 import {ModSlotsComponent} from '../modslots/modslots.component';
 import {TalentsComponent} from '../talents/talents.component';
+import {InventoryItem} from '../inventory/inventory.model';
 export {Gear} from './gear.model';
 
 
@@ -32,7 +33,7 @@ export {Gear} from './gear.model';
     EditorDirective, AutoResizeInputComponent, ModSlotsComponent, TalentsComponent]
 })
 export class GearOverviewComponent implements OnInit {
-  @Input() gear: Gear;
+  @Input() item: InventoryItem;
 
   descriptor: GearDescriptor;
 
@@ -47,13 +48,13 @@ export class GearOverviewComponent implements OnInit {
 
   ngOnInit() {
     this._itemService
-      .getDescriptorFor(this.gear.type)
+      .getDescriptorFor(this.item.type)
       .subscribe(descriptor => this.descriptor = descriptor);
   }
 
   get items() {
 
-    return this.descriptor ? this.descriptor.items[this.gear.rarity] : [];
+    return this.descriptor ? this.descriptor.items[this.item.rarity] : [];
 
   }
 
@@ -62,29 +63,44 @@ export class GearOverviewComponent implements OnInit {
   }
 
   get talents() {
+    return this.item.talents;
 
-    return [
-      this.gear.talent = !this.gear.talent
-        ? {id: this.talentChoices[0].id} : this.gear.talent];
   }
 
   get isHighEnd() {
-    return this.gear.rarity === GearRarity.HIGH_END;
+    return this.item.rarity === GearRarity.HIGH_END;
+  }
+
+  get isGear() {
+    return !this.isWeapon;
+  }
+
+  get isWeapon() {
+    return isWeaponType(this.item.type);
   }
 
   onRarityChanged(rarity) {
     // reset gear info when rarity changes
-    this.gear.name = this.items[0].name;
-    this.gear.score = this._itemService.scores[rarity][0];
+    this.item.name = this.items[0].name;
+    this.item.score = this._itemService.scores[rarity][0];
+    if (this.isGear) {
+
+      if (this.isHighEnd) {
+        this.item.talents = [{id: this.talentChoices[0].id}];
+      } else {
+        this.item.talents = [];
+      }
+    }
+
   }
 
 
   get scores() {
-    return this._itemService.scores[this.gear.rarity];
+    return this._itemService.scores[this.item.rarity];
   }
 
   onArmorValueChanged(value) {
-    this.gear.armor = value;
+    (<Gear>this.item).armor = value;
   }
 
   onGearScoreChanged(score) {
@@ -93,9 +109,9 @@ export class GearOverviewComponent implements OnInit {
 
   get metadata(): AttributeMeta {
     return {
-      level: this.gear.score,
-      rarity: this.gear.rarity,
-      belongsTo: this.gear.type
+      level: this.item.score,
+      rarity: this.item.rarity,
+      belongsTo: this.item.type
 
     };
   }

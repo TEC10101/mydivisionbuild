@@ -5,28 +5,28 @@
   </div>
   <div id="inventory-gear">
     <div class="column clearfix">
-      <inventory-gear-item (click)="navigate('body-armor')" [item]="inventory.bodyArmor"
-                           gear-type="body-armor"></inventory-gear-item>
+      <inventory-item (click)="navigate('body-armor')" [item]="inventory.bodyArmor"
+                           item-type="body-armor"></inventory-item>
 
-      <inventory-gear-item (click)="navigate('mask')" [item]="inventory.mask"
-                           gear-type="mask"></inventory-gear-item>
+      <inventory-item (click)="navigate('mask')" [item]="inventory.mask"
+                           item-type="mask"></inventory-item>
 
-      <inventory-gear-item (click)="navigate('knee-pads')" gear-type="knee-pads"
-                           [item]="inventory.kneePads"></inventory-gear-item>
+      <inventory-item (click)="navigate('knee-pads')" item-type="knee-pads"
+                           [item]="inventory.kneePads"></inventory-item>
     </div>
 
     <div class="column clearfix">
-      <inventory-gear-item
-        (click)="navigate('back-pack')" gear-type="back-pack"
-        [item]="inventory.backPack"></inventory-gear-item>
+      <inventory-item
+        (click)="navigate('back-pack')" item-type="back-pack"
+        [item]="inventory.backPack"></inventory-item>
 
-      <inventory-gear-item
-        (click)="navigate('gloves')" gear-type="gloves"
-        [item]="inventory.gloves"></inventory-gear-item>
+      <inventory-item
+        (click)="navigate('gloves')" item-type="gloves"
+        [item]="inventory.gloves"></inventory-item>
 
-      <inventory-gear-item
-        (click)="navigate('holster')" gear-type="holster"
-        [item]="inventory.holster"></inventory-gear-item>
+      <inventory-item
+        (click)="navigate('holster')" item-type="holster"
+        [item]="inventory.holster"></inventory-item>
     </div>
 
 

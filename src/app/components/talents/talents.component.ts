@@ -18,12 +18,27 @@ import {GearTalent} from '../../services/item.service';
 import * as _ from 'lodash';
 import {EditorDirective} from '../../directives/editor';
 import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
+import {ValueFormat} from "../../common/models/common";
 
 
-const TEMPLATE_INPUT_MARKER = 'x%';
-const TEMPLATE_INPUT_MARKER_REXP = new RegExp('(' + TEMPLATE_INPUT_MARKER + ')');
+const TEMPLATE_INPUT_PERCENT_MARKER = 'x%';
+const TEMPLATE_INPUT_NUMBER_MARKER = '#';
+const TEMPLATE_INPUT_MARKER_REXP =
+  new RegExp(`(${TEMPLATE_INPUT_PERCENT_MARKER}|${TEMPLATE_INPUT_NUMBER_MARKER})`);
+
+const INPUT_FORMAT_MARKER = '%format%';
+
+const TALENT_INPUT_FORMAT = (function () {
+
+  let o = {};
+  o[TEMPLATE_INPUT_PERCENT_MARKER] = ValueFormat.PERCENT;
+  o[TEMPLATE_INPUT_NUMBER_MARKER] = ValueFormat.NUMBER;
+  return o;
+})();
+
+
 const TALENT_INPUT_TEMPLATE = ` <auto-resize-input [length]='2' 
-                            inputType='number' [format]='percent'
+                            inputType='number' [format]='%format%'
                            [(ngModel)]='talent.value'
         ></auto-resize-input>`;
 @Component({
@@ -113,7 +128,10 @@ export class TalentComponent implements OnInit, AfterViewInit {
 
     let text = _.find(this.choices, {id: id}).template;
     let template = text.split(TEMPLATE_INPUT_MARKER_REXP)
-      .map(part => part === TEMPLATE_INPUT_MARKER ? TALENT_INPUT_TEMPLATE : part).join('');
+      .map((part: string) => {
+        let format = TALENT_INPUT_FORMAT[part.match(TEMPLATE_INPUT_MARKER_REXP).pop()];
+        return format ? TALENT_INPUT_TEMPLATE.replace(INPUT_FORMAT_MARKER, format) : part;
+      }).join('');
 
     this._loader.loadNextToLocation(
       TalentComponent.toComponent(template, this.talent),

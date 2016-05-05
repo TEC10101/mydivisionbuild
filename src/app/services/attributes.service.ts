@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {GearType, AttributeType, GearAttribute} from '../common/models/common';
+import {ItemType, AttributeType, GearAttribute} from '../common/models/common';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
@@ -20,11 +20,11 @@ export class AttributesService {
 
   private _attributes = new BehaviorSubject<GearAttribute[]>([]);
 
-  private static defaultFilterProvider(gearType: GearType, attributeType: AttributeType) {
+  private static defaultFilterProvider(gearType: ItemType, attributeType: AttributeType) {
     return {type: attributeType, supports: [gearType]};
   }
 
-  private static skillFilterProvider(gearType: GearType) {
+  private static skillFilterProvider(gearType: ItemType) {
     return {type: AttributeType.SKILL, skill: true, supports: [gearType]};
   }
 
@@ -40,7 +40,7 @@ export class AttributesService {
         () => console.log('Finished loading attributes')
       );
 
-    // this._bodyArmor = new AttributeStore(GearType.BodyArmor, this._http);
+    // this._bodyArmor = new AttributeStore(ItemType.BodyArmor, this._http);
 
 
   }
@@ -50,7 +50,7 @@ export class AttributesService {
   }
 
 
-  getFor(gearType: GearType, attributeType: AttributeType): AttributeObservable {
+  getFor(gearType: ItemType, attributeType: AttributeType): AttributeObservable {
 
     let providerName = attributeType + 'FilterProvider';
     let filterProvider = AttributesService[providerName]

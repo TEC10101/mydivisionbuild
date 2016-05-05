@@ -1,0 +1,9 @@
+<div id="inventory-gear-items" class="clearfix">
+  <div id="items-list">
+    <inventory-item-row [item]="item" *ngFor="let item of items"></inventory-item-row>
+  </div>
+   <div id="item-overview" *ngIf="activeItem">
+     <gear-overview [item]="activeItem"></gear-overview>
+   </div>
+
+</div>

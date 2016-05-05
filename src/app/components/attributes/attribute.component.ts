@@ -8,7 +8,7 @@ import {Attribute} from './attributes.model';
 import {AttributePipe} from './attribute.pipe';
 import {AttributesService, AttributeObservable} from '../../services/attributes.service';
 import {
-  GearType, AttributeType, Rarity, ValueFormat, GearAttribute
+  ItemType, AttributeType, Rarity, ValueFormat, GearAttribute
 }
   from '../../common/models/common';
 import {Subscription} from 'rxjs/Subscription';
@@ -22,7 +22,7 @@ import {numberRange} from '../../common/utils';
 export interface AttributeMeta {
   level: number;
   rarity: Rarity;
-  belongsTo: GearType;
+  belongsTo: ItemType;
 }
 
 

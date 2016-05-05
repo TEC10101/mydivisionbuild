@@ -1,0 +1,110 @@
+{
+  "items": {
+    "superior": [
+      {
+        "name": "Responder holster"
+      },
+      {
+        "name": "Shooter holster"
+      },
+      {
+        "name": "Rapid assault holster"
+      },
+      {
+        "name": "Urban assault holster"
+      },
+      {
+        "name": "Agent holster"
+      },
+      {
+        "name": "Spider silk holster"
+      }
+    ],
+    "high-end": [
+      {
+        "name": "Hybrid holster"
+      },
+      {
+        "name": "Strike holster"
+      },
+      {
+        "name": "Rush holster"
+      },
+      {
+        "name": "Retention holster"
+      },
+      {
+        "name": "Spec-ops holster"
+      },
+      {
+        "name": "Tactical holster"
+      },
+      {
+        "name": "Operator holster"
+      },
+      {
+        "name": "Gunslinger holster"
+      }
+    ],
+    "gear-set": [
+      {
+        "name": "Striker's holster",
+        "set": "striker"
+      },
+      {
+        "name": "Juggernaut's holster",
+        "omit": true,
+        "set": "juggernaut"
+      },
+      {
+        "name": "Sentry's Call holster",
+        "set": "sentry"
+      },
+      {
+        "name": "Holster of the Nomad",
+        "set": "nomad"
+      },
+      {
+        "name": "Tactician's Authority holster",
+        "set": "tactician"
+      }
+    ]
+  },
+  "icons": {
+    "superior": {
+      "131": "ca_cm_t_t6_e_icon.png",
+      "147": "ca_cm_t_t7_e_icon.png",
+      "165": "ca_cm_t_t7_e_icon.png"
+    },
+    "high-end": {
+      "163": "ca_cm_t6_l_icon.png",
+      "182": "ca_cm_t_t7_l_icon.png",
+      "204": "ca_cm_t_t7_l_icon.png"
+    },
+    "gear-set": {
+      "striker": "ca_cm_t_t7_l_dlc1_icon.png",
+      "juggernaut": "ca_cm_t_t4_c_icon.png",
+      "sentry": "ca_cm_t_t6_u_icon.png",
+      "nomad": "ca_cm_t_t7_l_icon.png",
+      "tactician": "ca_cm_t_t4_c_icon.png"
+    }
+  },
+  "talents": [
+    {
+      "id": "nimble",
+      "template": "While doing a cover to cover move in combat, you heal 2% of your max Health for every 1 meter run."
+    },
+    {
+      "id": "recovered",
+      "template": "Damage taken while doing a cover to cover maneuver is regenerated over # seconds upon reaching your destination."
+    },
+    {
+      "id": "steadfast",
+      "template": "While in cover, health regeneration kicks in twice as fast."
+    },
+    {
+      "id": "sturdy",
+      "template": "Increase armor by x% when staying more than 10 seconds in the same cover."
+    }
+  ]
+}

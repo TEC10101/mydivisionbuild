@@ -1,15 +1,15 @@
-<div class="item-wrapper {{gear.rarity}}">
+<div class="item-wrapper {{item.rarity}}">
   <div class="section-wrapper title-section">
     <div class="rarity-indicator"></div>
     <div class="title-wrapper">
-      <label editor="false">{{gear.name}}</label>
-      <select [(ngModel)]="gear.name" editor="true">
-        <option *ngFor="#item of items" [value]="item.name">{{item.name}}</option>
+      <label editor="false">{{item.name}}</label>
+      <select [(ngModel)]="item.name" editor="true">
+        <option *ngFor="let item of items" [value]="item.name">{{item.name}}</option>
       </select>
     </div>
     <div class="rarity-wrapper">
-      <label editor="false">{{gear.rarity|ucfirst}}</label>
-      <select [(ngModel)]="gear.rarity" editor="true" (ngModelChange)="onRarityChanged($event)">
+      <label editor="false">{{item.rarity|ucfirst}}</label>
+      <select [(ngModel)]="item.rarity" editor="true" (ngModelChange)="onRarityChanged($event)">
         <option class="option-{{rarity}}" *ngFor="let rarity of rarities" [value]="rarity">{{rarity|ucfirst}}</option>
       </select>
     </div>
@@ -18,8 +18,8 @@
       score
       <div class="number-wrapper score-number-wrapper">
 
-        <label editor="false">{{gear.score}}</label>
-        <select [(ngModel)]="gear.score" editor="true" (ngModelChange)="onGearScoreChanged($event)">
+        <label editor="false">{{item.score}}</label>
+        <select [(ngModel)]="item.score" editor="true" (ngModelChange)="onGearScoreChanged($event)">
           <option *ngFor="let score of scores" [value]="score">{{score}}</option>
         </select>
 
@@ -27,7 +27,7 @@
     </div>
   </div>
 
-  <div class="section-wrapper">
+  <div class="section-wrapper" *ngIf="isGear">
 
     <div class="stat-wrapper">
       ARMOR
@@ -35,7 +35,7 @@
         <auto-resize-input
           resize-increment="20"
           prepend=""
-          [(ngModel)]="gear.armor"
+          [(ngModel)]="item.armor"
           (input)="onArmorValueChanged($event)"></auto-resize-input>
 
       </div>
@@ -48,17 +48,16 @@
 
 
   </div>
-  <div class="section-wrapper">
-    <stats-display [stats]="gear.stats"></stats-display>
+  <div class="section-wrapper" *ngIf="isGear">
+    <stats-display [stats]="item.stats"></stats-display>
   </div>
-  <div class="section-wrapper">
-    <item-attributes [data]="gear.attributes" [gear-metadata]="metadata"
-    ></item-attributes>
+  <div class="section-wrapper" *ngIf="isGear">
+    <item-attributes [data]="item.attributes" [gear-metadata]="metadata"></item-attributes>
   </div>
 
 
   <div class="section-wrapper">
-    <modslots [gear-metadata]="metadata" [slots]="gear.mods"></modslots>
+    <modslots [gear-metadata]="metadata" [slots]="item.mods"></modslots>
   </div>
 
 

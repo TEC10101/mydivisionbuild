@@ -9,12 +9,12 @@ import {ItemsService} from '../../../services/item.service';
 import {GearRarity} from '../../../common/models/common';
 
 @Component({
-  selector: 'inventory-gear-item-image',
-  styles: [require('./inventory-gear-item-image.component.scss')],
-  template: require('./inventory-gear-item-image.component.html')
+  selector: 'inventory-item-image',
+  styles: [require('./inventory-item-image.component.scss')],
+  template: require('./inventory-item-image.component.html')
 
 })
-export class InventoryGearItemImageComponent {
+export class InventoryItemImageComponent {
   @Input() item: Gear;
 
   constructor(private _modSlotService: ModSlotService, private _itemService: ItemsService) {

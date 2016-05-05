@@ -1,13 +1,13 @@
 @import "../common";
 
-.inventory-gear-item {
+.inventory-item {
   width: $inventory-gear-item-width;
   background-color: rgba(#000000, $black-alpha);
   height: $inventory-gear-item-height;
   //@include transform(skew(0deg, 1.38deg));
 }
 
-.inventory-gear-stats {
+.inventory-item-stats {
   list-style: none;
   width: 45px;
   display: inline-block;
@@ -33,7 +33,7 @@
 
 }
 
-.inventory-gear-armor {
+.inventory-item-armor {
   color: #cccdc8;
   text-align: center;
   font-family: "Borda";

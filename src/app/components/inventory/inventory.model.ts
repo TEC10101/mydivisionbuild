@@ -3,7 +3,9 @@
  */
 
 import {Gear} from '../gear-overview/gear.model';
-import {GenderType} from '../../common/models/common';
+import {GenderType, Rarity, ItemType} from '../../common/models/common';
+import {Attributes, Attribute} from '../attributes/attributes.model';
+import {Talent} from "../talents/talent.model";
 export class Inventory {
 
   id: string;
@@ -21,3 +23,21 @@ export class Inventory {
   gloves: Gear;
   holster: Gear;
 }
+
+
+export interface ItemModSlot {
+  id: number;
+  primary?: Attribute;
+  secondary?: Attribute;
+}
+export interface InventoryItem {
+  rarity: Rarity;
+  type: ItemType;
+  name: string;
+  score: number;
+  attributes: Attributes;
+  mods: ItemModSlot[];
+  talents: Talent[];
+
+}
+

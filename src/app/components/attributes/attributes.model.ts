@@ -3,10 +3,10 @@
  */
 
 
-export class Attributes {
-  major: Attribute[];
-  minor: Attribute[];
-  skill: Attribute[];
+export interface Attributes {
+  major?: Attribute[];
+  minor?: Attribute[];
+  skill?: Attribute[];
 }
 
 

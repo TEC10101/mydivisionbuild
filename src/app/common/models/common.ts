@@ -5,7 +5,9 @@
 export type Rarity = 'high-end' | 'superior' | 'specialized' | 'gear-set' ;
 export type StatType = 'firearms' | 'stamaina' | 'electronics';
 
-export type GearType = 'body-armor' | 'mask' | 'knee-pads' | 'back-pack' | 'gloves' | 'holster';
+export type ItemType = 'body-armor' | 'mask' | 'knee-pads'
+  | 'back-pack' | 'gloves' | 'holster'
+  | 'pistol' | 'ar'| 'smg'|'shotgun'|'sniper'|'lmg';
 export type AttributeInheritance = 'native' | 'extra'
 // tslint:disable-next-line
 export const AttributeInheritance = {
@@ -41,14 +43,25 @@ export const AttributeType = {
 
 // https://basarat.gitbooks.io/typescript/content/docs/enums.html
 // tslint:disable-next-line
-export const GearType = {
-  BodyArmor: 'body-armor' as GearType,
-  Mask: 'mask' as GearType,
-  KneePads: 'knee-pads' as GearType,
-  BackPack: 'back-pack' as GearType,
-  Gloves: 'gloves' as GearType,
-  Holster: 'holster' as GearType
+export const ItemType = {
+  BodyArmor: 'body-armor' as ItemType,
+  Mask: 'mask' as ItemType,
+  KneePads: 'knee-pads' as ItemType,
+  BackPack: 'back-pack' as ItemType,
+  Gloves: 'gloves' as ItemType,
+  Holster: 'holster' as ItemType,
+  Pistol: 'pistol' as ItemType,
+  AR: 'assault-rifle' as ItemType,
+  SMG: 'smg' as ItemType,
+  LMG: 'lmg' as ItemType,
+  Shotgun: 'shotgun' as ItemType,
+  Sniper: 'sniper' as ItemType
 };
+export const GEAR_TYPES = [ItemType.BodyArmor, ItemType.Mask,
+  ItemType.KneePads, ItemType.BackPack,
+  ItemType.Gloves, ItemType.Holster];
+export const WEAPON_TYPES = [ItemType.Pistol, ItemType.AR, ItemType.SMG, ItemType.LMG,
+  ItemType.Shotgun, ItemType.Sniper];
 
 
 // tslint:disable-next-line
@@ -93,7 +106,7 @@ export interface GearAttribute {
   format: ValueFormat;
   native: boolean;
   mod: boolean;
-  supports: GearType[];
+  supports: ItemType[];
   values: GearValues;
 
 

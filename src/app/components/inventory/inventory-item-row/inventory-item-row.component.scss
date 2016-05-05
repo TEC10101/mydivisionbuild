@@ -5,7 +5,7 @@ $item-row-width: 400px;
 $item-row-height: 73px;
 $item-row-score-width: 68px;
 
-.inventory-gear-item-row {
+.inventory-item-row {
   .left {
     width: $item-row-width;
     margin-right: 5px;
@@ -34,18 +34,18 @@ $item-row-score-width: 68px;
   }
 }
 
-.gear-item-image {
+.item-image {
   height: $item-row-height;
   float: left;
   transform-origin: top left;
   transform: scale(((100/$inventory-gear-image-height) * $item-row-height) / 100);
 }
 
-:host .inventory-gear-image {
+:host .inventory-image {
 
 }
 
-.gear-item-meta {
+.item-meta {
   float: left;
   color: white;
   padding-top: 5px;

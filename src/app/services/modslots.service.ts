@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AttributesService} from './attributes.service';
-import {GearType, GearAttribute, AttributeType} from '../common/models/common';
+import {ItemType, GearAttribute, AttributeType} from '../common/models/common';
 import {ModSlotType, MOD_SLOT_TYPES} from '../components/modslots/modslots.model';
 import {asObservable} from '../common/utils';
 import * as _ from 'lodash';
@@ -19,10 +19,10 @@ export class ModSlotAttributeSet {
 export class ModSlotService {
 
 
-  static hasNative(gearType: GearType): boolean {
+  static hasNative(gearType: ItemType): boolean {
     switch (gearType) {
-      case GearType.Mask:
-      case GearType.BackPack:
+      case ItemType.Mask:
+      case ItemType.BackPack:
         return true;
       default:
         return false;
@@ -31,14 +31,14 @@ export class ModSlotService {
   }
 
   // TODO: allow to pass rarity and score to restrict more
-  static canHaveExtra(gearType: GearType): number {
+  static canHaveExtra(gearType: ItemType): number {
     switch (gearType) {
-      case GearType.Mask:
-      case GearType.KneePads:
-      case GearType.Holster:
+      case ItemType.Mask:
+      case ItemType.KneePads:
+      case ItemType.Holster:
         return 2;
 
-      case GearType.BodyArmor:
+      case ItemType.BodyArmor:
         return 3;
       default:
         return 0;

@@ -6,7 +6,10 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {BehaviorSubject} from 'rxjs/Rx';
-import {DivisionItem, GearType, GearRarity, Rarity, Gender} from '../common/models/common';
+import {
+  DivisionItem, ItemType, GearRarity, Rarity, Gender, WEAPON_TYPES
+}
+  from '../common/models/common';
 import * as _ from 'lodash';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 import {asObservable} from '../common/utils';
@@ -88,7 +91,7 @@ export class ItemsService {
 
     let self = this;
 
-    _.forEach(GearType, (gearType: GearType, key: string) => {
+    _.forEach(ItemType, (gearType: ItemType, key: string) => {
       console.log('ItemsService(', gearType, ')');
       let subjectName = dashCaseToCamelCase(gearType);
 
@@ -111,17 +114,17 @@ export class ItemsService {
 
   // @TODO : add GEAR_SET images
   get rarities(): Rarity[] {
-    return [GearRarity.SUPERIOR, GearRarity.HIGH_END, GearRarity.GEAR_SET]
+    return [GearRarity.SUPERIOR, GearRarity.HIGH_END, GearRarity.GEAR_SET];
   }
 
 
   /**
    * Returns a descriptor for the choosen gear type
-   * @param gearType
+   * @param itemType
    * @returns {Observable<GearDescriptor>}
    */
-  getDescriptorFor(gearType: GearType): Observable<GearDescriptor> {
-    let obs = <Observable<GearDescriptor>>this['_' + dashCaseToCamelCase(gearType || '')];
+  getDescriptorFor(itemType: ItemType): Observable<GearDescriptor> {
+    let obs = <Observable<GearDescriptor>>this['_' + dashCaseToCamelCase(itemType || '')];
     if (obs) {
       return asObservable(obs.first((x, idx, _) => !!x));
     }
@@ -129,6 +132,7 @@ export class ItemsService {
     console.dir(Observable.create());
     return Observable.create();
   }
+
 
   _imageUrl(type: string, icon: string): string {
     return icon ? this._imagePath + type + '/' + icon : '';
@@ -179,4 +183,10 @@ export class ItemsService {
 
     });
   }
+}
+export function isWeaponType(itemType: ItemType): boolean {
+
+
+  return _.includes(WEAPON_TYPES, itemType);
+
 }
