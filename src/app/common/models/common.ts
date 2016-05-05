@@ -7,7 +7,7 @@ export type StatType = 'firearms' | 'stamaina' | 'electronics';
 
 export type ItemType = 'body-armor' | 'mask' | 'knee-pads'
   | 'back-pack' | 'gloves' | 'holster'
-  | 'pistol' | 'ar'| 'smg'|'shotgun'|'sniper'|'lmg';
+  | 'pistol' | 'assault-rifle'| 'smg'|'shotgun'|'sniper'|'lmg';
 export type AttributeInheritance = 'native' | 'extra'
 // tslint:disable-next-line
 export const AttributeInheritance = {
@@ -142,5 +142,16 @@ export class GearStats {
   electronics: number;
 }
 
+
+export interface ItemTalent {
+  id: string;
+  template: string;
+  affects?: string[];
+}
+
+export interface WeaponTalent extends ItemTalent {
+
+  supports: ItemType[];
+}
 
 

@@ -1,0 +1,431 @@
+[
+  {
+    "id": "accurate",
+    "name": "Accurate",
+    "template": "Accuracy is increased by x%",
+    "affects": [
+      "accuracy"
+    ],
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "adept",
+    "name": "Adept",
+    "template": "Using a skill increases your critical hit chance by x% for 5 seconds",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "balanced",
+    "name": "Balanced",
+    "template": "Weapon acquires maximum accuracy faster when shouldered",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "sniper"
+    ]
+  },
+  {
+    "id": "brutal",
+    "name": "Brutal",
+    "affects": [
+      "headshot"
+    ],
+    "template": "Headshot damage is increased by x% when using this weapon",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "capable",
+    "name": "Capable",
+    "template": "Using a skill improves the handling of your weapon for x seconds",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "commanding",
+    "name": "Commanding",
+    "template": "Every kill performed while the signature skill is active extends its duration by x%",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "competent",
+    "name": "Competent",
+    "template": "Weapon damage is increased by x% for 10 seconds after using a skill",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "coolheaded",
+    "name": "Coolheaded",
+    "template": "Performing a headshot reduces all skill cooldowns by x%",
+    "supports": [
+      "caduceus",
+      "sniper",
+      "pistol"
+    ]
+  },
+  {
+    "id": "deadly",
+    "name": "Deadly",
+    "template": "Critical hit damage is increased by x%",
+    "affects": [
+      "chd"
+    ],
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "destructive",
+    "name": "Destructive",
+    "template": "Armor destruction value is increased by x% when using this weapon",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "determined",
+    "name": "Determined",
+    "template": "Killing a target reduces skill cooldowns by x%",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "dominant",
+    "name": "Dominant",
+    "template": "Every kill while your signature skill is active reduces the cooldown of your other skills by x%",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "expert",
+    "name": "Expert",
+    "template": "This weapon deals 100% more damage when the target is below 30% health",
+    "supports": [
+      "pistol"
+    ]
+  },
+  {
+    "id": "ferocious",
+    "name": "Ferocious",
+    "template": "Damage against elite and named enemies is increased by x%",
+    "affects": [
+      "elite_dmg"
+    ],
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "fierce",
+    "name": "Fierce",
+    "template": "Critical hit chance is increased by x% when using this weapon",
+    "affects": [
+      "chc"
+    ],
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "harmful",
+    "name": "harmful",
+    "template": "Each hit has a x% chance to apply the 'bleed' status effect",
+    "supports": [
+      "sniper",
+      "pistol"
+    ]
+  },
+  {
+    "id": "intense",
+    "name": "Intense",
+    "template": "The first bullet of a magazine has a x% chance to apply the 'on fire' status effect",
+    "supports": [
+      "assault-rifle",
+      "sniper",
+      "pistol"
+    ]
+  },
+  {
+    "id": "meticulous",
+    "name": "Meticulous",
+    "template": "Killing a target has a x% chance to instantly refill the magazine",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "predatory",
+    "name": "Predatory",
+    "template": "Killing a target regenerates x% health over 5 seconds",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "prepared",
+    "name": "Prepared",
+    "template": "Damage is increased by x% when more than 40 meters from the target",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "sniper"
+    ]
+  },
+  {
+    "id": "proficient",
+    "name": "Proficient",
+    "template": "The first bullet shot when out of combat has a x% chance to result in a critical hit",
+    "supports": [
+      "sniper",
+      "pistol"
+    ]
+  },
+  {
+    "id": "provident",
+    "name": "Provident",
+    "template": "The last bullet in your magazine deals x% bonus damage",
+    "supports": [
+      "assault-rifle",
+      "smg",
+      "sniper",
+      "pistol"
+    ]
+  },
+  {
+    "id": "responsive",
+    "name": "Responsive",
+    "template": "Damage is increased by x% when closer than 10 meters to the target",
+    "supports": [
+      "assault-rifle",
+      "smg",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "restored",
+    "name": "Restored",
+    "template": "Killing a target with this weapon removes all negative status effects",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "self-preserved",
+    "name": "Self-Preserved",
+    "template": "Critical hits with this weapon heal the user for x% of damage dealt",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "shotgun"
+    ]
+  },
+  {
+    "id": "skilled",
+    "name": "Skilled",
+    "template": "Headshot kills with this weapon increase signature skill resources by x%",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "pistol"
+    ]
+  },
+  {
+    "id": "stable",
+    "name": "Stable",
+    "template": "Stability is improved by x%",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "steady",
+    "name": "Steady",
+    "template": "Killing a target with a headshot removes 100% sway from the weapon for x seconds.",
+    "supports": [
+      "sniper"
+    ]
+  },
+  {
+    "id": "sustained",
+    "name": "sustained",
+    "template": "Killing a target increases your health by x%",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "swift",
+    "name": "Swift",
+    "template": "Reloading is x% faster",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "talented",
+    "name": "Talented",
+    "template": "Killing a target with this weapon increases skill power by x% for y seconds",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "toxic",
+    "name": "Toxic",
+    "template": "Headshots with this weapon have a x% chance to apply the 'blind' status effect",
+    "supports": [
+      "sniper",
+      "pistol"
+    ]
+  },
+  {
+    "id": "trained",
+    "name": "Trained",
+    "template": "Critical hits increase signature skill resources by x%",
+    "supports": [
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "unforgiving",
+    "name": "Unforgiving",
+    "template": "Missing health segments increases your damage: 1 missing segment +x%; 2 missing segments +y%.",
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  },
+  {
+    "id": "vicious",
+    "name": "Vicious",
+    "template": "Critical hit chance is increased by x% while at full health",
+    "affects": [
+      "chc"
+    ],
+    "supports": [
+      "assault-rifle",
+      "lmg",
+      "smg",
+      "sniper",
+      "shotgun",
+      "pistol"
+    ]
+  }
+]

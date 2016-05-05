@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import {UcFirstPipe} from '../../common/pipes/ucfirst_pipe';
 import {Talent} from './talent.model';
-import {GearTalent} from '../../services/item.service';
+import {ItemTalent} from '../../services/item.service';
 import * as _ from 'lodash';
 import {EditorDirective} from '../../directives/editor';
 import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
@@ -52,7 +52,7 @@ const TALENT_INPUT_TEMPLATE = ` <auto-resize-input [length]='2'
 export class TalentComponent implements OnInit, AfterViewInit {
 
   @Input() talent: Talent;
-  @Input() choices: GearTalent[];
+  @Input() choices: ItemTalent[];
 
   _previousTalentId: string;
   _componentRef: ComponentRef<any>;
@@ -160,7 +160,7 @@ export class TalentComponent implements OnInit, AfterViewInit {
 export class TalentsComponent {
 
   @Input() talents: Talent[];
-  @Input() choices: GearTalent[];
+  @Input() choices: ItemTalent[];
 }
 
 

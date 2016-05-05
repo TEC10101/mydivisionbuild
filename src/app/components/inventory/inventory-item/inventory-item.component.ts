@@ -31,6 +31,10 @@ export class InventoryItemComponent implements OnInit {
   }
 
 
+  get isGear() {
+    return !isWeaponType(this.itemType);
+  }
+
   ngOnInit(): any {
 
     if (!this.item)this._itemsService

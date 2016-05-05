@@ -1,5 +1,7 @@
 @import "../common";
 
+$inventory-item-info-width: $inventory-gear-item-width - $inventory-gear-image-width;
+$inventory-item-stats-width: 45px;
 .inventory-item {
   width: $inventory-gear-item-width;
   background-color: rgba(#000000, $black-alpha);
@@ -7,9 +9,14 @@
   //@include transform(skew(0deg, 1.38deg));
 }
 
+.inventory-item-info {
+  width: $inventory-item-info-width;
+  float: left;
+}
+
 .inventory-item-stats {
   list-style: none;
-  width: 45px;
+  width: $inventory-item-stats-width;
   display: inline-block;
   float: left;
   padding: 0;

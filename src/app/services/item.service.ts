@@ -7,7 +7,7 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {BehaviorSubject} from 'rxjs/Rx';
 import {
-  DivisionItem, ItemType, GearRarity, Rarity, Gender, WEAPON_TYPES, GEAR_TYPES
+  DivisionItem, ItemType, GearRarity, Rarity, Gender, WEAPON_TYPES, GEAR_TYPES, ItemTalent, WeaponTalent
 }
   from '../common/models/common';
 import * as _ from 'lodash';
@@ -23,10 +23,7 @@ class ItemStore {
   private _items: BehaviorSubject<DivisionItem[]> = new BehaviorSubject<DivisionItem[]>([]);
 }
 
-export interface GearTalent {
-  id: string;
-  template: string;
-}
+
 interface GearIconSet {
   // superior lvl30
   131?: string;
@@ -67,12 +64,12 @@ export interface ItemDescriptor {
 
   items: DivisionCategories<DivisionItem[], DivisionItem[]>;
 
-  talents: GearTalent[];
+  talents: ItemTalent[];
 }
 
 interface WeaponInfo extends DivisionItem {
   named: boolean;
-  talents: any[];
+  talents: ItemTalent[];
 }
 export interface GearDescriptor extends ItemDescriptor {
   icons: DivisionCategories<GearIconSet, GearIconSet>;
@@ -99,39 +96,67 @@ export class ItemsService {
   private _assaultRifle: BehaviorSubject<WeaponDescriptor> =
     new BehaviorSubject<WeaponDescriptor>(void 0);
 
+
+  private _weaponTalents: BehaviorSubject<WeaponTalent[]> =
+    new BehaviorSubject<WeaponTalent[]>(void 0);
+
   private _basePath = 'app/assets/json/';
   private _imagePath = 'app/assets/images/inventory/';
 
 
-  constructor(private _http: Http, private _inventoryService: InventoryService) {
+  constructor(private _http: Http) {
     this._loadItems(GEAR_TYPES);
-    this._loadItems(WEAPON_TYPES, (weapons: WeaponInfo[]) => {
+    this._loadWeaponTalents();
+
+    this._asObservable(this._weaponTalents)
+      .subscribe(talents => this._loadWeapons(talents));
+
+
+  }
+
+  _loadWeapons(talents: WeaponTalent[]) {
+    this._loadItems(WEAPON_TYPES, (weaponType: ItemType, weapons: WeaponInfo[]) => {
       let superior = _.filter(weapons, weapon => !weapon.named);
 
       let items = {};
       items[GearRarity.SUPERIOR] = superior;
       items[GearRarity.HIGH_END] = weapons;
+      items[GearRarity.GEAR_SET] = [];
 
-      return {
+
+      let supportedTalents = _.filter(talents, {supports: [weaponType]});
+
+      return <ItemDescriptor>{
         items: items,
-        talents: []
+        talents: supportedTalents
       };
     });
-
   }
 
+  _loadWeaponTalents() {
+    let url = this._basePath + 'weapon-talents.json';
+    this._http.get(url)
+      .map(res => <WeaponTalent[]>res.json())
+      .subscribe(
+        talents => this._weaponTalents.next(talents),
+        error => console.log('Error loading', url, error),
+        () => console.log('Finished loading', url)
+      );
+  }
 
-  _loadItems<T>(types: ItemType[], process: (item: T) => T = (item: T) => item) {
+  _loadItems(types: ItemType[],
+             process: (type: ItemType, json: any) => ItemDescriptor
+               = (type: ItemType, json: any) => <ItemDescriptor>json) {
     let self = this;
-    _.forEach(types, (gearType: ItemType, key: string) => {
-      console.log('ItemsService(', gearType, ')');
-      let subjectName = dashCaseToCamelCase(gearType);
+    _.forEach(types, (itemType: ItemType, key: string) => {
+      console.log('ItemsService(', itemType, ')');
+      let subjectName = dashCaseToCamelCase(itemType);
 
       let subject = self['_' + subjectName] as BehaviorSubject<any>;
       if (!subject) return;
-      let url = self._basePath + gearType + '.json';
+      let url = self._basePath + itemType + '.json';
       this._http.get(url)
-        .map(res => process(<T>res.json()))
+        .map(res => process(itemType, res.json()))
         .subscribe(
           descriptor => subject.next(descriptor),
           error => console.log('Error loading', url, error),
@@ -158,11 +183,15 @@ export class ItemsService {
   getDescriptorFor(itemType: ItemType): Observable<ItemDescriptor> {
     let obs = <Observable<ItemDescriptor>>this['_' + dashCaseToCamelCase(itemType || '')];
     if (obs) {
-      return asObservable(obs.first((x, idx, _) => !!x));
+      return this._asObservable(obs)
     }
 
     console.dir(Observable.create());
     return Observable.create();
+  }
+
+  _asObservable<T>(obs: Observable<T>): Observable<T> {
+    return asObservable(obs.first((x, idx, _) => !!x));
   }
 
 
@@ -208,9 +237,10 @@ export class ItemsService {
 
   }
 
-  _weaponImageResolve(descriptor: GearDescriptor, item: InventoryItem): ResolvedImage {
+  _weaponImageResolve(descriptor: WeaponDescriptor, item: InventoryItem): ResolvedImage {
+    let info = <DivisionItem>_.find(descriptor.items[item.rarity], {name: item.name});
     return {
-      primary: '',
+      primary: info ? this._imageUrl(item.type, info.icon) : '',
       secondary: ''
     };
   }
@@ -224,9 +254,13 @@ export class ItemsService {
 
     return this.getDescriptorFor(item.type).map(descriptor => {
       return isWeaponType(item.type)
-        ? this._weaponImageResolve(descriptor, item)
+        ? this._weaponImageResolve(<WeaponDescriptor>descriptor, item)
         : this._gearImageResolve(<GearDescriptor>descriptor, item);
     });
+  }
+
+  talentImageResolve(id) {
+    return this._imageUrl('talents', id + '.png');
   }
 }
 export function isWeaponType(itemType: ItemType): boolean {

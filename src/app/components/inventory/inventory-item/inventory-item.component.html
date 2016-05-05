@@ -1,16 +1,22 @@
 <div class="inventory-item clearfix" *ngIf="!!item">
   <inventory-item-image [item]="item"></inventory-item-image>
-  <ul class="inventory-item-stats">
 
-    <li *ngFor="let stat of statNames"
-        class="{{stat}}"
-        [ngClass]="{active:hasStat(stat)}"></li>
+  <div class="inventory-item-info" *ngIf="!isGear">
+
+  </div>
+  <div class="inventory-item-info" *ngIf="isGear">
+    <ul class="inventory-item-stats">
+
+      <li *ngFor="let stat of statNames"
+          class="{{stat}}"
+          [ngClass]="{active:hasStat(stat)}"></li>
 
 
-  </ul>
-  <div class="inventory-item-armor">
-    <label>ARMOR</label>
-    <span>{{item.armor}}</span>
+    </ul>
+    <div class="inventory-item-armor">
+      <label>ARMOR</label>
+      <span>{{item.armor}}</span>
+    </div>
   </div>
 
 </div>
