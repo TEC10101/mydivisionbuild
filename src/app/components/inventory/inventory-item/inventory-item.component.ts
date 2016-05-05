@@ -8,6 +8,7 @@ import {ItemsService, isWeaponType} from '../../../services/item.service';
 import {ItemType, GearRarity, DivisionItem, WeaponSlot} from '../../../common/models/common';
 import {InventoryService} from '../../../services/inventory.service';
 import {InventoryItem, InventoryItemType} from '../inventory.model';
+import {Talent} from "../../talents/talent.model";
 
 
 @Component({
@@ -30,6 +31,10 @@ export class InventoryItemComponent implements OnInit {
   constructor(private _itemsService: ItemsService, private _inventoryService: InventoryService) {
   }
 
+
+  get isWeapon() {
+    return isWeaponType(this.itemType);
+  }
 
   get isGear() {
     return !isWeaponType(this.itemType);
@@ -54,6 +59,17 @@ export class InventoryItemComponent implements OnInit {
   }
 
 
+  talentIconStyle(talent: Talent) {
+
+
+    let style = {};
+    let icon = this._itemsService
+      .talentImageResolve(talent.id);
+    style['-webkit-mask-image'] = `url('${icon.primary}')`;
+    return style;
+
+  }
+
   hasStat(name) {
     return !this.item || isWeaponType(this.itemType) ? false : (<Gear>this.item).stats[name] > 0;
   }
@@ -77,7 +93,11 @@ export class InventoryItemComponent implements OnInit {
 
       },
       mods: [],
-      talents: []
+      talents: [
+        {
+          id: 'accurate'
+        }
+      ]
     };
   }
 

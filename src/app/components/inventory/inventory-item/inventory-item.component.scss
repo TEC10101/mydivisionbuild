@@ -1,6 +1,5 @@
 @import "../common";
 
-$inventory-item-info-width: $inventory-gear-item-width - $inventory-gear-image-width;
 $inventory-item-stats-width: 45px;
 .inventory-item {
   width: $inventory-gear-item-width;
@@ -12,6 +11,27 @@ $inventory-item-stats-width: 45px;
 .inventory-item-info {
   width: $inventory-item-info-width;
   float: left;
+}
+
+.inventory-item-talents {
+  list-style: none;
+  width: $inventory-item-info-width;
+  display: inline-block;
+  float: left;
+  padding: 0;
+  margin: 0;
+  li {
+    width: $inventory-talent-width;
+    height: $inventory-talent-height;
+    opacity: 0.2;
+    background: #fff;
+    mask-type: luminance;
+    -webkit-mask-size: $inventory-talent-mask-width $inventory-talent-mask-height;
+    &.active {
+
+      opacity: 0.7;
+    }
+  }
 }
 
 .inventory-item-stats {

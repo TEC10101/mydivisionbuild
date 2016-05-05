@@ -259,8 +259,11 @@ export class ItemsService {
     });
   }
 
-  talentImageResolve(id) {
-    return this._imageUrl('talents', id + '.png');
+  talentImageResolve(id): ResolvedImage {
+    return {
+      primary: this._imageUrl('talents', id + '.png'),
+      secondary: ''
+    };
   }
 }
 export function isWeaponType(itemType: ItemType): boolean {

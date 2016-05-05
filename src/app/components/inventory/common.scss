@@ -12,3 +12,9 @@ $inventory-gear-set-icon-mask-width: $inventory-gear-mask-height;
 $inventory-gear-set-icon-mask-height: $inventory-gear-mask-height;
 $black-alpha: 0.30;
 $rarity-alpha: 0.56;
+
+$inventory-item-info-width: $inventory-gear-item-width - $inventory-gear-image-width;
+$inventory-talent-width: $inventory-item-info-width / 2;
+$inventory-talent-height: $inventory-item-info-width / 2;
+$inventory-talent-mask-width: $inventory-talent-width;
+$inventory-talent-mask-height: $inventory-talent-height;
