@@ -41,15 +41,14 @@ export class ModSlotComponent implements OnInit {
 
   constructor(private _modSlotService: ModSlotService, private _el: ElementRef) {
 
-    this.slotTypes = this._modSlotService.types;
-    this.slotTypes.forEach(type=>this._slotTypesById[type.id] = type)
+
   }
 
 
   onSlotTypeChanged() {
 
-    //Cast selected id to a number due to bug with angular2 and select
-    //http://stackoverflow.com/questions/35491608/how-to-get-number-in-ngmodel-in-angular-2
+    // Cast selected id to a number due to bug with angular2 and select
+    // http://stackoverflow.com/questions/35491608/how-to-get-number-in-ngmodel-in-angular-2
     this.slot.id = +this.slot.id;
 
     this._selectedSlotType = this._slotTypesById[this.slot.id];
@@ -61,15 +60,6 @@ export class ModSlotComponent implements OnInit {
 
   }
 
-
-  private refreshAttributeProviders() {
-
-    this._modSlotService.getAttributeSetFor(this._selectedSlotType).first().subscribe((attributeSet: ModSlotAttributeSet)=> {
-
-      this._primaryAttributes.next(attributeSet.primary);
-      this._secondaryAttributes.next(attributeSet.secondary);
-    })
-  }
 
   /**
    *  Function that returns an Observable that allows the @link AttributeComponent to
@@ -84,7 +74,20 @@ export class ModSlotComponent implements OnInit {
   }
 
   ngOnInit(): any {
+    this.slotTypes = this._modSlotService.getTypes(this.metadata.belongsTo);
+    this.slotTypes.forEach(type => this._slotTypesById[type.id] = type);
     this.onSlotTypeChanged();
+  }
+
+  private refreshAttributeProviders() {
+
+    this._modSlotService
+      .getAttributeSetFor(this._selectedSlotType)
+      .subscribe((attributeSet: ModSlotAttributeSet) => {
+
+        this._primaryAttributes.next(attributeSet.primary);
+        this._secondaryAttributes.next(attributeSet.secondary);
+      });
   }
 
 

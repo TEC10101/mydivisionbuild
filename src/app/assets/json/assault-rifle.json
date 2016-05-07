@@ -1,96 +1,137 @@
-[
-  {
-    "name": "ACR",
-    "icon": "w_ar_acr_t1_icon.png"
-  },
-  {
-    "name": "Black Market AK-74",
-    "icon": "w_ar_ak47_t3_icon.png"
-  },
-  {
-    "name": "Caduceus",
-    "named": true,
-    "talents": [
-      "coolheaded",
-      "restored",
-      "self-preserved"
-    ],
-    "icon": "w_ar_fnscar-l_exotic_icon.png"
-  },
-  {
-    "name": "Classic FAL",
-    "icon": "w_ar_fal_t1_icon.png"
-  },
-  {
-    "name": "Custom P416 G3",
-    "icon": "w_ar_pof_p416_t2_icon.png"
-  },
-  {
-    "name": "Enhanced ACR-E",
-    "icon": "w_ar_acr_t2_icon.png"
-  },
-  {
-    "name": "Liberator",
-    "named": true,
-    "icon": "w_ar_m4_exotic_icon.png",
-    "talents": [
-      "adept",
-      "determined",
-      "talented"
-    ]
-  },
-  {
-    "name": "Lightweight M4",
-    "icon": "w_ar_m4_t2_icon.png"
-  },
-  {
-    "name": "LVOA-C",
-    "icon": "w_ar_m4_t3_icon.png"
-  },
-  {
-    "name": "Military AK-47M",
-    "icon": "w_ar_ak47_t2_icon.png"
-  },
-  {
-    "name": "Military P416",
-    "icon": "w_ar_pof_p416_t1_icon.png"
-  },
-  {
-    "name": "Military SA-58",
-    "icon": "w_ar_fal_t2_icon.png"
-  },
-  {
-    "name": "Police M4",
-    "icon": "w_ar_m4_t1_icon.png"
-  },
-  {
-    "name": "SCAR-L",
-    "icon": "w_ar_fnscar-l_t1_icon.png"
-  },
-  {
-    "name": "SOCOM SCAR-L",
-    "icon": "w_ar_fnscar-l_t2_icon.png"
-  },
-  {
-    "name": "Tactical ACR",
-    "icon": "w_ar_acr_t3_icon.png"
-  },
-  {
-    "name": "Tactical Mk 16",
-    "icon": "w_ar_fnscar-l_t3_icon.png"
-  },
-  {
-    "name": "Tactical SA-58",
-    "icon": "w_ar_fal_t3_icon.png"
-  },
-  {
-    "name": "Warlord",
-    "named": true,
-    "icon": "w_ar_ak47_exotic_icon.png",
-    "talents": [
-      "capable",
-      "ferocious",
-      "unforgiving"
-    ]
+{
+  "weapons": [
+    {
+      "name": "ACR",
+      "icon": "w_ar_acr_t1_icon.png",
+      "family": "acr"
+    },
+    {
+      "name": "Black Market AK-74",
+      "icon": "w_ar_ak47_t3_icon.png"
+    },
+    {
+      "name": "Caduceus",
+      "named": true,
+      "talents": [
+        "coolheaded",
+        "restored",
+        "self-preserved"
+      ],
+      "icon": "w_ar_fnscar-l_exotic_icon.png"
+    },
+    {
+      "name": "Classic FAL",
+      "icon": "w_ar_fal_t1_icon.png"
+    },
+    {
+      "name": "Custom P416 G3",
+      "icon": "w_ar_pof_p416_t2_icon.png"
+    },
+    {
+      "name": "Enhanced ACR-E",
+      "icon": "w_ar_acr_t2_icon.png",
+      "family": "acr"
+    },
+    {
+      "name": "Liberator",
+      "named": true,
+      "icon": "w_ar_m4_exotic_icon.png",
+      "talents": [
+        "adept",
+        "determined",
+        "talented"
+      ]
+    },
+    {
+      "name": "Lightweight M4",
+      "icon": "w_ar_m4_t2_icon.png"
+    },
+    {
+      "name": "LVOA-C",
+      "icon": "w_ar_m4_t3_icon.png"
+    },
+    {
+      "name": "Military AK-47M",
+      "icon": "w_ar_ak47_t2_icon.png"
+    },
+    {
+      "name": "Military P416",
+      "icon": "w_ar_pof_p416_t1_icon.png"
+    },
+    {
+      "name": "Military SA-58",
+      "icon": "w_ar_fal_t2_icon.png"
+    },
+    {
+      "name": "Police M4",
+      "icon": "w_ar_m4_t1_icon.png"
+    },
+    {
+      "name": "SCAR-L",
+      "icon": "w_ar_fnscar-l_t1_icon.png"
+    },
+    {
+      "name": "SOCOM SCAR-L",
+      "icon": "w_ar_fnscar-l_t2_icon.png"
+    },
+    {
+      "name": "Tactical ACR",
+      "icon": "w_ar_acr_t3_icon.png",
+      "family": "acr"
+    },
+    {
+      "name": "Tactical Mk 16",
+      "icon": "w_ar_fnscar-l_t3_icon.png"
+    },
+    {
+      "name": "Tactical SA-58",
+      "icon": "w_ar_fal_t3_icon.png"
+    },
+    {
+      "name": "Warlord",
+      "named": true,
+      "icon": "w_ar_ak47_exotic_icon.png",
+      "talents": [
+        "capable",
+        "ferocious",
+        "unforgiving"
+      ]
+    }
+  ],
+  "compatibility": {
+    "acr": {
+      "magazine": true,
+      "muzzle": [
+        "recoil",
+        "suppressor_large"
+      ],
+      "optics": [
+        "iron_sights",
+        "rds_small",
+        "rds_large"
+      ],
+      "underbarrel": [
+        "grip_small",
+        "grip_large",
+        "laser"
+      ]
+    },
+    "ak-47": {
+      "magazine": true,
+      "muzzle": [
+        "recoil",
+        "suppressor_large"
+      ],
+      "optics": [
+
+        "rds_small",
+        "rds_large"
+      ],
+      "underbarrel": [
+        "grip_small",
+        "grip_large",
+        "laser"
+      ]
+    }
   }
-]
+}

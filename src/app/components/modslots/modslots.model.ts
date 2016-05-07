@@ -29,6 +29,14 @@ export class ModSlotType {
 
       case ModSlotKind.ELECTRONICS:
         return 'Electronics';
+      case ModSlotKind.MUZZLE:
+        return 'Muzzle';
+      case ModSlotKind.UNDERBARREL:
+        return 'Underbarrel';
+      case ModSlotKind.OPTICS:
+        return 'Optics';
+      case ModSlotKind.MAGAZINE:
+        return 'Magazine';
       default:
         throw new Error('Invalid ModSlotKind');
     }
@@ -46,13 +54,21 @@ export class ModSlotType {
     return this._rarity;
   }
 
+  get identifier() {
+    return ModSlotType.toString(this._slotKind).toLowerCase();
+  }
+
+  get belongsToWeapon() {
+    return this._slotKind >= ModSlotKind.MUZZLE;
+  }
+
 
   get name() {
-    return [
+    return this._slotKind < ModSlotKind.MUZZLE ? [
       this._rarity === GearRarity.SUPERIOR
         ? 'Advanced ' : 'Prototype ',
       ModSlotType.toString(this._slotKind),
-      ' Mod'].join('');
+      ' Mod'].join('') : ModSlotType.toString(this._slotKind);
 
   }
 
@@ -72,11 +88,15 @@ export enum ModSlotKind {
   PERFORMANCE,
   FIREARMS,
   STAMINA,
-  ELECTRONICS
+  ELECTRONICS,
+  MUZZLE,
+  UNDERBARREL,
+  OPTICS,
+  MAGAZINE
 }
 
 
-export const MOD_SLOT_TYPES = [
+export const GEAR_MOD_SLOT_TYPES = [
 
   new ModSlotType(1, GearRarity.SUPERIOR, ModSlotKind.FIREARMS),
   new ModSlotType(2, GearRarity.SUPERIOR, ModSlotKind.STAMINA),
@@ -90,6 +110,24 @@ export const MOD_SLOT_TYPES = [
 
 ];
 
+export const WEAPON_MOD_SLOT_TYPES = [
 
+  new ModSlotType(1, GearRarity.SUPERIOR, ModSlotKind.MUZZLE),
+  new ModSlotType(2, GearRarity.SUPERIOR, ModSlotKind.UNDERBARREL),
+  new ModSlotType(3, GearRarity.SUPERIOR, ModSlotKind.OPTICS),
+  new ModSlotType(4, GearRarity.SUPERIOR, ModSlotKind.MAGAZINE),
+
+  new ModSlotType(5, GearRarity.HIGH_END, ModSlotKind.MUZZLE),
+  new ModSlotType(6, GearRarity.HIGH_END, ModSlotKind.UNDERBARREL),
+  new ModSlotType(7, GearRarity.HIGH_END, ModSlotKind.OPTICS),
+  new ModSlotType(8, GearRarity.HIGH_END, ModSlotKind.MAGAZINE)
+
+];
+
+
+export type WeaponModType =
+  'recoil' | 'suppressor_small'  | 'suppressor_large' |'suppressor_small'|
+    'iron_sights' | 'rds_small' | 'rds_large'|
+    'grip_small' | 'grip_large' | 'laser'
 
 

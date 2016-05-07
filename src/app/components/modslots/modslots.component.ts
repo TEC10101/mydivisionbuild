@@ -1,10 +1,11 @@
 import {Input, OnInit, Component} from '@angular/core';
-import {MOD_SLOT_TYPES, ModSlotType} from './modslots.model';
+import {GEAR_MOD_SLOT_TYPES, ModSlotType} from './modslots.model';
 import {ModSlotService, ModSlotAttributeSet} from '../../services/modslots.service';
 import {AttributeMeta} from '../attributes/attribute.component';
 import {ModSlotComponent} from './modslot.component';
 import {ItemModSlot} from '../inventory/inventory.model';
 import {EditorDirective} from '../../directives/editor';
+import {isWeaponType} from '../../services/item.service';
 
 /**
  * Created by xastey on 4/10/2016.
@@ -58,8 +59,16 @@ export class ModSlotsComponent implements OnInit {
 
   onAddSlot() {
 
+    isWeaponType(this.metadata.belongsTo) ? this.onAddWeaponModSlot() : this.onAddGearModSlot();
 
-    let defaultModSlotType = MOD_SLOT_TYPES[0];
+  }
+
+  onAddWeaponModSlot() {
+
+  }
+
+  onAddGearModSlot() {
+    let defaultModSlotType = this._modSlotService.getTypes(this.metadata.belongsTo)[0];
     if (this.canAddSlot)
 
 
@@ -74,7 +83,6 @@ export class ModSlotsComponent implements OnInit {
             this._addSlot(defaultModSlotType, attributeSet);
           });
       }
-
   }
 
   onRemoveSlot() {

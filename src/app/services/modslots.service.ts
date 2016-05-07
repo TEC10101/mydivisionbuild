@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {AttributesService} from './attributes.service';
 import {ItemType, GearAttribute, AttributeType} from '../common/models/common';
-import {ModSlotType, MOD_SLOT_TYPES} from '../components/modslots/modslots.model';
+import {ModSlotType, GEAR_MOD_SLOT_TYPES, WEAPON_MOD_SLOT_TYPES} from '../components/modslots/modslots.model';
 import {asObservable} from '../common/utils';
 import * as _ from 'lodash';
 import {Observable} from 'rxjs/Observable';
+import {isWeaponType} from './item.service';
 /**
  * Created by xastey on 4/10/2016.
  */
@@ -51,16 +52,28 @@ export class ModSlotService {
 
   }
 
-  get types() {
-    return MOD_SLOT_TYPES;
+  getTypes(itemType: ItemType) {
+    return isWeaponType(itemType) ? WEAPON_MOD_SLOT_TYPES : GEAR_MOD_SLOT_TYPES;
   }
 
 
   getAttributeSetFor(slotType: ModSlotType): Observable<ModSlotAttributeSet> {
 
 
+    return slotType.belongsToWeapon
+      ? this.getWeaponAttributeSetFor(slotType)
+      : this.getGearAttributeSetFor(slotType);
+
+
+  }
+
+  getWeaponAttributeSetFor(slotType: ModSlotType): Observable<ModSlotAttributeSet> {
+    return void 0;
+  }
+
+  getGearAttributeSetFor(slotType: ModSlotType): Observable<ModSlotAttributeSet> {
     return asObservable(this._attributeService
-      .attributes.map((attrs: GearAttribute[]) => {
+      .gearAttributes.map((attrs: GearAttribute[]) => {
         let primary, secondary;
         if (slotType.isPerformance) {
 
@@ -86,9 +99,8 @@ export class ModSlotService {
           primary: primary,
           secondary: secondary
         };
-      }));
+      })).first((x, idx, _) => !!x);
   }
-
 
 }
 

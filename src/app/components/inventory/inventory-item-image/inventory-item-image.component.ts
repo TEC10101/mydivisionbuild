@@ -52,8 +52,8 @@ export class InventoryItemImageComponent {
 
   }
 
-  get slotRarities() {
-    let slotTypes = this._modSlotService.types;
+  get modSlotsRarities() {
+    let slotTypes = this._modSlotService.getTypes(this.item.type);
     return (!this.item || !this.item.mods)
       ? [] :
       this.item.mods.map(m => _.find(slotTypes, {id: m.id}).rarity);

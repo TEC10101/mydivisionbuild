@@ -1,0 +1,139 @@
+[
+  {
+    "id": 1,
+    "name": "Crit Chance",
+    "type": "major",
+    "slots": [
+      "muzzle",
+      "optics",
+      "magazine"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Crit Damage",
+    "type": "major",
+    "slots": [
+      "muzzle",
+      "magazine"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Weapon Damage",
+    "type": "major",
+    "slots": [
+      "magazine"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Headshot Damage",
+    "type": "major",
+    "slots": [
+      "optics"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Accuracy",
+    "type": "major",
+    "slots": [
+      "muzzle",
+      "underbarrel",
+      "optics"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Hip Fire Accuracy",
+    "type": "major",
+    "slots": [
+      "underbarrel"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Stability",
+    "type": "major",
+    "slots": [
+      "muzzle",
+      "underbarrel"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Horizontal Stability",
+    "type": "major",
+    "slots": [
+      "muzzle",
+      "underbarrel"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Inital Bullet Stability",
+    "type": "major",
+    "slots": [
+      "muzzle",
+      "underbarrel"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Optimal Range",
+    "type": "major",
+    "slots": [
+      "muzzle",
+      "optics"
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Headshot Kill XP",
+    "type": "major",
+    "slots": [
+      "optics"
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Magazine Size",
+    "type": "major",
+    "slots": [
+      "magazine"
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Reload Speed",
+    "type": "major",
+    "slots": [
+      "magazine"
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Reduce Threat",
+    "type": "minor",
+    "slots": [
+      "muzzle"
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Increased Threat",
+    "type": "minor",
+    "slots": [
+      "muzzle"
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Rate of Fire",
+    "type": "minor",
+    "slots": [
+      "magazine"
+    ]
+  }
+]

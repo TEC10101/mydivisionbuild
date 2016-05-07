@@ -1,0 +1,148 @@
+{
+  "muzzle": [
+    {
+      "name": "Compensator",
+      "inheritAttribute": 8
+    },
+    {
+      "name": "Flash Hider",
+      "inheritAttribute": 8
+    },
+    {
+      "name": "Muzzle break",
+      "inheritAttribute": 7
+    },
+    {
+      "name": "Loud vent break",
+      "inheritAttribute": 16
+    },
+    {
+      "name": "Osprey .45 suppressor",
+      "inheritAttribute": 15
+    },
+    {
+      "name": "Ti-RANT suppressor",
+      "inheritAttribute": 15
+    },
+    {
+      "name": "Large suppressor",
+      "inheritAttribute": 15
+    },
+    {
+      "name": "SR-7 suppressor",
+      "inheritAttribute": 15
+    },
+    {
+      "name": "Omega rifle suppressor",
+      "inheritAttribute": 15
+    }
+  ],
+  "underbarrel": [
+    {
+      "name": "Angled Grip",
+      "inheritAttribute": 7
+    },
+    {
+      "name": "Small Grip",
+      "inheritAttribute": 5
+    },
+    {
+      "name": "Vertical Grip",
+      "inheritAttribute": 9
+    },
+    {
+      "name": "Handstop",
+      "inheritAttribute": 5
+    },
+    {
+      "name": "PEQ-15 Laser",
+      "inheritAttribute": 6
+    },
+    {
+      "name": "Small laser pointer",
+      "inheritAttribute": 6
+    }
+  ],
+  "optics": [
+    {
+      "name": "Improved iron sight"
+    },
+    {
+      "name": "Improved iron sights 2"
+    },
+    {
+      "name": "Improved iron sights 3"
+    },
+    {
+      "name": "EXPS3 Holographic sight",
+      "inheritAttribute": 10
+    },
+    {
+      "name": "PRO red dot sight",
+      "inheritAttribute": 4
+    },
+    {
+      "name": "Reflex sight",
+      "inheritAttribute": 10
+    },
+    {
+      "name": "Rugged mini reflex sight",
+      "inheritAttribute": 5
+    },
+    {
+      "name": "Russian red dot sight"
+    },
+    {
+      "name": "Small RDS scope"
+    },
+    {
+      "name": "T2 Micro red dot sight",
+      "inheritAttribute": 4
+    },
+    {
+      "name": "C79 scope (3.4x)",
+      "inheritAttribute": 5
+    },
+    {
+      "name": "55 Holo sight",
+      "inheritAttribute": 10
+    },
+    {
+      "name": "ACOG scope (4x)",
+      "inheritAttribute": 10
+    },
+    {
+      "name": "CQBSS scope (8x)",
+      "inheritAttribute": 4
+    },
+    {
+      "name": "VX-1 scope (12x)",
+      "inheritAttribute": 12
+    },
+    {
+      "name": "Mk4 M5A2 scope (15x)"
+    },
+    {
+      "name": "MK5 scope (15x)",
+      "inheritAttribute": 4
+    }
+  ],
+  "magazine": [
+    {
+      "name": "Extended Magazine",
+      "inheritAttribute": 13
+    },
+    {
+      "name": "Heavy magazine spring",
+      "inheritAttribute": 17
+    },
+    {
+      "name": "High velocity magazine",
+      "inheritAttribute": 1
+    },
+    {
+      "name": "Quick release magazine",
+      "inheritAttribute": 14
+    }
+  ]
+}

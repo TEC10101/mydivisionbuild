@@ -7,6 +7,7 @@ import 'rxjs/add/operator/startWith';
 import {BehaviorSubject} from 'rxjs/Rx';
 import {asObservable} from '../common/utils';
 import * as _ from 'lodash';
+import {isWeaponType} from './item.service';
 /**
  * Created by xastey on 4/3/2016.
  */
@@ -18,7 +19,7 @@ export class AttributesService {
 
   private _http: Http;
 
-  private _attributes = new BehaviorSubject<GearAttribute[]>([]);
+  private _gearAttributes = new BehaviorSubject<GearAttribute[]>([]);
 
   private static defaultFilterProvider(gearType: ItemType, attributeType: AttributeType) {
     return {type: attributeType, supports: [gearType]};
@@ -30,12 +31,12 @@ export class AttributesService {
 
   constructor(http: Http) {
     this._http = http;
-    let basePath = 'app/assets/json/attributes.json';
+    let basePath = 'app/assets/json/gear-attributes.json';
 
     http.get(basePath)
       .map(res => <GearAttribute[]>res.json())
       .subscribe(
-        attributes => this._attributes.next(attributes),
+        attributes => this._gearAttributes.next(attributes),
         err => console.error(err),
         () => console.log('Finished loading attributes')
       );
@@ -45,18 +46,28 @@ export class AttributesService {
 
   }
 
-  get attributes() {
-    return asObservable(this._attributes.first((attrs, idx, obs) => !!attrs.length));
+  get gearAttributes() {
+    return asObservable(this._gearAttributes.first((attrs, idx, obs) => !!attrs.length));
   }
 
 
-  getFor(gearType: ItemType, attributeType: AttributeType): AttributeObservable {
+  getFor(itemType: ItemType, attributeType: AttributeType): AttributeObservable {
+    return isWeaponType(itemType)
+      ? this._weaponAttributesFor(itemType, attributeType)
+      : this._gearAttributesFor(itemType, attributeType);
 
+  }
+
+  _weaponAttributesFor(itemType, attributeType): AttributeObservable {
+    return Observable.create();
+  }
+
+  _gearAttributesFor(itemType: ItemType, attributeType: AttributeType): AttributeObservable {
     let providerName = attributeType + 'FilterProvider';
     let filterProvider = AttributesService[providerName]
       ? AttributesService[providerName] : AttributesService.defaultFilterProvider;
-    return asObservable(this._attributes.map(attrs => {
-      return _.filter(attrs, filterProvider(gearType, attributeType));
+    return asObservable(this._gearAttributes.map(attrs => {
+      return _.filter(attrs, filterProvider(itemType, attributeType));
     }));
   }
 

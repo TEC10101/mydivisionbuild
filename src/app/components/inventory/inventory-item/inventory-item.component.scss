@@ -26,6 +26,7 @@ $inventory-item-stats-width: 45px;
     opacity: 0.2;
     background: #fff;
     mask-type: luminance;
+    float: left;
     -webkit-mask-size: $inventory-talent-mask-width $inventory-talent-mask-height;
     &.active {
 

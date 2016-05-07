@@ -18,6 +18,7 @@ import {Observable} from 'rxjs/Observable';
 import {Gear, GEAR_SCORES} from '../components/gear-overview/gear.model';
 import {InventoryService} from './inventory.service';
 import {InventoryItem} from '../components/inventory/inventory.model';
+import {WeaponModType} from '../components/modslots/modslots.model';
 
 
 class ItemStore {
@@ -69,16 +70,31 @@ export interface ItemDescriptor {
   talents: ItemTalent[];
 }
 
+interface WeaponModCompatibility {
+  magazine: boolean;
+  muzzle: WeaponModType[];
+  optics: WeaponModType[];
+  underbarrel: WeaponModType[];
+}
+
+type WeaponModCompatibilityByType= {[id: string]: WeaponModCompatibility}
+
+interface WeaponManifest {
+  weapons: WeaponInfo[];
+  compatibility: WeaponModCompatibilityByType;
+}
 interface WeaponInfo extends DivisionItem {
   named: boolean;
   talents: WeaponTalent[];
+  family: string;
 }
 export interface GearDescriptor extends ItemDescriptor {
   icons: DivisionCategories<GearIconSet, GearIconSet>;
 }
 
-export interface WeaponDescriptor extends ItemDescriptor {
 
+export interface WeaponDescriptor extends ItemDescriptor {
+  compatibility: WeaponModCompatibilityByType;
 }
 
 
@@ -117,7 +133,8 @@ export class ItemsService {
   }
 
   _loadWeapons(talents: WeaponTalent[]) {
-    this._loadItems(WEAPON_TYPES, (weaponType: ItemType, weapons: WeaponInfo[]) => {
+    this._loadItems(WEAPON_TYPES, (weaponType: ItemType, manifest: WeaponManifest) => {
+      let weapons = manifest.weapons;
       let superior = _.filter(weapons, weapon => !weapon.named);
 
       let items = {};
@@ -128,9 +145,10 @@ export class ItemsService {
 
       let supportedTalents: WeaponTalent[] = _.filter(talents, {supports: [weaponType]});
 
-      return <ItemDescriptor>{
+      return <WeaponDescriptor>{
         items: <DivisionItems>items,
-        talents: supportedTalents
+        talents: supportedTalents,
+        compatibility: manifest.compatibility
       };
     });
   }
@@ -187,8 +205,6 @@ export class ItemsService {
     if (obs) {
       return this._asObservable(obs);
     }
-
-    console.dir(Observable.create());
     return Observable.create();
   }
 
