@@ -6,6 +6,7 @@ import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 import {LZString} from 'lz-string';
 import {Http} from 'angular2/http';
 import {isWeaponType} from './item.service';
+import * as _ from 'lodash';
 
 /**
  * Created by xastey on 4/27/2016.

@@ -1,9 +1,10 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {ItemsService, isWeaponType} from './item.service';
 import {ItemType, DivisionItem, GearRarity, ItemTalent} from '../common/models/common';
 import {InventoryService} from './inventory.service';
 import {Weapon} from '../components/inventory/inventory.model';
 import {Gear} from '../components/gear-overview/gear.model';
+import * as _ from 'lodash';
 /**
  * Created by xastey on 5/7/2016.
  */

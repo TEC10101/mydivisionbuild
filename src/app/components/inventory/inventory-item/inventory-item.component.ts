@@ -5,7 +5,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Gear} from '../../gear-overview/gear.model';
 import {InventoryItemImageComponent} from '../inventory-item-image/inventory-item-image.component';
 import {ItemsService, isWeaponType} from '../../../services/item.service';
-import {ItemType, GearRarity, DivisionItem, WeaponSlot} from '../../../common/models/common';
+import {ItemType, GearRarity, DivisionItem, WeaponSlot, ItemTalent} from '../../../common/models/common';
 import {InventoryService} from '../../../services/inventory.service';
 import {InventoryItem, InventoryItemType, Weapon} from '../inventory.model';
 import {Talent} from '../../talents/talent.model';
@@ -49,7 +49,7 @@ export class InventoryItemComponent implements OnInit {
           let first = <DivisionItem>descriptor.items[GearRarity.SUPERIOR][0];
           let isWeapon = isWeaponType(this.itemType);
           let empty = isWeapon
-            ? this._weaponDefaultState(first.name)
+            ? this._weaponDefaultState(descriptor.talents, first.name)
             : this._gearDefaultState(first.name);
 
 
@@ -82,8 +82,10 @@ export class InventoryItemComponent implements OnInit {
     return ['firearms', 'stamina', 'electronics'];
   }
 
-  private _weaponDefaultState(name: string): Weapon {
-
+  private _weaponDefaultState(talents: ItemTalent[], name: string): Weapon {
+    let _talents = _.chain(talents).take(2).map(talent => {
+      return {id: talent.id};
+    }).value();
     return {
       rarity: GearRarity.SUPERIOR,
       type: this.itemType,
@@ -96,11 +98,7 @@ export class InventoryItemComponent implements OnInit {
         magazine: 37
       },
       mods: [],
-      talents: [
-        {
-          id: 'accurate'
-        }
-      ]
+      talents: _talents
     };
   }
 

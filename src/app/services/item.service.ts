@@ -126,7 +126,7 @@ export class ItemsService {
     this._loadItems(GEAR_TYPES);
     this._loadWeaponTalents();
 
-    this._asObservable(this._weaponTalents)
+    asObservable(this._weaponTalents, true)
       .subscribe(talents => this._loadWeapons(talents));
 
 
@@ -203,13 +203,9 @@ export class ItemsService {
   getDescriptorFor(itemType: ItemType): Observable<ItemDescriptor> {
     let obs = <Observable<ItemDescriptor>>this['_' + dashCaseToCamelCase(itemType || '')];
     if (obs) {
-      return this._asObservable(obs);
+      return asObservable(obs, true);
     }
     return Observable.create();
-  }
-
-  _asObservable<T>(obs: Observable<T>): Observable<T> {
-    return asObservable(obs.first((x, idx, _) => !!x));
   }
 
 

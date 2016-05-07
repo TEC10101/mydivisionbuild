@@ -48,7 +48,10 @@ export function camelCase(name) {
   });
 }
 
-export function asObservable<T>(subject: Observable<T>): Observable<T> {
-  return new Observable(fn => subject.subscribe(fn));
-}
+export function asObservable<T>(subject: Observable<T>, once: boolean = false): Observable<T> {
+  function wrap(obs) {
+    return new Observable(fn => obs.subscribe(fn));
+  }
 
+  return once ? wrap(subject.first((x, idx, _) => !!x)) : wrap(subject);
+}
