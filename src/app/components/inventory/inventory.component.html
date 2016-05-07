@@ -3,7 +3,7 @@
   <div id="inventory-weapons" class="inventory-section">
 
     <div class="column clearfix">
-      <inventory-item (click)="navigate('primary')" [item]="inventory.primary"
+      <inventory-item (click)="navigate('primary')" [item]="inventory.weapons.primary"
                       inventory-item-type="weapon"
                       item-type="assault-rifle"
                       weapon-slot="primary"
@@ -12,34 +12,34 @@
   </div>
   <div id="inventory-gear" class="inventory-section">
     <div class="column clearfix">
-      <inventory-item (click)="navigate('body-armor')" [item]="inventory.bodyArmor"
+      <inventory-item (click)="navigate('body-armor')" [item]="inventory.gear.bodyArmor"
                       inventory-item-type="gear"
                       item-type="body-armor"></inventory-item>
 
-      <inventory-item (click)="navigate('mask')" [item]="inventory.mask"
+      <inventory-item (click)="navigate('mask')" [item]="inventory.gear.mask"
                       inventory-item-type="gear"
                       item-type="mask"></inventory-item>
 
       <inventory-item (click)="navigate('knee-pads')" item-type="knee-pads"
                       inventory-item-type="gear"
-                      [item]="inventory.kneePads"></inventory-item>
+                      [item]="inventory.gear.kneePads"></inventory-item>
     </div>
 
     <div class="column clearfix">
       <inventory-item
         (click)="navigate('back-pack')" item-type="back-pack"
         inventory-item-type="gear"
-        [item]="inventory.backPack"></inventory-item>
+        [item]="inventory.gear.backPack"></inventory-item>
 
       <inventory-item
         (click)="navigate('gloves')" item-type="gloves"
         inventory-item-type="gear"
-        [item]="inventory.gloves"></inventory-item>
+        [item]="inventory.gear.gloves"></inventory-item>
 
       <inventory-item
         (click)="navigate('holster')" item-type="holster"
         inventory-item-type="gear"
-        [item]="inventory.holster"></inventory-item>
+        [item]="inventory.gear.holster"></inventory-item>
     </div>
 
 

@@ -1,0 +1,35 @@
+<div class="weapon-stats-wrapper">
+  <div class="stats-wrapper">
+    DMG
+    <div class="number-wrapper stat-number-wrapper">
+      <auto-resize-input
+        resize-increment="20"
+        prepend=""
+        format="weapon"
+        [(ngModel)]="damage"
+        (input)="onWeaponStatsChanged('damage',$event)"></auto-resize-input>
+    </div>
+  </div>
+
+  <div class="stats-wrapper">
+    RPM
+    <div class="number-wrapper stat-number-wrapper">
+      <auto-resize-input
+        resize-increment="20"
+        prepend=""
+        [(ngModel)]="rpm"
+        (input)="onWeaponStatsChanged('rpm',$event)"></auto-resize-input>
+    </div>
+  </div>
+
+  <div class="stats-wrapper">
+    MAG
+    <div class="number-wrapper stat-number-wrapper">
+      <auto-resize-input
+        resize-increment="20"
+        prepend=""
+        [(ngModel)]="magazine"
+        (input)="onWeaponStatsChanged('magazine',$event)"></auto-resize-input>
+    </div>
+  </div>
+</div>

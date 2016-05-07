@@ -7,8 +7,8 @@ import {InventoryItemImageComponent} from '../inventory-item-image/inventory-ite
 import {ItemsService, isWeaponType} from '../../../services/item.service';
 import {ItemType, GearRarity, DivisionItem, WeaponSlot} from '../../../common/models/common';
 import {InventoryService} from '../../../services/inventory.service';
-import {InventoryItem, InventoryItemType} from '../inventory.model';
-import {Talent} from "../../talents/talent.model";
+import {InventoryItem, InventoryItemType, Weapon} from '../inventory.model';
+import {Talent} from '../../talents/talent.model';
 
 
 @Component({
@@ -47,13 +47,17 @@ export class InventoryItemComponent implements OnInit {
       .subscribe(descriptor => {
 
           let first = <DivisionItem>descriptor.items[GearRarity.SUPERIOR][0];
-          let empty = isWeaponType(this.itemType)
+          let isWeapon = isWeaponType(this.itemType);
+          let empty = isWeapon
             ? this._weaponDefaultState(first.name)
             : this._gearDefaultState(first.name);
 
 
-          let itemType = this.weaponSlot ? <ItemType>this.weaponSlot : this.itemType;
-          this._inventoryService.update(itemType, empty);
+          if (isWeapon) {
+            this._inventoryService.updateWeapon(this.weaponSlot, <Weapon>empty);
+          } else {
+            this._inventoryService.update(this.itemType, empty);
+          }
         }
       );
   }
@@ -78,7 +82,7 @@ export class InventoryItemComponent implements OnInit {
     return ['firearms', 'stamina', 'electronics'];
   }
 
-  private _weaponDefaultState(name: string): InventoryItem {
+  private _weaponDefaultState(name: string): Weapon {
 
     return {
       rarity: GearRarity.SUPERIOR,
@@ -86,11 +90,10 @@ export class InventoryItemComponent implements OnInit {
       name: name,
       score: 131,
 
-      attributes: {
-        major: [],
-        minor: [],
-        skill: []
-
+      stats: {
+        damage: 8900,
+        rpm: 750,
+        magazine: 37
       },
       mods: [],
       talents: [

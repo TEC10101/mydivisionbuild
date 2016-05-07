@@ -111,7 +111,7 @@ export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, O
 
     this.placeholderContentName = nodeName.replace('_nghost-', '_ngcontent-');
 
-    //_nghost-juu-
+    // _nghost-juu-
 
   }
 

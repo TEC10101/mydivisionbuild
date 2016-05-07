@@ -1,6 +1,6 @@
 @import "../../assets/styles/common";
 
-.item-wrapper {
+:host .item-wrapper {
   color: $font-color;
   font-family: 'Borda', serif;
   font-size: 20px;
@@ -100,15 +100,6 @@
     float: left;
     font-weight: 700;
     margin-right: 10px;
-  }
-
-  .weapon-stats-wrapper {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .stat-wrapper {
-    font-weight: 600;
   }
 
   .requirements-wrapper {

@@ -14,11 +14,12 @@ import {
 } from '@angular/core';
 import {UcFirstPipe} from '../../common/pipes/ucfirst_pipe';
 import {Talent} from './talent.model';
-import {ItemTalent} from '../../services/item.service';
 import * as _ from 'lodash';
 import {EditorDirective} from '../../directives/editor';
 import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
-import {ValueFormat} from "../../common/models/common";
+import {ValueFormat, ItemTalent} from '../../common/models/common';
+import {BooleanConverter, InputConverter} from '../../common/converters';
+import {ItemsService} from '../../services/item.service';
 
 
 const TEMPLATE_INPUT_PERCENT_MARKER = 'x%';
@@ -53,6 +54,9 @@ export class TalentComponent implements OnInit, AfterViewInit {
 
   @Input() talent: Talent;
   @Input() choices: ItemTalent[];
+  @Input('has-image')
+  @InputConverter(BooleanConverter)
+  hasImage: boolean;
 
   _previousTalentId: string;
   _componentRef: ComponentRef<any>;
@@ -89,7 +93,9 @@ export class TalentComponent implements OnInit, AfterViewInit {
     return TalentTemplateComponent;
   }
 
-  constructor(private _loader: DynamicComponentLoader, private _elementRef: ElementRef) {
+  constructor(private _loader: DynamicComponentLoader,
+              private _elementRef: ElementRef,
+              private _itemsService: ItemsService) {
   }
 
 
@@ -129,7 +135,9 @@ export class TalentComponent implements OnInit, AfterViewInit {
     let text = _.find(this.choices, {id: id}).template;
     let template = text.split(TEMPLATE_INPUT_MARKER_REXP)
       .map((part: string) => {
-        let format = TALENT_INPUT_FORMAT[part.match(TEMPLATE_INPUT_MARKER_REXP).pop()];
+        if (!part) return '';
+        let matches = part.match(TEMPLATE_INPUT_MARKER_REXP);
+        let format = matches ? TALENT_INPUT_FORMAT[matches.pop()] : false;
         return format ? TALENT_INPUT_TEMPLATE.replace(INPUT_FORMAT_MARKER, format) : part;
       }).join('');
 
@@ -142,6 +150,11 @@ export class TalentComponent implements OnInit, AfterViewInit {
 
   onTalentChanged(id) {
     this.renderDescription(id);
+  }
+
+  get talentImage() {
+    return this._itemsService
+      .talentImageResolve(this.talent.id).primary;
   }
 
 
@@ -161,6 +174,9 @@ export class TalentsComponent {
 
   @Input() talents: Talent[];
   @Input() choices: ItemTalent[];
+
+  @Input('has-image')
+  @InputConverter(BooleanConverter) hasImage: boolean;
 }
 
 

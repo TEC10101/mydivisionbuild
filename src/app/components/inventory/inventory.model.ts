@@ -14,6 +14,21 @@ export const InventoryItemType = {
   Gear: 'gear' as InventoryItemType
 };
 
+export class InventoryWeapons {
+  primary: Weapon;
+  secondary: Weapon;
+  sidearm: Weapon;
+}
+
+export class InventoryGear {
+  bodyArmor: Gear;
+  mask: Gear;
+  kneePads: Gear;
+  backPack: Gear;
+  gloves: Gear;
+  holster: Gear;
+}
+
 export class Inventory {
 
   id: string;
@@ -21,16 +36,10 @@ export class Inventory {
 
   gender: GenderType;
 
+  weapons: InventoryWeapons = new InventoryWeapons();
+  gear: InventoryGear = new InventoryGear();
 
-  bodyArmor: Gear;
-  mask: Gear;
-  kneePads: Gear;
-  backPack: Gear;
-  gloves: Gear;
-  holster: Gear;
-  primary: InventoryItem;
-  secondary: InventoryItem;
-  sidearm: InventoryItem;
+
 }
 
 
@@ -39,14 +48,26 @@ export interface ItemModSlot {
   primary?: Attribute;
   secondary?: Attribute;
 }
+
+export interface WeaponStats {
+  damage: number;
+  rpm: number;
+  magazine: number;
+}
 export interface InventoryItem {
   rarity: Rarity;
   type: ItemType;
   name: string;
   score: number;
-  attributes: Attributes;
+  attributes?: Attributes;
   mods: ItemModSlot[];
   talents: Talent[];
 
+
 }
+
+export interface Weapon extends InventoryItem {
+  stats: WeaponStats;
+}
+
 

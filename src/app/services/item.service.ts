@@ -7,7 +7,8 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {BehaviorSubject} from 'rxjs/Rx';
 import {
-  DivisionItem, ItemType, GearRarity, Rarity, Gender, WEAPON_TYPES, GEAR_TYPES, ItemTalent, WeaponTalent
+  DivisionItem, ItemType, GearRarity, Rarity, Gender, WEAPON_TYPES, GEAR_TYPES,
+  ItemTalent, WeaponTalent
 }
   from '../common/models/common';
 import * as _ from 'lodash';
@@ -60,16 +61,17 @@ interface DivisionCategories<T, G> {
   'gear-set': G;
 }
 
+export type DivisionItems = DivisionCategories<DivisionItem[], DivisionItem[]>
 export interface ItemDescriptor {
 
-  items: DivisionCategories<DivisionItem[], DivisionItem[]>;
+  items: DivisionItems;
 
   talents: ItemTalent[];
 }
 
 interface WeaponInfo extends DivisionItem {
   named: boolean;
-  talents: ItemTalent[];
+  talents: WeaponTalent[];
 }
 export interface GearDescriptor extends ItemDescriptor {
   icons: DivisionCategories<GearIconSet, GearIconSet>;
@@ -124,10 +126,10 @@ export class ItemsService {
       items[GearRarity.GEAR_SET] = [];
 
 
-      let supportedTalents = _.filter(talents, {supports: [weaponType]});
+      let supportedTalents: WeaponTalent[] = _.filter(talents, {supports: [weaponType]});
 
       return <ItemDescriptor>{
-        items: items,
+        items: <DivisionItems>items,
         talents: supportedTalents
       };
     });
@@ -183,7 +185,7 @@ export class ItemsService {
   getDescriptorFor(itemType: ItemType): Observable<ItemDescriptor> {
     let obs = <Observable<ItemDescriptor>>this['_' + dashCaseToCamelCase(itemType || '')];
     if (obs) {
-      return this._asObservable(obs)
+      return this._asObservable(obs);
     }
 
     console.dir(Observable.create());

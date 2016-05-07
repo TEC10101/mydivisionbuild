@@ -1,10 +1,11 @@
-import {Inventory, InventoryItem} from '../components/inventory/inventory.model';
+import {Inventory, InventoryItem, Weapon} from '../components/inventory/inventory.model';
 import {Injectable} from '@angular/core';
 import {DUMMY_GEAR, Gear} from '../components/gear-overview/gear.model';
-import {Gender, ItemType} from '../common/models/common';
+import {Gender, ItemType, WeaponSlot} from '../common/models/common';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 import {LZString} from 'lz-string';
 import {Http} from 'angular2/http';
+import {isWeaponType} from './item.service';
 
 /**
  * Created by xastey on 4/27/2016.
@@ -23,6 +24,14 @@ export class InventoryService {
   private _inventories: Inventory[] = [];
 
 
+  _isWeaponSlot(value: string) {
+    return !!_.includes(_.values(WeaponSlot), value);
+  }
+
+  _inventoryItemSlot(value: string) {
+    return this._isWeaponSlot(value) ? 'weapons' : 'gear';
+  }
+
   constructor(private _http: Http) {
 
     let storage = localStorage.getItem(STORAGE_KEY);
@@ -35,21 +44,32 @@ export class InventoryService {
       // TODO: Add selector for choosing gender
       this._inventory.name = 'Default Build';
       this._inventory.gender = Gender.FEMALE;
-      this._inventory.bodyArmor = DUMMY_GEAR;
+
     }
 
 
   }
 
 
-  retrieve(gearType: ItemType): Gear {
-
-    return this._inventory[dashCaseToCamelCase(gearType)];
+  retrieveWeapon(slot: ItemType): Weapon {
+    return this._inventory.weapons[slot];
   }
 
-  update(gearType: ItemType, value: InventoryItem) {
+  retrieve(itemType: ItemType): Gear {
 
-    this._inventory[dashCaseToCamelCase(gearType)] = value;
+
+    return this._inventory[this._inventoryItemSlot(itemType)]
+      [dashCaseToCamelCase(itemType)];
+  }
+
+  updateWeapon(slot: string, value: Weapon) {
+    this._inventory.weapons[slot] = value;
+  }
+
+  update(itemType: ItemType, value: InventoryItem) {
+
+    this._inventory.gear
+      [dashCaseToCamelCase(itemType)] = value;
 
 
   }

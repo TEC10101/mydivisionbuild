@@ -119,11 +119,12 @@ export interface GearAttribute {
 
 
 }
-export type ValueFormat = 'percent' | 'number';
+export type ValueFormat = 'percent' | 'number' | 'weapon'
 // tslint:disable-next-line
 export const ValueFormat = {
   PERCENT: 'percent' as ValueFormat,
-  NUMBER: 'number' as ValueFormat
+  NUMBER: 'number' as ValueFormat,
+  WEAPON: 'weapon' as ValueFormat
 };
 
 
@@ -153,5 +154,7 @@ export interface WeaponTalent extends ItemTalent {
 
   supports: ItemType[];
 }
+
+
 
 

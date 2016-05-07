@@ -16,7 +16,8 @@ import {EditorDirective} from '../../directives/editor';
 import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
 import {ModSlotsComponent} from '../modslots/modslots.component';
 import {TalentsComponent} from '../talents/talents.component';
-import {InventoryItem} from '../inventory/inventory.model';
+import {InventoryItem, Weapon} from '../inventory/inventory.model';
+import {WeaponStatsComponent} from '../weapon-stats/weapon-stats.component';
 export {Gear} from './gear.model';
 
 
@@ -30,7 +31,8 @@ export {Gear} from './gear.model';
 
   template: require('./gear-overview.component.html'),
   directives: [StatsDisplay, AttributesComponent, NgFor,
-    EditorDirective, AutoResizeInputComponent, ModSlotsComponent, TalentsComponent]
+    EditorDirective, AutoResizeInputComponent, ModSlotsComponent,
+    TalentsComponent, WeaponStatsComponent]
 })
 export class GearOverviewComponent implements OnInit {
   @Input() item: InventoryItem;
@@ -79,6 +81,10 @@ export class GearOverviewComponent implements OnInit {
     return isWeaponType(this.item.type);
   }
 
+  get talentsHaveImage() {
+    return this.isWeapon;
+  }
+
   onRarityChanged(rarity) {
     // reset gear info when rarity changes
     this.item.name = this.items[0].name;
@@ -94,6 +100,10 @@ export class GearOverviewComponent implements OnInit {
 
   }
 
+
+  onWeaponStatsChanged(statName, value) {
+    (<Weapon>this.item).stats[statName] = value;
+  }
 
   get scores() {
     return this._itemService.scores[this.item.rarity];

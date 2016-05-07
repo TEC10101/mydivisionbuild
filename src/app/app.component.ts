@@ -9,6 +9,7 @@ import {EditorService} from "./services/editor-service";
 import {AttributesService} from "./services/attributes.service";
 import {InventoryRootComponent} from "./components/inventory/inventory.component";
 import {DUMMY_GEAR} from "./components/gear-overview/gear.model";
+import {BootstrapService} from './services/bootstrap.service';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class App implements OnInit {
   gear: Gear;
 
   constructor(private _editorService: EditorService,
-              private _attributesService: AttributesService) {
+              private _attributesService: AttributesService,
+              private _bootstrapService: BootstrapService) {
     this.gear = DUMMY_GEAR;
   }
 
