@@ -106,18 +106,32 @@ interface GearValues {
   147?: number[];
   165?: number[];
 }
-export interface GearAttribute {
+
+export interface DivisionAttribute {
+  id: number;
+  name: string;
+  type: AttributeType;
+  format?: ValueFormat;
+}
+export interface GearAttribute extends DivisionAttribute {
   id: number;
   name: string;
   type: AttributeType;
   kind: AttributeKind;
-  format: ValueFormat;
+
   native: boolean;
   mod: boolean;
   supports: ItemType[];
   values: GearValues;
 
 
+}
+
+export interface WeaponAttribute extends DivisionAttribute {
+  id: number;
+  name: string;
+  type: AttributeType;
+  slots: string[];
 }
 export type ValueFormat = 'percent' | 'number' | 'weapon'
 // tslint:disable-next-line

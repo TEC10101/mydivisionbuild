@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AttributesService} from './attributes.service';
-import {ItemType, GearAttribute, AttributeType} from '../common/models/common';
+import {ItemType, GearAttribute, AttributeType, WeaponAttribute, DivisionAttribute} from '../common/models/common';
 import {
   ModSlotType, GEAR_MOD_SLOT_TYPES, WEAPON_MOD_SLOT_TYPES, WeaponModType, ModSlotKind
 }
@@ -17,13 +17,15 @@ import {BehaviorSubject} from 'rxjs/Rx';
 
 
 export class ModSlotAttributeSet {
-  primary: GearAttribute[];
-  secondary: GearAttribute[];
+  primary: DivisionAttribute[];
+  secondary: DivisionAttribute[];
 }
 
-interface WeaponModItem {
+export interface WeaponModItem {
+  id: number;
   name: string;
   inheritAttribute?: number;
+
 }
 export interface WeaponModItems {
   muzzle: WeaponModItem[];
@@ -88,9 +90,9 @@ export class ModSlotService {
     return isWeaponType(itemType) ? WEAPON_MOD_SLOT_TYPES : GEAR_MOD_SLOT_TYPES;
   }
 
-  weaponItemsFor(slotType: ModSlotKind): Observable<WeaponModItem[]> {
+  weaponModItemsFor(slotType: ModSlotType): Observable<WeaponModItem[]> {
     return asObservable(this._weaponModItems, true).map(items => {
-      return items[slotType];
+      return items[slotType.identifier];
     });
   }
 
@@ -106,8 +108,17 @@ export class ModSlotService {
   }
 
   getWeaponAttributeSetFor(slotType: ModSlotType): Observable<ModSlotAttributeSet> {
-    return void 0;
+    return this._attributeService
+      .weaponAttributes.map((attrs: WeaponAttribute[]) => {
+        let found = _.filter(attrs, {slots: [slotType.identifier]});
+        return {
+          primary: found,
+          secondary: found
+        };
+      });
+
   }
+
 
   getGearAttributeSetFor(slotType: ModSlotType): Observable<ModSlotAttributeSet> {
     return asObservable(this._attributeService
@@ -140,5 +151,12 @@ export class ModSlotService {
       })).first((x, idx, _) => !!x);
   }
 
+  getTypesForWeapon(weaponFamily: string) {
+
+  }
+
+  imageFor(modSlotType: ModSlotType) {
+    return `app/assets/images/inventory/mods/${modSlotType.identifier}.png`;
+  }
 }
 

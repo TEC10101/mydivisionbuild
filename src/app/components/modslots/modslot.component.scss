@@ -2,6 +2,7 @@
 
 .mod-slot-wrapper {
   @include rarity-indicator();
+  margin-bottom: 5px;
 }
 
 select {
@@ -9,7 +10,7 @@ select {
 
 }
 
-select, label,.mod-slot-attributes-wrapper {
+select, label, .mod-slot-attributes-wrapper {
   margin-left: 25px;
 }
 
@@ -26,7 +27,57 @@ select, label,.mod-slot-attributes-wrapper {
 
 }
 
-
-.mod-slot-type-title-wrapper {
+.mod-slot-type-title-wrapper, .mod-slot-item-title-wrapper {
   display: inline-block;
+}
+
+.mod-slot-item-title-wrapper {
+  label {
+    display: block;
+  }
+}
+
+.weapon {
+  .rarity-indicator {
+    display: none;
+  }
+}
+
+.mod-slot-wrapper {
+  &.high-end {
+    .mod-slot-item-image {
+      background-color: rgba($high-end-rarity-color, .5);
+    }
+    .mod-slot-item-name {
+      color: $high-end-accent-font-color;
+    }
+  }
+  &.superior {
+    .mod-slot-item-image {
+      background-color: rgba($superior-rarity-color, .5);
+    }
+    .mod-slot-item-name {
+      label:nth(1), select {
+        color: $superior-accent-font-color;
+      }
+    }
+  }
+}
+
+.mod-slot-item-image {
+  float: left;
+  @include vertical-align-parent();
+  width: 64px;
+  height: 64px;
+
+  img {
+    width: 32px;
+    margin: 0 auto;
+    display: block;
+    @include vertical-align();
+  }
+}
+
+.mod-slot-item-name {
+  float: left;
 }

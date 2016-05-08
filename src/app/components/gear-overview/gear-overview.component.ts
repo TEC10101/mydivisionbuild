@@ -18,6 +18,7 @@ import {ModSlotsComponent} from '../modslots/modslots.component';
 import {TalentsComponent} from '../talents/talents.component';
 import {InventoryItem, Weapon} from '../inventory/inventory.model';
 import {WeaponStatsComponent} from '../weapon-stats/weapon-stats.component';
+import * as _ from 'lodash';
 export {Gear} from './gear.model';
 
 
@@ -121,7 +122,8 @@ export class GearOverviewComponent implements OnInit {
     return {
       level: this.item.score,
       rarity: this.item.rarity,
-      belongsTo: this.item.type
+      belongsTo: this.item.type,
+      weaponFamily: _.find(this.items, {name: this.item.name}).family
 
     };
   }

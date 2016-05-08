@@ -1,146 +1,182 @@
 {
   "muzzle": [
     {
+      "id": 1,
       "name": "Compensator",
       "inheritAttribute": 8
     },
     {
+      "id": 2,
       "name": "Flash Hider",
       "inheritAttribute": 8
     },
     {
+      "id": 3,
       "name": "Muzzle break",
       "inheritAttribute": 7
     },
     {
+      "id": 4,
       "name": "Loud vent break",
       "inheritAttribute": 16
     },
     {
+      "id": 5,
       "name": "Osprey .45 suppressor",
       "inheritAttribute": 15
     },
     {
+      "id": 6,
       "name": "Ti-RANT suppressor",
       "inheritAttribute": 15
     },
     {
+      "id": 7,
       "name": "Large suppressor",
       "inheritAttribute": 15
     },
     {
+      "id": 8,
       "name": "SR-7 suppressor",
       "inheritAttribute": 15
     },
     {
+      "id": 9,
       "name": "Omega rifle suppressor",
       "inheritAttribute": 15
     }
   ],
   "underbarrel": [
     {
+      "id": 1,
       "name": "Angled Grip",
       "inheritAttribute": 7
     },
     {
+      "id": 2,
       "name": "Small Grip",
       "inheritAttribute": 5
     },
     {
+      "id": 3,
       "name": "Vertical Grip",
       "inheritAttribute": 9
     },
     {
+      "id": 4,
       "name": "Handstop",
       "inheritAttribute": 5
     },
     {
+      "id": 5,
       "name": "PEQ-15 Laser",
       "inheritAttribute": 6
     },
     {
+      "id": 6,
       "name": "Small laser pointer",
       "inheritAttribute": 6
     }
   ],
   "optics": [
     {
+      "id": 1,
       "name": "Improved iron sight"
     },
     {
+      "id": 2,
       "name": "Improved iron sights 2"
     },
     {
+      "id": 3,
       "name": "Improved iron sights 3"
     },
     {
+      "id": 4,
       "name": "EXPS3 Holographic sight",
       "inheritAttribute": 10
     },
     {
+      "id": 5,
       "name": "PRO red dot sight",
       "inheritAttribute": 4
     },
     {
+      "id": 5,
       "name": "Reflex sight",
       "inheritAttribute": 10
     },
     {
+      "id": 7,
       "name": "Rugged mini reflex sight",
       "inheritAttribute": 5
     },
     {
+      "id": 8,
       "name": "Russian red dot sight"
     },
     {
+      "id": 9,
       "name": "Small RDS scope"
     },
     {
+      "id": 10,
       "name": "T2 Micro red dot sight",
       "inheritAttribute": 4
     },
     {
+      "id": 11,
       "name": "C79 scope (3.4x)",
       "inheritAttribute": 5
     },
     {
+      "id": 12,
       "name": "55 Holo sight",
       "inheritAttribute": 10
     },
     {
+      "id": 13,
       "name": "ACOG scope (4x)",
       "inheritAttribute": 10
     },
     {
+      "id": 14,
       "name": "CQBSS scope (8x)",
       "inheritAttribute": 4
     },
     {
+      "id": 15,
       "name": "VX-1 scope (12x)",
       "inheritAttribute": 12
     },
     {
+      "id": 16,
       "name": "Mk4 M5A2 scope (15x)"
     },
     {
+      "id": 17,
       "name": "MK5 scope (15x)",
       "inheritAttribute": 4
     }
   ],
   "magazine": [
     {
+      "id": 1,
       "name": "Extended Magazine",
       "inheritAttribute": 13
     },
     {
+      "id": 2,
       "name": "Heavy magazine spring",
       "inheritAttribute": 17
     },
     {
+      "id": 3,
       "name": "High velocity magazine",
       "inheritAttribute": 1
     },
     {
+      "id": 4,
       "name": "Quick release magazine",
       "inheritAttribute": 14
     }

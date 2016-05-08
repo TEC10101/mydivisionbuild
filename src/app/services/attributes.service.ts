@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ItemType, AttributeType, GearAttribute} from '../common/models/common';
+import {ItemType, AttributeType, GearAttribute, WeaponAttribute, DivisionAttribute} from '../common/models/common';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
@@ -11,15 +11,15 @@ import {isWeaponType} from './item.service';
 /**
  * Created by xastey on 4/3/2016.
  */
-export type AttributeObservable = Observable<GearAttribute[]>
+export type AttributeObservable = Observable<DivisionAttribute[]>
 
 @Injectable()
 export class AttributesService {
 
 
-  private _http: Http;
-
   private _gearAttributes = new BehaviorSubject<GearAttribute[]>([]);
+
+  private _weaponAttributes = new BehaviorSubject<WeaponAttribute[]>([]);
 
   private static defaultFilterProvider(gearType: ItemType, attributeType: AttributeType) {
     return {type: attributeType, supports: [gearType]};
@@ -29,21 +29,42 @@ export class AttributesService {
     return {type: AttributeType.SKILL, skill: true, supports: [gearType]};
   }
 
-  constructor(http: Http) {
-    this._http = http;
-    let basePath = 'app/assets/json/gear-attributes.json';
+  constructor(private _http: Http) {
 
-    http.get(basePath)
+
+    this._loadGearAttributes();
+    this._loadWeaponAttributes();
+
+    // this._bodyArmor = new AttributeStore(ItemType.BodyArmor, this._http);
+
+
+  }
+
+  _loadWeaponAttributes() {
+    let basePath = 'app/assets/json/weapon-attributes.json';
+    this._http.get(basePath)
+      .map(res => <WeaponAttribute[]>res.json())
+      .subscribe(
+        attributes => this._weaponAttributes.next(attributes),
+        err => console.error(err),
+        () => console.log('Finished loading attributes')
+      );
+  }
+
+  _loadGearAttributes() {
+    let basePath = 'app/assets/json/gear-attributes.json';
+    this._http.get(basePath)
       .map(res => <GearAttribute[]>res.json())
       .subscribe(
         attributes => this._gearAttributes.next(attributes),
         err => console.error(err),
         () => console.log('Finished loading attributes')
       );
+  }
 
-    // this._bodyArmor = new AttributeStore(ItemType.BodyArmor, this._http);
 
-
+  get weaponAttributes() {
+    return asObservable(this._weaponAttributes, true);
   }
 
   get gearAttributes() {
@@ -58,8 +79,8 @@ export class AttributesService {
 
   }
 
-  _weaponAttributesFor(itemType, attributeType): AttributeObservable {
-    return Observable.create();
+  _weaponAttributesFor(itemType: ItemType, attributeType: AttributeType): AttributeObservable {
+    return this.weaponAttributes;
   }
 
   _gearAttributesFor(itemType: ItemType, attributeType: AttributeType): AttributeObservable {

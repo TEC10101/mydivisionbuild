@@ -45,6 +45,7 @@ export class Inventory {
 
 export interface ItemModSlot {
   id: number;
+  itemId?: number;
   primary?: Attribute;
   secondary?: Attribute;
 }

@@ -3,7 +3,7 @@
 
     <label editor>+{{attribute.value|attribute:attributeFormat}}</label>
     <select [(ngModel)]="attribute.value" (ngModelChange)="onAttributeChange()" editor="true"
-            >
+    >
       <option *ngFor="let attr of attributeValues" [value]="attr">{{attr|attribute:attributeFormat}}</option>
     </select>
 
@@ -20,8 +20,8 @@
       <select [(ngModel)]="attribute.id" (ngModelChange)="onAttributeChange()">
         <option *ngFor="let attr of attributes" [value]="attr.id">{{attr.name}}</option>
       </select>
-      <button (click)="onRemoveAttribute()">-</button>
-      <button (click)="onAddAttribute()">+</button>
+      <button (click)="onRemoveAttribute()" *ngIf="canAddOrRemove">-</button>
+      <button (click)="onAddAttribute()" *ngIf="canAddOrRemove">+</button>
     </div>
 
   </div>

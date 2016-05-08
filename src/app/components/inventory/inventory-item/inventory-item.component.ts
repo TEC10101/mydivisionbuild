@@ -5,10 +5,14 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Gear} from '../../gear-overview/gear.model';
 import {InventoryItemImageComponent} from '../inventory-item-image/inventory-item-image.component';
 import {ItemsService, isWeaponType} from '../../../services/item.service';
-import {ItemType, GearRarity, DivisionItem, WeaponSlot, ItemTalent} from '../../../common/models/common';
+import {
+  ItemType, GearRarity, DivisionItem, WeaponSlot, ItemTalent
+}
+  from '../../../common/models/common';
 import {InventoryService} from '../../../services/inventory.service';
 import {InventoryItem, InventoryItemType, Weapon} from '../inventory.model';
 import {Talent} from '../../talents/talent.model';
+import * as _ from 'lodash';
 
 
 @Component({

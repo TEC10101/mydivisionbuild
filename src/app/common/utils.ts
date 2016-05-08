@@ -4,6 +4,7 @@
 
 import * as _ from 'lodash';
 import {Observable} from 'rxjs/Observable';
+import {isArray} from '@angular/core/src/facade/lang';
 
 
 export const noop = () => {
@@ -53,5 +54,5 @@ export function asObservable<T>(subject: Observable<T>, once: boolean = false): 
     return new Observable(fn => obs.subscribe(fn));
   }
 
-  return once ? wrap(subject.first((x, idx, _) => !!x)) : wrap(subject);
+  return once ? wrap(subject.first((x, idx, _) => isArray(x) ? !!x.length : !!x)) : wrap(subject);
 }

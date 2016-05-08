@@ -15,7 +15,8 @@ export class AttributePipe implements PipeTransform {
 
   transform(value: number, format: ValueFormat = ValueFormat.NUMBER): string {
 
-    if (!value || isNaN(value)) return '0';
+    let tail = format === ValueFormat.PERCENT ? '%' : '';
+    if (!value || isNaN(value)) return '0' + tail;
 
 
     if (format === ValueFormat.PERCENT) {

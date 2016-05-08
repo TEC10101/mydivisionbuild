@@ -1,14 +1,16 @@
 import {ModSlotType} from './modslots.model';
 import {Input, Component, OnInit, ElementRef} from '@angular/core';
 
-import {ModSlotService, ModSlotAttributeSet} from '../../services/modslots.service';
+import {ModSlotService, ModSlotAttributeSet, WeaponModItem} from '../../services/modslots.service';
 import {EditorDirective} from '../../directives/editor';
 import {AttributeObservable} from '../../services/attributes.service';
 import {BehaviorSubject} from 'rxjs/Rx';
-import {GearAttribute} from '../../common/models/common';
+import {GearAttribute, DivisionAttribute} from '../../common/models/common';
 import {asObservable} from '../../common/utils';
 import {AttributeComponent, AttributeMeta} from '../attributes/attribute.component';
-import {ItemModSlot} from "../inventory/inventory.model";
+import {ItemModSlot} from '../inventory/inventory.model';
+import {isWeaponType} from '../../services/item.service';
+import * as _ from 'lodash';
 /**
  * Created by xastey on 4/10/2016.
  */
@@ -29,19 +31,31 @@ export class ModSlotComponent implements OnInit {
   @Input('gear-metadata') metadata: AttributeMeta;
   slotTypes: ModSlotType[];
 
+
+  weaponModItems: WeaponModItem[] = [];
+  weaponModItemName: string;
   private slotName: string;
   private _slotTypesById: SlotTypesById = {};
   private slotRarity: string;
-  private _primaryAttributes = new BehaviorSubject<GearAttribute[]>([]);
+  private _primaryAttributes = new BehaviorSubject<DivisionAttribute[]>([]);
 
 
-  private _secondaryAttributes = new BehaviorSubject<GearAttribute[]>([]);
+  private _secondaryAttributes = new BehaviorSubject<DivisionAttribute[]>([]);
   private _selectedSlotType: ModSlotType;
 
 
   constructor(private _modSlotService: ModSlotService, private _el: ElementRef) {
 
 
+  }
+
+
+  get isWeapon() {
+    return isWeaponType(this.metadata.belongsTo);
+  }
+
+  get isGear() {
+    return !this.isWeapon;
   }
 
 
@@ -55,9 +69,28 @@ export class ModSlotComponent implements OnInit {
     this.slotName = this._selectedSlotType.name;
     this.slotRarity = this._selectedSlotType.rarity;
 
+
+    if (this.isWeapon)
+      this._modSlotService
+        .weaponModItemsFor(this._selectedSlotType).subscribe(weaponModItems => {
+        this.weaponModItems = weaponModItems;
+        if (!this.slot.itemId) this.slot.itemId = this.weaponModItems[0].id;
+        console.log('Found weapon mod items', this._selectedSlotType, weaponModItems);
+      });
+
     this.refreshAttributeProviders();
 
 
+  }
+
+  get weaponSlotImage() {
+    return this._selectedSlotType
+      ? this._modSlotService.imageFor(this._selectedSlotType)
+      : '';
+  }
+
+  onWeaponSlotItemChanged(itemId) {
+    this.weaponModItemName = _.find(this.weaponModItems, {id: itemId}).name;
   }
 
 
@@ -74,8 +107,12 @@ export class ModSlotComponent implements OnInit {
   }
 
   ngOnInit(): any {
+
+
     this.slotTypes = this._modSlotService.getTypes(this.metadata.belongsTo);
     this.slotTypes.forEach(type => this._slotTypesById[type.id] = type);
+
+
     this.onSlotTypeChanged();
   }
 

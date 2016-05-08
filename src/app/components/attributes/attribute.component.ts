@@ -8,7 +8,7 @@ import {Attribute} from './attributes.model';
 import {AttributePipe} from './attribute.pipe';
 import {AttributesService, AttributeObservable} from '../../services/attributes.service';
 import {
-  ItemType, AttributeType, Rarity, ValueFormat, GearAttribute
+  ItemType, AttributeType, Rarity, ValueFormat, GearAttribute, DivisionAttribute
 }
   from '../../common/models/common';
 import {Subscription} from 'rxjs/Subscription';
@@ -17,12 +17,14 @@ import {EditorDirective} from '../../directives/editor';
 import {AttributeRestrictPipe} from './attribute-restrict.pipe';
 import {isNumber, isFunction} from '@angular/core/src/facade/lang';
 import {numberRange} from '../../common/utils';
+import {isWeaponType} from '../../services/item.service';
 
 
 export interface AttributeMeta {
   level: number;
   rarity: Rarity;
   belongsTo: ItemType;
+  weaponFamily: string;
 }
 
 
@@ -31,7 +33,7 @@ export interface AttributeEvent {
   attributeType: AttributeType;
 }
 
-type AttributesById = {[id: string]: GearAttribute}
+type AttributesById = {[id: string]: DivisionAttribute}
 
 @Component({
   selector: 'item-attribute',
@@ -55,19 +57,15 @@ export class AttributeComponent implements OnInit, OnDestroy {
   @Output() removed = new EventEmitter<AttributeEvent>();
 
   attributeFormat: ValueFormat;
-  selectedAttribute: GearAttribute;
-  attributes: GearAttribute[];
+  selectedAttribute: DivisionAttribute;
+  attributes: DivisionAttribute[];
   attributeName: string = '';
 
+
+  @Input('attributes-provider') attributesProvider: AttributeObservable;
   private _attributesById: AttributesById = {};
 
   private _subscription: Subscription;
-
-
-  /**
-   *
-   */
-  @Input('attributes-provider') attributesProvider: AttributeObservable;
 
 
   constructor(private _attributesService: AttributesService) {
@@ -93,7 +91,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
       this._attributesById = {};
       this.attributes = data;
       this.attribute.id = undefined;
-      data.forEach((attr: GearAttribute) => this._attributesById[attr.id] = attr);
+      data.forEach((attr: DivisionAttribute) => this._attributesById[attr.id] = attr);
       if (data.length) {
 
         this.onAttributeChange();
@@ -101,6 +99,10 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
     });
 
+  }
+
+  get canAddOrRemove() {
+    return !isWeaponType(this.metadata.belongsTo);
   }
 
   get attributeDef() {
@@ -133,7 +135,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
     this.attributeName = this.selectedAttribute.name;
 
-    this.attributeFormat = this.selectedAttribute.format;
+    this.attributeFormat = this.selectedAttribute.format || ValueFormat.PERCENT;
   }
 
   onAddAttribute() {
@@ -154,7 +156,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
   }
 
   get freeFormDisplay() {
-    //this.attributeDef ? !this.attributeDef.values : true;
+    // this.attributeDef ? !this.attributeDef.values : true;
     return true;
   }
 
