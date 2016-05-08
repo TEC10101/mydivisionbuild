@@ -46,19 +46,27 @@ select, label, .mod-slot-attributes-wrapper {
 .mod-slot-wrapper {
   &.high-end {
     .mod-slot-item-image {
-      background-color: rgba($high-end-rarity-color, .5);
+      background-color: rgba($high-end-rarity-color, .2);
     }
     .mod-slot-item-name {
-      color: $high-end-accent-font-color;
+      label:nth-child(1) {
+        font-weight: 600;
+      }
+      label:nth-child(2), select {
+        color: $high-end-accent-font-color;
+      }
     }
   }
   &.superior {
     .mod-slot-item-image {
-      background-color: rgba($superior-rarity-color, .5);
+      background-color: rgba($superior-rarity-color, .2);
     }
     .mod-slot-item-name {
-      label:nth(1), select {
-        color: $superior-accent-font-color;
+      label:nth-child(1) {
+        font-weight: 600;
+      }
+      label:nth-child(2), select {
+        color: $superior-accent-font-color !important;
       }
     }
   }

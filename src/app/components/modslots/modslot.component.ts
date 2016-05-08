@@ -34,6 +34,7 @@ export class ModSlotComponent implements OnInit {
 
   weaponModItems: WeaponModItem[] = [];
   weaponModItemName: string;
+  inheritPrimaryAttributeId: number = 0;
   private slotName: string;
   private _slotTypesById: SlotTypesById = {};
   private slotRarity: string;
@@ -75,13 +76,16 @@ export class ModSlotComponent implements OnInit {
         .weaponModItemsFor(this._selectedSlotType).subscribe(weaponModItems => {
         this.weaponModItems = weaponModItems;
         if (!this.slot.itemId) this.slot.itemId = this.weaponModItems[0].id;
-        console.log('Found weapon mod items', this._selectedSlotType, weaponModItems);
+        this.onWeaponSlotItemChanged(this.slot.itemId);
+
+
       });
 
     this.refreshAttributeProviders();
 
 
   }
+
 
   get weaponSlotImage() {
     return this._selectedSlotType
@@ -90,7 +94,9 @@ export class ModSlotComponent implements OnInit {
   }
 
   onWeaponSlotItemChanged(itemId) {
-    this.weaponModItemName = _.find(this.weaponModItems, {id: itemId}).name;
+    let weaponModItem = _.find(this.weaponModItems, {id: +itemId});
+    this.weaponModItemName = weaponModItem.name;
+    this.inheritPrimaryAttributeId = weaponModItem.inheritAttribute || 0;
   }
 
 

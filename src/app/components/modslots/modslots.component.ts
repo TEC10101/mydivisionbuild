@@ -79,7 +79,7 @@ export class ModSlotsComponent implements OnInit {
     _.forEach(modSlotTypes, (modSlotType: ModSlotType, id) => {
       this._modSlotService.getAttributeSetFor(modSlotType)
         .subscribe(attributeSet => {
-          console.log('onAddWeaponModSlot', modSlotType, attributeSet);
+
           tree.push([modSlotType, attributeSet]);
 
           if (tree.length === modSlotTypes.length) {

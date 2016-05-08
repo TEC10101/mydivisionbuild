@@ -17,7 +17,7 @@
       <div class="mod-slot-item-name">
         <label>{{slotName}}</label>
         <label editor="false">{{weaponModItemName}}</label>
-        <select [(ngModel)]="slot.itemId" editor="true" (ngModelChange)="onWeaponSlotItemChanged()">
+        <select [(ngModel)]="slot.itemId" editor="true" (ngModelChange)="onWeaponSlotItemChanged($event)">
           <option *ngFor="let weaponModItem of weaponModItems" [value]="weaponModItem.id">
             {{weaponModItem.name}}
           </option>
@@ -32,6 +32,7 @@
                     can-add="false"
                     [attributes-provider]="getAttributesProvider(true)"
                     [metadata]="metadata"
+                    [restrict-attribute]="inheritPrimaryAttributeId"
                     attribute-type="main"
     ></item-attribute>
 

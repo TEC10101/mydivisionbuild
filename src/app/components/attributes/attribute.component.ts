@@ -18,6 +18,7 @@ import {AttributeRestrictPipe} from './attribute-restrict.pipe';
 import {isNumber, isFunction} from '@angular/core/src/facade/lang';
 import {numberRange} from '../../common/utils';
 import {isWeaponType} from '../../services/item.service';
+import {BooleanConverter, InputConverter, NumberConverter} from '../../common/converters';
 
 
 export interface AttributeMeta {
@@ -53,12 +54,17 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   @Input('maxlength') maxlength: any;
 
+  @Input('restrict-attribute')
+  @InputConverter(NumberConverter)
+  restrictAttributeId: number;
+
   @Output() added = new EventEmitter<AttributeEvent>();
   @Output() removed = new EventEmitter<AttributeEvent>();
 
+
   attributeFormat: ValueFormat;
   selectedAttribute: DivisionAttribute;
-  attributes: DivisionAttribute[];
+  _attributes: DivisionAttribute[];
   attributeName: string = '';
 
 
@@ -89,7 +95,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
       : this._attributesService.getFor(meta.belongsTo, this.attributeType);
     this._subscription = provider.subscribe(data => {
       this._attributesById = {};
-      this.attributes = data;
+      this._attributes = data;
       this.attribute.id = undefined;
       data.forEach((attr: DivisionAttribute) => this._attributesById[attr.id] = attr);
       if (data.length) {
@@ -99,6 +105,20 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
     });
 
+  }
+
+  get attributes() {
+    let values = isNaN(this.restrictAttributeId) || !this.restrictAttributeId
+      ? this._attributes : _.filter(this._attributes, {id: this.restrictAttributeId});
+
+    // check to see if we are restricting the attribute selection
+    // if so then commit the change so that when not in edit mode the view
+    // updates correctly
+    if (values.length === 1) {
+
+      this._commitAttributeChange(values[0].id);
+    }
+    return values;
   }
 
   get canAddOrRemove() {
@@ -131,7 +151,12 @@ export class AttributeComponent implements OnInit, OnDestroy {
     if (!this.attribute.id || this.attributes.length === 1) {
       this.attribute.id = this.attributes[0].id;
     }
-    this.selectedAttribute = this._attributesById[this.attribute.id];
+    this._commitAttributeChange(this.attribute.id);
+
+  }
+
+  _commitAttributeChange(id) {
+    this.selectedAttribute = this._attributesById[id];
 
     this.attributeName = this.selectedAttribute.name;
 

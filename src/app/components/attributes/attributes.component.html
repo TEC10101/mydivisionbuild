@@ -16,7 +16,7 @@
   <item-attribute *ngFor="let attribute of minorAttributes" [attribute]="attribute" [metadata]="metadata"
                   attribute-type="minor"
                   (removed)="onRemoveAttribute($event)"
-                  (added)="onAddAttribute($event)"></item-attribute>
+                  (added)="onAddAttribute($event)" can-restrict="true"></item-attribute>
 
   <div class="attributes-title-wrapper" *ngIf="skillAttributes.length">
     Skill Attributes
