@@ -79,7 +79,7 @@ export class InventoryItemComponent implements OnInit {
   }
 
   hasStat(name) {
-    return !this.item || isWeaponType(this.itemType) ? false : (<Gear>this.item).stats[name] > 0;
+    return !this.item ? false : (<Gear>this.item).stats[name] > 0;
   }
 
   get statNames() {

@@ -136,7 +136,10 @@
     },
     {
       "id": "reckless",
-      "template": "You deal x% more damage and receive 10% more damage."
+      "template": "You deal x% more damage and receive 10% more damage.",
+      "affects": [
+        "weapon_damage"
+      ]
     },
     {
       "id": "robust",

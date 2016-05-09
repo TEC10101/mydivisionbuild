@@ -54,9 +54,8 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   @Input('maxlength') maxlength: any;
 
-  @Input('restrict-attribute')
-  @InputConverter(NumberConverter)
-  restrictAttributeId: number;
+
+  _restrictAttributeId: number;
 
   @Output() added = new EventEmitter<AttributeEvent>();
   @Output() removed = new EventEmitter<AttributeEvent>();
@@ -107,9 +106,29 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   }
 
+  get restrictAttributeId() {
+    return this._restrictAttributeId;
+  }
+
+  @Input('restrict-attribute')
+  @InputConverter(NumberConverter)
+  set restrictAttributeId(value) {
+
+    if (this._restrictAttributeId !== value) {
+      this.attribute.id = void 0;
+    }
+    this._restrictAttributeId = value;
+    let attrs = this.attributes;
+    if (!this.attribute.id && attrs.length) {
+      this._commitAttributeChange(attrs[0].id);
+    }
+  }
+
   get attributes() {
-    let values = isNaN(this.restrictAttributeId) || !this.restrictAttributeId
-      ? this._attributes : _.filter(this._attributes, {id: this.restrictAttributeId});
+    let values = this._attributes ?
+      isNaN(this.restrictAttributeId) || !this.restrictAttributeId
+        ? this._attributes : _.filter(this._attributes, {id: this.restrictAttributeId})
+      : [];
 
     // check to see if we are restricting the attribute selection
     // if so then commit the change so that when not in edit mode the view
@@ -156,6 +175,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
   }
 
   _commitAttributeChange(id) {
+    this.attribute.id = id;
     this.selectedAttribute = this._attributesById[id];
 
     this.attributeName = this.selectedAttribute.name;

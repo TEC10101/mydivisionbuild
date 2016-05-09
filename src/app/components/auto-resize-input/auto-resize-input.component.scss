@@ -9,7 +9,7 @@ input, .placeholder {
 
   @include text-style();
   &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+    //    -webkit-appearance: none;
     margin: 0;
   }
 

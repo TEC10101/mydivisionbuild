@@ -3,6 +3,9 @@
     "id": 1,
     "name": "Crit Chance",
     "type": "major",
+    "affects": [
+      "chc"
+    ],
     "slots": [
       "muzzle",
       "optics",
@@ -13,6 +16,9 @@
     "id": 2,
     "name": "Crit Damage",
     "type": "major",
+    "affects": [
+      "chd"
+    ],
     "slots": [
       "muzzle",
       "magazine"
@@ -22,6 +28,9 @@
     "id": 3,
     "name": "Weapon Damage",
     "type": "major",
+    "affects": [
+      "weapon_damage"
+    ],
     "slots": [
       "magazine"
     ]
@@ -29,6 +38,9 @@
   {
     "id": 4,
     "name": "Headshot Damage",
+    "affects": [
+      "headshot"
+    ],
     "type": "major",
     "slots": [
       "optics"
@@ -37,6 +49,9 @@
   {
     "id": 5,
     "name": "Accuracy",
+    "affects": [
+      "accuracy"
+    ],
     "type": "major",
     "slots": [
       "muzzle",
@@ -47,6 +62,9 @@
   {
     "id": 6,
     "name": "Hip Fire Accuracy",
+    "affects": [
+      "hip_accuracy"
+    ],
     "type": "major",
     "slots": [
       "underbarrel"
@@ -55,6 +73,9 @@
   {
     "id": 7,
     "name": "Stability",
+    "affects": [
+      "stability"
+    ],
     "type": "major",
     "slots": [
       "muzzle",
@@ -64,6 +85,9 @@
   {
     "id": 8,
     "name": "Horizontal Stability",
+    "affects": [
+      "horizontal_stability"
+    ],
     "type": "major",
     "slots": [
       "muzzle",
@@ -99,6 +123,9 @@
   {
     "id": 12,
     "name": "Magazine Size",
+    "affects": [
+      "magazine"
+    ],
     "type": "major",
     "slots": [
       "magazine"
@@ -107,6 +134,9 @@
   {
     "id": 13,
     "name": "Reload Speed",
+    "affects":[
+      "reload"
+    ],
     "type": "major",
     "slots": [
       "magazine"

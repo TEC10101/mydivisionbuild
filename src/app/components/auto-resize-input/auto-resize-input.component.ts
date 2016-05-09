@@ -60,8 +60,9 @@ export class AutoResizeInput {
         <label  [ngClass]='{hidden:editing}' (click)='onClicked()'>
           {{prepend}}{{value|attribute:format}}
         </label>
-        <input [ngClass]='{hidden:!editing}' autofocus type='text' 
-         pattern='\d*' [attr.maxlength]='length' [value]='value' 
+        <input [ngClass]='{hidden:!editing}' autofocus type='number'
+         min="0" max="9999"
+         [attr.step]="numberStep" [attr.size]='length' [value]='value' 
          (input)='onInputChanged($event)'  (focus)='onInputFocused()' 
          class='auto-resize-input' (blur)='onInputBlurred()'/>
     </div>
@@ -100,6 +101,10 @@ export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, O
     this.ngZone = ngZone;
     this._editorSubscription = this._editorService.subscribe((value) => this.allowEditing = value);
 
+  }
+
+  get numberStep() {
+    return this.format === ValueFormat.PERCENT ? '0.5' : '1';
   }
 
   ngOnInit(): any {
@@ -213,7 +218,7 @@ export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, O
   }
 
   private setElementWidth(nativeElement: any, width: number) {
-    nativeElement.style.width = width + 'px';
+    nativeElement.style.width = width + 15 + 'px';
   }
 
 

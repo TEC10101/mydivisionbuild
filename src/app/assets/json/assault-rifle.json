@@ -123,7 +123,6 @@
         "suppressor_large"
       ],
       "optics": [
-
         "rds_small",
         "rds_large"
       ],
@@ -132,6 +131,13 @@
         "grip_large",
         "laser"
       ]
+    }
+  },
+  "stats": {
+    "acr": {
+      "rpm": 760,
+      "magazine": 30,
+      "reload": 2300
     }
   }
 }

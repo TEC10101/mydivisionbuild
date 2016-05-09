@@ -170,5 +170,19 @@ export interface WeaponTalent extends ItemTalent {
 }
 
 
+export type Affects = 'chc' | 'chd' | 'weapon_damage'
+
+export const Affects = {
+  CRIT_HIT_CHANCE: 'chc' as Affects,
+  CRIT_HIT_DAMAGE: 'chd' as Affects,
+  WEAPON_DAMAGE: 'weapon_damage' as Affects
+};
+
+export interface AffectsResults {
+
+  affects: Affects,
+  value: number;
+}
+
 
 

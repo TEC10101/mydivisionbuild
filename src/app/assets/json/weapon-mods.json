@@ -18,12 +18,12 @@
     {
       "id": 4,
       "name": "Loud vent break",
-      "inheritAttribute": 16
+      "inheritAttribute": 15
     },
     {
       "id": 5,
       "name": "Osprey .45 suppressor",
-      "inheritAttribute": 15
+      "inheritAttribute": 14
     },
     {
       "id": 6,
@@ -33,17 +33,17 @@
     {
       "id": 7,
       "name": "Large suppressor",
-      "inheritAttribute": 15
+      "inheritAttribute": 14
     },
     {
       "id": 8,
       "name": "SR-7 suppressor",
-      "inheritAttribute": 15
+      "inheritAttribute": 14
     },
     {
       "id": 9,
       "name": "Omega rifle suppressor",
-      "inheritAttribute": 15
+      "inheritAttribute": 14
     }
   ],
   "underbarrel": [
@@ -168,7 +168,7 @@
     {
       "id": 2,
       "name": "Heavy magazine spring",
-      "inheritAttribute": 17
+      "inheritAttribute": 16
     },
     {
       "id": 3,
@@ -178,7 +178,7 @@
     {
       "id": 4,
       "name": "Quick release magazine",
-      "inheritAttribute": 14
+      "inheritAttribute": 13
     }
   ]
 }

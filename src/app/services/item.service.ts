@@ -5,7 +5,7 @@
 
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
-import {BehaviorSubject} from 'rxjs/Rx';
+import {BehaviorSubject, Subject, Observable} from 'rxjs';
 import {
   DivisionItem, ItemType, GearRarity, Rarity, Gender, WEAPON_TYPES, GEAR_TYPES,
   ItemTalent, WeaponTalent
@@ -14,7 +14,7 @@ import {
 import * as _ from 'lodash';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 import {asObservable} from '../common/utils';
-import {Observable} from 'rxjs/Observable';
+
 import {Gear, GEAR_SCORES} from '../components/gear-overview/gear.model';
 import {InventoryService} from './inventory.service';
 import {InventoryItem} from '../components/inventory/inventory.model';
@@ -77,13 +77,14 @@ interface WeaponModCompatibility {
   underbarrel: WeaponModType[];
 }
 
-type WeaponModCompatibilityByType= {[id: string]: WeaponModCompatibility}
+type WeaponModCompatibilityByType = {[id: string]: WeaponModCompatibility}
+type WeaponBaseAttributesByFamily = {[id: string]: WeaponBaseAttributes}
 
 interface WeaponManifest {
   weapons: WeaponInfo[];
   compatibility: WeaponModCompatibilityByType;
 }
-interface WeaponInfo extends DivisionItem {
+export interface WeaponInfo extends DivisionItem {
   named: boolean;
   talents: WeaponTalent[];
   family: string;
@@ -93,8 +94,40 @@ export interface GearDescriptor extends ItemDescriptor {
 }
 
 
+export interface WeaponBaseAttributes {
+  rpm: number;
+  damage: number;
+  reloadEmpty: number;
+  reloadBulletsLeft: number;
+  scaling: number;
+}
 export interface WeaponDescriptor extends ItemDescriptor {
   compatibility: WeaponModCompatibilityByType;
+  attributes: WeaponBaseAttributesByFamily;
+}
+export class GearMetaData {
+  bodyArmor: GearDescriptor;
+  mask: GearDescriptor;
+  backPack: GearDescriptor;
+  gloves: GearDescriptor;
+  kneePads: GearDescriptor;
+  holster: GearDescriptor;
+
+  forType(itemType: ItemType): GearDescriptor {
+    let name = dashCaseToCamelCase(itemType);
+    return this.hasOwnProperty(name) ? this[name] : void 0;
+  }
+
+
+}
+
+export class WeaponMetaData {
+  assaultRifle: WeaponDescriptor;
+
+  forType(itemType: ItemType): WeaponDescriptor {
+    let name = dashCaseToCamelCase(itemType);
+    return this.hasOwnProperty(name) ? this[name] : void 0;
+  }
 }
 
 
@@ -129,6 +162,34 @@ export class ItemsService {
     asObservable(this._weaponTalents, true)
       .subscribe(talents => this._loadWeapons(talents));
 
+
+  }
+
+  _collectDescriptors<T>(metadata: T, types: ItemType[]) {
+    types = types.slice(0);
+
+    let obs = types.map(type => this['_' + dashCaseToCamelCase(type)]);
+    let all = new Subject<T>();
+    Observable.merge(...obs).take(obs.length).subscribe(
+      descriptor => {
+        let itemType = types.shift();
+        let name = dashCaseToCamelCase(itemType);
+        metadata[name] = descriptor;
+      },
+      error => console.log(error),
+      () => all.next(metadata)
+    );
+
+    return all;
+  }
+
+  gatherAllGearMetaData(): Observable<GearMetaData> {
+    let metadata = new GearMetaData();
+    return this._collectDescriptors(metadata, GEAR_TYPES);
+
+  }
+
+  gatherAllWeaponMetaData() {
 
   }
 
