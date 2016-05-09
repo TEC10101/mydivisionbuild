@@ -112,9 +112,10 @@ export interface DivisionAttribute {
   name: string;
   type: AttributeType;
   format?: ValueFormat;
+  affects: Affects[];
 }
 export interface GearAttribute extends DivisionAttribute {
-  id: number;
+
   name: string;
   type: AttributeType;
   kind: AttributeKind;
@@ -161,7 +162,7 @@ export class GearStats {
 export interface ItemTalent {
   id: string;
   template: string;
-  affects?: string[];
+  affects?: Affects[];
 }
 
 export interface WeaponTalent extends ItemTalent {
@@ -171,16 +172,33 @@ export interface WeaponTalent extends ItemTalent {
 
 
 export type Affects = 'chc' | 'chd' | 'weapon_damage'
-
+  | 'assault_rifle_damage' | 'shotgun_damage' | 'lmg_damage'
+  |'pistol_damage'|'sniper_damage'|'armor'|'health'|'skill_power'
+  |'firearms'|'stamina'|'electronics'
+// tslint:disable-next-line
 export const Affects = {
-  CRIT_HIT_CHANCE: 'chc' as Affects,
-  CRIT_HIT_DAMAGE: 'chd' as Affects,
-  WEAPON_DAMAGE: 'weapon_damage' as Affects
+  normalize: function (value: string) {
+    return (value.replace(/-/g, '_').toLowerCase()) as Affects;
+  },
+  CRIT_HIT_CHANCE: 'chc'  as Affects,
+  CRIT_HIT_DAMAGE: 'chd'  as Affects,
+  WEAPON_DAMAGE: 'weapon_damage'  as Affects,
+  ASSAULT_RIFLE_DAMAGE: 'assault_rifle_damage'  as Affects,
+  SHOTGUN_DAMAGE: 'shotgun_damage'  as Affects,
+  LMG_DAMAGE: 'lmg_damage'  as Affects,
+  PISTOL_DAMAGE: 'pistol_damage' as Affects,
+  SNIPER_DAMAGE: 'sniper_damage' as Affects,
+  ARMOR: 'armor' as Affects,
+  HEALTH: 'health' as Affects,
+  SKILL_POWER: 'skill_power'  as Affects,
+  FIREARMS: 'firearms' as Affects,
+  STAMINA: 'stamina' as Affects,
+  ELECTRONICS: 'electronics' as Affects
 };
 
 export interface AffectsResults {
 
-  affects: Affects,
+  affects: Affects;
   value: number;
 }
 

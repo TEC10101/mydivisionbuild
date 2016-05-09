@@ -25,7 +25,7 @@ export interface AttributeMeta {
   level: number;
   rarity: Rarity;
   belongsTo: ItemType;
-  weaponFamily: string;
+  weaponFamily?: string;
 }
 
 
@@ -156,7 +156,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
     if (!this.attribute.id) {
       return [];
     }
-    let [low, high] = this.attributeDef.values[this.metadata.level];
+    let [low, high] = [1, 2];// this.attributeDef.values[this.metadata.level];
 
     return numberRange(low, high);
 

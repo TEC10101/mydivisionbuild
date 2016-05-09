@@ -40,6 +40,8 @@ export class AttributesService {
 
   }
 
+ 
+
   _loadWeaponAttributes() {
     let basePath = 'app/assets/json/weapon-attributes.json';
     this._http.get(basePath)

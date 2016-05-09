@@ -8,7 +8,7 @@ import {Http} from '@angular/http';
 import {BehaviorSubject, Subject, Observable} from 'rxjs';
 import {
   DivisionItem, ItemType, GearRarity, Rarity, Gender, WEAPON_TYPES, GEAR_TYPES,
-  ItemTalent, WeaponTalent
+  ItemTalent, WeaponTalent, GearAttribute, WeaponAttribute
 }
   from '../common/models/common';
 import * as _ from 'lodash';
@@ -19,6 +19,7 @@ import {Gear, GEAR_SCORES} from '../components/gear-overview/gear.model';
 import {InventoryService} from './inventory.service';
 import {InventoryItem} from '../components/inventory/inventory.model';
 import {WeaponModType} from '../components/modslots/modslots.model';
+import {AttributesService} from './attributes.service';
 
 
 class ItemStore {
@@ -26,6 +27,7 @@ class ItemStore {
 }
 
 
+let defaultDescriptorProcessor = (type: ItemType, json: any) => <ItemDescriptor>json;
 interface GearIconSet {
   // superior lvl30
   131?: string;
@@ -78,7 +80,7 @@ interface WeaponModCompatibility {
 }
 
 type WeaponModCompatibilityByType = {[id: string]: WeaponModCompatibility}
-type WeaponBaseAttributesByFamily = {[id: string]: WeaponBaseAttributes}
+type  WeaponBaseStatsByFamily = {[id: string]: WeaponBaseStats}
 
 interface WeaponManifest {
   weapons: WeaponInfo[];
@@ -94,18 +96,28 @@ export interface GearDescriptor extends ItemDescriptor {
 }
 
 
-export interface WeaponBaseAttributes {
+export interface WeaponBaseStats {
   rpm: number;
   damage: number;
   reloadEmpty: number;
   reloadBulletsLeft: number;
   scaling: number;
 }
+
+
 export interface WeaponDescriptor extends ItemDescriptor {
   compatibility: WeaponModCompatibilityByType;
-  attributes: WeaponBaseAttributesByFamily;
+  stats: WeaponBaseStatsByFamily;
 }
-export class GearMetaData {
+
+abstract class DescriptorCollection<T> {
+
+  forType(itemType: ItemType): T {
+    let name = dashCaseToCamelCase(itemType);
+    return this.hasOwnProperty(name) ? this[name] : void 0;
+  }
+}
+export class GearDescriptorCollection extends DescriptorCollection<GearDescriptor> {
   bodyArmor: GearDescriptor;
   mask: GearDescriptor;
   backPack: GearDescriptor;
@@ -113,21 +125,16 @@ export class GearMetaData {
   kneePads: GearDescriptor;
   holster: GearDescriptor;
 
-  forType(itemType: ItemType): GearDescriptor {
-    let name = dashCaseToCamelCase(itemType);
-    return this.hasOwnProperty(name) ? this[name] : void 0;
-  }
+  attributes: GearAttribute[];
+  
 
 
 }
 
-export class WeaponMetaData {
+export class WeaponDescriptorCollection extends DescriptorCollection<WeaponDescriptor> {
   assaultRifle: WeaponDescriptor;
+  attributes: WeaponAttribute[];
 
-  forType(itemType: ItemType): WeaponDescriptor {
-    let name = dashCaseToCamelCase(itemType);
-    return this.hasOwnProperty(name) ? this[name] : void 0;
-  }
 }
 
 
@@ -144,6 +151,11 @@ export class ItemsService {
 
   // weapons
 
+  private _weaponDescriptorCollection: WeaponDescriptorCollection
+    = new WeaponDescriptorCollection();
+  private _gearDescriptorCollection: GearDescriptorCollection
+    = new GearDescriptorCollection();
+
   private _assaultRifle: BehaviorSubject<WeaponDescriptor> =
     new BehaviorSubject<WeaponDescriptor>(void 0);
 
@@ -155,12 +167,17 @@ export class ItemsService {
   private _imagePath = 'app/assets/images/inventory/';
 
 
-  constructor(private _http: Http) {
-    this._loadItems(GEAR_TYPES);
+  constructor(private _http: Http, private _attributesService: AttributesService) {
+    this._loadItems(GEAR_TYPES, this._gearDescriptorCollection);
     this._loadWeaponTalents();
 
     asObservable(this._weaponTalents, true)
       .subscribe(talents => this._loadWeapons(talents));
+    _attributesService.weaponAttributes
+      .subscribe(attributes => this._weaponDescriptorCollection.attributes = attributes);
+
+    _attributesService.gearAttributes
+      .subscribe(attributes => this._gearDescriptorCollection.attributes = attributes);
 
 
   }
@@ -183,35 +200,35 @@ export class ItemsService {
     return all;
   }
 
-  gatherAllGearMetaData(): Observable<GearMetaData> {
-    let metadata = new GearMetaData();
-    return this._collectDescriptors(metadata, GEAR_TYPES);
+  get _gearDescriptors(): GearDescriptorCollection {
+    return this._gearDescriptorCollection;
 
   }
 
-  gatherAllWeaponMetaData() {
-
+  get _weaponDescriptors(): WeaponDescriptorCollection {
+    return this._weaponDescriptorCollection;
   }
 
   _loadWeapons(talents: WeaponTalent[]) {
-    this._loadItems(WEAPON_TYPES, (weaponType: ItemType, manifest: WeaponManifest) => {
-      let weapons = manifest.weapons;
-      let superior = _.filter(weapons, weapon => !weapon.named);
+    this._loadItems(WEAPON_TYPES, this._weaponDescriptorCollection,
+      (weaponType: ItemType, manifest: WeaponManifest) => {
+        let weapons = manifest.weapons;
+        let superior = _.filter(weapons, weapon => !weapon.named);
 
-      let items = {};
-      items[GearRarity.SUPERIOR] = superior;
-      items[GearRarity.HIGH_END] = weapons;
-      items[GearRarity.GEAR_SET] = [];
+        let items = {};
+        items[GearRarity.SUPERIOR] = superior;
+        items[GearRarity.HIGH_END] = weapons;
+        items[GearRarity.GEAR_SET] = [];
 
 
-      let supportedTalents: WeaponTalent[] = _.filter(talents, {supports: [weaponType]});
+        let supportedTalents: WeaponTalent[] = _.filter(talents, {supports: [weaponType]});
 
-      return <WeaponDescriptor>{
-        items: <DivisionItems>items,
-        talents: supportedTalents,
-        compatibility: manifest.compatibility
-      };
-    });
+        return <WeaponDescriptor>{
+          items: <DivisionItems>items,
+          talents: supportedTalents,
+          compatibility: manifest.compatibility
+        };
+      });
   }
 
   _loadWeaponTalents() {
@@ -225,11 +242,13 @@ export class ItemsService {
       );
   }
 
-  _loadItems(types: ItemType[],
+  _loadItems(types: ItemType[], collection: DescriptorCollection<ItemDescriptor>,
              process: (type: ItemType, json: any) => ItemDescriptor
-               = (type: ItemType, json: any) => <ItemDescriptor>json) {
+               = defaultDescriptorProcessor) {
+
     let self = this;
     _.forEach(types, (itemType: ItemType, key: string) => {
+
       console.log('ItemsService(', itemType, ')');
       let subjectName = dashCaseToCamelCase(itemType);
 
@@ -239,7 +258,10 @@ export class ItemsService {
       this._http.get(url)
         .map(res => process(itemType, res.json()))
         .subscribe(
-          descriptor => subject.next(descriptor),
+          descriptor => {
+            subject.next(descriptor);
+            collection[subjectName] = descriptor;
+          },
           error => console.log('Error loading', url, error),
           () => console.log('Finished loading', url)
         );

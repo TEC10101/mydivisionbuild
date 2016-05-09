@@ -8,7 +8,7 @@ import {StatsDisplay} from '../stats-display/stats-display';
 import {Gear} from './gear.model';
 import {AttributesComponent} from '../attributes/attributes.component';
 import {PrettyNumberPipe} from '../../common/pipes/prettynumber';
-import {Rarity, GearRarity} from '../../common/models/common';
+import {Rarity, GearRarity, DivisionItem} from '../../common/models/common';
 import {AttributeMeta} from '../attributes/attribute.component';
 import {ItemsService, ItemDescriptor, isWeaponType} from '../../services/item.service';
 import {NgFor} from '@angular/common';
@@ -55,7 +55,7 @@ export class GearOverviewComponent implements OnInit {
       .subscribe(descriptor => this.descriptor = descriptor);
   }
 
-  get items() {
+  get items(): DivisionItem[] {
 
     return this.descriptor ? this.descriptor.items[this.item.rarity] : [];
 
@@ -119,12 +119,11 @@ export class GearOverviewComponent implements OnInit {
   }
 
   get metadata(): AttributeMeta {
+    // weaponFamily: _.find(this.items, {name: this.item.name}).family
     return {
       level: this.item.score,
       rarity: this.item.rarity,
-      belongsTo: this.item.type,
-      weaponFamily: _.find(this.items, {name: this.item.name}).family
-
+      belongsTo: this.item.type
     };
   }
 

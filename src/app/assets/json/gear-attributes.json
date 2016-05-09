@@ -5,6 +5,9 @@
     "type": "major",
     "kind": "offensive",
     "format": "percent",
+    "affects": [
+      "chc"
+    ],
     "supports": [
       "mask",
       "gloves"
@@ -43,6 +46,9 @@
     "type": "major",
     "kind": "offensive",
     "format": "percent",
+    "affects": [
+      "chd"
+    ],
     "supports": [
       "backpack",
       "gloves",
@@ -82,6 +88,9 @@
     "type": "major",
     "kind": "offensive",
     "format": "number",
+    "affects": [
+      "smg_damage"
+    ],
     "supports": [
       "gloves"
     ]
@@ -92,6 +101,9 @@
     "type": "major",
     "kind": "offensive",
     "format": "number",
+    "affects": [
+      "assault_rifle_damage"
+    ],
     "supports": [
       "gloves"
     ]
@@ -102,6 +114,9 @@
     "type": "major",
     "kind": "offensive",
     "format": "number",
+    "affects": [
+      "shotgun_damage"
+    ],
     "supports": [
       "gloves"
     ]
@@ -112,6 +127,9 @@
     "type": "major",
     "kind": "offensive",
     "format": "number",
+    "affects": [
+      "lmg_damage"
+    ],
     "supports": [
       "gloves"
     ]
@@ -122,6 +140,9 @@
     "type": "major",
     "kind": "offensive",
     "format": "number",
+    "affects": [
+      "pistol_damage"
+    ],
     "supports": [
       "gloves",
       "holster"
@@ -133,6 +154,9 @@
     "type": "major",
     "kind": "offensive",
     "format": "number",
+    "affects": [
+      "sniper_damage"
+    ],
     "supports": [
       "gloves"
     ]
@@ -183,6 +207,9 @@
     "type": "major",
     "kind": "defensive",
     "format": "number",
+    "affects": [
+      "armor"
+    ],
     "supports": [
       "mask",
       "body-armor",
@@ -198,6 +225,9 @@
     "type": "major",
     "kind": "defensive",
     "format": "number",
+    "affects": [
+      "armor"
+    ],
     "supports": [
       "body-armor",
       "backpack",
@@ -212,6 +242,9 @@
     "type": "major",
     "kind": "defensive",
     "format": "number",
+    "affects": [
+      "health"
+    ],
     "supports": [
       "mask",
       "body-armor",
@@ -278,6 +311,9 @@
     "type": "major",
     "kind": "utility",
     "format": "number",
+    "affects":[
+      "skill_power"
+    ],
     "supports": [
       "mask",
       "backpack"
@@ -420,6 +456,9 @@
     "name": "Firearms",
     "type": "main",
     "kind": "abstract",
+    "affects":[
+      "firearms"
+    ],
     "format": "number",
     "mod": true,
     "supports": []
@@ -429,6 +468,9 @@
     "name": "Stamina",
     "type": "main",
     "kind": "abstract",
+    "affects":[
+      "stamina"
+    ],
     "format": "number",
     "mod": true,
     "supports": []
@@ -438,6 +480,9 @@
     "name": "Electronics",
     "type": "main",
     "kind": "abstract",
+    "affects":[
+      "electronics"
+    ],
     "format": "number",
     "mod": true,
     "supports": []

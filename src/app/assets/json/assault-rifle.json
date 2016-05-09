@@ -137,7 +137,8 @@
     "acr": {
       "rpm": 760,
       "magazine": 30,
-      "reload": 2300
+      "reload": 2300,
+      "scaling":
     }
   }
 }
