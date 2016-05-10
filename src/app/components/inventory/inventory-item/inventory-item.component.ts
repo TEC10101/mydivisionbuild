@@ -12,7 +12,7 @@ import {
 import {InventoryService} from '../../../services/inventory.service';
 import {InventoryItem, InventoryItemType, Weapon} from '../inventory.model';
 import {Talent} from '../../talents/talent.model';
-import * as _ from 'lodash';
+import * as _ from 'lodash/index';
 
 
 @Component({

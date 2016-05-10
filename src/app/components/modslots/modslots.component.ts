@@ -7,7 +7,7 @@ import {ItemModSlot} from '../inventory/inventory.model';
 import {EditorDirective} from '../../directives/editor';
 import {isWeaponType} from '../../services/item.service';
 import {GearRarity} from '../../common/models/common';
-import * as _ from 'lodash';
+import * as _ from 'lodash/index';
 
 /**
  * Created by xastey on 4/10/2016.

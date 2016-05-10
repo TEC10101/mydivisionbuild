@@ -1,10 +1,10 @@
 /*
  * Providers provided by Angular
  */
-import {bootstrap} from "@angular/platform-browser-dynamic";
-import {DIRECTIVES, PIPES, PROVIDERS} from "./platform/browser";
-import {ENV_PROVIDERS} from "./platform/environment";
-import {App, APP_PROVIDERS, APP_DIRECTIVES} from "./app";
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {DIRECTIVES, PIPES, PROVIDERS} from './platform/browser';
+import {ENV_PROVIDERS} from './platform/environment';
+import {App, APP_PROVIDERS, APP_DIRECTIVES} from './app';
 /*
  * Platform and Environment
  * our providers/directives/pipes

@@ -5,13 +5,14 @@
 
 import {Injectable} from '@angular/core';
 import {Inventory, Weapon, InventoryGear} from '../components/inventory/inventory.model';
-import {ItemType, Affects} from '../common/models/common';
+import {ItemType, Affects, DivisionItem, GearRarity} from '../common/models/common';
 import {
   WeaponDescriptor, WeaponInfo, WeaponDescriptorCollection, ItemsService,
   GearDescriptorCollection, WeaponBaseStats
 } from './item.service';
 import {Gear} from '../components/gear-overview/gear.model';
 import {AttributesService} from './attributes.service';
+import * as _ from 'lodash/index';
 @Injectable()
 export class BuildStatsService {
 
@@ -47,7 +48,7 @@ export class BuildStatsService {
   }
 }
 
-class InventoryCalculator {
+export class InventoryCalculator {
 
 
   private _primary: WeaponStatsCalculator;
@@ -77,9 +78,16 @@ class InventoryCalculator {
   }
 
   get stamina() {
-    let base = this._reduce((sum, gear) => sum + gear.stats.firearms);
+    let base = this._reduce((sum, gear) => sum + gear.stats.stamina);
     let fromMods = this.calculateAffectsValueFromMods(Affects.STAMINA);
     return base + fromMods;
+  }
+
+  staminaFor(gear: Gear) {
+    let base = gear.stats.stamina;
+    let fromMods = this.calculateAffectsValueFromMods(Affects.STAMINA, gear);
+    return base + fromMods;
+
   }
 
   get electronics() {
@@ -130,7 +138,7 @@ class InventoryCalculator {
 
       // gear only has one talent
       let talent = gear.talents[0];
-      return sum + (_.contains(talentsThatAffects, talent.id) ? talent.value : 0);
+      return sum + (_.includes(talentsThatAffects, talent.id) ? talent.value : 0);
 
     });
   }
@@ -143,28 +151,29 @@ class InventoryCalculator {
     ).map(attr => attr.id);
   }
 
-  calculateAffectsValueFromMods(affects: Affects) {
+  calculateAffectsValueFromMods(affects: Affects, limitToGear?: Gear) {
     let attributesThatAffects = this._attributesThatAffects(affects);
     if (!attributesThatAffects.length) return 0;
     return this._reduce((sum, gear) => {
 
       let mods = gear.mods;
 
+
       return sum + _.reduce(mods, (total, mod) => {
 
-          let primary = mod.primary
-            ? _.contains(attributesThatAffects, mod.primary.id)
+          let primary = mod.primary && _.includes(attributesThatAffects, mod.primary.id)
+            ? mod.primary.value
             : 0;
 
-          let secondary = mod.secondary
-            ? _.contains(attributesThatAffects, mod.secondary.id)
+          let secondary = mod.secondary && _.includes(attributesThatAffects, mod.secondary.id)
+            ? mod.secondary.value
             : 0;
 
           return total + primary + secondary;
 
         }, 0);
 
-    });
+    }, limitToGear);
   }
 
   calculateAffectsValueFromAttributes(affects: Affects) {
@@ -173,17 +182,20 @@ class InventoryCalculator {
 
 
     return this._reduce((sum, gear) => {
-      let attributes = gear.attributes;
-      return sum + _.reduce(_.values(attributes), (total, attr) => {
-          return total + _.contains(attributesThatAffects, attr.id) ? +attr.value : 0;
-        });
+      let majorAttributes = gear.attributes.major;
+      return sum + _.reduce(majorAttributes, (total, attr) => {
+          return total + (_.includes(attributesThatAffects, attr.id) ? +attr.value : 0);
+        }, 0);
     });
   }
 
 
-  _reduce(fn: (sum: number, gear: Gear) => number) {
-    let all = this._inventory.gear;
-    return _.reduce(all, fn, 0);
+  _reduce(fn: (sum: number, gear: Gear) => number, limitToGear?: Gear) {
+
+    let all = limitToGear ? [limitToGear] : <Gear[]>_.values(this._inventory.gear);
+    return _.reduce(all, (sum, gear) => {
+      return gear ? fn(sum, gear) : sum;
+    }, 0);
   }
 
 
@@ -192,8 +204,6 @@ class InventoryCalculator {
 
 class WeaponStatsCalculator {
 
-  private _inventoryCalc: InventoryCalculator;
-  private _weaponInfo: WeaponInfo;
 
   constructor(private _weapon: Weapon,
               private _weaponDescriptors: WeaponDescriptorCollection,
@@ -211,9 +221,10 @@ class WeaponStatsCalculator {
 
   weaponInfo(descriptor?: WeaponDescriptor) {
 
-    return _.find(descriptor
-        ? descriptor.items : this.weaponDescriptor.items,
-      {name: this._weapon.name});
+
+    let items = <WeaponInfo[]>_.merge(..._.values(descriptor
+      ? descriptor.items : this.weaponDescriptor.items));
+    return _.find(items, {name: this._weapon.name});
   }
 
   get damage() {
@@ -231,7 +242,7 @@ class WeaponStatsCalculator {
 
   get _weaponBaseStats(): WeaponBaseStats {
     let descriptor = this.weaponDescriptor;
-    let family = this.weaponInfo(descriptor);
+    let family = this.weaponInfo(descriptor).family;
     return descriptor.stats[family];
   }
 
@@ -267,8 +278,8 @@ class WeaponStatsCalculator {
     if (!attributes.length) return 0;
     return _.reduce(mods, (sum, mod) => {
 
-      let primary = _.contains(attributes, mod.primary) ? mod.primary.value : 0;
-      let secondary = _.contains(attributes, mod.secondary) ? mod.secondary.value : 0;
+      let primary = _.includes(attributes, mod.primary.id) ? mod.primary.value : 0;
+      let secondary = _.includes(attributes, mod.secondary.id) ? mod.secondary.value : 0;
       return sum + primary + secondary;
     }, 0);
   }

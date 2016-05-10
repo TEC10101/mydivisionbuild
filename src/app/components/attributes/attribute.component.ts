@@ -19,6 +19,7 @@ import {isNumber, isFunction} from '@angular/core/src/facade/lang';
 import {numberRange} from '../../common/utils';
 import {isWeaponType} from '../../services/item.service';
 import {BooleanConverter, InputConverter, NumberConverter} from '../../common/converters';
+import * as _ from 'lodash/index';
 
 
 export interface AttributeMeta {
@@ -156,7 +157,8 @@ export class AttributeComponent implements OnInit, OnDestroy {
     if (!this.attribute.id) {
       return [];
     }
-    let [low, high] = [1, 2];// this.attributeDef.values[this.metadata.level];
+    // this.attributeDef.values[this.metadata.level];
+    let [low, high] = [1, 2];
 
     return numberRange(low, high);
 

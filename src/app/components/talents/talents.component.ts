@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import {UcFirstPipe} from '../../common/pipes/ucfirst_pipe';
 import {Talent} from './talent.model';
-import * as _ from 'lodash';
+import * as _ from 'lodash/index';
 import {EditorDirective} from '../../directives/editor';
 import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
 import {ValueFormat, ItemTalent} from '../../common/models/common';

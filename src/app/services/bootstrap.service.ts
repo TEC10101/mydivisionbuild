@@ -4,7 +4,7 @@ import {ItemType, DivisionItem, GearRarity, ItemTalent} from '../common/models/c
 import {InventoryService} from './inventory.service';
 import {Weapon} from '../components/inventory/inventory.model';
 import {Gear} from '../components/gear-overview/gear.model';
-import * as _ from 'lodash';
+import * as _ from 'lodash/index';
 /**
  * Created by xastey on 5/7/2016.
  */

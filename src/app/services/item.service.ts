@@ -3,7 +3,7 @@
  */
 
 
-import {Injectable} from '@angular/core';
+import {Injectable, Inject, forwardRef} from '@angular/core';
 import {Http} from '@angular/http';
 import {BehaviorSubject, Subject, Observable} from 'rxjs';
 import {
@@ -11,7 +11,7 @@ import {
   ItemTalent, WeaponTalent, GearAttribute, WeaponAttribute
 }
   from '../common/models/common';
-import * as _ from 'lodash';
+import * as _ from 'lodash/index';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 import {asObservable} from '../common/utils';
 
@@ -85,6 +85,7 @@ type  WeaponBaseStatsByFamily = {[id: string]: WeaponBaseStats}
 interface WeaponManifest {
   weapons: WeaponInfo[];
   compatibility: WeaponModCompatibilityByType;
+  stats: WeaponBaseStatsByFamily;
 }
 export interface WeaponInfo extends DivisionItem {
   named: boolean;
@@ -124,9 +125,7 @@ export class GearDescriptorCollection extends DescriptorCollection<GearDescripto
   gloves: GearDescriptor;
   kneePads: GearDescriptor;
   holster: GearDescriptor;
-
   attributes: GearAttribute[];
-  
 
 
 }
@@ -166,13 +165,18 @@ export class ItemsService {
   private _basePath = 'app/assets/json/';
   private _imagePath = 'app/assets/images/inventory/';
 
+  // for some reason without using @Inject(forwardRef(() => AttributesService))
+  // AttributesService will resolve to undefined and throw an error
 
-  constructor(private _http: Http, private _attributesService: AttributesService) {
+  constructor(private _http: Http,
+              @Inject(forwardRef(() => AttributesService))
+              private _attributesService: AttributesService) {
     this._loadItems(GEAR_TYPES, this._gearDescriptorCollection);
     this._loadWeaponTalents();
 
     asObservable(this._weaponTalents, true)
       .subscribe(talents => this._loadWeapons(talents));
+
     _attributesService.weaponAttributes
       .subscribe(attributes => this._weaponDescriptorCollection.attributes = attributes);
 
@@ -226,7 +230,8 @@ export class ItemsService {
         return <WeaponDescriptor>{
           items: <DivisionItems>items,
           talents: supportedTalents,
-          compatibility: manifest.compatibility
+          compatibility: manifest.compatibility,
+          stats: manifest.stats
         };
       });
   }

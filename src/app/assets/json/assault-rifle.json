@@ -7,7 +7,8 @@
     },
     {
       "name": "Black Market AK-74",
-      "icon": "w_ar_ak47_t3_icon.png"
+      "icon": "w_ar_ak47_t3_icon.png",
+      "family": "ak47"
     },
     {
       "name": "Caduceus",
@@ -17,15 +18,23 @@
         "restored",
         "self-preserved"
       ],
-      "icon": "w_ar_fnscar-l_exotic_icon.png"
+      "icon": "w_ar_fnscar-l_exotic_icon.png",
+      "family": "scar-l"
     },
     {
       "name": "Classic FAL",
-      "icon": "w_ar_fal_t1_icon.png"
+      "icon": "w_ar_fal_t1_icon.png",
+      "family": "fal"
+    },
+    {
+      "name": "Classic AK-47",
+      "icon": "w_ar_ak47_t1_icon.png",
+      "family": "ak47"
     },
     {
       "name": "Custom P416 G3",
-      "icon": "w_ar_pof_p416_t2_icon.png"
+      "icon": "w_ar_pof_p416_t2_icon.png",
+      "family": "p416"
     },
     {
       "name": "Enhanced ACR-E",
@@ -36,6 +45,7 @@
       "name": "Liberator",
       "named": true,
       "icon": "w_ar_m4_exotic_icon.png",
+      "family": "m4",
       "talents": [
         "adept",
         "determined",
@@ -44,35 +54,43 @@
     },
     {
       "name": "Lightweight M4",
-      "icon": "w_ar_m4_t2_icon.png"
+      "icon": "w_ar_m4_t2_icon.png",
+      "family": "m4"
     },
     {
       "name": "LVOA-C",
-      "icon": "w_ar_m4_t3_icon.png"
+      "icon": "w_ar_m4_t3_icon.png",
+      "family": "lvoa"
     },
     {
       "name": "Military AK-47M",
-      "icon": "w_ar_ak47_t2_icon.png"
+      "icon": "w_ar_ak47_t2_icon.png",
+      "family": "ak47"
     },
     {
       "name": "Military P416",
-      "icon": "w_ar_pof_p416_t1_icon.png"
+      "icon": "w_ar_pof_p416_t1_icon.png",
+      "family": "p416"
     },
     {
       "name": "Military SA-58",
-      "icon": "w_ar_fal_t2_icon.png"
+      "icon": "w_ar_fal_t2_icon.png",
+      "family": "sa58"
     },
     {
       "name": "Police M4",
-      "icon": "w_ar_m4_t1_icon.png"
+      "icon": "w_ar_m4_t1_icon.png",
+      "family": "m4"
     },
     {
       "name": "SCAR-L",
-      "icon": "w_ar_fnscar-l_t1_icon.png"
+      "icon": "w_ar_fnscar-l_t1_icon.png",
+      "family": "scar-l"
     },
     {
       "name": "SOCOM SCAR-L",
-      "icon": "w_ar_fnscar-l_t2_icon.png"
+      "icon": "w_ar_fnscar-l_t2_icon.png",
+      "family": "scar-l"
     },
     {
       "name": "Tactical ACR",
@@ -81,16 +99,19 @@
     },
     {
       "name": "Tactical Mk 16",
-      "icon": "w_ar_fnscar-l_t3_icon.png"
+      "icon": "w_ar_fnscar-l_t3_icon.png",
+      "family": "mk16"
     },
     {
       "name": "Tactical SA-58",
-      "icon": "w_ar_fal_t3_icon.png"
+      "icon": "w_ar_fal_t3_icon.png",
+      "family": "fal"
     },
     {
       "name": "Warlord",
       "named": true,
       "icon": "w_ar_ak47_exotic_icon.png",
+      "family": "ak47",
       "talents": [
         "capable",
         "ferocious",
@@ -137,8 +158,56 @@
     "acr": {
       "rpm": 760,
       "magazine": 30,
-      "reload": 2300,
-      "scaling":
+      "reload": 2.7,
+      "scaling": 1.3
+    },
+    "ak-47": {
+      "rpm": 600,
+      "magazine": 3,
+      "reload": 3,
+      "scaling": 1.6
+    },
+    "fal": {
+      "rpm": 650,
+      "magazine": 20,
+      "reload": 2.8,
+      "scaling": 1.8
+    },
+    "lova": {
+      "rpm": 850,
+      "magazine": 30,
+      "reload": 2.7,
+      "scaling": 1.3
+    },
+    "m4": {
+      "rpm": 850,
+      "magazine": 30,
+      "reload": 2.9,
+      "scaling": 1.3
+    },
+    "mk16": {
+      "rpm": 625,
+      "magazine": 30,
+      "reload": 2.7,
+      "scaling": 1.5
+    },
+    "p416": {
+      "rpm": 750,
+      "magazine": 30,
+      "reload": 2.75,
+      "scaling": 1.3
+    },
+    "sa58": {
+      "rpm": 1.8,
+      "magazine": 20,
+      "reload": 2.8,
+      "scaling": 1.8
+    },
+    "scar-l": {
+      "rpm": 625,
+      "magazine": 30,
+      "reload": 2.7,
+      "scaling": 1.5
     }
   }
 }

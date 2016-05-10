@@ -5,7 +5,9 @@
 import {Gear} from '../gear-overview/gear.model';
 import {GenderType, Rarity, ItemType} from '../../common/models/common';
 import {Attributes, Attribute} from '../attributes/attributes.model';
-import {Talent} from "../talents/talent.model";
+import {Talent} from '../talents/talent.model';
+
+
 
 export type InventoryItemType = 'weapon' | 'gear';
 // tslint:disable-next-line
@@ -20,7 +22,7 @@ export class InventoryWeapons {
   sidearm: Weapon;
 }
 
-export class InventoryGear {
+export class InventoryGear  {
   bodyArmor: Gear;
   mask: Gear;
   kneePads: Gear;

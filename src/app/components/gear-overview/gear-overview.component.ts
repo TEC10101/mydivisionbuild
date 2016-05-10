@@ -18,7 +18,7 @@ import {ModSlotsComponent} from '../modslots/modslots.component';
 import {TalentsComponent} from '../talents/talents.component';
 import {InventoryItem, Weapon} from '../inventory/inventory.model';
 import {WeaponStatsComponent} from '../weapon-stats/weapon-stats.component';
-import * as _ from 'lodash';
+import * as _ from 'lodash/index';
 export {Gear} from './gear.model';
 
 

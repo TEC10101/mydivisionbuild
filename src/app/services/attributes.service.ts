@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
-import {ItemType, AttributeType, GearAttribute, WeaponAttribute, DivisionAttribute} from '../common/models/common';
+import {
+  ItemType, AttributeType, GearAttribute, WeaponAttribute, DivisionAttribute
+}
+  from '../common/models/common';
 import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/startWith';
 import {BehaviorSubject} from 'rxjs/Rx';
 import {asObservable} from '../common/utils';
-import * as _ from 'lodash';
+import * as _ from 'lodash/index';
 import {isWeaponType} from './item.service';
 /**
  * Created by xastey on 4/3/2016.
@@ -40,7 +43,6 @@ export class AttributesService {
 
   }
 
- 
 
   _loadWeaponAttributes() {
     let basePath = 'app/assets/json/weapon-attributes.json';

@@ -10,7 +10,7 @@ import {asObservable} from '../../common/utils';
 import {AttributeComponent, AttributeMeta} from '../attributes/attribute.component';
 import {ItemModSlot} from '../inventory/inventory.model';
 import {isWeaponType} from '../../services/item.service';
-import * as _ from 'lodash';
+import * as _ from 'lodash/index';
 /**
  * Created by xastey on 4/10/2016.
  */

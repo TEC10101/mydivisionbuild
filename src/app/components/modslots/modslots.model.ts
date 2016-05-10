@@ -1,6 +1,6 @@
 import {GearStats, Rarity, GearRarity, GearAttribute} from '../../common/models/common';
 import {Attribute} from '../attributes/attributes.model';
-import * as _ from 'lodash';
+import * as _ from 'lodash/index';
 /**
  * Created by xastey on 4/10/2016.
  */

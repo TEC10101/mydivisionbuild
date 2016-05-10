@@ -17,7 +17,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import {ControlValueAccessor, NgControl, FORM_DIRECTIVES} from '@angular/common';
-import * as _ from 'lodash';
+import * as _ from 'lodash/index';
 import {ValueFormat} from '../../common/models/common';
 import {AttributePipe} from '../attributes/attribute.pipe';
 import {EditorService} from '../../services/editor-service';

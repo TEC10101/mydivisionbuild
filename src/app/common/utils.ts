@@ -54,5 +54,7 @@ export function asObservable<T>(subject: Observable<T>, once: boolean = false): 
     return new Observable(fn => obs.subscribe(fn));
   }
 
-  return once ? wrap(subject.first((x, idx, _) => isArray(x) ? !!x.length : !!x)) : wrap(subject);
+  return once
+    ? wrap(subject.first((x: any, idx, _) => isArray(x) ? !!(<any[]>x).length : !!x))
+    : wrap(subject);
 }

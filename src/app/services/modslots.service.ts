@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
 import {AttributesService} from './attributes.service';
-import {ItemType, GearAttribute, AttributeType, WeaponAttribute, DivisionAttribute} from '../common/models/common';
+import {
+  ItemType, GearAttribute, AttributeType, WeaponAttribute, DivisionAttribute
+}
+  from '../common/models/common';
 import {
   ModSlotType, GEAR_MOD_SLOT_TYPES, WEAPON_MOD_SLOT_TYPES, WeaponModType, ModSlotKind
 }
   from '../components/modslots/modslots.model';
 import {asObservable} from '../common/utils';
-import * as _ from 'lodash';
+import * as _ from 'lodash/index';
 import {Observable} from 'rxjs/Observable';
 import {isWeaponType} from './item.service';
 import {Http} from '@angular/http';
