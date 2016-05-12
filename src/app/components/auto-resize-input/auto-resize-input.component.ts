@@ -32,20 +32,23 @@ import {InputConverter, NumberConverter} from '../../common/converters';
 
 })
 export class AutoResizeInput {
-  @HostListener('input', ['$event'])
-  @HostListener('change', ['$event'])
-  nativeElement: any;
 
 
-  constructor(elementRef: ElementRef) {
+  constructor(private _elementRef: ElementRef) {
 
-    this.nativeElement = elementRef.nativeElement;
+
+  }
+
+  get nativeElement() {
+    return this._elementRef.nativeElement;
   }
 
   /**
    * @private
    * Don't send the input's input event
    */
+  @HostListener('input', ['$event'])
+  @HostListener('change', ['$event'])
   private stopInput(ev) {
     ev.preventDefault();
     ev.stopPropagation();
@@ -170,10 +173,13 @@ export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, O
       this.editing = true;
 
       let inputElement = this.autoResizeInput.nativeElement;
+
       let self = this;
       this.ngZone.run(() => {
-        inputElement.focus();
-        inputElement.select();
+        if (inputElement) {
+          inputElement.focus();
+          inputElement.select();
+        }
         self.resize();
 
       });
@@ -186,6 +192,9 @@ export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, O
     if (value.length > this.length) {
       value = value.substr(0, this.length);
     }
+
+    // make sure its an number
+    value = +value;
     if (this.value !== value) {
       this.value = value;
       this.input.emit(this.value);
@@ -234,6 +243,7 @@ export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, O
      */
 
     // convert to string
+    console.log('this.autoResizeInput.nativeElement', this.autoResizeInput, this.autoResizeInput.nativeElement)
     let value = this.value + '';
     this.setElementWidth(this.autoResizeInput.nativeElement,
       ((value.length + 1) * this.resizeIncrement) + 2);

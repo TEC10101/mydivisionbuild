@@ -49,7 +49,7 @@ export class StatsDisplay {
 
 
   stat(name) {
-    return !this.stats ? 0 : this.stat[name];
+    return !this.stats ? 0 : this.stats[name];
   }
 
   onStateValueChanged(event: StateValueChangeEvent) {
