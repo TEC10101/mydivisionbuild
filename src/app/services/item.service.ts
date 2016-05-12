@@ -177,14 +177,15 @@ export class ItemsService {
     asObservable(this._weaponTalents, true)
       .subscribe(talents => this._loadWeapons(talents));
 
-    _attributesService.weaponAttributes
+    this._attributesService.weaponAttributes
       .subscribe(attributes => this._weaponDescriptorCollection.attributes = attributes);
 
-    _attributesService.gearAttributes
+    this._attributesService.gearAttributes
       .subscribe(attributes => this._gearDescriptorCollection.attributes = attributes);
 
-
   }
+
+
 
   _collectDescriptors<T>(metadata: T, types: ItemType[]) {
     types = types.slice(0);

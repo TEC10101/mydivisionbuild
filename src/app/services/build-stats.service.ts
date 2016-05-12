@@ -63,12 +63,20 @@ export class InventoryCalculator {
     this._secondary = new WeaponStatsCalculator(weapons.secondary, weaponDescriptors, this);
   }
 
+  get primary() {
+    return this._primary;
+  }
+
+  get secondary() {
+    return this._secondary;
+  }
+
   get skillpower() {
-    let base = 535; // base at lvl 30
+
     let fromElectronics = (this.electronics * 10);
     let fromMods = this.calculateAffectsValueFromMods(Affects.SKILL_POWER);
     let fromAttributes = this.calculateAffectsValueFromAttributes(Affects.SKILL_POWER);
-    return base + fromElectronics + fromMods + fromAttributes;
+    return fromElectronics + fromMods + fromAttributes;
   }
 
   get firearms() {
@@ -91,9 +99,10 @@ export class InventoryCalculator {
   }
 
   get electronics() {
-    let base = this._reduce((sum, gear) => sum + gear.stats.electronics);
+    let base = 535; // base at lvl 30
+    let fromGear = this._reduce((sum, gear) => sum + gear.stats.electronics);
     let fromMods = this.calculateAffectsValueFromMods(Affects.ELECTRONICS);
-    return base + fromMods;
+    return base + fromGear + fromMods;
   }
 
   get health() {
@@ -182,8 +191,8 @@ export class InventoryCalculator {
 
 
     return this._reduce((sum, gear) => {
-      let majorAttributes = gear.attributes.major;
-      return sum + _.reduce(majorAttributes, (total, attr) => {
+      let attributes = _.flatten(_.values(gear.attributes));
+      return sum + _.reduce(attributes, (total, attr) => {
           return total + (_.includes(attributesThatAffects, attr.id) ? +attr.value : 0);
         }, 0);
     });

@@ -5,6 +5,10 @@ import {describe, it, expect, inject, beforeEach, beforeEachProviders} from '@an
 import {TestComponentBuilder} from '@angular/compiler/testing';
 import {TalentComponent} from './talents.component';
 import {DIVISION_PROVIDERS} from '../../services/core';
+import {HTTP_PROVIDERS, XHRBackend} from '@angular/http';
+
+import {provide} from '@angular/core';
+import {FixtureBackend} from '../../testing/fixture-backend';
 describe('TalentsComponent: component', () => {
   let tcb;
   let choices = [
@@ -24,6 +28,8 @@ describe('TalentsComponent: component', () => {
   };
 // setup
   beforeEachProviders(() => [
+    HTTP_PROVIDERS,
+    provide(XHRBackend, {useClass: FixtureBackend}),
     TestComponentBuilder,
     TalentComponent,
     DIVISION_PROVIDERS

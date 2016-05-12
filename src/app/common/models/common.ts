@@ -180,7 +180,7 @@ export const Affects = {
   normalize: function (value: string) {
     return (value.replace(/-/g, '_').toLowerCase()) as Affects;
   },
-  CRIT_HIT_CHANCE: 'chc'  as Affects,
+  CRIT_HIT_CHANCE: 'crit_hit_chance'  as Affects,
   CRIT_HIT_DAMAGE: 'chd'  as Affects,
   WEAPON_DAMAGE: 'weapon_damage'  as Affects,
   ASSAULT_RIFLE_DAMAGE: 'assault_rifle_damage'  as Affects,

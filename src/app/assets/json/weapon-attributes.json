@@ -4,7 +4,7 @@
     "name": "Crit Chance",
     "type": "major",
     "affects": [
-      "chc"
+      "crit_hit_chance"
     ],
     "slots": [
       "muzzle",
@@ -17,7 +17,7 @@
     "name": "Crit Damage",
     "type": "major",
     "affects": [
-      "chd"
+      "crit_hit_damage"
     ],
     "slots": [
       "muzzle",

@@ -108,7 +108,7 @@
     "name": "Deadly",
     "template": "Critical hit damage is increased by x%",
     "affects": [
-      "chd"
+      "crit_hit_damage"
     ],
     "supports": [
       "assault-rifle",
@@ -187,7 +187,7 @@
     "name": "Fierce",
     "template": "Critical hit chance is increased by x% when using this weapon",
     "affects": [
-      "chc"
+      "crit_hit_chance"
     ],
     "supports": [
       "assault-rifle",
@@ -417,7 +417,7 @@
     "name": "Vicious",
     "template": "Critical hit chance is increased by x% while at full health",
     "affects": [
-      "chc"
+      "crit_hit_chance"
     ],
     "supports": [
       "assault-rifle",

@@ -6,7 +6,7 @@
     "kind": "offensive",
     "format": "percent",
     "affects": [
-      "chc"
+      "crit_hit_chance"
     ],
     "supports": [
       "mask",
@@ -47,7 +47,7 @@
     "kind": "offensive",
     "format": "percent",
     "affects": [
-      "chd"
+      "crit_hit_damage"
     ],
     "supports": [
       "backpack",
