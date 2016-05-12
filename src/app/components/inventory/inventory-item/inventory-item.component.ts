@@ -5,10 +5,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Gear} from '../../gear-overview/gear.model';
 import {InventoryItemImageComponent} from '../inventory-item-image/inventory-item-image.component';
 import {ItemsService, isWeaponType} from '../../../services/item.service';
-import {
-  ItemType, GearRarity, DivisionItem, WeaponSlot, ItemTalent
-}
-  from '../../../common/models/common';
+import {ItemType, GearRarity, DivisionItem, WeaponSlot, ItemTalent} from '../../../common/models/common';
 import {InventoryService} from '../../../services/inventory.service';
 import {InventoryItem, InventoryItemType, Weapon} from '../inventory.model';
 import {Talent} from '../../talents/talent.model';
@@ -107,7 +104,7 @@ export class InventoryItemComponent implements OnInit {
   }
 
   private _gearDefaultState(name: string): Gear {
-    return {
+    let gear = {
       rarity: GearRarity.SUPERIOR,
       type: this.itemType,
       name: name,
@@ -128,6 +125,11 @@ export class InventoryItemComponent implements OnInit {
       mods: [],
       talents: []
     };
+    let keys = ['firearms', 'stamina', 'electronics'];
+    let key = keys[_.random(0, keys.length - 1)];
+    gear.stats[key] = _.random(450, 650);
+
+    return gear;
   }
 }
 

@@ -2,14 +2,15 @@
  * Created by xastey on 4/2/2016.
  */
 
-import {Component, ViewEncapsulation, OnInit} from "angular2/core";
-import {RouteConfig} from "angular2/router";
-import {Gear} from "./components/gear-overview/gear-overview.component";
-import {EditorService} from "./services/editor-service";
-import {AttributesService} from "./services/attributes.service";
-import {InventoryRootComponent} from "./components/inventory/inventory.component";
-import {DUMMY_GEAR} from "./components/gear-overview/gear.model";
+import {Component, ViewEncapsulation, OnInit} from 'angular2/core';
+import {RouteConfig} from 'angular2/router';
+import {Gear} from './components/gear-overview/gear-overview.component';
+import {EditorService} from './services/editor-service';
+import {AttributesService} from './services/attributes.service';
+import {InventoryRootComponent} from './components/inventory/inventory.component';
+import {DUMMY_GEAR} from './components/gear-overview/gear.model';
 import {BootstrapService} from './services/bootstrap.service';
+import {BuildStatsBannerComponent} from './components/build-stats-banner/build-stats-banner.component';
 
 
 @Component({
@@ -17,9 +18,10 @@ import {BootstrapService} from './services/bootstrap.service';
 
   pipes: [],
   styles: [require('./assets/styles/app.scss')],
-  directives: [],
+  directives: [BuildStatsBannerComponent],
   encapsulation: ViewEncapsulation.None,
   templateUrl: 'app/my-division-build-app.html',
+
   providers: []
 })
 

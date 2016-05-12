@@ -66,7 +66,7 @@ export class BootstrapService {
   }
 
   private _gearDefaultState(itemType: ItemType, name: string): Gear {
-    return {
+    let gear = {
       rarity: GearRarity.SUPERIOR,
       type: itemType,
       name: name,
@@ -87,5 +87,11 @@ export class BootstrapService {
       mods: [],
       talents: []
     };
+    let keys = ['firearms', 'stamina', 'electronics'];
+    let key = keys[_.random(1, keys.length - 1)];
+    gear.stats[key] = _.random(450, 650);
+
+    return gear;
+
   }
 }

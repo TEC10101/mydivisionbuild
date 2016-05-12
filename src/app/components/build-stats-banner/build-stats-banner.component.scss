@@ -1,0 +1,67 @@
+@import "../../assets/styles/common";
+
+$spacing: 2%;
+$num-of-columns: 3;
+$column-width: 344px;
+#build-stats-banner {
+  max-width: 1080px;
+  width: auto;
+  margin-bottom: 15px;
+
+}
+
+.column {
+  color: #fff;
+  background-color: rgba(#3c3d37, .40);
+
+  width: $column-width;
+
+  float: left;
+  margin-right: 16px;
+  @include text-style();
+
+  &:last-child {
+    margin-right: 0px;
+  }
+
+  label {
+    text-align: center;
+    display: block;
+    width: 100%;
+
+  }
+  span {
+    display: block;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+  }
+
+  img {
+    display: inline-block;
+    width: 25px;
+    position: relative;
+    bottom: -6px;
+  }
+  .bottom {
+    line-height: 25px;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    hr {
+      display: block;
+      height: 1px;
+      border: 0;
+      border-top: 1px solid rgba(#534a4b, .40);
+      margin: 0 auto;
+      padding: 0;
+
+      box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.30);
+    }
+    @include vertical-align-parent();
+    div {
+      @include vertical-align();
+    }
+
+  }
+}
