@@ -278,7 +278,8 @@ class WeaponStatsCalculator {
 
   _sniperAccuracy() {
     let stats = this._weaponBaseStats;
-    //((1/(1+(TimeToMinAccuracyMSFinal + TimeToMaxAccuracyMSFinal))) *200 + 0.6) * 60 + WeaponSpreadSizeModBonus*40 +20
+    //((1/(1+(TimeToMinAccuracyMSFinal + TimeToMaxAccuracyMSFinal))) *200 + 0.6) 
+    // * 60 + WeaponSpreadSizeModBonus*40 +20
     let base = ((1 / (1 + (stats.timeToMinAccuracy + stats.timeToMaxAccuracy))) * 200 + 0.6) * 60;
     let spreadSizeModBonus = this.calculateAffectsValueFromMods(Affects.ACCURACY) * 40;
     return base + spreadSizeModBonus + 20;
