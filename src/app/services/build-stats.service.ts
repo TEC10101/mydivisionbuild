@@ -5,13 +5,16 @@
 
 import {Injectable} from '@angular/core';
 import {Inventory, Weapon, InventoryGear} from '../components/inventory/inventory.model';
-import {ItemType, Affects, DivisionItem, GearRarity} from '../common/models/common';
+import {ItemType, Affects} from '../common/models/common';
 import {
-  WeaponDescriptor, WeaponInfo, WeaponDescriptorCollection, ItemsService,
-  GearDescriptorCollection, WeaponBaseStats
+  WeaponDescriptor,
+  WeaponInfo,
+  WeaponDescriptorCollection,
+  ItemsService,
+  GearDescriptorCollection,
+  WeaponBaseStats
 } from './item.service';
 import {Gear} from '../components/gear-overview/gear.model';
-import {AttributesService} from './attributes.service';
 import * as _ from 'lodash/index';
 @Injectable()
 export class BuildStatsService {
@@ -249,10 +252,43 @@ class WeaponStatsCalculator {
   }
 
 
+  get accuracy() {
+
+
+    return this._weapon.type !== ItemType.Sniper
+      ? this._accuracy() : this._sniperAccuracy();
+
+
+  }
+
+  _accuracy() {
+    // ui_dictionary.mdict   WeaponAccuracyCompareUI
+    let stats = this._weaponBaseStats;
+    // (1/(1+Weapon.AimSpreadMin))*100 + (1/(1+Weapon.AimSpreadMax))*10
+    // + (1/(1+Weapon.SpreadMax))*20 + WeaponSpreadSizeModBonus*40
+    // + WeaponSpreadMaxModBonus*20 -40
+    let base = (1 / (1 + stats.aimSpreadMin)) * 100
+      + (1 / (1 + stats.aimSpreadMax)) * 10
+      + (1 / (1 + stats.spreadMax));
+    let spreadSizeModBonus = this.calculateAffectsValueFromMods(Affects.ACCURACY) * 40;
+    let spreadMaxModBonus = this.calculateAffectsValueFromMods(Affects.HIP_ACCURACY) * 20;
+
+    return base + spreadSizeModBonus + spreadMaxModBonus - 40;
+  }
+
+  _sniperAccuracy() {
+    let stats = this._weaponBaseStats;
+    //((1/(1+(TimeToMinAccuracyMSFinal + TimeToMaxAccuracyMSFinal))) *200 + 0.6) * 60 + WeaponSpreadSizeModBonus*40 +20
+    let base = ((1 / (1 + (stats.timeToMinAccuracy + stats.timeToMaxAccuracy))) * 200 + 0.6) * 60;
+    let spreadSizeModBonus = this.calculateAffectsValueFromMods(Affects.ACCURACY) * 40;
+    return base + spreadSizeModBonus + 20;
+  }
+
   get _weaponBaseStats(): WeaponBaseStats {
     let descriptor = this.weaponDescriptor;
     let family = this.weaponInfo(descriptor).family;
-    return descriptor.stats[family];
+    return this._weaponDescriptors.weaponStatsFor(descriptor, family);
+
   }
 
   _scalingFactor() {

@@ -7,16 +7,22 @@ import {Injectable, Inject, forwardRef} from '@angular/core';
 import {Http} from '@angular/http';
 import {BehaviorSubject, Subject, Observable} from 'rxjs';
 import {
-  DivisionItem, ItemType, GearRarity, Rarity, Gender, WEAPON_TYPES, GEAR_TYPES,
-  ItemTalent, WeaponTalent, GearAttribute, WeaponAttribute
-}
-  from '../common/models/common';
+  DivisionItem,
+  ItemType,
+  GearRarity,
+  Rarity,
+  Gender,
+  WEAPON_TYPES,
+  GEAR_TYPES,
+  ItemTalent,
+  WeaponTalent,
+  GearAttribute,
+  WeaponAttribute
+} from '../common/models/common';
 import * as _ from 'lodash/index';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 import {asObservable} from '../common/utils';
-
-import {Gear, GEAR_SCORES} from '../components/gear-overview/gear.model';
-import {InventoryService} from './inventory.service';
+import {GEAR_SCORES} from '../components/gear-overview/gear.model';
 import {InventoryItem} from '../components/inventory/inventory.model';
 import {WeaponModType} from '../components/modslots/modslots.model';
 import {AttributesService} from './attributes.service';
@@ -80,7 +86,12 @@ interface WeaponModCompatibility {
 }
 
 type WeaponModCompatibilityByType = {[id: string]: WeaponModCompatibility}
-type  WeaponBaseStatsByFamily = {[id: string]: WeaponBaseStats}
+
+interface WeaponFamilyStats {
+  parent?: string;
+  values: WeaponBaseStats;
+}
+type  WeaponBaseStatsByFamily = {[id: string]: WeaponFamilyStats}
 
 interface WeaponManifest {
   weapons: WeaponInfo[];
@@ -99,10 +110,15 @@ export interface GearDescriptor extends ItemDescriptor {
 
 export interface WeaponBaseStats {
   rpm: number;
-  damage: number;
+  magazine: number;
   reloadEmpty: number;
-  reloadBulletsLeft: number;
+  reload: number;
+  aimSpreadMin: number;
+  aimSpreadMax: number;
+  spreadMax: number;
   scaling: number;
+  timeToMinAccuracy?: number;
+  timeToMaxAccuracy?: number;
 }
 
 
@@ -133,6 +149,28 @@ export class GearDescriptorCollection extends DescriptorCollection<GearDescripto
 export class WeaponDescriptorCollection extends DescriptorCollection<WeaponDescriptor> {
   assaultRifle: WeaponDescriptor;
   attributes: WeaponAttribute[];
+
+  weaponStatsFor(descriptor: WeaponDescriptor, family: string): WeaponBaseStats {
+
+
+    let customizer = (objValue, srcValue, key, object, source) => {
+      return _.isUndefined(objValue) ? srcValue : objValue;
+    };
+
+    let stats = descriptor.stats;
+
+    let weaponStats: WeaponBaseStats = <WeaponBaseStats>{};
+    let familyStats;
+    while (family) {
+      familyStats = stats[family];
+      family = familyStats ? familyStats.parent : void 0;
+
+      weaponStats = <WeaponBaseStats>_.assignWith(weaponStats, familyStats.values, customizer);
+    }
+
+    return weaponStats;
+
+  }
 
 }
 
@@ -184,7 +222,6 @@ export class ItemsService {
       .subscribe(attributes => this._gearDescriptorCollection.attributes = attributes);
 
   }
-
 
 
   _collectDescriptors<T>(metadata: T, types: ItemType[]) {

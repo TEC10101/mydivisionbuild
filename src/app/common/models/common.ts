@@ -174,7 +174,7 @@ export interface WeaponTalent extends ItemTalent {
 export type Affects = 'chc' | 'chd' | 'weapon_damage'
   | 'assault_rifle_damage' | 'shotgun_damage' | 'lmg_damage'
   |'pistol_damage'|'sniper_damage'|'armor'|'health'|'skill_power'
-  |'firearms'|'stamina'|'electronics'
+  |'firearms'|'stamina'|'electronics' | 'accuracy' | 'hip_accuracy'
 // tslint:disable-next-line
 export const Affects = {
   normalize: function (value: string) {
@@ -193,7 +193,10 @@ export const Affects = {
   SKILL_POWER: 'skill_power'  as Affects,
   FIREARMS: 'firearms' as Affects,
   STAMINA: 'stamina' as Affects,
-  ELECTRONICS: 'electronics' as Affects
+  ELECTRONICS: 'electronics' as Affects,
+  ACCURACY: 'accuracy' as Affects,
+  HIP_ACCURACY: 'hip_accuracy' as Affects
+
 };
 
 export interface AffectsResults {

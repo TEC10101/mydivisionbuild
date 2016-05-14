@@ -155,13 +155,48 @@
     }
   },
   "stats": {
+    "assaultrifle_v1": {
+      "values": {
+        "rpm": 800,
+        "magazine": 31,
+        "aimSpreadMin": 0.5,
+        "aimSpreadMax": 1.75,
+        "spreadMax": 3.0,
+        "reload": 1900
+      }
+    },
+    "assaultrifle_v2": {
+      "values": {
+        "rpm": 550,
+        "magazine": 30,
+        "aimSpreadMin": 0.15,
+        "aimSpreadMax": 0.6,
+        "spreadMax": 3.0,
+        "reload": 1900
+      }
+    },
+    "weapon_assaultrifle_v2_burst": {
+      "values": {
+        "rpm": 850,
+        "magazine": 45,
+        "aimSpreadMin": 0.5,
+        "aimSpreadMax": 1.75,
+        "spreadMax": 3.0,
+        "reload": 1900
+      }
+    },
     "acr": {
-      "rpm": 760,
-      "magazine": 30,
-      "reload": 2.7,
-      "scaling": 1.3,
-      "accuracy": 19,
-      "stability": 29
+      "extends": "assaultrifle_v2",
+      "values": {
+        "rpm": 760,
+        "magazine": 30,
+        "aimSpreadMin": 0.18,
+        "aimSpreadMax": 0.7,
+        "spreadMax": 4.0,
+        "reload": 2300,
+        "reloadEmpty": 2700,
+        "scaling": 1.3
+      }
     },
     "ak74": {
       "rpm": 600,
@@ -214,7 +249,6 @@
       "magazine": 30,
       "reload": 2.75,
       "scaling": 1.3
-
     },
     "sa58": {
       "rpm": 1.8,
