@@ -1,0 +1,189 @@
+{
+  "weapons": [
+    {
+      "name": "Midas",
+      "named": true,
+      "icon": "w_smg_socimi821_exotic_icon.png",
+      "family": "socimi821",
+      "talents": [
+        "unlock_close_targets_more_damage",
+        "unlock_critical_hits_Heal",
+        "unlock_full_health_buffs_crit_chance"
+      ]
+    },
+    {
+      "name": "Black Market T821",
+      "icon": "w_smg_socimi821_t1_icon.png",
+      "family": "socimi821"
+    },
+    {
+      "name": "Police T821",
+      "icon": "w_smg_socimi821_t2_icon.png",
+      "family": "socimi821"
+    },
+    {
+      "name": "AUG A3 Para XS",
+      "icon": "w_smg_aug-a3p_t1_icon.png",
+      "family": "aug"
+    },
+    {
+      "name": "Enhanced AUG A3P",
+      "icon": "w_smg_aug-a3p_t2_icon.png",
+      "family": "aug"
+    },
+    {
+      "name": "Tactical AUG A3P",
+      "icon": "w_smg_aug-a3p_t3_icon.png",
+      "family": "aug"
+    },
+    {
+      "name": "Burst Fire MP-5 A4",
+      "icon": "w_smg_mp5_t1_icon.png",
+      "family": "mp5"
+    },
+    {
+      "name": "Navy MP-5 N",
+      "icon": "w_smg_mp5_t2_icon.png",
+      "family": "mp5"
+    },
+    {
+      "name": "MP-5 ST",
+      "icon": "w_smg_mp5_t3_icon.png",
+      "family": "mp5"
+    },
+    {
+      "name": "MP7",
+      "icon": "w_smg_mp7_t1_icon.png",
+      "family": "mp7"
+    },
+    {
+      "name": "Valkyrie",
+      "icon": "w_smg_tec_9_exotic_icon.png",
+      "family": "tec9",
+      "talents": [
+        "unlock_killing_reduces_skill_cooldowns",
+        "unlock_skill_use_buffs_weapon_damage",
+        "unlock_close_targets_more_damage"
+      ]
+    },
+    {
+      "name": "Converted SMG-9",
+      "icon": "w_smg_tec_9_t1_icon.png",
+      "family": "tec9"
+    },
+    {
+      "name": "Converted SMG-9 A2",
+      "icon": "w_smg_tec_9_t2_icon.png",
+      "family": "tec9"
+    },
+    {
+      "name": "Tactical Vector 45 ACP",
+      "icon": "w_smg_krissvector_t1_icon.png",
+      "family": "vector_1"
+    },
+    {
+      "name": "Vector 45 ACP",
+      "icon": "w_smg_krissvector_t2_icon.png",
+      "family": "vector"
+    },
+    {
+      "name": "First Wave Vector 45 ACP",
+      "icon": "w_smg_krissvector_t3_icon.png",
+      "family": "vector"
+    }
+  ],
+  "compatibility": {
+  },
+  "stats": {
+    "weapon_submachinegun_v1": {
+      "values": {
+        "rpm": 900,
+        "magazine": 50,
+        "aimSpreadMin": 0.75,
+        "aimSpreadMax": 0.95,
+        "spreadMax": 1.4,
+        "reload": 2300,
+        "reloadEmpty": 2300,
+        "headshotMultiplier": 1.5,
+        "bonus": "crit_hit_chance"
+      }
+    },
+    "socimi821": {
+      "parent": "weapon_submachinegun_v1",
+      "values": {
+        "rpm": 550,
+        "magazine": 32,
+        "reload": 1800,
+        "reloadEmpty": 2200,
+        "aimSpreadMin": 0.5,
+        "aimSpreadMax": 1.1,
+        "scaling": 1.5
+      }
+    },
+    "aug": {
+      "parent": "weapon_submachinegun_v1",
+      "values": {
+        "rpm": 725,
+        "magazine": 25,
+        "aimSpreadMin": 0.7,
+        "aimSpreadMax": 0.9,
+        "reload": 2100,
+        "reloadEmpty": 2500,
+        "scaling": 1.65
+      }
+    },
+    "mp5": {
+      "parent": "weapon_submachinegun_v1",
+      "values": {
+        "rpm": 800,
+        "magazine": 32,
+        "reload": 2100,
+        "reloadEmpty": 2500,
+        "scaling": 1.35
+      }
+    },
+    "mp7": {
+      "parent": "weapon_submachinegun_v1",
+      "values": {
+        "rpm": 950,
+        "magazine": 20,
+        "aimSpreadMin": 0.8,
+        "aimSpreadMax": 0.9,
+        "reload": 1900,
+        "reloadEmpty": 2300,
+        "scaling": 1.45
+      }
+    },
+    "tec9": {
+      "parent": "weapon_submachinegun_v1",
+      "values": {
+        "rpm": 825,
+        "magazine": 32,
+        "aimSpreadMin": 0.3,
+        "aimSpreadMax": 1.0,
+        "reload": 2000,
+        "reloadEmpty": 2400,
+        "scaling": 1.3
+      }
+    },
+    "vector": {
+      "parent": "weapon_submachinegun_v1",
+      "values": {
+        "rpm": 750,
+        "magazine": 20,
+        "aimSpreadMin": 0.9,
+        "aimSpreadMax": 1.0,
+        "reload": 1900,
+        "reloadEmpty": 2300,
+        "scaling": 1.65
+      }
+    },
+    "vector_1": {
+      "parent": "vector",
+      "values": {
+        "reload": 1850,
+        "reloadEmpty": 2250
+      }
+    }
+  }
+}

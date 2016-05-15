@@ -1,0 +1,151 @@
+{
+  "weapons": [
+    {
+      "name": "M870 Express",
+      "icon": "w_stg_870_t1_icon.png",
+      "family": "m870"
+    },
+    {
+      "name": "Military M870",
+      "icon": "w_stg_870_t2_icon.png",
+      "family": "m870"
+    },
+    {
+      "name": "Custom M870 MCS",
+      "icon": "w_stg_870_t3_icon.png",
+      "family": "m870"
+    },
+    {
+      "name": "Cassidy",
+      "icon": "w_stg_doublebarrel_engraved_t1_icon.png",
+      "named": true,
+      "talents": [
+        "unlock_close_targets_more_damage",
+        "unlock_sig_skill_duration_buff_on_kill",
+        "Unlock_killing_chance_to_refill_mag"
+      ],
+      "family": "doublebarrel"
+    },
+    {
+      "name": "Engraved Double Barrel Sawed Off",
+      "icon": "w_stg_doublebarrel_engraved_t2_icon.png",
+      "family": "doublebarrel"
+    },
+    {
+      "name": "Double Barrel Shotgun",
+      "icon": "w_stg_doublebarrel_t1_icon.png",
+      "family": "doublebarrel"
+    },
+    {
+      "name": "Double Barrel Sawed Off",
+      "icon": "w_stg_doublebarrel_t2_icon.png",
+      "family": "doublebarrel"
+    },
+    {
+      "name": "Super 90",
+      "icon": "w_lmg_rpk_exotic_icon.png",
+      "family": "m4",
+      "talents": [
+        "swift",
+        "unlock_buffed_armour_destruction",
+        "unlock_bonus_elite_damage"
+      ]
+    },
+    {
+      "name": "Marine Super 90",
+      "icon": "w_stg_benelli_m4_t1_icon.png",
+      "family": "m4"
+    },
+    {
+      "name": "Military RPK-74 M",
+      "icon": "w_stg_benelli_m4_t2_icon.png",
+      "family": "m4"
+    },
+    {
+      "name": "Tactical Super 90 SBS",
+      "icon": "w_stg_benelli_m4_t3_icon.png",
+      "family": "m4"
+    },
+    {
+      "name": "Medved",
+      "icon": "w_stg_saiga12_exotic_icon.png",
+      "family": "saiga12"
+    },
+    {
+      "name": "SASG-12",
+      "icon": "w_stg_saiga12_t1_icon.png",
+      "family": "saiga12"
+    },
+    {
+      "name": "Tactical SASG-12 K",
+      "icon": "w_stg_saiga12_t2_icon.png",
+      "family": "saiga12"
+    },
+    {
+      "name": "Black Market SASG-12 S",
+      "icon": "w_stg_saiga12_t3_icon.png",
+      "family": "saiga12"
+    }
+  ],
+  "compatibility": {
+  },
+  "stats": {
+    "weapon_shotgun_v1": {
+      "values": {
+        "rpm": 110,
+        "magazine": 8,
+        "aimSpreadMin": 1.1,
+        "aimSpreadMax": 1.2,
+        "spreadMax": 4.5,
+        "reload": 650,
+        "reloadEmpty": 800
+      }
+    },
+    "m870": {
+      "parent": "weapon_shotgun_v1",
+      "values": {
+        "rpm": 75,
+        "magazine": 5,
+        "reload": 3800,
+        "reloadEmpty": 3800,
+        "aimSpreadMin": 1.1,
+        "aimSpreadMax": 1.2,
+        "scaling": 12
+      }
+    },
+    "doublebarrel": {
+      "parent": "weapon_shotgun_v1",
+      "values": {
+        "rpm": 200,
+        "magazine": 2,
+        "aimSpreadMin": 1.2,
+        "aimSpreadMax": 1.4,
+        "reload": 2700,
+        "reloadEmpty": 2700,
+        "scaling": 10.4
+      }
+    },
+    "m4": {
+      "parent": "weapon_shotgun_v1",
+      "values": {
+        "rpm": 150,
+        "magazine": 8,
+        "reload": 5800,
+        "reloadEmpty": 5800,
+        "scaling": 10
+      }
+    },
+    "saiga12": {
+      "parent": "weapon_shotgun_v1",
+      "values": {
+        "rpm": 180,
+        "magazine": 7,
+        "aimSpreadMin": 0.85,
+        "aimSpreadMax": 1.0,
+        "reload": 3000,
+        "reloadEmpty": 3700,
+        "scaling": 8.5
+      }
+    }
+  }
+}
