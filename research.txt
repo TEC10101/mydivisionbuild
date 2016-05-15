@@ -13,5 +13,11 @@ Gear naming structure:
 - naming convention is :<unknown>_<gender(m|f)>_<unknown>_<tier>_<rarity([c]ommon,[u]ncommon,[r]are,[e]pic,[l]egendary)_icon.dds
 
 
-Weapon Icons Mapping
+Weapon Icons Mapping + Stats
 - game system data/juice/weapons
+
+Weapon Stats Names
+- game system data/juice/item/player_weapon*
+
+
+http://divisionfieldguide.com/weapon-item/

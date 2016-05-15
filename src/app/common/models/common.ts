@@ -171,17 +171,18 @@ export interface WeaponTalent extends ItemTalent {
 }
 
 
-export type Affects = 'chc' | 'chd' | 'weapon_damage'
+export type Affects = 'crit_hit_chance' | 'crit_hit_damage' | 'weapon_damage'
   | 'assault_rifle_damage' | 'shotgun_damage' | 'lmg_damage'
   |'pistol_damage'|'sniper_damage'|'armor'|'health'|'skill_power'
-  |'firearms'|'stamina'|'electronics' | 'accuracy' | 'hip_accuracy'
+  |'firearms'|'stamina'|'electronics' | 'accuracy' | 'hip_accuracy' | 'magazine_size'
+  |'headshot_damage' |'rpm' | 'reload';
 // tslint:disable-next-line
 export const Affects = {
   normalize: function (value: string) {
     return (value.replace(/-/g, '_').toLowerCase()) as Affects;
   },
   CRIT_HIT_CHANCE: 'crit_hit_chance'  as Affects,
-  CRIT_HIT_DAMAGE: 'chd'  as Affects,
+  CRIT_HIT_DAMAGE: 'crit_hit_damage'  as Affects,
   WEAPON_DAMAGE: 'weapon_damage'  as Affects,
   ASSAULT_RIFLE_DAMAGE: 'assault_rifle_damage'  as Affects,
   SHOTGUN_DAMAGE: 'shotgun_damage'  as Affects,
@@ -195,7 +196,11 @@ export const Affects = {
   STAMINA: 'stamina' as Affects,
   ELECTRONICS: 'electronics' as Affects,
   ACCURACY: 'accuracy' as Affects,
-  HIP_ACCURACY: 'hip_accuracy' as Affects
+  HIP_ACCURACY: 'hip_accuracy' as Affects,
+  MAGAZINE_SIZE: 'magazine_size' as Affects,
+  HEADSHOT_DAMAGE: 'headshot_damage' as Affects,
+  RELOAD: 'reload' as Affects,
+  RPM: 'rpm' as Affects
 
 };
 

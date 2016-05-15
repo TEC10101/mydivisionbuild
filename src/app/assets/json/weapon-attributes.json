@@ -39,7 +39,7 @@
     "id": 4,
     "name": "Headshot Damage",
     "affects": [
-      "headshot"
+      "headshot_damage"
     ],
     "type": "major",
     "slots": [
@@ -124,7 +124,7 @@
     "id": 12,
     "name": "Magazine Size",
     "affects": [
-      "magazine"
+      "magazine_size"
     ],
     "type": "major",
     "slots": [
@@ -134,7 +134,7 @@
   {
     "id": 13,
     "name": "Reload Speed",
-    "affects":[
+    "affects": [
       "reload"
     ],
     "type": "major",
@@ -162,6 +162,9 @@
     "id": 16,
     "name": "Rate of Fire",
     "type": "minor",
+    "affects": [
+      "rpm"
+    ],
     "slots": [
       "magazine"
     ]

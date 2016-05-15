@@ -225,6 +225,93 @@ class WeaponStatsCalculator {
   }
 
 
+  get dps() {
+
+    // https://docs.google.com/spreadsheets/d/1lOh5fD3l1xhh1NE8HG0iQfY-d2Q_3-Yi9euvx_MH4Lg/edit#gid=522138074
+    let rpm = this.rpm;
+
+    let reloadSpeed = this.reloadSpeed; // C18
+
+    let magazineSize = this.magazineSize; // C19
+
+
+    let damagePerBullet = this.damage;  // C12
+    let accuracy = this.accuracy / 100;   // C13
+    let critChanceFromGear = this._inventoryCalc
+      .calculateTotalAffectsValue(Affects.CRIT_HIT_CHANCE);
+    let critChanceFromWeaponMods = this
+      .calculateAffectsValueFromMods(Affects.CRIT_HIT_CHANCE);
+    let inheritedWeaponCritChance = 0; // TODO : Read for smgs
+    let critChance = (inheritedWeaponCritChance + critChanceFromGear + critChanceFromWeaponMods)
+      / 100; // C15
+
+    let critDamageFromGear = this._inventoryCalc
+      .calculateTotalAffectsValue(Affects.CRIT_HIT_DAMAGE);
+    let critDamageFromWeaponMods = this.calculateAffectsValueFromMods(Affects.CRIT_HIT_DAMAGE);
+    let critDamage = (critDamageFromGear + critDamageFromWeaponMods) / 100; // C16
+
+
+    let headShotBonus = this
+        .calculateAffectsValueFromMods(Affects.ASSAULT_RIFLE_DAMAGE) / 100; // C14
+    let damagePerHeadShot = damagePerBullet * headShotBonus; // F15
+
+    let nonHeadShotBullets = magazineSize * (1 - accuracy);  // F20
+    let headShotBullets = magazineSize * accuracy; // F21
+
+    let oneIsNoneExtraBullets = 0; // F22
+
+    let adjustedMagSize = magazineSize + oneIsNoneExtraBullets;  // F23
+    let adjustedNonHeadShotBullets = nonHeadShotBullets + (oneIsNoneExtraBullets * (1 - accuracy)); // F24
+    let adjustedHeadShotBullets = headShotBullets + (oneIsNoneExtraBullets * accuracy); // F25
+
+    // Crit
+    let critNonHeadShotDamage = damagePerBullet * (1 + critDamage); // F29
+    let critHeadShotDamage = damagePerHeadShot + (1 + critDamage); // F30
+    let nonHeadShotCritChance = adjustedNonHeadShotBullets * critChance; // F31
+    let headShotCritChance = adjustedHeadShotBullets * critChance; // F32
+
+    // DPS Breakdown
+    let totalDamage = (adjustedMagSize * (1 - critChance) * (1 - accuracy)) * damagePerBullet;
+    let totalHeadShotDamage = (adjustedMagSize * accuracy
+      - (adjustedMagSize * critChance * accuracy))
+      * (damagePerBullet * headShotBonus);
+    let totalCritDamage = (adjustedMagSize * (critChance * (1 - accuracy)))
+      * (damagePerBullet * (1 + critDamage));
+    let critHeadShotDamage = (adjustedMagSize * accuracy * critChance)
+      * (damagePerBullet * headShotBonus * (1 + critDamage));
+
+    let cycleTime = adjustedMagSize / (rpm / 60) + reloadSpeed;
+
+    let finalDPS = (totalDamage + totalHeadShotDamage + totalCritDamage + critHeadShotDamage)
+      / cycleTime;
+
+    return Math.ceil(finalDPS);
+
+
+  }
+
+  get reloadSpeed() {
+    let stats = this._weaponBaseStats;
+    let base = stats.reloadEmpty / 1000;
+    let adjusted = (base * (this.calculateAffectsValueFromMods(Affects.RELOAD) / 100)) + base;
+
+    return Math.floor(adjusted);
+  }
+
+  get rpm() {
+    let stats = this._weaponBaseStats;
+    let rpm = (stats.rpm * (this.calculateAffectsValueFromMods(Affects.RPM) / 100)) + stats.rpm;
+    return Math.floor(rpm);
+  }
+
+  get magazineSize() {
+    let stats = this._weaponBaseStats;
+    let magazineSize = (stats.magazine
+      * (this.calculateAffectsValueFromMods(Affects.MAGAZINE_SIZE) / 100)) + stats.magazine;
+
+    return Math.floor(magazineSize);
+  }
+
   get weaponDescriptor() {
 
     return this._weaponDescriptors.forType(this._weapon.type);
@@ -244,7 +331,7 @@ class WeaponStatsCalculator {
     // https://www.reddit.com/r/thedivision/comments/4auh6v/actual_formula_for_weapon_damage/
     let base = (
     this._weapon.stats.damage
-    + this._flatDamageBonus() + this._scalingFactor()
+    + this._flatDamageBonus + this._scalingFactor
     * this._inventoryCalc.firearms);
 
     let damagePercentage = 1 + this._weaponDamagePercent();
@@ -278,7 +365,7 @@ class WeaponStatsCalculator {
 
   _sniperAccuracy() {
     let stats = this._weaponBaseStats;
-    // ((1/(1+(TimeToMinAccuracyMSFinal + TimeToMaxAccuracyMSFinal))) *200 + 0.6) 
+    // ((1/(1+(TimeToMinAccuracyMSFinal + TimeToMaxAccuracyMSFinal))) *200 + 0.6)
     // * 60 + WeaponSpreadSizeModBonus*40 +20
     let base = ((1 / (1 + (stats.timeToMinAccuracy + stats.timeToMaxAccuracy))) * 200 + 0.6) * 60;
     let spreadSizeModBonus = this.calculateAffectsValueFromMods(Affects.ACCURACY) * 40;
@@ -292,14 +379,14 @@ class WeaponStatsCalculator {
 
   }
 
-  _scalingFactor() {
+  get _scalingFactor() {
 
     // https://www.reddit.com/r/thedivision/comments/4e0c7k/all_weapons_dmg_scaling_values/
     return this._weaponBaseStats.scaling;
 
   }
 
-  _flatDamageBonus() {
+  get _flatDamageBonus() {
     return this._inventoryCalc.weaponDamage(this._weapon.type);
   }
 
