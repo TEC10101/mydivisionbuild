@@ -1,0 +1,176 @@
+{
+  "weapons": [
+    {
+      "name": "M249 B",
+      "icon": "w_lmg_m249_t1_icon.png",
+      "family": "m249"
+    },
+    {
+      "name": "Tactical M249 Para",
+      "icon": "w_lmg_m249_t2_icon.png",
+      "family": "m249"
+    },
+    {
+      "name": "Military MK46",
+      "icon": "w_lmg_m249_t3_icon.png",
+      "family": "m249"
+    },
+    {
+      "name": "100 Hours",
+      "icon": "w_lmg_m60_exotic_icon.png",
+      "named": true,
+      "talents": [
+        "unlock_killing_restores_heatlh_over_time",
+        "unlock_strong_recoil_reduction",
+        "Unlock_killing_chance_to_refill_mag"
+      ],
+      "family": "m60"
+    },
+    {
+      "name": "Classic M60",
+      "icon": "w_lmg_m60_t1_icon.png",
+      "family": "m60"
+    },
+    {
+      "name": "Military M60 E4",
+      "icon": "w_lmg_m60_t2_icon.png",
+      "family": "m60"
+    },
+    {
+      "name": "Black Market M60 E6",
+      "icon": "w_lmg_m60_t3_icon.png",
+      "family": "m60"
+    },
+    {
+      "name": "Pakhan",
+      "named": true,
+      "icon": "w_lmg_rpk_exotic_icon.png",
+      "family": "rpk",
+      "talents": [
+        "swift",
+        "unlock_buffed_armour_destruction",
+        "unlock_bonus_elite_damage"
+      ]
+    },
+    {
+      "name": "Classic RPK-74",
+      "icon": "w_lmg_rpk_t1_icon.png",
+      "family": "rpk"
+    },
+    {
+      "name": "Military RPK-74 M",
+      "icon": "w_lmg_rpk_t2_icon.png",
+      "family": "rpk"
+    },
+    {
+      "name": "Black Market RPK-74 E",
+      "icon": "w_lmg_rpk_t2_icon.png",
+      "family": "rpk"
+    },
+    {
+      "name": "Military L86 LSW",
+      "icon": "w_lmg_sa80_t1_icon.png",
+      "family": "sa80"
+    },
+    {
+      "name": "Custom L86 A2",
+      "icon": "w_lmg_sa80_t2_icon.png",
+      "family": "sa80"
+    }
+  ],
+  "compatibility": {
+    "acr": {
+      "magazine": true,
+      "muzzle": [
+        "recoil",
+        "suppressor_large"
+      ],
+      "optics": [
+        "iron_sights",
+        "rds_small",
+        "rds_large"
+      ],
+      "underbarrel": [
+        "grip_small",
+        "grip_large",
+        "laser"
+      ]
+    },
+    "ak-47": {
+      "magazine": true,
+      "muzzle": [
+        "recoil",
+        "suppressor_large"
+      ],
+      "optics": [
+        "rds_small",
+        "rds_large"
+      ],
+      "underbarrel": [
+        "grip_small",
+        "grip_large",
+        "laser"
+      ]
+    }
+  },
+  "stats": {
+    "weapon_lightmachinegun_v1": {
+      "values": {
+        "rpm": 580,
+        "magazine": 100,
+        "aimSpreadMin": 0.6,
+        "aimSpreadMax": 1.1,
+        "spreadMax": 3.25,
+        "reload": 5500,
+        "reloadEmpty": 5500
+      }
+    },
+    "m249": {
+      "parent": "weapon_lightmachinegun_v1",
+      "values": {
+        "rpm": 550,
+        "aimSpreadMin": 0.55,
+        "aimSpreadMax": 1.0,
+        "spreadMax": 4.0,
+        "scaling": 1.5
+      }
+    },
+    "m60": {
+      "parent": "weapon_lightmachinegun_v1",
+      "values": {
+        "rpm": 500,
+        "aimSpreadMin": 0.5,
+        "aimSpreadMax": 1.0,
+        "reload": 5750,
+        "reloadEmpty": 5750,
+        "scaling": 1.24
+      }
+    },
+    "rpk": {
+      "parent": "weapon_lightmachinegun_v1",
+      "values": {
+        "rpm": 650,
+        "magazine": 45,
+        "aimSpreadMin": 0.3,
+        "aimSpreadMax": 0.95,
+        "spreadMax": 3.0,
+        "reload": 2700,
+        "reloadEmpty": 3200,
+        "scaling": 1.15
+      }
+    },
+    "sa80": {
+      "parent": "weapon_lightmachinegun_v1",
+      "values": {
+        "rpm": 610,
+        "magazine": 30,
+        "aimSpreadMin": 0.35,
+        "aimSpreadMax": 0.95,
+        "spreadMax": 3.25,
+        "reload": 2400,
+        "reloadEmpty": 2900,
+        "scaling": 1.35
+      }
+    }
+  }
+}

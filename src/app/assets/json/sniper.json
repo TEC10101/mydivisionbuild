@@ -1,0 +1,182 @@
+{
+  "weapons": [
+    {
+      "name": "Historian",
+      "icon": "w_mr_m14_exotic_icon.png",
+      "named": true,
+      "family": "historian",
+      "talents": [
+        "unlock_far_targets_more_damage",
+        "unlock_first_bullet_chance_for_burn",
+        "unlock_chance_for_bleeding"
+      ]
+    },
+    {
+      "name": "Classic M1A",
+      "icon": "w_mr_m14_t1_icon.png",
+      "family": "m1a"
+    },
+    {
+      "name": "SOCOM M1A",
+      "icon": "w_mr_m14_t2_icon.png",
+      "family": "m1a"
+    },
+    {
+      "name": "First Wave M1A",
+      "icon": "w_mr_m14_t3_icon.png",
+      "family": "m1a"
+    },
+    {
+      "name": "Classic M44 Carbine",
+      "icon": "w_mr_mosinnagant_t1_icon.png",
+      "family": "m44_1"
+    },
+    {
+      "name": "Hunting M44",
+      "icon": "w_mr_mosinnagant_t2_icon.png",
+      "family": "m44_2"
+    },
+    {
+      "name": "Custom M44",
+      "icon": "w_mr_mosinnagant_t3_icon.png",
+      "family": "m44_3"
+    },
+    {
+      "name": "Tenebrae",
+      "named": true,
+      "icon": "w_mr_fnscar-h_exotic_icon.png",
+      "family": "scar",
+      "talents": [
+        "unlock_headshot_reduce_weapon_sway",
+        "unlock_headshot_damage_buff",
+        "unlock_Headshot_chance_for_blind"
+      ]
+    },
+    {
+      "name": "Military SCAR-H",
+      "icon": "w_mr_fnscar-h_t1_icon.png",
+      "family": "scar"
+    },
+    {
+      "name": "Police Mk17",
+      "icon": "w_mr_fnscar-h_t2_icon.png",
+      "family": "scar"
+    },
+    {
+      "name": "SOCOM Mk20 SSR",
+      "icon": "w_mr_fnscar-h_t3_icon.png",
+      "family": "scar"
+    },
+    {
+      "name": "Covert SRS",
+      "icon": "w_mr_srs_t1_icon.png",
+      "family": "srs"
+    },
+    {
+      "name": "SRS A1",
+      "icon": "w_mr_srs_t2_icon.png",
+      "family": "srs"
+    }
+  ],
+  "compatibility": {
+  },
+  "stats": {
+    "weapon_sniper_v1": {
+      "values": {
+        "rpm": 98,
+        "magazine": 11,
+        "aimSpreadMin": 0.1,
+        "aimSpreadMax": 1.0,
+        "spreadMax": 3.0,
+        "reload": 2400,
+        "reloadEmpty": 2400,
+        "timeToMinAccuracy": 150,
+        "timeToMaxAccuracy": 500
+      }
+    },
+    "m1a": {
+      "parent": "weapon_sniper_v1",
+      "values": {
+        "rpm": 300,
+        "magazine": 10,
+        "aimSpreadMin": 0.1,
+        "aimSpreadMax": 2.0,
+        "spreadMax": 4.0,
+        "reload": 2900,
+        "reloadEmpty": 3500,
+        "timeToMinAccuracy": 150,
+        "timeToMaxAccuracy": 800,
+        "scaling": 6.20
+      }
+    },
+    "historian": {
+      "parent": "m1a",
+      "values": {
+        "scaling": 6.5
+      }
+    },
+    "m44": {
+      "parent": "weapon_sniper_v1",
+      "values": {
+        "rpm": 55,
+        "magazine": 5,
+        "aimSpreadMin": 0.12,
+        "aimSpreadMax": 2.0,
+        "spreadMax": 4.0,
+        "reload": 4200,
+        "reloadEmpty": 4200,
+        "timeToMaxAccuracy": 700,
+        "scaling": 8
+      }
+    },
+    "m44_1": {
+      "parent": "m44",
+      "values": {
+        "reload": 600,
+        "reloadEmpty": 4200
+      }
+    },
+    "m44_2": {
+      "parent": "m44",
+      "values": {
+        "reload": 600,
+        "reloadEmpty": 4200,
+        "timeToMinAccuracy": 200
+      }
+    },
+    "m44_3": {
+      "parent": "m44",
+      "values": {
+        "reload": 1900,
+        "reloadEmpty": 3600,
+        "scaling": 7
+      }
+    },
+    "scar": {
+      "parent": "weapon_sniper_v1",
+      "values": {
+        "rpm": 275,
+        "magazine": 20,
+        "aimSpreadMin": 0.12,
+        "aimSpreadMax": 1.7,
+        "timeToMinAccuracy": 100,
+        "reload": 2500,
+        "reloadEmpty": 3000,
+        "scaling": 3.5
+      }
+    },
+    "srs": {
+      "parent": "weapon_sniper_v1",
+      "values": {
+        "rpm": 53,
+        "magazine": 7,
+        "aimSpreadMin": 0.1,
+        "aimSpreadMax": 1.8,
+        "timeToMaxAccuracy": 700,
+        "reload": 1950,
+        "reloadEmpty": 3200,
+        "scaling": 6.5
+      }
+    }
+  }
+}
