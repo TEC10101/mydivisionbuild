@@ -1,5 +1,8 @@
-import {Inventory, InventoryItem, Weapon} from '../components/inventory/inventory.model';
-import {Injectable} from '@angular/core';
+import {
+  Inventory, InventoryItem, Weapon
+}
+  from '../components/inventory/inventory.model';
+import {Injectable, EventEmitter} from '@angular/core';
 import {DUMMY_GEAR, Gear} from '../components/item-overview/gear.model';
 import {Gender, ItemType, WeaponSlot} from '../common/models/common';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
@@ -7,6 +10,9 @@ import {LZString} from 'lz-string';
 import {Http} from 'angular2/http';
 import {isWeaponType} from './item.service';
 import * as _ from 'lodash/index';
+import {BehaviorSubject} from 'rxjs';
+import {asObservable} from '../common/utils';
+
 
 /**
  * Created by xastey on 4/27/2016.
@@ -17,13 +23,18 @@ const STORAGE_KEY = 'inventories';
 @Injectable()
 export class InventoryService {
 
-
+  _weaponSelected = new BehaviorSubject<Weapon>(void 0);
   private _inventory: Inventory;
 
   private _api: string = 'https://api.myjson.com/';
 
+
   private _inventories: Inventory[] = [];
 
+
+  get weaponSelected() {
+    return asObservable(this._weaponSelected.filter((x, io, obs) => !!x));
+  }
 
   _isWeaponSlot(value: string) {
     return !!_.includes(_.values(WeaponSlot), value);
@@ -65,6 +76,9 @@ export class InventoryService {
 
   updateWeapon(slot: string, value: Weapon) {
     this._inventory.weapons[slot] = value;
+    if (slot == 'primary' && !this._weaponSelected.getValue()) {
+      this._weaponSelected.next(value);
+    }
   }
 
   update(itemType: ItemType, value: InventoryItem) {

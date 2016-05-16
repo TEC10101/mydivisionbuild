@@ -56,7 +56,7 @@ export class InventoryCalculator {
               private _gearDescriptors: GearDescriptorCollection,
               primary: Weapon, secondary: Weapon) {
 
-    let weapons = this._inventory.weapons;
+
     this._primary = new WeaponStatsCalculator(primary, weaponDescriptors, this);
     this._secondary = new WeaponStatsCalculator(secondary, weaponDescriptors, this);
   }
@@ -208,6 +208,12 @@ export class InventoryCalculator {
   }
 
 
+  caculateDps(weapon: Weapon) {
+    let calc = weapon === this.secondary 
+      ? this._secondary : this._primary;
+
+    return calc.dps;
+  }
 }
 
 
@@ -291,7 +297,7 @@ export class WeaponStatsCalculator {
       / cycleTime;
 
 
-    return finalDPS.toFixed(2);
+    return Math.floor(finalDPS);
 
 
   }
