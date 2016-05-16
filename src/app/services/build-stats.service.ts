@@ -238,7 +238,7 @@ export class WeaponStatsCalculator {
       .calculateTotalAffectsValue(Affects.CRIT_HIT_CHANCE);
     let critChanceFromWeaponMods = this
       .calculateAffectsValueFromMods(Affects.CRIT_HIT_CHANCE);
-    let inheritedWeaponCritChance = 0; // TODO : Read for smgs
+    let inheritedWeaponCritChance = this.calculateAffectsFromWeaponBonus(Affects.CRIT_HIT_CHANCE);
     let critChance = (inheritedWeaponCritChance + critChanceFromGear + critChanceFromWeaponMods)
       / 100; // C15
 
@@ -286,6 +286,7 @@ export class WeaponStatsCalculator {
 
 
   }
+
 
   get reloadSpeed() {
     let stats = this._weaponBaseStats;
@@ -397,6 +398,11 @@ export class WeaponStatsCalculator {
   _otherWeaponDamageMultipliers() {
     // https://www.reddit.com/r/thedivision/comments/4gica6/all_your_multipliers_are_belong_to_us/
     return 1;
+  }
+
+  calculateAffectsFromWeaponBonus(affects: Affects) {
+    let bonus = this._weapon.stats.bonus;
+    return bonus && bonus.affects === affects ? bonus.value : 0;
   }
 
   calculateAffectsValueFromMods(affects: Affects) {

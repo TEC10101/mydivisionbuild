@@ -89,6 +89,7 @@ export class ItemOverviewComponent implements OnInit {
       this.item.name = item.name;
     }
     this.selectedItemType = this.item.type = itemType;
+    this._ensureWeaponBonus();
   }
 
   _ensureWeaponBonus() {
@@ -162,7 +163,7 @@ export class ItemOverviewComponent implements OnInit {
   }
 
   onWeaponTypeChanged(itemType: ItemType) {
-    this._ensureWeaponBonus();
+
     this._updateDescriptor(itemType);
   }
 
