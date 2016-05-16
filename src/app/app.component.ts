@@ -4,11 +4,11 @@
 
 import {Component, ViewEncapsulation, OnInit} from 'angular2/core';
 import {RouteConfig} from 'angular2/router';
-import {Gear} from './components/gear-overview/gear-overview.component';
+import {Gear} from './components/item-overview/item-overview.component.ts';
 import {EditorService} from './services/editor-service';
 import {AttributesService} from './services/attributes.service';
 import {InventoryRootComponent} from './components/inventory/inventory.component';
-import {DUMMY_GEAR} from './components/gear-overview/gear.model';
+import {DUMMY_GEAR} from './components/item-overview/gear.model';
 import {BootstrapService} from './services/bootstrap.service';
 import {BuildStatsBannerComponent} from './components/build-stats-banner/build-stats-banner.component';
 

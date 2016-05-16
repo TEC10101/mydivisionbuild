@@ -1,6 +1,6 @@
 import {Inventory, InventoryItem, Weapon} from '../components/inventory/inventory.model';
 import {Injectable} from '@angular/core';
-import {DUMMY_GEAR, Gear} from '../components/gear-overview/gear.model';
+import {DUMMY_GEAR, Gear} from '../components/item-overview/gear.model';
 import {Gender, ItemType, WeaponSlot} from '../common/models/common';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 import {LZString} from 'lz-string';

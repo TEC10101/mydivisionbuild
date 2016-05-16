@@ -2,7 +2,7 @@
  * Created by xastey on 4/26/2016.
  */
 import {Component, Input, OnInit} from '@angular/core';
-import {Gear} from '../../gear-overview/gear.model';
+import {Gear} from '../../item-overview/gear.model';
 import {InventoryItemImageComponent} from '../inventory-item-image/inventory-item-image.component';
 import {ItemsService, isWeaponType} from '../../../services/item.service';
 import {ItemType, GearRarity, DivisionItem, WeaponSlot, ItemTalent} from '../../../common/models/common';
@@ -94,9 +94,8 @@ export class InventoryItemComponent implements OnInit {
       score: 131,
 
       stats: {
-        damage: 8900,
-        rpm: 750,
-        magazine: 37
+        damage: 8900
+
       },
       mods: [],
       talents: _talents

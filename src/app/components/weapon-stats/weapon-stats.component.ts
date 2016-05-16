@@ -1,7 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Weapon} from '../inventory/inventory.model';
 import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
 import {EditorService} from '../../services/editor-service';
+import {BuildStatsService, WeaponStatsCalculator} from '../../services/build-stats.service';
 
 
 @Component({
@@ -11,11 +12,22 @@ import {EditorService} from '../../services/editor-service';
   directives: [AutoResizeInputComponent]
 
 })
-export class WeaponStatsComponent {
+export class WeaponStatsComponent implements OnInit {
 
   @Input() weapon: Weapon;
+  _calc: WeaponStatsCalculator;
 
-  constructor(private _editorService: EditorService) {
+
+  constructor(private _editorService: EditorService,
+              private _buildStatsService: BuildStatsService) {
+
+
+  }
+
+
+  ngOnInit(): any {
+    this._calc = this._buildStatsService
+      .createForWeapon(this.weapon);
   }
 
   get _editing() {
@@ -24,18 +36,16 @@ export class WeaponStatsComponent {
 
   get damage() {
     return this._editing ? this.weapon.stats.damage
-      : 0;
+      : this._calc.damage;
   }
 
   get rpm() {
-    return this._editing ? this.weapon.stats.rpm :
-      0;
+    return this._calc.rpm;
 
   }
 
   get magazine() {
-    return this._editing ? this.weapon.stats.magazine :
-      0;
+    return this._calc.magazineSize;
 
   }
 }

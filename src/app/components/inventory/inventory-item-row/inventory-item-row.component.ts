@@ -1,12 +1,12 @@
-import {Component, Input} from '@angular/core';
-import {Gear} from '../../gear-overview/gear.model';
+import {Component, Input, OnInit} from '@angular/core';
+import {Gear} from '../../item-overview/gear.model';
 import {PrettyNumberPipe} from '../../../common/pipes/prettynumber';
 import {InventoryItemImageComponent} from '../inventory-item-image/inventory-item-image.component';
 
 import {isWeaponType} from '../../../services/item.service';
 import {InventoryItem, Weapon} from '../inventory.model';
 import {InventoryService} from '../../../services/inventory.service';
-import {BuildStatsService} from '../../../services/build-stats.service';
+import {BuildStatsService, WeaponStatsCalculator} from '../../../services/build-stats.service';
 
 @Component({
   selector: 'inventory-item-row',
@@ -16,19 +16,24 @@ import {BuildStatsService} from '../../../services/build-stats.service';
   directives: [InventoryItemImageComponent]
 
 })
-export class InventoryItemRowComponent {
+export class InventoryItemRowComponent implements OnInit {
 
   @Input() item: InventoryItem;
+  _calc: WeaponStatsCalculator;
 
   constructor(private _buildStatsService: BuildStatsService,
               private _inventoryService: InventoryService) {
 
   }
 
+
+  ngOnInit(): any {
+    this._calc = this._buildStatsService
+      .createForWeapon(<Weapon>this.item);
+  }
+
   get weaponDps() {
-    return this
-      ._buildStatsService
-      .caculateDps(<Weapon>this.item, this._inventoryService.inventory.gear);
+    return this._calc.dps;
   }
 
   get isGear() {

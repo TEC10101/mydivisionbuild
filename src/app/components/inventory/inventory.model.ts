@@ -2,11 +2,10 @@
  * Created by xastey on 4/22/2016.
  */
 
-import {Gear} from '../gear-overview/gear.model';
-import {GenderType, Rarity, ItemType} from '../../common/models/common';
+import {Gear} from '../item-overview/gear.model';
+import {GenderType, Rarity, ItemType, Affects} from '../../common/models/common';
 import {Attributes, Attribute} from '../attributes/attributes.model';
 import {Talent} from '../talents/talent.model';
-
 
 
 export type InventoryItemType = 'weapon' | 'gear';
@@ -22,7 +21,7 @@ export class InventoryWeapons {
   sidearm: Weapon;
 }
 
-export class InventoryGear  {
+export class InventoryGear {
   bodyArmor: Gear;
   mask: Gear;
   kneePads: Gear;
@@ -52,11 +51,16 @@ export interface ItemModSlot {
   secondary?: Attribute;
 }
 
-export interface WeaponStats {
-  damage: number;
-  rpm: number;
-  magazine: number;
+export interface WeaponBonusStat {
+  value: number;
+  affects: Affects;
 }
+export interface WeaponStats {
+  damage: number;  
+  bonus?: WeaponBonusStat;
+}
+
+
 export interface InventoryItem {
   rarity: Rarity;
   type: ItemType;

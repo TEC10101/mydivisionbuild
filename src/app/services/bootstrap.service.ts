@@ -3,7 +3,7 @@ import {ItemsService, isWeaponType} from './item.service';
 import {ItemType, DivisionItem, GearRarity, ItemTalent} from '../common/models/common';
 import {InventoryService} from './inventory.service';
 import {Weapon} from '../components/inventory/inventory.model';
-import {Gear} from '../components/gear-overview/gear.model';
+import {Gear} from '../components/item-overview/gear.model';
 import * as _ from 'lodash/index';
 /**
  * Created by xastey on 5/7/2016.
@@ -56,9 +56,8 @@ export class BootstrapService {
       score: 131,
 
       stats: {
-        damage: 13500,
-        rpm: 750,
-        magazine: 37
+        damage: 13500
+
       },
       mods: [],
       talents: _talents

@@ -64,7 +64,9 @@ export const ItemType = {
   LMG: 'lmg' as ItemType,
   Shotgun: 'shotgun' as ItemType,
   Sniper: 'sniper' as ItemType
+
 };
+
 export const GEAR_TYPES = [ItemType.BodyArmor, ItemType.Mask,
   ItemType.KneePads, ItemType.BackPack,
   ItemType.Gloves, ItemType.Holster];

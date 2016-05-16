@@ -14,41 +14,35 @@ import {
   GearDescriptorCollection,
   WeaponBaseStats
 } from './item.service';
-import {Gear} from '../components/gear-overview/gear.model';
+import {Gear} from '../components/item-overview/gear.model';
 import * as _ from 'lodash/index';
+import {InventoryService} from './inventory.service';
+import {Attribute} from '../components/attributes/attributes.model';
 @Injectable()
 export class BuildStatsService {
 
-
-  constructor(private _itemsService: ItemsService) {
+  constructor(private _itemsService: ItemsService,
+              private _inventoryService: InventoryService) {
 
   }
 
-  create(inventory: Inventory) {
+
+  create(inventory?: Inventory, primary?: Weapon, secondary?: Weapon) {
 
     let gearDescriptors = this._itemsService._gearDescriptors;
     let weaponDescriptors = this._itemsService._weaponDescriptors;
+    inventory = inventory ? inventory : this._inventoryService.inventory;
+    primary = primary || inventory.weapons.primary;
+    secondary = secondary || inventory.weapons.secondary;
     return new InventoryCalculator(
       inventory, weaponDescriptors,
-      gearDescriptors);
+      gearDescriptors, primary, secondary);
   }
 
-  caculateDps(weapon: Weapon, inventory: InventoryGear) {
-
-    return 12345;
+  createForWeapon(weapon: Weapon, inventory?: Inventory) {
+    return this.create(inventory, weapon).primary;
   }
 
-  caculateWeaponDamage(weapon: Weapon) {
-    return weapon.stats.damage;
-  }
-
-  caculateWeaponRPM(weapon: Weapon) {
-    return weapon.stats.rpm;
-  }
-
-  caculateWeaponMagazine(weapon: Weapon) {
-    return weapon.stats.magazine;
-  }
 }
 
 export class InventoryCalculator {
@@ -59,11 +53,12 @@ export class InventoryCalculator {
 
   constructor(private _inventory: Inventory,
               weaponDescriptors: WeaponDescriptorCollection,
-              private _gearDescriptors: GearDescriptorCollection) {
+              private _gearDescriptors: GearDescriptorCollection,
+              primary: Weapon, secondary: Weapon) {
 
     let weapons = this._inventory.weapons;
-    this._primary = new WeaponStatsCalculator(weapons.primary, weaponDescriptors, this);
-    this._secondary = new WeaponStatsCalculator(weapons.secondary, weaponDescriptors, this);
+    this._primary = new WeaponStatsCalculator(primary, weaponDescriptors, this);
+    this._secondary = new WeaponStatsCalculator(secondary, weaponDescriptors, this);
   }
 
   get primary() {
@@ -136,6 +131,8 @@ export class InventoryCalculator {
 
   calculateAffectsValueFromTalents(affects: Affects) {
     return this._reduce((sum, gear) => {
+
+      if (!gear.talents.length) return sum;
       // resolve descriptor to get correct talents
       let descriptor = this.descriptorForType(gear.type);
       // filter out only the talents that can affect this value
@@ -156,7 +153,7 @@ export class InventoryCalculator {
   }
 
 
-  _attributesThatAffects(affects: Affects) {
+  _attributesThatAffects(affects: Affects): number[] {
     return _.filter(
       this._gearDescriptors.attributes,
       {affects: [affects]}
@@ -194,7 +191,7 @@ export class InventoryCalculator {
 
 
     return this._reduce((sum, gear) => {
-      let attributes = _.flatten(_.values(gear.attributes));
+      let attributes = <Attribute[]>_.flatten(_.values(gear.attributes));
       return sum + _.reduce(attributes, (total, attr) => {
           return total + (_.includes(attributesThatAffects, attr.id) ? +attr.value : 0);
         }, 0);
@@ -214,7 +211,7 @@ export class InventoryCalculator {
 }
 
 
-class WeaponStatsCalculator {
+export class WeaponStatsCalculator {
 
 
   constructor(private _weapon: Weapon,
@@ -265,10 +262,10 @@ class WeaponStatsCalculator {
     let adjustedHeadShotBullets = headShotBullets + (oneIsNoneExtraBullets * accuracy); // F25
 
     // Crit
-    let critNonHeadShotDamage = damagePerBullet * (1 + critDamage); // F29
-    let critHeadShotDamage = damagePerHeadShot + (1 + critDamage); // F30
-    let nonHeadShotCritChance = adjustedNonHeadShotBullets * critChance; // F31
-    let headShotCritChance = adjustedHeadShotBullets * critChance; // F32
+    // let critNonHeadShotDamage = damagePerBullet * (1 + critDamage); // F29
+    // let critHeadShotDamage = damagePerHeadShot + (1 + critDamage); // F30
+    // let nonHeadShotCritChance = adjustedNonHeadShotBullets * critChance; // F31
+    // let headShotCritChance = adjustedHeadShotBullets * critChance; // F32
 
     // DPS Breakdown
     let totalDamage = (adjustedMagSize * (1 - critChance) * (1 - accuracy)) * damagePerBullet;
@@ -321,7 +318,7 @@ class WeaponStatsCalculator {
   weaponInfo(descriptor?: WeaponDescriptor) {
 
 
-    let items = <WeaponInfo[]>_.merge(..._.values(descriptor
+    let items = <WeaponInfo[]>_.merge([], ..._.values(descriptor
       ? descriptor.items : this.weaponDescriptor.items));
     return _.find(items, {name: this._weapon.name});
   }

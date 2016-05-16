@@ -14,22 +14,14 @@
   <div class="stats-wrapper">
     RPM
     <div class="number-wrapper stat-number-wrapper">
-      <auto-resize-input
-        resize-increment="20"
-        prepend=""
-        [(ngModel)]="rpm"
-        (input)="onWeaponStatsChanged('rpm',$event)"></auto-resize-input>
+      {{rpm}}
     </div>
   </div>
 
   <div class="stats-wrapper">
     MAG
     <div class="number-wrapper stat-number-wrapper">
-      <auto-resize-input
-        resize-increment="20"
-        prepend=""
-        [(ngModel)]="magazine"
-        (input)="onWeaponStatsChanged('magazine',$event)"></auto-resize-input>
+      {{magazine}}
     </div>
   </div>
 </div>

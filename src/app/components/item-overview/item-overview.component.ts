@@ -8,7 +8,7 @@ import {StatsDisplay} from '../stats-display/stats-display';
 import {Gear} from './gear.model';
 import {AttributesComponent} from '../attributes/attributes.component';
 import {PrettyNumberPipe} from '../../common/pipes/prettynumber';
-import {Rarity, GearRarity, DivisionItem} from '../../common/models/common';
+import {Rarity, GearRarity, DivisionItem, ItemType} from '../../common/models/common';
 import {AttributeMeta} from '../attributes/attribute.component';
 import {ItemsService, ItemDescriptor, isWeaponType} from '../../services/item.service';
 import {NgFor} from '@angular/common';
@@ -23,22 +23,26 @@ export {Gear} from './gear.model';
 
 
 @Component({
-  selector: 'gear-overview',
+  selector: 'item-overview',
   pipes: [UcFirstPipe, PrettyNumberPipe],
   // Set moduleId to current module so that all loading is done
   // relative
 
-  styles: [require('./gear-overview.component.scss')],
+  styles: [require('./item-overview.component.scss')],
 
-  template: require('./gear-overview.component.html'),
+  template: require('./item-overview.component.html'),
   directives: [StatsDisplay, AttributesComponent, NgFor,
     EditorDirective, AutoResizeInputComponent, ModSlotsComponent,
     TalentsComponent, WeaponStatsComponent]
 })
-export class GearOverviewComponent implements OnInit {
+export class ItemOverviewComponent implements OnInit {
   @Input() item: InventoryItem;
 
   descriptor: ItemDescriptor;
+
+  weaponTypeNames: any;
+
+  selectedItemType: ItemType;
 
 
   constructor(private _itemService: ItemsService) {
@@ -50,9 +54,56 @@ export class GearOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.selectedItemType = this.item.type;
+    this._updateDescriptor();
+
+    this._ensureWeaponBonus();
+    this.weaponTypeNames = [];
+    return _.forEach(this._itemService.weaponTypeNames, (v, k) =>
+      this.weaponTypeNames.push({
+        value: k,
+        label: v
+      }));
+  }
+
+  _updateDescriptor(itemType?: ItemType) {
+    itemType = itemType || this.selectedItemType;
     this._itemService
-      .getDescriptorFor(this.item.type)
-      .subscribe(descriptor => this.descriptor = descriptor);
+      .getDescriptorFor(itemType)
+
+      .subscribe(descriptor => this._commitChanges(descriptor, itemType));
+
+  }
+
+  _commitChanges(descriptor: ItemDescriptor, itemType: ItemType) {
+
+
+    this.descriptor = descriptor;
+    if (this.item.type !== itemType) {
+      let item = descriptor.items[this.item.rarity][0];
+      if (!item) {
+        this.item.rarity = GearRarity.SUPERIOR;
+        item = descriptor.items[this.item.rarity][0];
+      }
+      this.item.name = item.name;
+    }
+    this.selectedItemType = this.item.type = itemType;
+  }
+
+  _ensureWeaponBonus() {
+    if (this.isWeapon) {
+      let weapon = <Weapon>this.item;
+      if (this.weaponHasBonus) {
+        if (!weapon.stats.bonus) {
+          weapon.stats.bonus = this._itemService
+            .defaultWeaponBonusFor(weapon.type);
+        }
+      } else {
+        weapon.stats.bonus = void 0;
+      }
+
+    }
   }
 
   get items(): DivisionItem[] {
@@ -104,6 +155,27 @@ export class GearOverviewComponent implements OnInit {
 
   onWeaponStatsChanged(statName, value) {
     (<Weapon>this.item).stats[statName] = value;
+  }
+
+  onWeaponBonusChanged(value) {
+    (<Weapon>this.item).stats.bonus.value = value;
+  }
+
+  onWeaponTypeChanged(itemType: ItemType) {
+    this._ensureWeaponBonus();
+    this._updateDescriptor(itemType);
+  }
+
+
+  get weaponHasBonus() {
+    let type = this.item.type;
+    return type === ItemType.SMG || type === ItemType.Sniper;
+  }
+
+  get weaponBonusText() {
+    return this.item.type === ItemType.SMG
+      ? 'Critical Hit Chance'
+      : 'Headshot Damage';
   }
 
   get scores() {

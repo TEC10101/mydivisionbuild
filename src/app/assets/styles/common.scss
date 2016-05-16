@@ -8,4 +8,6 @@ $section-wrapper-padding: $section-wrapper-top-bottom-padding $section-wrapper-s
 
 $rarities: high-end superior specialized gear-set;
 $rarity-to-color: (high-end:$high-end-rarity-color, superior:$superior-rarity-color,
-  specialized:$specialized-rarity-color, gear-set:$gear-set-rarity-color)
+  specialized:$specialized-rarity-color, gear-set:$gear-set-rarity-color);
+
+$weapon-types: (ar:assault-rifle, lmg:lmg, smg:smg, sniper:sniper, shotgun:shotgun);

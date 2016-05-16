@@ -5,7 +5,7 @@
 
 import {Component} from '@angular/core';
 import {InventoryItemRowComponent} from '../inventory-item-row/inventory-item-row.component';
-import {GearOverviewComponent} from '../../gear-overview/gear-overview.component';
+import {ItemOverviewComponent} from '../../item-overview/item-overview.component.ts';
 import {RouteParams} from '@angular/router-deprecated';
 import {InventoryService} from '../../../services/inventory.service';
 import {ItemType} from '../../../common/models/common';
@@ -13,7 +13,7 @@ import {ItemType} from '../../../common/models/common';
   selector: 'inventory-items',
   styles: [require('./inventory-items.component.scss')],
   template: require('./inventory-items.component.html'),
-  directives: [InventoryItemRowComponent, GearOverviewComponent]
+  directives: [InventoryItemRowComponent, ItemOverviewComponent]
 
 })
 export class InventoryItemsComponent {

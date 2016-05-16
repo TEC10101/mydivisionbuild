@@ -17,13 +17,13 @@ import {
   ItemTalent,
   WeaponTalent,
   GearAttribute,
-  WeaponAttribute
+  WeaponAttribute, Affects
 } from '../common/models/common';
 import * as _ from 'lodash/index';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 import {asObservable} from '../common/utils';
-import {GEAR_SCORES} from '../components/gear-overview/gear.model';
-import {InventoryItem} from '../components/inventory/inventory.model';
+import {GEAR_SCORES} from '../components/item-overview/gear.model';
+import {InventoryItem, WeaponBonusStat} from '../components/inventory/inventory.model';
 import {WeaponModType} from '../components/modslots/modslots.model';
 import {AttributesService} from './attributes.service';
 
@@ -32,6 +32,16 @@ class ItemStore {
   private _items: BehaviorSubject<DivisionItem[]> = new BehaviorSubject<DivisionItem[]>([]);
 }
 
+const WEAPON_TYPES_TO_LABEL = (function () {
+
+  let values = {};
+  values[ItemType.AR] = 'Assault Rifle';
+  values[ItemType.LMG] = 'Light Machine gun';
+  values[ItemType.SMG] = 'Submachine Gun';
+  values[ItemType.Sniper] = 'Marksman Rifle';
+  values[ItemType.Shotgun] = 'Shotgun';
+  return values;
+})();
 
 let defaultDescriptorProcessor = (type: ItemType, json: any) => <ItemDescriptor>json;
 interface GearIconSet {
@@ -148,6 +158,11 @@ export class GearDescriptorCollection extends DescriptorCollection<GearDescripto
 
 export class WeaponDescriptorCollection extends DescriptorCollection<WeaponDescriptor> {
   assaultRifle: WeaponDescriptor;
+  smg: WeaponDescriptor;
+  lmg: WeaponDescriptor;
+  shotgun: WeaponDescriptor;
+  sniper: WeaponDescriptor;
+
   attributes: WeaponAttribute[];
 
   weaponStatsFor(descriptor: WeaponDescriptor, family: string): WeaponBaseStats {
@@ -194,6 +209,14 @@ export class ItemsService {
     = new GearDescriptorCollection();
 
   private _assaultRifle: BehaviorSubject<WeaponDescriptor> =
+    new BehaviorSubject<WeaponDescriptor>(void 0);
+  private _smg: BehaviorSubject<WeaponDescriptor> =
+    new BehaviorSubject<WeaponDescriptor>(void 0);
+  private _lmg: BehaviorSubject<WeaponDescriptor> =
+    new BehaviorSubject<WeaponDescriptor>(void 0);
+  private _shotgun: BehaviorSubject<WeaponDescriptor> =
+    new BehaviorSubject<WeaponDescriptor>(void 0);
+  private _sniper: BehaviorSubject<WeaponDescriptor> =
     new BehaviorSubject<WeaponDescriptor>(void 0);
 
 
@@ -403,6 +426,23 @@ export class ItemsService {
     return {
       primary: this._imageUrl('talents', id + '.png'),
       secondary: ''
+    };
+  }
+
+  translateToName(itemType: ItemType) {
+    return WEAPON_TYPES_TO_LABEL[itemType];
+  }
+
+  get weaponTypeNames() {
+    return WEAPON_TYPES_TO_LABEL;
+  }
+
+  defaultWeaponBonusFor(weaponType: ItemType): WeaponBonusStat {
+    return {
+      value: 0,
+      affects: weaponType === ItemType.SMG
+        ? Affects.CRIT_HIT_CHANCE
+        : Affects.HEADSHOT_DAMAGE
     };
   }
 }
