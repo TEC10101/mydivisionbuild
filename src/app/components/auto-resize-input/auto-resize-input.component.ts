@@ -243,7 +243,7 @@ export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, O
      */
 
     // convert to string
-    console.log('this.autoResizeInput.nativeElement', this.autoResizeInput, this.autoResizeInput.nativeElement)
+
     let value = this.value + '';
     this.setElementWidth(this.autoResizeInput.nativeElement,
       ((value.length + 1) * this.resizeIncrement) + 2);

@@ -40,6 +40,7 @@ const TALENT_INPUT_FORMAT = (function () {
 
 const TALENT_INPUT_TEMPLATE = ` <auto-resize-input [length]='2' 
                             inputType='number' [format]='%format%'
+                            (input)="onTalentValueChanged($event)"
                            [(ngModel)]='talent.value'
         ></auto-resize-input>`;
 @Component({
@@ -88,6 +89,10 @@ export class TalentComponent implements OnInit, AfterViewInit {
 
       constructor() {
         this.talent = talent;
+      }
+
+      onTalentValueChanged(value) {
+        this.talent.value = value;
       }
     }
     return TalentTemplateComponent;
@@ -150,6 +155,10 @@ export class TalentComponent implements OnInit, AfterViewInit {
 
   onTalentChanged(id) {
     this.renderDescription(id);
+  }
+
+  onTalentUnlockedChanged(unlocked) {
+    this.talent.unlocked = unlocked;
   }
 
   get talentImage() {

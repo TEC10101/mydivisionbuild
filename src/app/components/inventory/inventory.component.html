@@ -8,6 +8,12 @@
                       item-type="assault-rifle"
                       weapon-slot="primary"
       ></inventory-item>
+
+      <inventory-item (click)="navigate('secondary')" [item]="inventory.weapons.secondary"
+                      inventory-item-type="weapon"
+                      item-type="sniper"
+                      weapon-slot="secondary"
+      ></inventory-item>
     </div>
   </div>
   <div id="inventory-gear" class="inventory-section">

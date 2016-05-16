@@ -147,7 +147,7 @@ export class InventoryCalculator {
 
       // gear only has one talent
       let talent = gear.talents[0];
-      return sum + (_.includes(talentsThatAffects, talent.id) ? talent.value : 0);
+      return sum + ( _.includes(talentsThatAffects, talent.id) ? talent.value : 0);
 
     });
   }
@@ -238,14 +238,22 @@ export class WeaponStatsCalculator {
       .calculateTotalAffectsValue(Affects.CRIT_HIT_CHANCE);
     let critChanceFromWeaponMods = this
       .calculateAffectsValueFromMods(Affects.CRIT_HIT_CHANCE);
+
+    let critChanceFromWeaponTalents = this
+      .calculateAffectsFromWeaponTalents(Affects.CRIT_HIT_CHANCE);
     let inheritedWeaponCritChance = this.calculateAffectsFromWeaponBonus(Affects.CRIT_HIT_CHANCE);
-    let critChance = (inheritedWeaponCritChance + critChanceFromGear + critChanceFromWeaponMods)
+    let critChance = (inheritedWeaponCritChance + critChanceFromGear
+      + critChanceFromWeaponTalents + critChanceFromWeaponMods)
       / 100; // C15
+    critChance = 0.235;
 
     let critDamageFromGear = this._inventoryCalc
       .calculateTotalAffectsValue(Affects.CRIT_HIT_DAMAGE);
     let critDamageFromWeaponMods = this.calculateAffectsValueFromMods(Affects.CRIT_HIT_DAMAGE);
-    let critDamage = (critDamageFromGear + critDamageFromWeaponMods) / 100; // C16
+    let critDamageFromWeaponTalents = this
+      .calculateAffectsFromWeaponTalents(Affects.CRIT_HIT_DAMAGE);
+    let critDamage = (critDamageFromGear + critDamageFromWeaponMods
+      + critDamageFromWeaponTalents) / 100; // C16
 
 
     let headShotBonus = this
@@ -282,7 +290,8 @@ export class WeaponStatsCalculator {
     let finalDPS = (totalDamage + totalHeadShotDamage + totalCritDamage + critHeadShotDamage)
       / cycleTime;
 
-    return Math.ceil(finalDPS);
+
+    return finalDPS.toFixed(2);
 
 
   }
@@ -291,9 +300,7 @@ export class WeaponStatsCalculator {
   get reloadSpeed() {
     let stats = this._weaponBaseStats;
     let base = stats.reloadEmpty / 1000;
-    let adjusted = (base * (this.calculateAffectsValueFromMods(Affects.RELOAD) / 100)) + base;
-
-    return Math.floor(adjusted);
+    return (base * (this.calculateAffectsValueFromMods(Affects.RELOAD) / 100)) + base;
   }
 
   get rpm() {
@@ -325,6 +332,7 @@ export class WeaponStatsCalculator {
   }
 
   get damage() {
+
     // https://www.reddit.com/r/thedivision/comments/4cfhr6/more_information_on_weapon_damage_math/
     // https://www.reddit.com/r/thedivision/comments/4auh6v/actual_formula_for_weapon_damage/
     let base = (
@@ -404,6 +412,23 @@ export class WeaponStatsCalculator {
     let bonus = this._weapon.stats.bonus;
     return bonus && bonus.affects === affects ? bonus.value : 0;
   }
+
+  calculateAffectsFromWeaponTalents(affects: Affects) {
+    let talentsThatAffects = this._attributesThatAffects(affects);
+    if (!talentsThatAffects.length) return 0;
+    let talents = _.filter(this._weapon.talents, {unlocked: true});
+    return _.reduce(talents,
+      (sum, talent) => sum + (_.includes(talentsThatAffects, talent.id)
+        ? talent.value : 0), 0);
+  }
+
+  _attributesThatAffects(affects: Affects): string[] {
+    return _.filter(
+      this.weaponDescriptor.talents,
+      {affects: [affects]}
+    ).map(attr => attr.id);
+  }
+
 
   calculateAffectsValueFromMods(affects: Affects) {
     let mods = this._weapon.mods;

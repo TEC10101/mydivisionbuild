@@ -5,5 +5,6 @@ import {GearStats} from '../../common/models/common';
 export interface Talent {
   id?: string;
   value?: number;
+  unlocked?: boolean;
   requirements?: GearStats;
 }

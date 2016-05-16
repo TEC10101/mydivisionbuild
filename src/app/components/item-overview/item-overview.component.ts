@@ -67,6 +67,11 @@ export class ItemOverviewComponent implements OnInit {
       }));
   }
 
+  /**
+   * Update the {@link ItemDescriptor} for a giving {@link ItemType}
+   * @param itemType
+   * @private
+   */
   _updateDescriptor(itemType?: ItemType) {
     itemType = itemType || this.selectedItemType;
     this._itemService
@@ -76,6 +81,15 @@ export class ItemOverviewComponent implements OnInit {
 
   }
 
+  /**
+   * Finalize model changes, this is done so that we apply
+   * the itemType change at its last possible state so that
+   * all other values that are neede (name,rarity) have been
+   * set correctly for other method usage
+   * @param descriptor
+   * @param itemType
+   * @private
+   */
   _commitChanges(descriptor: ItemDescriptor, itemType: ItemType) {
 
 
@@ -92,6 +106,10 @@ export class ItemOverviewComponent implements OnInit {
     this._ensureWeaponBonus();
   }
 
+  /**
+   * Checks or adds weapon bonus data
+   * @private
+   */
   _ensureWeaponBonus() {
     if (this.isWeapon) {
       let weapon = <Weapon>this.item;

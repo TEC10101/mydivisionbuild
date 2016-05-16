@@ -1,10 +1,34 @@
 @import "../../assets/styles/common";
 
+select {
+  @include select-style($dotted: true);
+}
+
 .talent-wrapper {
   background-color: $alternate-background-color;
   margin-bottom: 10px;
   overflow: auto;
   padding: $section-wrapper-padding;
+
+
+  .talent-image,.talent-description-text,select {
+    opacity: 0.5;
+  }
+  &.unlocked {
+    .talent-image,.talent-description-text,select {
+      opacity: 1;
+    }
+  }
+}
+
+.talent-unlocked {
+  font-size: 12px;
+  position: absolute;
+  right: 19px;
+  input {
+    float: left;
+    display: inline-block;
+  }
 }
 
 .talent-title-wrapper {
@@ -20,10 +44,6 @@
 
 .talent-title-name-wrapper {
   float: left;
-}
-
-select {
-  @include select-style($dotted: true);
 }
 
 .talent-title-name {

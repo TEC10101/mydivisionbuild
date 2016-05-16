@@ -1,4 +1,4 @@
-<div class="talent-wrapper">
+<div class="talent-wrapper" [ngClass]="{unlocked:talent.unlocked}">
 
   <div class="talent-title-wrapper">
     Talent
@@ -10,6 +10,10 @@
       <select [(ngModel)]="talent.id" (ngModelChange)="onTalentChanged($event)">
         <option *ngFor="let choice of choices" [value]="choice.id">{{choice.id|ucfirst}}</option>
       </select>
+    </div>
+    <div editor="true" class="talent-unlocked">
+      <input type="checkbox" [(ngModel)]="talent.unlocked" (ngModelChange)="onTalentUnlockedChanged($event)"/>
+      Unlocked
     </div>
   </div>
   <div class="talent-description-text">
