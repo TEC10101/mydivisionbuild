@@ -1,5 +1,5 @@
 /**
- * Created by xastey on 4/7/2016.
+ * Created by Keyston on 4/7/2016.
  */
 
 //https://blog.rsuter.com/angular-2-typescript-property-decorator-that-converts-input-values-to-the-correct-type/

@@ -1,5 +1,5 @@
 /**
- * Created by xastey on 4/22/2016.
+ * Created by Keyston on 4/22/2016.
  */
 import {Component} from '@angular/core';
 import {Inventory} from './inventory.model';

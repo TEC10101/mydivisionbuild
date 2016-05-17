@@ -1,5 +1,5 @@
 /**
- * Created by xastey on 4/22/2016.
+ * Created by Keyston on 4/22/2016.
  */
 
 import {Gear} from '../item-overview/gear.model';

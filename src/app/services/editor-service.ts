@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs/Rx';
 /**
- * Created by xastey on 4/7/2016.
+ * Created by Keyston on 4/7/2016.
  */
 
 @Injectable()

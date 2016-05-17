@@ -6,7 +6,7 @@ import {Weapon} from '../components/inventory/inventory.model';
 import {Gear} from '../components/item-overview/gear.model';
 import * as _ from 'lodash/index';
 /**
- * Created by xastey on 5/7/2016.
+ * Created by Keyston on 5/7/2016.
  */
 
 

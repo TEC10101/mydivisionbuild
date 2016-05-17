@@ -1,5 +1,5 @@
 /**
- * Created by xastey on 5/8/2016.
+ * Created by Keyston on 5/8/2016.
  */
 
 export type GearTalent = 'enduring'|'refreshed'|'rehabilitated'|'rejuvenated'|'tenacious'

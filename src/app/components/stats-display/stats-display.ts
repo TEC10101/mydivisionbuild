@@ -1,5 +1,5 @@
 /**
- * Created by xastey on 4/2/2016.
+ * Created by Keyston on 4/2/2016.
  */
 
 import {Component, Input, Output, EventEmitter} from '@angular/core';

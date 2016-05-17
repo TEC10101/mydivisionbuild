@@ -12,7 +12,7 @@ import {ItemModSlot} from '../inventory/inventory.model';
 import {isWeaponType} from '../../services/item.service';
 import * as _ from 'lodash/index';
 /**
- * Created by xastey on 4/10/2016.
+ * Created by Keyston on 4/10/2016.
  */
 
 

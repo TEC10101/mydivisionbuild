@@ -1,5 +1,5 @@
 /**
- * Created by xastey on 5/12/2016.
+ * Created by Keyston on 5/12/2016.
  */
 import {Component, OnInit} from '@angular/core';
 import {BuildStatsService, InventoryCalculator} from '../../services/build-stats.service';

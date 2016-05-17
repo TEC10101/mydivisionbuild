@@ -1,5 +1,5 @@
 /**
- * Created by xastey on 4/3/2016.
+ * Created by Keyston on 4/3/2016.
  */
 
 import {Component, Input, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';

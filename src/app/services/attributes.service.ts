@@ -12,7 +12,7 @@ import {asObservable} from '../common/utils';
 import * as _ from 'lodash/index';
 import {isWeaponType} from './item.service';
 /**
- * Created by xastey on 4/3/2016.
+ * Created by Keyston on 4/3/2016.
  */
 export type AttributeObservable = Observable<DivisionAttribute[]>
 
