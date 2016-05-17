@@ -103,6 +103,7 @@ export class ItemOverviewComponent implements OnInit {
       this.item.name = item.name;
     }
     this.selectedItemType = this.item.type = itemType;
+    this.weaponTypeName = this._itemService.translateToName(itemType);
     this._ensureWeaponBonus();
   }
 

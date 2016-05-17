@@ -4,7 +4,7 @@
   <div class="inventory-item-info" *ngIf="isWeapon">
     <ul class="inventory-item-talents">
 
-      <li *ngFor="let talent of item.talents" class="active"
+      <li *ngFor="let talent of item.talents" [ngClass]="{active:talent.unlocked}"
           [ngStyle]="talentIconStyle(talent)"
       ></li>
 

@@ -24,7 +24,7 @@ export class AttributePipe implements PipeTransform {
     }
     if (format === ValueFormat.WEAPON) {
       return value >= WEAPON_THRESHOLD ?
-      (WEAPON_BASE + ((value - WEAPON_THRESHOLD) * .001)) + 'k' :
+      (WEAPON_BASE + ((value - WEAPON_THRESHOLD) * .001)).toFixed(1) + 'k' :
         value.toLocaleString();
     }
     return value.toLocaleString();
