@@ -51,7 +51,7 @@ export function camelCase(name) {
 
 export function asObservable<T>(subject: Observable<T>, once: boolean = false): Observable<T> {
   function wrap(obs) {
-    return new Observable(fn => obs.subscribe(fn));
+    return new Observable<T>(fn => obs.subscribe(fn));
   }
 
   return once
