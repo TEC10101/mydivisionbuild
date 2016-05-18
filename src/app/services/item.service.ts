@@ -355,8 +355,9 @@ export class ItemsService {
    * @returns {Observable<ItemDescriptor>}
    */
   getDescriptorFor(itemType: ItemType): Observable<ItemDescriptor> {
-    let obs = <Observable<ItemDescriptor>>this['_' + dashCaseToCamelCase(itemType || '')];
+    let obs: Observable<ItemDescriptor> = <Observable<ItemDescriptor>>this['_' + dashCaseToCamelCase(itemType || '')];
     if (obs) {
+
       return asObservable(obs, true);
     }
     return Observable.create();

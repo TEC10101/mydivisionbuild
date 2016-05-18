@@ -71,11 +71,11 @@ export class AttributesService {
   }
 
 
-  get weaponAttributes() {
+  get weaponAttributes(): Observable<WeaponAttribute[]> {
     return asObservable(this._weaponAttributes, true);
   }
 
-  get gearAttributes() {
+  get gearAttributes(): Observable<GearAttribute[]> {
     return asObservable(this._gearAttributes.first((attrs, idx, obs) => !!attrs.length));
   }
 
