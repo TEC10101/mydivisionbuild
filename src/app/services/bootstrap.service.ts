@@ -5,6 +5,8 @@ import {InventoryService} from './inventory.service';
 import {Weapon} from '../components/inventory/inventory.model';
 import {Gear} from '../components/item-overview/gear.model';
 import * as _ from 'lodash/index';
+import {Subject} from 'rxjs/Subject';
+import {asObservable} from '../common/utils';
 /**
  * Created by Keyston on 5/7/2016.
  */
@@ -16,10 +18,17 @@ export class BootstrapService {
   constructor(private _itemsService: ItemsService,
               private _inventoryService: InventoryService) {
 
+
+  }
+
+  boot() {
+    let subject = new Subject<InventoryService>();
+    let toLoad = 0;
     _.forEach(ItemType, (itemType: ItemType, key: string) => {
 
       let isWeapon = isWeaponType(itemType);
       if (isWeapon && itemType !== ItemType.AR) return;
+      toLoad++;
       this._itemsService
         .getDescriptorFor(itemType)
         .subscribe(descriptor => {
@@ -34,14 +43,19 @@ export class BootstrapService {
 
             if (isWeapon) {
               this._inventoryService.updateWeapon('primary', <Weapon>empty);
+              this._inventoryService.updateWeapon('secondary', _.cloneDeep(<Weapon>empty));
             } else {
               this._inventoryService.update(itemType, empty);
+            }
+            toLoad--;
+            if (!toLoad) {
+              subject.next(this._inventoryService);
             }
           }
         );
 
     });
-
+    return asObservable(subject);
   }
 
   private _weaponDefaultState(talents: ItemTalent[], itemType, name: string): Weapon {

@@ -6,9 +6,10 @@
 import {Component} from '@angular/core';
 import {InventoryItemRowComponent} from '../inventory-item-row/inventory-item-row.component';
 import {ItemOverviewComponent} from '../../item-overview/item-overview.component.ts';
-import {RouteParams} from '@angular/router-deprecated';
+import {RouteParams, Router} from '@angular/router-deprecated';
 import {InventoryService} from '../../../services/inventory.service';
 import {ItemType} from '../../../common/models/common';
+
 @Component({
   selector: 'inventory-items',
   styles: [require('./inventory-items.component.scss')],
@@ -23,10 +24,16 @@ export class InventoryItemsComponent {
 
 
   constructor(private _routeParams: RouteParams,
-              private _inventoryService: InventoryService) {
+              private _inventoryService: InventoryService,
+              private _router: Router) {
 
     this._itemType = <ItemType>_routeParams.get('itemType');
 
+  }
+
+
+  back() {
+    this._router.navigate(['Inventory']);
   }
 
   get items() {

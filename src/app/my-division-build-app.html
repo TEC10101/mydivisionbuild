@@ -1,11 +1,11 @@
 <base href="/">
-<main>
+<main *ngIf="loaded">
   <build-stats-banner></build-stats-banner>
   <router-outlet></router-outlet>
 </main>
 
 <button (click)="onToggleEditor()">{{currentEditorState}}</button>
-<auth></auth>
+
 
 <footer>
   © 2016

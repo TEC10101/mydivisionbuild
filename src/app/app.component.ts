@@ -24,7 +24,7 @@ import {AuthComponent} from './components/auth/auth.component';
   styles: [require('./assets/styles/app.scss')],
   directives: [BuildStatsBannerComponent, AuthComponent],
   encapsulation: ViewEncapsulation.None,
-  templateUrl: 'app/my-division-build-app.html',
+  template: require('./my-division-build-app.html'),
 
   providers: []
 })
@@ -36,12 +36,14 @@ import {AuthComponent} from './components/auth/auth.component';
 ])
 export class App implements OnInit {
 
-  gear: Gear;
+
+  loaded: boolean = false;
 
   constructor(private _editorService: EditorService,
-              private _attributesService: AttributesService,
               private _bootstrapService: BootstrapService) {
-    this.gear = DUMMY_GEAR;
+
+
+    _bootstrapService.boot().subscribe(loaded => this.loaded = true);
   }
 
   ngOnInit() {

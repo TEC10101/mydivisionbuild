@@ -42,25 +42,25 @@ export class InventoryItemComponent implements OnInit {
   }
 
   ngOnInit(): any {
+    /*
+     if (!this.item)this._itemsService
+     .getDescriptorFor(this.itemType)
+     .subscribe(descriptor => {
 
-    if (!this.item)this._itemsService
-      .getDescriptorFor(this.itemType)
-      .subscribe(descriptor => {
-
-          let first = <DivisionItem>descriptor.items[GearRarity.SUPERIOR][0];
-          let isWeapon = isWeaponType(this.itemType);
-          let empty = isWeapon
-            ? this._weaponDefaultState(descriptor.talents, first.name)
-            : this._gearDefaultState(first.name);
+     let first = <DivisionItem>descriptor.items[GearRarity.SUPERIOR][0];
+     let isWeapon = isWeaponType(this.itemType);
+     let empty = isWeapon
+     ? this._weaponDefaultState(descriptor.talents, first.name)
+     : this._gearDefaultState(first.name);
 
 
-          if (isWeapon) {
-            this._inventoryService.updateWeapon(this.weaponSlot, <Weapon>empty);
-          } else {
-            this._inventoryService.update(this.itemType, empty);
-          }
-        }
-      );
+     if (isWeapon) {
+     this._inventoryService.updateWeapon(this.weaponSlot, <Weapon>empty);
+     } else {
+     this._inventoryService.update(this.itemType, empty);
+     }
+     }
+     );*/
   }
 
 

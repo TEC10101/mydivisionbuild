@@ -1,3 +1,12 @@
+@import '../../../assets/styles/mixins';
+
 #items-list, #item-overview {
   float: left;
+}
+
+#back-button {
+  @include editor-button(150px, $color: white);
+  display: inline-block;
+  padding: 10px 5px;
+  cursor: pointer;
 }

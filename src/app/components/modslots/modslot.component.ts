@@ -45,6 +45,9 @@ export class ModSlotComponent implements OnInit {
   private _selectedSlotType: ModSlotType;
 
 
+  private _primaryObservable = asObservable(this._primaryAttributes);
+  private _secondaryObservable = asObservable(this._secondaryAttributes);
+
   constructor(private _modSlotService: ModSlotService, private _el: ElementRef) {
 
 
@@ -109,7 +112,7 @@ export class ModSlotComponent implements OnInit {
   getAttributesProvider(primary: boolean): AttributeObservable {
 
 
-    return asObservable(primary ? this._primaryAttributes : this._secondaryAttributes);
+    return primary ? this._primaryObservable : this._secondaryObservable;
   }
 
   ngOnInit(): any {

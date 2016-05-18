@@ -105,15 +105,15 @@
   }
 }
 
-@mixin editor-button($button-width) {
+@mixin editor-button($button-width,$text-size:15px,$color:$accent-font-color) {
 
   @include section-background();
-  @include text-style(15px, 1);
+  @include text-style($text-size, 1);
   border: none;
   display: block;
   margin-bottom: 10px;
   width: $button-width;
-  color: $accent-font-color;
+  color: $color;
 
 }
 
