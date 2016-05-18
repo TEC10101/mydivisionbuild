@@ -54,11 +54,11 @@ export class InventoryCalculator {
   constructor(private _inventory: Inventory,
               weaponDescriptors: WeaponDescriptorCollection,
               private _gearDescriptors: GearDescriptorCollection,
-              primary: Weapon, secondary: Weapon) {
+              private _primaryWeapon: Weapon, private _secondaryWeapon: Weapon) {
 
 
-    this._primary = new WeaponStatsCalculator(primary, weaponDescriptors, this);
-    this._secondary = new WeaponStatsCalculator(secondary, weaponDescriptors, this);
+    this._primary = new WeaponStatsCalculator(_primaryWeapon, weaponDescriptors, this);
+    this._secondary = new WeaponStatsCalculator(_secondaryWeapon, weaponDescriptors, this);
   }
 
   get primary() {
@@ -209,7 +209,7 @@ export class InventoryCalculator {
 
 
   caculateDps(weapon: Weapon) {
-    let calc = weapon === this.secondary 
+    let calc = weapon === this._secondaryWeapon
       ? this._secondary : this._primary;
 
     return calc.dps;

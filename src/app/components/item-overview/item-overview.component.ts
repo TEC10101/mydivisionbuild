@@ -42,6 +42,7 @@ export class ItemOverviewComponent implements OnInit {
 
   weaponTypeNames: any;
 
+  weaponTypeName: string;
   selectedItemType: ItemType;
 
 

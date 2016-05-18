@@ -22,7 +22,8 @@ export class BuildStatsBannerComponent {
   constructor(private _buildStatsService: BuildStatsService,
               private _inventoryService: InventoryService) {
 
-    this._inventoryService.weaponSelected.subscribe(weapon => this._onWeaponSelected(weapon));
+    this._inventoryService.weaponSelected
+      .subscribe(weapon => this._onWeaponSelected(weapon));
   }
 
 

@@ -16,6 +16,11 @@ export const AttributeInheritance = {
 
 };
 
+export interface Dictionary<T> {
+  [index: string]: T;
+}
+
+
 export type WeaponSlot = 'primary' | 'secondary'| 'sidearm';
 // tslint:disable-next-line
 export const WeaponSlot = {
@@ -211,6 +216,5 @@ export interface AffectsResults {
   affects: Affects;
   value: number;
 }
-
 
 

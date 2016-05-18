@@ -28,6 +28,7 @@
     </div>
   </div>
 
+
   <div class="section-wrapper clearfix" *ngIf="isWeapon">
     <div class="type-icon-wrapper {{item.type}}"></div>
     <div class="type-name-wrapper">
@@ -38,7 +39,7 @@
       </select>
     </div>
     <div class="type-extra-stat-wrapper" *ngIf="weaponHasBonus">
-      <div class="type-extra-stat-number-wrapper" >
+      <div class="type-extra-stat-number-wrapper">
         <auto-resize-input
           resize-increment="20"
           prepend="+"
@@ -46,7 +47,7 @@
           (input)="onWeaponBonusChanged($event)"></auto-resize-input>
       </div>
       <div class="type-extra-stat-text-wrapper">
-           {{weaponBonusText}}
+        {{weaponBonusText}}
       </div>
 
     </div>

@@ -7,11 +7,12 @@ import {DUMMY_GEAR, Gear} from '../components/item-overview/gear.model';
 import {Gender, ItemType, WeaponSlot} from '../common/models/common';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 import {LZString} from 'lz-string';
-import {Http} from 'angular2/http';
+import {Http} from '@angular/http';
 import {isWeaponType} from './item.service';
 import * as _ from 'lodash/index';
 import {BehaviorSubject} from 'rxjs';
 import {asObservable} from '../common/utils';
+import {Observable} from 'rxjs/Observable';
 
 
 /**
@@ -32,8 +33,8 @@ export class InventoryService {
   private _inventories: Inventory[] = [];
 
 
-  get weaponSelected() {
-    return asObservable(this._weaponSelected.filter((x, io, obs) => !!x));
+  get weaponSelected(): Observable<Weapon> {
+    return asObservable(this._weaponSelected.filter((x, _) => !!x));
   }
 
   _isWeaponSlot(value: string) {

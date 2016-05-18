@@ -6,6 +6,7 @@ import {InventoryService} from './inventory.service';
 
 import {BootstrapService} from './bootstrap.service';
 import {BuildStatsService} from './build-stats.service';
+import {AuthService} from './auth.service.ts';
 
 /**
  * Created by Keyston on 4/3/2016.
@@ -14,4 +15,4 @@ import {BuildStatsService} from './build-stats.service';
 
 export const DIVISION_PROVIDERS: any[] = [AttributesService, ItemsService,
   EditorService, ModSlotService, InventoryService, BuildStatsService,
-  BootstrapService];
+  BootstrapService, AuthService];

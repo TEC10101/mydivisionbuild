@@ -80,11 +80,10 @@ module.exports = {
       'angular2/testing': helpers.root('node_modules/@angular/core/testing.js'),
       '@angular/testing': helpers.root('node_modules/@angular/core/testing.js'),
       'angular2/platform/browser': helpers.root('node_modules/@angular/platform-browser/index.js'),
-      'angular2/testing': helpers.root('node_modules/@angular/testing/index.js'),
       'angular2/router': helpers.root('node_modules/@angular/router-deprecated/index.js'),
       'angular2/http': helpers.root('node_modules/@angular/http/index.js'),
       'angular2/http/testing': helpers.root('node_modules/@angular/http/testing.js')
-    },
+    }
 
   },
 
@@ -122,7 +121,7 @@ module.exports = {
           // these packages have problems with their sourcemaps
           helpers.root('node_modules/rxjs'),
           helpers.root('node_modules/@angular2-material'),
-          helpers.root('node_modules/@angular'),
+          helpers.root('node_modules/@angular')
         ]
       }
 

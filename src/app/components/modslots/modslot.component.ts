@@ -116,10 +116,16 @@ export class ModSlotComponent implements OnInit {
 
 
     this.slotTypes = this._modSlotService.getTypes(this.metadata.belongsTo);
+
     this.slotTypes.forEach(type => this._slotTypesById[type.id] = type);
 
 
     this.onSlotTypeChanged();
+    // allow selecting of weapon mod rarity
+    if (this.isWeapon) {
+      let slotTypeId = this.slot.id;
+      this.slotTypes = _.filter(this.slotTypes, {kind: this._selectedSlotType.kind});
+    }
   }
 
   private refreshAttributeProviders() {

@@ -17,7 +17,7 @@ import * as _ from 'lodash/index';
 type ModAttributeSetByType = {[id: number]: ModSlotAttributeSet}
 @Component({
   selector: 'modslots',
-  templateUrl: 'app/components/modslots/modslots.component.html',
+  template: require('./modslots.component.html'),
   styles: [require('./modslots.component.scss')],
   directives: [ModSlotComponent, EditorDirective]
 

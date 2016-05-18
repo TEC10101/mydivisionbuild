@@ -2,10 +2,10 @@
   <div id="items-list">
     <inventory-item-row [item]="item" *ngFor="let item of items"></inventory-item-row>
   </div>
-   <div id="item-overview" *ngIf="activeItem">
-     <item-overview [item]="activeItem"></item-overview>
-   </div>
 
+  <div id="item-overview" *ngIf="activeItem">
+    <item-overview [item]="activeItem"></item-overview>
+  </div>
 
 
 </div>

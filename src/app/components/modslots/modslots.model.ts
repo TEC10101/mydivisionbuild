@@ -46,6 +46,10 @@ export class ModSlotType {
   }
 
 
+  get kind() {
+    return this._slotKind;
+  }
+
   get id() {
     return this._id;
   }

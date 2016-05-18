@@ -3,12 +3,12 @@
  */
 
 
-import {Pipe, PipeTransform} from "angular2/core";
+import {Pipe, PipeTransform} from '@angular/core';
 
-@Pipe({name: "prettynumber"})
+@Pipe({name: 'prettynumber'})
 export class PrettyNumberPipe implements PipeTransform {
 
-  transform(value:any, args:any[]):string {
-    return value.toLocaleString()
+  transform(value: any, args: any[]): string {
+    return value.toLocaleString();
   }
 }
