@@ -3,7 +3,7 @@
  */
 
 
-import {Injectable} from '@angular/core';
+import {Injectable, Inject, forwardRef} from '@angular/core';
 import {Inventory, Weapon, InventoryGear} from '../components/inventory/inventory.model';
 import {ItemType, Affects} from '../common/models/common';
 import {
@@ -22,6 +22,7 @@ import {Attribute} from '../components/attributes/attributes.model';
 export class BuildStatsService {
 
   constructor(private _itemsService: ItemsService,
+              @Inject(forwardRef(() => InventoryService))
               private _inventoryService: InventoryService) {
 
   }

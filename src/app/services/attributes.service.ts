@@ -35,12 +35,16 @@ export class AttributesService {
   constructor(private _http: Http) {
 
 
-    this._loadGearAttributes();
-    this._loadWeaponAttributes();
+
 
     // this._bodyArmor = new AttributeStore(ItemType.BodyArmor, this._http);
 
 
+  }
+
+  init() {
+    this._loadGearAttributes();
+    this._loadWeaponAttributes();
   }
 
 

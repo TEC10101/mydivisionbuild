@@ -6,20 +6,25 @@ import {BuildStatsService, InventoryCalculator} from '../../services/build-stats
 import {InventoryService} from '../../services/inventory.service';
 import {PrettyNumberPipe} from '../../common/pipes/prettynumber';
 import {Weapon} from '../inventory/inventory.model';
+import {EditorService} from '../../services/editor-service';
+import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
+import {EditorDirective} from '../../directives/editor';
 
 
 @Component({
   selector: 'build-stats-banner',
   template: require('./build-stats-banner.component.html'),
   styles: [require('./build-stats-banner.component.scss')],
-  pipes: [PrettyNumberPipe]
+  pipes: [PrettyNumberPipe],
+  directives: [AutoResizeInputComponent, EditorDirective]
 })
 export class BuildStatsBannerComponent {
 
   private _calc: InventoryCalculator;
   private _selectedWeapon: Weapon;
 
-  constructor(private _buildStatsService: BuildStatsService,
+  constructor(private _editorService: EditorService,
+              private _buildStatsService: BuildStatsService,
               private _inventoryService: InventoryService) {
 
     this._inventoryService.weaponSelected
@@ -59,4 +64,33 @@ export class BuildStatsBannerComponent {
     this._selectedWeapon = weapon;
 
   }
+
+  save() {
+    this._inventoryService.save();
+  }
+
+  reset() {
+    this._inventoryService.reset();
+  }
+
+  get ownsInventory() {
+    return this._inventoryService.owns();
+  }
+
+  get currentEditorState() {
+    return this._editorService.state ? 'Editor On' : 'Editor Off';
+  }
+
+  onBuildNameChanged(name) {
+    this.inventory.name = name;
+  }
+
+  onToggleEditor() {
+    this._editorService.toggle();
+  }
+
+  get inventory() {
+    return this._inventoryService.inventory;
+  }
+
 }

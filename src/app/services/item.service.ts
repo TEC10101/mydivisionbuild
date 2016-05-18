@@ -232,6 +232,12 @@ export class ItemsService {
   constructor(private _http: Http,
               @Inject(forwardRef(() => AttributesService))
               private _attributesService: AttributesService) {
+
+
+  }
+
+  init() {
+    this._attributesService.init();
     this._loadItems(GEAR_TYPES, this._gearDescriptorCollection);
     this._loadWeaponTalents();
 
@@ -243,7 +249,6 @@ export class ItemsService {
 
     this._attributesService.gearAttributes
       .subscribe(attributes => this._gearDescriptorCollection.attributes = attributes);
-
   }
 
 

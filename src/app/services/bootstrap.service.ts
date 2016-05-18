@@ -22,6 +22,8 @@ export class BootstrapService {
   }
 
   boot() {
+
+    this._itemsService.init();
     let subject = new Subject<InventoryService>();
     let toLoad = 0;
     _.forEach(ItemType, (itemType: ItemType, key: string) => {
@@ -57,6 +59,8 @@ export class BootstrapService {
     });
     return asObservable(subject);
   }
+
+  
 
   private _weaponDefaultState(talents: ItemTalent[], itemType, name: string): Weapon {
 

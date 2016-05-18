@@ -15,6 +15,7 @@ import {
 }
   from './components/build-stats-banner/build-stats-banner.component';
 import {AuthComponent} from './components/auth/auth.component';
+import {InventoryService} from './services/inventory.service';
 
 
 @Component({
@@ -34,28 +35,18 @@ import {AuthComponent} from './components/auth/auth.component';
   {path: '/...', name: 'InventoryRoot', component: InventoryRootComponent}
 
 ])
-export class App implements OnInit {
+export class App {
 
 
   loaded: boolean = false;
 
-  constructor(private _editorService: EditorService,
-              private _bootstrapService: BootstrapService) {
+  constructor(private _bootstrapService: BootstrapService) {
 
 
-    _bootstrapService.boot().subscribe(loaded => this.loaded = true);
-  }
-
-  ngOnInit() {
-
-  }
-
-  get currentEditorState() {
-    return this._editorService.state ? 'Currently On' : 'Currently Off';
-  }
-
-  onToggleEditor() {
-    this._editorService.toggle();
+    _bootstrapService.boot().subscribe((service: InventoryService) => {
+      service.freeze();
+      this.loaded = true;
+    });
   }
 
 

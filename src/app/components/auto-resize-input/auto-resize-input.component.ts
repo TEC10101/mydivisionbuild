@@ -63,7 +63,7 @@ export class AutoResizeInput {
         <label  [ngClass]='{hidden:editing}' (click)='onClicked()'>
           {{prepend}}{{value|attribute:format}}
         </label>
-        <input [ngClass]='{hidden:!editing}' autofocus type='number'
+        <input [ngClass]='{hidden:!editing}' autofocus [attr.type]='inputType'
          min="0" max="9999"
          [attr.step]="numberStep" [attr.size]='length' [value]='value' 
          (input)='onInputChanged($event)'  (focus)='onInputFocused()' 
@@ -83,7 +83,7 @@ export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, O
   @Input('resize-increment')
   @InputConverter(NumberConverter) resizeIncrement: number = 10;
   @Input() length: number = 4;
-  @Input() inputType: string;
+  @Input() inputType: string = 'number';
   @Input() format: ValueFormat;
   @Input() prepend: string = '+';
   value: string;
@@ -189,12 +189,13 @@ export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, O
 
   onInputChanged(event) {
     let value = event.target.value;
-    if (value.length > this.length) {
+    if (this.length && value.length > this.length) {
       value = value.substr(0, this.length);
     }
 
     // make sure its an number
-    value = +value;
+    if (this.inputType === 'number')
+      value = +value;
     if (this.value !== value) {
       this.value = value;
       this.input.emit(this.value);

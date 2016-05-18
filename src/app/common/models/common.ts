@@ -141,12 +141,13 @@ export interface WeaponAttribute extends DivisionAttribute {
   type: AttributeType;
   slots: string[];
 }
-export type ValueFormat = 'percent' | 'number' | 'weapon'
+export type ValueFormat = 'percent' | 'number' | 'weapon' |'none'
 // tslint:disable-next-line
 export const ValueFormat = {
   PERCENT: 'percent' as ValueFormat,
   NUMBER: 'number' as ValueFormat,
-  WEAPON: 'weapon' as ValueFormat
+  WEAPON: 'weapon' as ValueFormat,
+  NONE: 'none' as ValueFormat
 };
 
 

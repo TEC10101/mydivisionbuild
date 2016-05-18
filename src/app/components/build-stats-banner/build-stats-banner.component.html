@@ -1,37 +1,52 @@
 <div id="build-stats-banner" class="clearfix">
-  <div class="column">
 
-  </div>
-  <div class="column">
-    <label>Primary DPS</label>
-    <span>{{dps|prettynumber}}</span>
 
-    <div class="bottom">
-      <hr>
-      Firearms <img src="app/assets/images/icon-stat-firearms.png"/>{{firearms}}
+  <div id="banner-columns">
+
+    <div id="banner-name">
+      <label editor>{{inventory.name}}</label>
+
+
+      <input editor="true" type="text" [(ngModel)]="inventory.name"
+             (ngModelChange)="onBuildNameChanged($event)"/>
+
     </div>
-  </div>
-  <div class="column">
-    <label>Health</label>
+    <div class="column">
+      <label>Primary DPS</label>
+      <span>{{dps|prettynumber}}</span>
 
-    <span>{{health|prettynumber}}</span>
-    <div class="bottom">
-      <hr>
-      Stamina <img src="app/assets/images/icon-stat-stamina.png"/>{{stamina}}
+      <div class="bottom">
+        <hr>
+        Firearms <img src="app/assets/images/icon-stat-firearms.png"/>{{firearms}}
+      </div>
     </div>
+    <div class="column">
+      <label>Health</label>
 
-  </div>
-
-  <div class="column">
-    <label>Skill Power</label>
-
-    <span>{{skillpower|prettynumber}}</span>
-    <div class="bottom">
-      <hr>
-
-      Electronics <img src="app/assets/images/icon-stat-electronics.png"/>{{electronics}}
+      <span>{{health|prettynumber}}</span>
+      <div class="bottom">
+        <hr>
+        Stamina <img src="app/assets/images/icon-stat-stamina.png"/>{{stamina}}
+      </div>
 
     </div>
 
+    <div class="column">
+      <label>Skill Power</label>
+
+      <span>{{skillpower|prettynumber}}</span>
+      <div class="bottom">
+        <hr>
+
+        Electronics <img src="app/assets/images/icon-stat-electronics.png"/>{{electronics}}
+
+      </div>
+
+    </div>
+  </div>
+  <div id="inventory-actions" *ngIf="ownsInventory">
+    <button (click)="save()">SAVE</button>
+    <button (click)="reset()">NEW</button>
+    <button (click)="onToggleEditor()">{{currentEditorState}}</button>
   </div>
 </div>

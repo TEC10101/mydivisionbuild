@@ -4,7 +4,7 @@
 import {Component} from '@angular/core';
 import {Inventory} from './inventory.model';
 import {InventoryItemComponent} from './inventory-item/inventory-item.component';
-import {Router, RouteConfig, RouterOutlet} from '@angular/router-deprecated';
+import {Router, RouteConfig, RouterOutlet, RouteParams} from '@angular/router-deprecated';
 import {InventoryItemsComponent} from './inventory-items/inventory-items.component';
 import {InventoryService} from '../../services/inventory.service';
 import {AuthCallbackComponent} from '../auth/auth-callback.component';
@@ -23,8 +23,13 @@ export class InventoryComponent {
   inventory: Inventory;
 
 
-  constructor(private _router: Router, private _inventoryService: InventoryService) {
+  constructor(private _router: Router,
+              private _inventoryService: InventoryService,
+              private _routeParams: RouteParams) {
     this.inventory = this._inventoryService.inventory;
+
+    let id = _routeParams.get('id');
+    if (id) _inventoryService.load(id);
 
   }
 
