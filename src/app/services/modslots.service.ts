@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import {AttributesService} from './attributes.service';
 import {
   ItemType, GearAttribute, AttributeType, WeaponAttribute, DivisionAttribute
@@ -14,6 +14,7 @@ import {Observable} from 'rxjs/Observable';
 import {isWeaponType} from './item.service';
 import {Http} from '@angular/http';
 import {BehaviorSubject} from 'rxjs/Rx';
+import {APP_CONFIG} from '../common/config';
 /**
  * Created by Keyston on 4/10/2016.
  */
@@ -72,9 +73,10 @@ export class ModSlotService {
 
   }
 
-  constructor(private _attributeService: AttributesService, private _http: Http) {
+  constructor(@Inject(APP_CONFIG) private config, private _attributeService: AttributesService, private _http: Http) {
 
     this._loadWeaponMods();
+    this._basePath = config.baseUrl + '/json/';
 
   }
 

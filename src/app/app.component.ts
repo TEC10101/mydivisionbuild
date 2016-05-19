@@ -16,6 +16,7 @@ import {
   from './components/build-stats-banner/build-stats-banner.component';
 import {AuthComponent} from './components/auth/auth.component';
 import {InventoryService} from './services/inventory.service';
+import {AssetPipe} from './common/pipes/asset.pipe';
 
 
 @Component({

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import {
   ItemType, AttributeType, GearAttribute, WeaponAttribute, DivisionAttribute
 }
@@ -11,6 +11,7 @@ import {BehaviorSubject} from 'rxjs/Rx';
 import {asObservable} from '../common/utils';
 import * as _ from 'lodash/index';
 import {isWeaponType} from './item.service';
+import {APP_CONFIG} from '../common/config';
 /**
  * Created by Keyston on 4/3/2016.
  */
@@ -32,7 +33,7 @@ export class AttributesService {
     return {type: AttributeType.SKILL, skill: true, supports: [gearType]};
   }
 
-  constructor(private _http: Http) {
+  constructor(@Inject(APP_CONFIG) private _config, private _http: Http) {
 
 
 
@@ -49,7 +50,7 @@ export class AttributesService {
 
 
   _loadWeaponAttributes() {
-    let basePath = 'app/assets/json/weapon-attributes.json';
+    let basePath = `${this._config.baseUrl}/json/weapon-attributes.json`;
     this._http.get(basePath)
       .map(res => <WeaponAttribute[]>res.json())
       .subscribe(
@@ -60,7 +61,7 @@ export class AttributesService {
   }
 
   _loadGearAttributes() {
-    let basePath = 'app/assets/json/gear-attributes.json';
+    let basePath = `${this._config.baseUrl}/json/gear-attributes.json`;
     this._http.get(basePath)
       .map(res => <GearAttribute[]>res.json())
       .subscribe(

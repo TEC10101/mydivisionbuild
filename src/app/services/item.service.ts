@@ -26,6 +26,7 @@ import {GEAR_SCORES} from '../components/item-overview/gear.model';
 import {InventoryItem, WeaponBonusStat} from '../components/inventory/inventory.model';
 import {WeaponModType} from '../components/modslots/modslots.model';
 import {AttributesService} from './attributes.service';
+import {APP_CONFIG} from '../common/config';
 
 
 class ItemStore {
@@ -229,9 +230,12 @@ export class ItemsService {
   // for some reason without using @Inject(forwardRef(() => AttributesService))
   // AttributesService will resolve to undefined and throw an error
 
-  constructor(private _http: Http,
+  constructor(@Inject(APP_CONFIG) private config, private _http: Http,
               @Inject(forwardRef(() => AttributesService))
               private _attributesService: AttributesService) {
+
+    this._basePath = config.baseUrl + '/json/';
+    this._imagePath = config.baseUrl + '/images/inventory/';
 
 
   }

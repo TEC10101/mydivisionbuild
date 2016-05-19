@@ -17,7 +17,7 @@
 
       <div class="bottom">
         <hr>
-        Firearms <img src="app/assets/images/icon-stat-firearms.png"/>{{firearms}}
+        Firearms <img [src]="'/images/icon-stat-firearms.png'|asset"/>{{firearms}}
       </div>
     </div>
     <div class="column">
@@ -26,7 +26,7 @@
       <span>{{health|prettynumber}}</span>
       <div class="bottom">
         <hr>
-        Stamina <img src="app/assets/images/icon-stat-stamina.png"/>{{stamina}}
+        Stamina <img [src]="'/images/icon-stat-stamina.png'|asset"/>{{stamina}}
       </div>
 
     </div>
@@ -38,7 +38,7 @@
       <div class="bottom">
         <hr>
 
-        Electronics <img src="app/assets/images/icon-stat-electronics.png"/>{{electronics}}
+        Electronics <img [src]="'/images/icon-stat-electronics.png'|asset"/>{{electronics}}
 
       </div>
 

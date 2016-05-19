@@ -74,7 +74,7 @@ export class InventoryService {
 
     let storage = localStorage.getItem(STORAGE_KEY);
     if (storage) this._inventories = <Inventories>JSON.parse(storage);
-    this._stats = new BuildStatsService(itemsService, this)
+    this._stats = new BuildStatsService(itemsService, this);
     this.reset();
 
 
