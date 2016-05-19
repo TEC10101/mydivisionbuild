@@ -55,6 +55,10 @@ export class AttributeComponent implements OnInit, OnDestroy {
 
   @Input('maxlength') maxlength: any;
 
+  @Input('add-buttons')
+  @InputConverter(BooleanConverter)
+  showAddButtons: boolean;
+
 
   _restrictAttributeId: number;
 
@@ -142,7 +146,7 @@ export class AttributeComponent implements OnInit, OnDestroy {
   }
 
   get canAddOrRemove() {
-    return !isWeaponType(this.metadata.belongsTo);
+    return !isWeaponType(this.metadata.belongsTo) && this.showAddButtons;
   }
 
   get attributeDef() {

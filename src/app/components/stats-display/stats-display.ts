@@ -6,6 +6,9 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {StatType, GearStats} from '../../common/models/common';
 import {NgClass} from '@angular/common';
 import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.component';
+import {BuildStatsService, InventoryCalculator} from '../../services/build-stats.service';
+import {AttributeMeta} from '../attributes/attribute.component';
+import {EditorService} from '../../services/editor-service';
 
 
 interface StateValueChangeEvent {
@@ -46,10 +49,20 @@ export class SingleStatDisplay {
 export class StatsDisplay {
 
   @Input() stats: GearStats;
+  @Input('gear-metadata') metadata: AttributeMeta;
+  _calc: InventoryCalculator;
+
+  constructor(private _buildStatsService: BuildStatsService,
+              private _editorService: EditorService) {
+
+    this._calc = this._buildStatsService.create();
+  }
 
 
   stat(name) {
-    return !this.stats ? 0 : this.stats[name];
+    let editing = this._editorService.state;
+    let stats = !editing ? this._calc.statsForGear(this.metadata.belongsTo) : this.stats;
+    return !stats ? 0 : stats[name];
   }
 
   onStateValueChanged(event: StateValueChangeEvent) {

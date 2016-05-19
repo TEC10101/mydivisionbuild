@@ -5,7 +5,7 @@
 
 import {Injectable, Inject, forwardRef} from '@angular/core';
 import {Inventory, Weapon, InventoryGear} from '../components/inventory/inventory.model';
-import {ItemType, Affects} from '../common/models/common';
+import {ItemType, Affects, GearStats} from '../common/models/common';
 import {
   WeaponDescriptor,
   WeaponInfo,
@@ -18,6 +18,7 @@ import {Gear} from '../components/item-overview/gear.model';
 import * as _ from 'lodash/index';
 import {InventoryService} from './inventory.service';
 import {Attribute} from '../components/attributes/attributes.model';
+import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 @Injectable()
 export class BuildStatsService {
 
@@ -214,6 +215,21 @@ export class InventoryCalculator {
       ? this._secondary : this._primary;
 
     return calc.dps;
+  }
+
+  statsForGear(itemType: ItemType): GearStats {
+    let gear = this._inventory.gear[dashCaseToCamelCase(itemType)];
+    let base = gear.stats;
+
+    return {
+      firearms: base.firearms
+      + this.calculateAffectsValueFromMods(Affects.FIREARMS, gear),
+      stamina: base.stamina
+      + this.calculateAffectsValueFromMods(Affects.STAMINA, gear),
+      electronics: base.electronics
+      + this.calculateAffectsValueFromMods(Affects.ELECTRONICS, gear)
+    };
+
   }
 }
 

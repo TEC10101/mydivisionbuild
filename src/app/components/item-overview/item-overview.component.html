@@ -82,7 +82,7 @@
 
   </div>
   <div class="section-wrapper" *ngIf="isGear">
-    <stats-display [stats]="item.stats"></stats-display>
+    <stats-display [stats]="item.stats" [gear-metadata]="metadata"></stats-display>
   </div>
   <div class="section-wrapper" *ngIf="isGear">
     <item-attributes [data]="item.attributes" [gear-metadata]="metadata"></item-attributes>
