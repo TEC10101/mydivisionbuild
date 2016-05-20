@@ -446,7 +446,7 @@ export class WeaponStatsCalculator {
   get accuracy() {
 
 
-    return this._weapon.type !== ItemType.Sniper
+    return this._weapon.type !== ItemType.Marksman
       ? this._accuracy() : this._sniperAccuracy();
 
 

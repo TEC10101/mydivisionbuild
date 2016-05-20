@@ -190,7 +190,7 @@ export class ItemOverviewComponent implements OnInit {
 
   get weaponHasBonus() {
     let type = this.item.type;
-    return type === ItemType.SMG || type === ItemType.Sniper;
+    return type === ItemType.SMG || type === ItemType.Marksman;
   }
 
   get weaponBonusText() {

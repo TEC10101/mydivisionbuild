@@ -69,7 +69,7 @@ export const ItemType = {
   SMG: 'smg' as ItemType,
   LMG: 'lmg' as ItemType,
   Shotgun: 'shotgun' as ItemType,
-  Sniper: 'sniper' as ItemType
+  Marksman: 'marksman-rifle' as ItemType
 
 };
 
@@ -77,7 +77,7 @@ export const GEAR_TYPES = [ItemType.BodyArmor, ItemType.Mask,
   ItemType.KneePads, ItemType.BackPack,
   ItemType.Gloves, ItemType.Holster];
 export const WEAPON_TYPES = [ItemType.Pistol, ItemType.AR, ItemType.SMG, ItemType.LMG,
-  ItemType.Shotgun, ItemType.Sniper];
+  ItemType.Shotgun, ItemType.Marksman];
 
 
 // tslint:disable-next-line

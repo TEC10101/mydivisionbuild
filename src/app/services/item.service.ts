@@ -40,7 +40,7 @@ const WEAPON_TYPES_TO_LABEL = (function () {
   values[ItemType.AR] = 'Assault Rifle';
   values[ItemType.LMG] = 'Light Machine gun';
   values[ItemType.SMG] = 'Submachine Gun';
-  values[ItemType.Sniper] = 'Marksman Rifle';
+  values[ItemType.Marksman] = 'Marksman Rifle';
   values[ItemType.Shotgun] = 'Shotgun';
   return values;
 })();
@@ -164,7 +164,7 @@ export class WeaponDescriptorCollection extends DescriptorCollection<WeaponDescr
   smg: WeaponDescriptor;
   lmg: WeaponDescriptor;
   shotgun: WeaponDescriptor;
-  sniper: WeaponDescriptor;
+  marksmanRifle: WeaponDescriptor;
 
   attributes: WeaponAttribute[];
 
@@ -219,7 +219,7 @@ export class ItemsService {
     new BehaviorSubject<WeaponDescriptor>(void 0);
   private _shotgun: BehaviorSubject<WeaponDescriptor> =
     new BehaviorSubject<WeaponDescriptor>(void 0);
-  private _sniper: BehaviorSubject<WeaponDescriptor> =
+  private _marksmanRifle: BehaviorSubject<WeaponDescriptor> =
     new BehaviorSubject<WeaponDescriptor>(void 0);
 
 
