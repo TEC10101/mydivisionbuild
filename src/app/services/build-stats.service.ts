@@ -5,7 +5,8 @@
 
 import {Injectable, Inject, forwardRef} from '@angular/core';
 import {Inventory, Weapon, InventoryGear} from '../components/inventory/inventory.model';
-import {ItemType, Affects, GearStats} from '../common/models/common';
+import {ItemType, GearStats} from '../common/models/common';
+import {Affects} from '../common/models/affects';
 import {
   WeaponDescriptor,
   WeaponInfo,
@@ -54,7 +55,53 @@ export class BuildStatsService {
     return this.create(inventory, weapon).primary;
   }
 
+  computeSheet() {
+
+    let gearNames = _.map(this._itemsService.gearTypes, dashCaseToCamelCase);
+    let sheet = new CharacterSheet();
+    let calc = this._defaultInstance;
+    let gearItems = this._inventoryService.inventory.gear;
+    let weapons = this._inventoryService.inventory.weapons;
+    _.forEach(Affects, (affects: Affects) => {
+      let breakdown = new StatBreakdown();
+      let sumFromGear = _.sumBy(gearNames, (name) => {
+        return breakdown[name] = calc.calculateTotalAffectsValue(affects);
+      });
+      breakdown.primary = calc.primary.calculateTotalAffectsValue(affects);
+      breakdown.secondary = calc.secondary.calculateTotalAffectsValue(affects);
+
+      sheet.add(affects, breakdown);
+
+    });
+    return sheet;
+  }
+
 }
+export class CharacterSheet {
+
+  _info: {[id: string]: StatBreakdown};
+
+  add(key: Affects, breakdown) {
+    this._info[key] = breakdown;
+  }
+
+  retrieve(key: Affects): StatBreakdown {
+    return this._info[key];
+  }
+}
+
+class StatBreakdown {
+  primary: number;
+  secondary: number;
+  pistol: number;
+  bodyArmor: number;
+  mask: number;
+  kneePads: number;
+  gloves: number;
+  holster: number;
+
+}
+
 
 export class InventoryCalculator {
 
@@ -80,6 +127,7 @@ export class InventoryCalculator {
     return this._secondary;
   }
 
+
   get skillpower() {
 
     let fromElectronics = (this.electronics * 10);
@@ -100,7 +148,7 @@ export class InventoryCalculator {
     let base = 535; // base at lvl 30
     let fromGear = this._reduce((sum, gear) => sum + gear.stats.stamina);
     let fromMods = this.calculateAffectsValueFromMods(Affects.STAMINA);
-    return base + fromMods;
+    return base + fromGear + fromMods;
   }
 
   staminaFor(gear: Gear) {
@@ -131,10 +179,10 @@ export class InventoryCalculator {
   }
 
 
-  calculateTotalAffectsValue(affects: Affects) {
-    let talentAffects = this.calculateAffectsValueFromTalents(affects);
-    let modsAffects = this.calculateAffectsValueFromMods(affects);
-    let attributesAffects = this.calculateAffectsValueFromAttributes(affects);
+  calculateTotalAffectsValue(affects: Affects, limitToGear?: Gear) {
+    let talentAffects = this.calculateAffectsValueFromTalents(affects, limitToGear);
+    let modsAffects = this.calculateAffectsValueFromMods(affects, limitToGear);
+    let attributesAffects = this.calculateAffectsValueFromAttributes(affects, limitToGear);
     let nativeValue = 0;
     switch (affects) {
       case Affects.FIREARMS:
@@ -158,7 +206,7 @@ export class InventoryCalculator {
     return this._gearDescriptors.forType(itemType);
   }
 
-  calculateAffectsValueFromTalents(affects: Affects) {
+  calculateAffectsValueFromTalents(affects: Affects, limitToGear?: Gear) {
     return this._reduce((sum, gear) => {
 
       if (!gear.talents.length) return sum;
@@ -178,7 +226,7 @@ export class InventoryCalculator {
       let talent = gear.talents[0];
       return sum + ( _.includes(talentsThatAffects, talent.id) ? talent.value : 0);
 
-    });
+    }, limitToGear);
   }
 
 
@@ -214,7 +262,7 @@ export class InventoryCalculator {
     }, limitToGear);
   }
 
-  calculateAffectsValueFromAttributes(affects: Affects) {
+  calculateAffectsValueFromAttributes(affects: Affects, limitToGear?: Gear) {
     let attributesThatAffects = this._attributesThatAffects(affects);
     if (!attributesThatAffects.length) return 0;
 
@@ -224,7 +272,7 @@ export class InventoryCalculator {
       return sum + _.reduce(attributes, (total, attr) => {
           return total + (_.includes(attributesThatAffects, attr.id) ? +attr.value : 0);
         }, 0);
-    });
+    }, limitToGear);
   }
 
 
@@ -472,13 +520,6 @@ export class WeaponStatsCalculator {
         ? talent.value : 0), 0);
   }
 
-  _attributesThatAffects(affects: Affects): string[] {
-    return _.filter(
-      this.weaponDescriptor.talents,
-      {affects: [affects]}
-    ).map(attr => attr.id);
-  }
-
 
   calculateAffectsValueFromMods(affects: Affects) {
     let mods = this._weapon.mods;
@@ -494,5 +535,19 @@ export class WeaponStatsCalculator {
       return sum + primary + secondary;
     }, 0);
   }
+
+  calculateTotalAffectsValue(affects: Affects) {
+    let fromTalents = this.calculateAffectsFromWeaponTalents(affects);
+    let fromMods = this.calculateAffectsValueFromMods(affects);
+    return fromTalents + fromMods;
+  }
+
+  _attributesThatAffects(affects: Affects): string[] {
+    return _.filter(
+      this.weaponDescriptor.talents,
+      {affects: [affects]}
+    ).map(attr => attr.id);
+  }
+
 
 }

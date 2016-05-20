@@ -17,7 +17,7 @@ import {
   ItemTalent,
   WeaponTalent,
   GearAttribute,
-  WeaponAttribute, Affects
+  WeaponAttribute
 } from '../common/models/common';
 import * as _ from 'lodash/index';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
@@ -27,6 +27,7 @@ import {InventoryItem, WeaponBonusStat} from '../components/inventory/inventory.
 import {WeaponModType} from '../components/modslots/modslots.model';
 import {AttributesService} from './attributes.service';
 import {APP_CONFIG} from '../common/config';
+import {Affects} from '../common/models/affects';
 
 
 class ItemStore {
@@ -108,7 +109,7 @@ interface WeaponManifest {
   weapons: WeaponInfo[];
   compatibility: WeaponModCompatibilityByType;
   stats: WeaponBaseStatsByFamily;
-  
+
 }
 export interface WeaponInfo extends DivisionItem {
   named: boolean;
@@ -455,6 +456,10 @@ export class ItemsService {
         ? Affects.CRIT_HIT_CHANCE
         : Affects.HEADSHOT_DAMAGE
     };
+  }
+
+  get gearTypes() {
+    return GEAR_TYPES;
   }
 }
 export function isWeaponType(itemType: ItemType): boolean {

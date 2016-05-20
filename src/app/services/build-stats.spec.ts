@@ -20,8 +20,9 @@ import {BuildStatsService, InventoryCalculator} from './build-stats.service';
 import {ItemsService} from './item.service';
 import {AttributesService} from './attributes.service';
 import {Inventory} from '../components/inventory/inventory.model';
-import {ItemType, GearRarity, Affects} from '../common/models/common';
+import {ItemType, GearRarity} from '../common/models/common';
 import {FixtureBackend} from '../testing/fixture-backend';
+import {Affects} from '../common/models/affects';
 
 describe('Build-statsService: service', () => {
   let service: BuildStatsService;

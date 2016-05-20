@@ -3,9 +3,10 @@
  */
 
 import {Gear} from '../item-overview/gear.model';
-import {GenderType, Rarity, ItemType, Affects} from '../../common/models/common';
+import {GenderType, Rarity, ItemType} from '../../common/models/common';
 import {Attributes, Attribute} from '../attributes/attributes.model';
 import {Talent} from '../talents/talent.model';
+import {Affects} from '../../common/models/affects';
 
 
 export type InventoryItemType = 'weapon' | 'gear';
@@ -56,7 +57,7 @@ export interface WeaponBonusStat {
   affects: Affects;
 }
 export interface WeaponStats {
-  damage: number;  
+  damage: number;
   bonus?: WeaponBonusStat;
 }
 
