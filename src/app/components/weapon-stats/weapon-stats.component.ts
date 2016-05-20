@@ -25,6 +25,7 @@ export class WeaponStatsComponent implements OnInit {
   }
 
 
+  
   ngOnInit(): any {
     this._calc = this._buildStatsService
       .createForWeapon(this.weapon);

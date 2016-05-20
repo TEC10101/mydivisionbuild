@@ -1,6 +1,14 @@
 @import "../../assets/styles/colors";
 @import "../../assets/styles/mixins";
 
+:host.flat {
+
+  input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+
+  }
+}
+
 input, .placeholder {
   color: #eb7c09;
   float: left;

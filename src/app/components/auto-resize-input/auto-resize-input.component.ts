@@ -102,12 +102,13 @@ export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, O
     ngControl.valueAccessor = this;
     this.elementRef = elementRef;
     this.ngZone = ngZone;
-    this._editorSubscription = this._editorService.subscribe((value) => this.allowEditing = value);
+    this._editorSubscription = this._editorService
+      .subscribe((value) => this.allowEditing = value);
 
   }
 
   get numberStep() {
-    return this.format === ValueFormat.PERCENT ? '0.5' : '1';
+    return 1; // this.format === ValueFormat.PERCENT ? '0.5' : '1';
   }
 
   ngOnInit(): any {
@@ -115,7 +116,8 @@ export class AutoResizeInputComponent implements ControlValueAccessor, OnInit, O
     this.value = this.ngModel;
     this.onChange(this.value);
     let attributes = this.elementRef.nativeElement.attributes;
-    let nodeName = _.find(attributes, (attr: any) => attr.nodeName.indexOf('_nghost-') !== -1).nodeName;
+    let nodeName = _.find(attributes, (attr: any) =>
+    attr.nodeName.indexOf('_nghost-') !== -1).nodeName;
 
     this.placeholderContentName = nodeName.replace('_nghost-', '_ngcontent-');
 
