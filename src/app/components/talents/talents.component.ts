@@ -20,6 +20,7 @@ import {AutoResizeInputComponent} from '../auto-resize-input/auto-resize-input.c
 import {ValueFormat, ItemTalent} from '../../common/models/common';
 import {BooleanConverter, InputConverter} from '../../common/converters';
 import {ItemsService} from '../../services/item.service';
+import {AttributeMeta} from '../attributes/attribute.component';
 
 
 const TEMPLATE_INPUT_PERCENT_MARKER = 'x%';
@@ -53,6 +54,7 @@ const TALENT_INPUT_TEMPLATE = ` <auto-resize-input [length]='2'
 
 export class TalentComponent implements OnInit, AfterViewInit {
 
+
   @Input() talent: Talent;
   @Input() choices: ItemTalent[];
   @Input('has-image')
@@ -61,8 +63,12 @@ export class TalentComponent implements OnInit, AfterViewInit {
 
   _previousTalentId: string;
   _componentRef: ComponentRef<any>;
+  _metadata: AttributeMeta;
 
-  @ViewChild('description', {read: ViewContainerRef}) _descriptionContainerRef: ViewContainerRef;
+  @ViewChild('description', {read: ViewContainerRef})
+  _descriptionContainerRef: ViewContainerRef;
+
+  _selectedChoice: ItemTalent;
 
 
   static toComponent(template, talent) {
@@ -106,10 +112,37 @@ export class TalentComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): any {
     // ensure that there is a value for the talent even if its 0
-    if (!this.talent.value) this.talent.value = 0;
+
     if (!this.talent.id) {
       this.talent.id = this.choices[0].id;
     }
+
+    if (!this.talent.value && this._metadata)
+      this._updateTalentDefaultValue();
+
+
+  }
+
+  @Input()
+  set metadata(value) {
+    let updateDefaultValue = !this._metadata || (value && value.score !== this._metadata.score);
+    this._metadata = value;
+    if (updateDefaultValue) {
+      this._updateTalentDefaultValue();
+    }
+  }
+
+  get metadata() {
+    return this._metadata;
+  }
+
+  _updateTalentDefaultValue() {
+
+    let talent = this._selectedChoice = _.find(this.choices, {id: this.talent.id});
+
+    let defaultValue = talent.defaultValues
+      ? talent.defaultValues[this.metadata.score] : 0;
+    this.talent.value = defaultValue || 0;
 
   }
 
@@ -183,6 +216,7 @@ export class TalentsComponent {
 
   @Input() talents: Talent[];
   @Input() choices: ItemTalent[];
+  @Input() metadata: AttributeMeta;
 
   @Input('has-image')
   @InputConverter(BooleanConverter) hasImage: boolean;

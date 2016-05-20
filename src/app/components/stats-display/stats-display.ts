@@ -49,7 +49,7 @@ export class SingleStatDisplay {
 export class StatsDisplay {
 
   @Input() stats: GearStats;
-  @Input('gear-metadata') metadata: AttributeMeta;
+  @Input('metadata') metadata: AttributeMeta;
   _calc: InventoryCalculator;
 
   constructor(private _buildStatsService: BuildStatsService,
@@ -61,7 +61,7 @@ export class StatsDisplay {
 
   stat(name) {
     let editing = this._editorService.state;
-    let stats = !editing ? this._calc.statsForGear(this.metadata.belongsTo) : this.stats;
+    let stats = !editing ? this._calc.gearStatsFor(this.metadata.belongsTo) : this.stats;
     return !stats ? 0 : stats[name];
   }
 

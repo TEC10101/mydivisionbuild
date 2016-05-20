@@ -77,20 +77,21 @@
   </div>
   <div class="section-wrapper " *ngIf="isHighEnd || isWeapon">
 
-    <talents [choices]="talentChoices" [talents]="talents" [has-image]="talentsHaveImage"></talents>
+    <talents [choices]="talentChoices" [talents]="talents" [metadata]="metadata"
+             [has-image]="talentsHaveImage"></talents>
 
 
   </div>
   <div class="section-wrapper" *ngIf="isGear">
-    <stats-display [stats]="item.stats" [gear-metadata]="metadata"></stats-display>
+    <stats-display [stats]="item.stats" [metadata]="metadata"></stats-display>
   </div>
   <div class="section-wrapper" *ngIf="isGear">
-    <item-attributes [data]="item.attributes" [gear-metadata]="metadata"></item-attributes>
+    <item-attributes [data]="item.attributes" [metadata]="metadata"></item-attributes>
   </div>
 
 
   <div class="section-wrapper">
-    <modslots [gear-metadata]="metadata" [slots]="item.mods"></modslots>
+    <modslots [metadata]="metadata" [slots]="item.mods"></modslots>
   </div>
 
 

@@ -171,11 +171,22 @@ export interface ItemTalent {
   id: string;
   template: string;
   affects?: Affects[];
+  defaultValues?: ValueByGearScore<number>;
+  requirements?: ValueByGearScore<GearStats>;
 }
 
+export interface ValueByGearScore<T> {
+  131: T;
+  147: T;
+  165: T;
+  163: T;
+  182: T;
+  204: T;
+}
 export interface WeaponTalent extends ItemTalent {
 
   supports: ItemType[];
+
 }
 
 

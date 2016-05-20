@@ -6,6 +6,34 @@
     "affects": [
       "accuracy"
     ],
+    "defaultValues": {
+      "131": 40,
+      "147": 147,
+      "165": 42,
+      "163": 45,
+      "182": 46,
+      "204": 47
+    },
+    "requirements": {
+      "131": {
+        "firearms": 1444
+      },
+      "147": {
+        "firearms": 1574
+      },
+      "165": {
+        "firearms": 1719
+      },
+      "163": {
+        "firearms": 1733
+      },
+      "182": {
+        "firearms": 1889
+      },
+      "204": {
+        "firearms": 2063
+      }
+    },
     "supports": [
       "assault-rifle",
       "lmg",

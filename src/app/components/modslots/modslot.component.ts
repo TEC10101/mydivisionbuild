@@ -28,7 +28,7 @@ export class ModSlotComponent implements OnInit {
 
   @Input() slot: ItemModSlot;
 
-  @Input('gear-metadata') metadata: AttributeMeta;
+  @Input('metadata') metadata: AttributeMeta;
   slotTypes: ModSlotType[];
 
 

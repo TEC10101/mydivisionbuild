@@ -214,7 +214,7 @@ export class ItemOverviewComponent implements OnInit {
   get metadata(): AttributeMeta {
     // weaponFamily: _.find(this.items, {name: this.item.name}).family
     return {
-      level: this.item.score,
+      score: this.item.score,
       rarity: this.item.rarity,
       belongsTo: this.item.type
     };

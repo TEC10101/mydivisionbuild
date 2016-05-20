@@ -80,13 +80,15 @@ export class InventoryCalculator {
   }
 
   get firearms() {
-    let base = this._reduce((sum, gear) => sum + gear.stats.firearms);
+    let base = 535;// base at lvl 30
+    let fromGear = this._reduce((sum, gear) => sum + gear.stats.firearms);
     let fireArmsFromMods = this.calculateAffectsValueFromMods(Affects.FIREARMS);
-    return base + fireArmsFromMods;
+    return base + fromGear + fireArmsFromMods;
   }
 
   get stamina() {
-    let base = this._reduce((sum, gear) => sum + gear.stats.stamina);
+    let base = 535; // base at lvl 30
+    let fromGear = this._reduce((sum, gear) => sum + gear.stats.stamina);
     let fromMods = this.calculateAffectsValueFromMods(Affects.STAMINA);
     return base + fromMods;
   }
@@ -123,6 +125,21 @@ export class InventoryCalculator {
     let talentAffects = this.calculateAffectsValueFromTalents(affects);
     let modsAffects = this.calculateAffectsValueFromMods(affects);
     let attributesAffects = this.calculateAffectsValueFromAttributes(affects);
+    let nativeValue = 0;
+    switch (affects) {
+      case Affects.FIREARMS:
+      case Affects.STAMINA:
+      case Affects.ELECTRONICS:
+
+        nativeValue = 535;
+        break;
+      case Affects.CRIT_HIT_DAMAGE:
+        nativeValue = 25;
+        break;
+      default:
+        nativeValue = 0;
+    }
+
     return talentAffects + modsAffects + attributesAffects;
   }
 
@@ -217,7 +234,7 @@ export class InventoryCalculator {
     return calc.dps;
   }
 
-  statsForGear(itemType: ItemType): GearStats {
+  gearStatsFor(itemType: ItemType): GearStats {
     let gear = this._inventory.gear[dashCaseToCamelCase(itemType)];
     let base = gear.stats;
 
@@ -363,7 +380,7 @@ export class WeaponStatsCalculator {
     + this._flatDamageBonus + this._scalingFactor
     * this._inventoryCalc.firearms);
 
-    let damagePercentage = 1 + this._weaponDamagePercent();
+    let damagePercentage = (1 + this._weaponDamagePercent()) / 100;
     return base * damagePercentage * this._otherWeaponDamageMultipliers();
   }
 

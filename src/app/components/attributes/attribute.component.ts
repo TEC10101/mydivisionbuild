@@ -23,7 +23,7 @@ import * as _ from 'lodash/index';
 
 
 export interface AttributeMeta {
-  level: number;
+  score: number;
   rarity: Rarity;
   belongsTo: ItemType;
   weaponFamily?: string;

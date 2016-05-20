@@ -108,6 +108,7 @@ interface WeaponManifest {
   weapons: WeaponInfo[];
   compatibility: WeaponModCompatibilityByType;
   stats: WeaponBaseStatsByFamily;
+  
 }
 export interface WeaponInfo extends DivisionItem {
   named: boolean;

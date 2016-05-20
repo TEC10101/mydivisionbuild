@@ -25,7 +25,7 @@ import {InputConverter, BooleanConverter} from '../../common/converters';
 export class AttributesComponent {
 
   @Input('data') attributes: Attributes;
-  @Input('gear-metadata') metadata: AttributeMeta;
+  @Input('metadata') metadata: AttributeMeta;
   @Input('can-add')
   @InputConverter(BooleanConverter)
   canAdd: boolean = true;
