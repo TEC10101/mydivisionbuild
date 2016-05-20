@@ -54,7 +54,41 @@
       "sniper",
       "shotgun",
       "pistol"
-    ]
+    ],
+    "defaultValues": {
+      "131": 5.5,
+      "147": 6,
+      "165": 6.5,
+      "163": 7.5,
+      "182": 8,
+      "204": 8.5
+    },
+    "requirements": {
+      "131": {
+        "firearms": 1444,
+        "electronics": 1444
+      },
+      "147": {
+        "firearms": 1574,
+        "electronics": 1574
+      },
+      "165": {
+        "firearms": 1719,
+        "electronics": 1719
+      },
+      "163": {
+        "firearms": 1733,
+        "electronics": 1733
+      },
+      "182": {
+        "firearms": 1889,
+        "electronics": 1889
+      },
+      "204": {
+        "firearms": 2063,
+        "electronics": 2063
+      }
+    }
   },
   {
     "id": "balanced",
@@ -64,7 +98,33 @@
       "assault-rifle",
       "lmg",
       "sniper"
-    ]
+    ],
+    "requirements": {
+      "131": {
+        "firearms": 1444,
+        "stamina": 1083
+      },
+      "147": {
+        "firearms": 1574,
+        "stamina": 1181
+      },
+      "165": {
+        "firearms": 1719,
+        "stamina": 1289
+      },
+      "163": {
+        "firearms": 1733,
+        "stamina": 1300
+      },
+      "182": {
+        "firearms": 1889,
+        "stamina": 1417
+      },
+      "204": {
+        "firearms": 2063,
+        "stamina": 1547
+      }
+    }
   },
   {
     "id": "brutal",

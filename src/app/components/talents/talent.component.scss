@@ -10,12 +10,11 @@ select {
   overflow: auto;
   padding: $section-wrapper-padding;
 
-
-  .talent-image,.talent-description-text,select {
+  .talent-image, .talent-description-text, select {
     opacity: 0.5;
   }
   &.unlocked {
-    .talent-image,.talent-description-text,select {
+    .talent-image, .talent-description-text, select {
       opacity: 1;
     }
   }
@@ -61,12 +60,49 @@ select {
   padding-bottom: 10px;
 }
 
-.talent-image {
+.talent-meta {
+  text-align: center;
 
   img {
     width: 64px;
     margin: 0 auto;
-    display: block;
+    display: inline-block;
   }
+
 }
 
+.talent-requirements {
+  @include text-style(20px);
+  vertical-align: top;
+  display: inline-block;
+  &.high-end {
+    color: $high-end-accent-font-color;
+  }
+  &.superior {
+    color: $superior-accent-font-color;
+  }
+  @each $stat in $main-stat-names {
+    li.#{$stat} {
+      background: url('app/assets/images/icon-stat-#{$stat}.png') left center no-repeat;
+      background-size: 26px 26px;
+
+    }
+
+  }
+  ul {
+
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      color: white;
+      opacity: .20;
+      font-weight: 700;
+      &.active {
+
+        opacity: 1;
+
+      }
+    }
+  }
+}

@@ -21,6 +21,7 @@ import {ValueFormat, ItemTalent} from '../../common/models/common';
 import {BooleanConverter, InputConverter} from '../../common/converters';
 import {ItemsService} from '../../services/item.service';
 import {AttributeMeta} from '../attributes/attribute.component';
+import {BuildStatsService, InventoryCalculator} from '../../services/build-stats.service';
 
 
 const TEMPLATE_INPUT_PERCENT_MARKER = 'x%';
@@ -44,6 +45,12 @@ const TALENT_INPUT_TEMPLATE = ` <auto-resize-input [length]='2'
                             (input)="onTalentValueChanged($event)"
                            [(ngModel)]='talent.value'
         ></auto-resize-input>`;
+
+interface TalentRequirement {
+  id: string;
+  value: number;
+
+}
 @Component({
   selector: 'talent',
   styles: [require('./talent.component.scss')],
@@ -51,7 +58,6 @@ const TALENT_INPUT_TEMPLATE = ` <auto-resize-input [length]='2'
   pipes: [UcFirstPipe],
   directives: [EditorDirective, AutoResizeInputComponent]
 })
-
 export class TalentComponent implements OnInit, AfterViewInit {
 
 
@@ -69,6 +75,9 @@ export class TalentComponent implements OnInit, AfterViewInit {
   _descriptionContainerRef: ViewContainerRef;
 
   _selectedChoice: ItemTalent;
+
+  _calc: InventoryCalculator;
+  _lastScore: number;
 
 
   static toComponent(template, talent) {
@@ -100,13 +109,18 @@ export class TalentComponent implements OnInit, AfterViewInit {
       onTalentValueChanged(value) {
         this.talent.value = value;
       }
+
+
     }
     return TalentTemplateComponent;
   }
 
   constructor(private _loader: DynamicComponentLoader,
               private _elementRef: ElementRef,
-              private _itemsService: ItemsService) {
+              private _itemsService: ItemsService,
+              private buildStatsService: BuildStatsService) {
+
+    this._calc = buildStatsService.instance;
   }
 
 
@@ -121,6 +135,30 @@ export class TalentComponent implements OnInit, AfterViewInit {
       this._updateTalentDefaultValue();
 
 
+  }
+
+  get requirements() {
+    let selectedChoices = _.find(this.choices, {id: this.talent.id});
+
+    if (selectedChoices && selectedChoices.requirements) {
+      let requirementsByScore = selectedChoices
+          .requirements[this._metadata.score] || void 0;
+      return requirementsByScore
+        ? _.reduce(['firearms', 'stamina', 'electronics'],
+        (o, stat) => {
+          if (requirementsByScore[stat]) {
+            let value = requirementsByScore[stat];
+            let statValue = this._calc[stat];
+            o.push({
+              id: stat,
+              value: value,
+              active: statValue >= value
+            });
+          }
+          return o;
+        }, []) : [];
+    }
+    return [];
   }
 
   @Input()

@@ -4,12 +4,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Gear} from '../../item-overview/gear.model';
 import {InventoryItemImageComponent} from '../inventory-item-image/inventory-item-image.component';
-import {ItemsService, isWeaponType} from '../../../services/item.service';
-import {ItemType, GearRarity, DivisionItem, WeaponSlot, ItemTalent} from '../../../common/models/common';
+import {ItemsService, isWeaponType, ItemDescriptor} from '../../../services/item.service';
+import {ItemType, GearRarity, DivisionItem, WeaponSlot, ItemTalent, GearStats} from '../../../common/models/common';
 import {InventoryService} from '../../../services/inventory.service';
 import {InventoryItem, InventoryItemType, Weapon} from '../inventory.model';
 import {Talent} from '../../talents/talent.model';
 import * as _ from 'lodash/index';
+import {BuildStatsService, InventoryCalculator} from '../../../services/build-stats.service';
 
 
 @Component({
@@ -27,9 +28,20 @@ export class InventoryItemComponent implements OnInit {
   @Input('item-type') itemType: ItemType;
   @Input('inventory-item-type') inventoryItemType: InventoryItemType;
   @Input('weapon-slot') weaponSlot: WeaponSlot;
+  _descriptor: ItemDescriptor;
 
+  _calc: InventoryCalculator;
+  _stats: GearStats;
 
-  constructor(private _itemsService: ItemsService, private _inventoryService: InventoryService) {
+  constructor(private _itemsService: ItemsService,
+              private _inventoryService: InventoryService,
+              private buildStatsService: BuildStatsService) {
+    let calc = buildStatsService.instance;
+    this._stats = {
+      firearms: calc.firearms,
+      stamina: calc.stamina,
+      electronics: calc.electronics
+    };
   }
 
 
@@ -42,6 +54,12 @@ export class InventoryItemComponent implements OnInit {
   }
 
   ngOnInit(): any {
+
+    this._itemsService
+      .getDescriptorFor(this.itemType)
+      .subscribe(descriptor => this._descriptor = descriptor);
+
+
     /*
      if (!this.item)this._itemsService
      .getDescriptorFor(this.itemType)
@@ -63,6 +81,18 @@ export class InventoryItemComponent implements OnInit {
      );*/
   }
 
+
+  isTalentActive(talent) {
+    if (!this._descriptor) return false;
+    let talentChoices = this._descriptor.talents;
+    let selectedChoices = _.find(talentChoices, {id: talent.id});
+    let requirementsByScore = selectedChoices
+      .requirements[this.item.score];
+    return _.every(requirementsByScore,
+      (value, stat) => this._stats[stat] >= value);
+
+
+  }
 
   talentIconStyle(talent: Talent) {
 

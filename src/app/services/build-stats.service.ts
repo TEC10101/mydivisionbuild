@@ -22,9 +22,18 @@ import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 @Injectable()
 export class BuildStatsService {
 
+  _defaultInstance: InventoryCalculator;
+
   constructor(private _itemsService: ItemsService,
               @Inject(forwardRef(() => InventoryService))
               private _inventoryService: InventoryService) {
+
+
+  }
+
+  get instance() {
+    return !this._defaultInstance ? this._defaultInstance = this.create()
+      : this._defaultInstance;
 
   }
 
@@ -79,8 +88,9 @@ export class InventoryCalculator {
     return fromElectronics + fromMods + fromAttributes;
   }
 
+
   get firearms() {
-    let base = 535;// base at lvl 30
+    let base = 535; // base at lvl 30
     let fromGear = this._reduce((sum, gear) => sum + gear.stats.firearms);
     let fireArmsFromMods = this.calculateAffectsValueFromMods(Affects.FIREARMS);
     return base + fromGear + fireArmsFromMods;

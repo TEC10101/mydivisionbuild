@@ -20,7 +20,14 @@
     <div #description></div>
 
   </div>
-  <div class="talent-image" *ngIf="hasImage">
-    <img [src]="talentImage"/>
+  <div class="talent-meta">
+    <img [src]="talentImage" *ngIf="hasImage"/>
+    <div class="talent-requirements" *ngIf="requirements.length" [ngClass]="metadata.rarity">
+      Requirements
+      <ul>
+        <li *ngFor="let req of requirements" [ngClass]="{active:req.active}"
+            class="{{req.id}}">{{req.value}}</li>
+      </ul>
+    </div>
   </div>
 </div>
