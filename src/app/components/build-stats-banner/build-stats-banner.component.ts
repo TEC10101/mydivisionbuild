@@ -72,6 +72,10 @@ export class BuildStatsBannerComponent {
   reset() {
     this._inventoryService.reset();
   }
+  
+  openSheet(){
+    
+  }
 
   get ownsInventory() {
     return this._inventoryService.owns();

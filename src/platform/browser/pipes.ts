@@ -4,10 +4,12 @@
 
 import {PLATFORM_PIPES} from '@angular/core';
 import {AssetPipe} from '../../app/common/pipes/asset.pipe';
+import {AttributePipe} from '../../app/components/attributes/attribute.pipe';
 
 // application_pipes: pipes that are global through out the application
 export const APPLICATION_PIPES = [
-  AssetPipe
+  AssetPipe,
+  AttributePipe
 ];
 
 export const PIPES = [

@@ -434,6 +434,14 @@ export class ItemsService {
     });
   }
 
+  defaultItemTypeImage(itemType: ItemType, item?: InventoryItem) {
+    if (isWeaponType(itemType)) {
+      let descriptor = this._weaponDescriptorCollection.forType(itemType);
+      return this._weaponImageResolve(descriptor, item).primary;
+    }
+    return this._imageUrl(itemType, 'icon.png');
+  }
+
   talentImageResolve(id): ResolvedImage {
     return {
       primary: this._imageUrl('talents', id + '.png'),

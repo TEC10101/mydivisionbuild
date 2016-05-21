@@ -11,7 +11,7 @@ $column-width: 344px;
 }
 
 #banner-columns {
-  max-width: 1080px;
+  max-width: $max-width;
   float: left;
 }
 
@@ -77,6 +77,7 @@ $column-width: 344px;
   button {
     cursor: pointer;
     @include editor-button(100px, $color: white);
+    margin-bottom: 11px;
   }
 }
 

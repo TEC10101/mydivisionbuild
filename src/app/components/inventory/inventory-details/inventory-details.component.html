@@ -1,0 +1,50 @@
+<div id="inventory-details">
+
+  <div class="inventory-details-section">
+    <h1>Attributes</h1>
+
+    <table>
+      <thead>
+      <tr id="header">
+        <th>Attribute</th>
+        <th>TOTAL</th>
+        <th>
+          <img [src]="selectedWeaponIcon" class="weapon"/>
+        </th>
+        <th>
+          <img [src]="itemTypeIcon('mask')"/>
+        </th>
+        <th>
+          <img [src]="itemTypeIcon('body-armor')"/>
+        </th>
+        <th>
+          <img [src]="itemTypeIcon('knee-pads')"/>
+        </th>
+        <th>
+          <img [src]="itemTypeIcon('back-pack')"/>
+        </th>
+        <th>
+          <img [src]="itemTypeIcon('gloves')"/>
+        </th>
+        <th>
+          <img [src]="itemTypeIcon('holster')"/>
+        </th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let layout of layouts">
+
+      <tr class="section-header">
+        <th>{{layout.header}}</th>
+      </tr>
+      <tr *ngFor="let line of layout.lines" class="line">
+        <td class="title">{{line.title}}</td>
+        <td class="total">{{line.breakdown.total|attribute:line.format}}</td>
+        <td *ngFor="let column of columns(line.breakdown)" class="column">
+          <span *ngIf="column > 0 ">{{column|attribute:line.format}}</span>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>

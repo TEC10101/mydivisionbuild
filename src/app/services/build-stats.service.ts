@@ -20,6 +20,8 @@ import * as _ from 'lodash/index';
 import {InventoryService} from './inventory.service';
 import {Attribute} from '../components/attributes/attributes.model';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
+
+const DEFAULT_STAT_VALUE = 535;
 @Injectable()
 export class BuildStatsService {
 
@@ -59,27 +61,52 @@ export class BuildStatsService {
 
     let gearNames = _.map(this._itemsService.gearTypes, dashCaseToCamelCase);
     let sheet = new CharacterSheet();
-    let calc = this._defaultInstance;
+    let calc = this.instance;
     let gearItems = this._inventoryService.inventory.gear;
-    let weapons = this._inventoryService.inventory.weapons;
+
     _.forEach(Affects, (affects: Affects) => {
       let breakdown = new StatBreakdown();
-      let sumFromGear = _.sumBy(gearNames, (name) => {
-        return breakdown[name] = calc.calculateTotalAffectsValue(affects);
+
+
+      let total = _.sumBy(gearNames, (name) => {
+        let gear = gearItems[name];
+        return breakdown[name] = calc.calculateTotalAffectsValue(affects, gear);
       });
-      breakdown.primary = calc.primary.calculateTotalAffectsValue(affects);
-      breakdown.secondary = calc.secondary.calculateTotalAffectsValue(affects);
+      total += InventoryCalculator.nativeValue(affects);
+      total += breakdown.primary = calc.primary.calculateTotalAffectsValue(affects);
+      total += breakdown.secondary = calc.secondary.calculateTotalAffectsValue(affects);
+
+      breakdown.total = total;
 
       sheet.add(affects, breakdown);
 
     });
+    let calculateValue = (affects: Affects, fn: (gear: Gear) => number,
+                          defaultValue: number = 0) => {
+      let breakdown = new StatBreakdown();
+      breakdown.total = _.sumBy(gearNames, (name) => {
+          let gear = gearItems[name];
+          return breakdown[name] = fn(gear);
+
+        }) + defaultValue;
+      sheet.add(affects, breakdown);
+    };
+
+
+    calculateValue(Affects.HEALTH, gear => calc.healthFor(gear),
+      InventoryCalculator.staminaToHealth(DEFAULT_STAT_VALUE));
+    calculateValue(Affects.STAMINA, gear => calc.staminaFor(gear), DEFAULT_STAT_VALUE);
+    calculateValue(Affects.SKILL_POWER, gear => calc.skillPowerFor(gear),
+      InventoryCalculator.electronicsToSkillPower(DEFAULT_STAT_VALUE));
+    calculateValue(Affects.ELECTRONICS, gear => calc.electronicsFor(gear), DEFAULT_STAT_VALUE);
+
     return sheet;
   }
 
 }
 export class CharacterSheet {
 
-  _info: {[id: string]: StatBreakdown};
+  _info: {[id: string]: StatBreakdown} = {};
 
   add(key: Affects, breakdown) {
     this._info[key] = breakdown;
@@ -90,15 +117,17 @@ export class CharacterSheet {
   }
 }
 
-class StatBreakdown {
+export class StatBreakdown {
   primary: number;
   secondary: number;
   pistol: number;
   bodyArmor: number;
+  backPack: number;
   mask: number;
   kneePads: number;
   gloves: number;
   holster: number;
+  total: number;
 
 }
 
@@ -130,7 +159,7 @@ export class InventoryCalculator {
 
   get skillpower() {
 
-    let fromElectronics = (this.electronics * 10);
+    let fromElectronics = InventoryCalculator.electronicsToSkillPower(this.electronics);
     let fromMods = this.calculateAffectsValueFromMods(Affects.SKILL_POWER);
     let fromAttributes = this.calculateAffectsValueFromAttributes(Affects.SKILL_POWER);
     return fromElectronics + fromMods + fromAttributes;
@@ -151,12 +180,6 @@ export class InventoryCalculator {
     return base + fromGear + fromMods;
   }
 
-  staminaFor(gear: Gear) {
-    let base = gear.stats.stamina;
-    let fromMods = this.calculateAffectsValueFromMods(Affects.STAMINA, gear);
-    return base + fromMods;
-
-  }
 
   get electronics() {
     let base = 535; // base at lvl 30
@@ -165,13 +188,43 @@ export class InventoryCalculator {
     return base + fromGear + fromMods;
   }
 
+  electronicsFor(gear: Gear) {
+    let base = gear.stats.electronics;
+    let fromMods = this.calculateAffectsValueFromMods(Affects.ELECTRONICS, gear);
+    return base + fromMods;
+  }
+
   get health() {
     // http://divisionfieldguide.com/post/2016/03/which-is-better-armor-versus-health/
-    let base = this.stamina * 30;
+    let base = InventoryCalculator.staminaToHealth(this.stamina);
     let fromMods = this.calculateAffectsValueFromMods(Affects.HEALTH);
     let fromAttributes = this.calculateAffectsValueFromAttributes(Affects.HEALTH);
     return base + fromMods + fromAttributes;
   }
+
+  healthFor(gear) {
+    let base = InventoryCalculator.staminaToHealth(gear.stats.stamina);
+    let fromMods = this.calculateAffectsValueFromMods(Affects.HEALTH, gear);
+
+    let fromAttributes = this.calculateAffectsValueFromAttributes(Affects.HEALTH, gear);
+    return base + fromMods + fromAttributes;
+  }
+
+
+  staminaFor(gear: Gear) {
+    let base = gear.stats.stamina;
+    let fromMods = this.calculateAffectsValueFromMods(Affects.STAMINA, gear);
+    return base + fromMods;
+
+  }
+
+  skillPowerFor(gear: Gear) {
+    let base = InventoryCalculator.electronicsToSkillPower(gear.stats.electronics);
+    let fromMods = this.calculateAffectsValueFromMods(Affects.SKILL_POWER);
+    let fromAttributes = this.calculateAffectsValueFromAttributes(Affects.SKILL_POWER);
+    return base + fromMods + fromAttributes;
+  }
+
 
   weaponDamage(itemType: ItemType) {
     let affects = Affects.normalize(itemType + '_damage');
@@ -183,22 +236,10 @@ export class InventoryCalculator {
     let talentAffects = this.calculateAffectsValueFromTalents(affects, limitToGear);
     let modsAffects = this.calculateAffectsValueFromMods(affects, limitToGear);
     let attributesAffects = this.calculateAffectsValueFromAttributes(affects, limitToGear);
-    let nativeValue = 0;
-    switch (affects) {
-      case Affects.FIREARMS:
-      case Affects.STAMINA:
-      case Affects.ELECTRONICS:
+    let nativeValue = limitToGear ? 0 : InventoryCalculator.nativeValue(affects);
 
-        nativeValue = 535;
-        break;
-      case Affects.CRIT_HIT_DAMAGE:
-        nativeValue = 25;
-        break;
-      default:
-        nativeValue = 0;
-    }
 
-    return talentAffects + modsAffects + attributesAffects;
+    return nativeValue + talentAffects + modsAffects + attributesAffects;
   }
 
 
@@ -306,6 +347,38 @@ export class InventoryCalculator {
     };
 
   }
+
+  static staminaToHealth(stamina) {
+    return stamina * 30;
+  }
+
+  static electronicsToSkillPower(electronics) {
+    return electronics * 10;
+  }
+
+  static nativeValue(affects: Affects): number {
+    let nativeValue = 0;
+    switch (affects) {
+      case Affects.FIREARMS:
+      case Affects.STAMINA:
+      case Affects.ELECTRONICS:
+
+        nativeValue = DEFAULT_STAT_VALUE;
+        break;
+      case Affects.CRIT_HIT_DAMAGE:
+        nativeValue = 25;
+        break;
+      case Affects.SCAVENGING:
+        nativeValue = 15;
+        break;
+      default:
+        nativeValue = 0;
+    }
+
+    return nativeValue;
+  }
+
+
 }
 
 
@@ -317,6 +390,10 @@ export class WeaponStatsCalculator {
               private _inventoryCalc: InventoryCalculator) {
 
 
+  }
+
+  get weapon() {
+    return this._weapon;
   }
 
 

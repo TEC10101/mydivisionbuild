@@ -8,6 +8,7 @@ import {Router, RouteConfig, RouterOutlet, RouteParams} from '@angular/router-de
 import {InventoryItemsComponent} from './inventory-items/inventory-items.component';
 import {InventoryService} from '../../services/inventory.service';
 import {AuthCallbackComponent} from '../auth/auth-callback.component';
+import {InventoryDetailsComponent} from './inventory-details/inventory-details.component';
 
 
 @Component({
@@ -46,6 +47,7 @@ export class InventoryComponent {
 @RouteConfig([
   {path: '/inventory', name: 'Inventory', component: InventoryComponent, useAsDefault: true},
   {path: '/inventory/:itemType', name: 'InventoryList', component: InventoryItemsComponent},
+  {path: '/inventory/details', name: 'InventoryDetails', component: InventoryDetailsComponent},
   {path: '/authCallback/:strategy', name: 'AuthCallback', component: AuthCallbackComponent}
 
 
